@@ -1,18 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+
+import { Provider } from "react-redux";
+import rootReducer from "./reducers/index";
 // Importing Sass with Bootstrap CSS
 import './custom.scss';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+
+import { createStore } from "redux";
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
