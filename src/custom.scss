@@ -1,0 +1,25 @@
+
+/* make the customizations */
+$theme-colors: (
+        "info": tomato,
+        "danger": teal
+);
+
+// $body-color: #fff;
+$body-bg: #fff;
+
+
+$font-family-sans-serif: "Futura-Pt", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+// $font-family-monospace: "Futura-Pt", monospace;
+// "pragmatapro-fraktur";
+
+
+// $font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+// $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+// $font-family-base:            $font-family-sans-serif !default;
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
+
+
