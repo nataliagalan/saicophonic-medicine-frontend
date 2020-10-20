@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { Navbar, Nav } from 'react-bootstrap';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+
 import $ from "jquery"
 import Sidebar from './Sidebar';
+import VideoContainer from './VideoContainer';
 
 class MyNavbar extends Component {
 
@@ -24,7 +27,10 @@ class MyNavbar extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Sidebar />
+      <div id="wrapper">
+        <Sidebar />
+        <VideoContainer />
+      </div>
       </>
     )
   }
