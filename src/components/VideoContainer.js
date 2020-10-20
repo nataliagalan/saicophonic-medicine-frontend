@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+// import Card from 'react-bootstrap/Card';
+// import CardGroup from 'react-bootstrap/CardGroup';
+
 import VideoCard from './VideoCard';
 import LyricsCard from './LyricsCard';
+import Line from './Line';
+
 
 class VideoContainer extends Component {
 
   render() {
     return (
       <>
-      {/* <!-- Page Content --> */}
-        <div id="page-content-wrapper">
-          <Container fluid>
-            <Row>
-              {/* render video cards with map */}
-              <div class="col-lg-12">
-                <VideoCard />
-              </div>
-              <div class="col-lg-12">
-                <LyricsCard />
-              </div>
-            </Row>
-          </Container>
-        </div>
-      {/* <!-- /#page-content-wrapper --> */}
+        <Row>
+          <Col sm={8}>
+            <VideoCard />
+          </Col>
+          <Col sm={4}>
+            <LyricsCard />
+          </Col>
+        </Row>
+        <Line color="black" />
       </>
     )
   }

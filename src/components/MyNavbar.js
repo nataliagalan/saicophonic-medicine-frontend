@@ -3,8 +3,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
 import $ from "jquery"
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
 import Sidebar from './Sidebar';
 import VideoContainer from './VideoContainer';
+
 
 class MyNavbar extends Component {
 
@@ -27,10 +32,21 @@ class MyNavbar extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      {/* <!-- Wrapper --> */}
       <div id="wrapper">
         <Sidebar />
-        <VideoContainer />
+        {/* render video container with map */}
+        {/* <!-- Page Content --> */}
+        <div id="page-content-wrapper">
+          <Container fluid>
+            {/* <Row> */}
+              <VideoContainer />
+            {/* </Row> */}
+          </Container>
+        </div>
+        {/* <!-- /#page-content-wrapper --> */}
       </div>
+      {/* <!-- /#wrapper --> */}
       </>
     )
   }
