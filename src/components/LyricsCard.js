@@ -28,37 +28,39 @@ class LyricsCard extends Component {
     const { lyrics, id } = this.props
     return (
       <Accordion defaultActiveKey="0">
+          {/* {on click event that setStates the selected song} */}
         <Card>
-          <Accordion.Toggle as={Card.Header} eventKey="0">
+          <Accordion.Toggle as={Card.Header} eventKey="1">
             02:00 - Has This Hit
           </Accordion.Toggle>
-          <Accordion.Collapse eventKey="0">
+          <Accordion.Collapse eventKey="1">
             <Card.Body>{lyrics}
             </Card.Body>
           </Accordion.Collapse>
         </Card>
-        <Card>
+
+        {/* <Card>
           <Accordion.Toggle as={Card.Header} eventKey="1">
-            07:00 - Ceiling
+            {timestamp} - {title}
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="1">
-            <Card.Body>Lyrics Here</Card.Body>
+            <Card.Body>
+            {lyrics} 
+            </Card.Body>
           </Accordion.Collapse>
+          </Card> */}
+
+          {/* Edit and Delete buttons */}
           <Row>
             <Col>
               <Button 
                 as={Link} 
-                to={`/videos/edit/${id}`}>              ✏️</Button>
-              <Button 
-                as={Link} 
-                to={`/videos/${id}`}>
-                👀</Button>
+                to={`/videos/edit/${id}`}>✏️</Button>
               <Button 
                 onClick={() => this.delVideo(id)}
                 >🗑</Button>
             </Col>
           </Row>
-        </Card>
       </Accordion>
     )
   }

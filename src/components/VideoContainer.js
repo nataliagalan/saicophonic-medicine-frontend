@@ -10,6 +10,8 @@ import Line from './Line';
 
 
 class VideoContainer extends Component {
+  //keep local state here for selected video
+  //this.props.video.songs[0].timestamp - value of first stamp by default
 
   render() {
     // console.log(this.props.video, "inside video container");

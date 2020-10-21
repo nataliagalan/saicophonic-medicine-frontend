@@ -62,14 +62,14 @@ class New extends Component {
           </Col>
         </Form.Row>
         <br></br>
-        {/* <Form.Row>
+        <Form.Row>
           <Col>
             <Form.Control placeholder="Time" />
           </Col>
           <Col xs={7}>
             <Form.Control placeholder="Song Title" />
           </Col>
-        </Form.Row> */}
+        </Form.Row>
         <br></br>
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Control 
