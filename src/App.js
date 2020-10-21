@@ -17,10 +17,12 @@ const App = () => {
     <BrowserRouter>
       <div className="App">
         <MyNavbar />
-        <Route exact path="/videos" component={VideoDashboard} />
-        <Route exact path="/videos/new" component={New} />
-        <Route exact path="/videos/:id" component={Show} />
-        <Route exact path="/videos/edit/:id" component={Edit} />
+        <Switch>
+          <Route exact path="/videos" component={VideoDashboard} />
+          <Route exact path="/videos/new" component={New} />
+          <Route exact path="/videos/:id" component={Show} />
+          <Route exact path="/videos/edit/:id" component={Edit} />
+        </Switch>
       </div>
       {/* <!-- /.App --> */}
     </BrowserRouter>
