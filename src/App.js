@@ -10,6 +10,7 @@ import MyNavbar from './components/MyNavbar';
 import New from './pages/New';
 import VideoDashboard from './components/VideoDashboard';
 import Edit from './pages/Edit';
+import Show from './pages/Show';
 
 
 const App = () => {
@@ -25,8 +26,8 @@ const App = () => {
         {/* <!-- /#wrapper --> */}
 
         <Route exact path="/videos/new" component={New} />
+        <Route exact path="/videos/:id" component={Show} />
         <Route exact path="/videos/edit/:id" component={Edit} />
-
 
       </div>
       {/* <!-- /.App --> */}
