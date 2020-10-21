@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+
 class New extends Component {
 
   state = {
@@ -15,7 +16,7 @@ class New extends Component {
     title: '',
     timestamp: '',
     user_id: 5,
-    error: null
+    error: null,
   };
 
   handleChange = (e) => {
@@ -49,6 +50,7 @@ class New extends Component {
 
 
 
+
   render() {
     return (
       <Form
@@ -68,15 +70,15 @@ class New extends Component {
         <Form.Row>
           <Col>
             <Form.Control 
-              name="time" 
-              value={this.state.url} 
+              name="timestamp" 
+              value={this.state.timestamp} 
               onChange={this.handleChange}
               placeholder="Time" />
           </Col>
           <Col xs={7}>
             <Form.Control
               name="title" 
-              value={this.state.url} 
+              value={this.state.title} 
               onChange={this.handleChange} 
               placeholder="Song Title" />
           </Col>
@@ -91,11 +93,16 @@ class New extends Component {
             placeholder="Lyrics"
             rows={11} />
         </Form.Group>
+
+
+        <br></br>
         <Button 
           variant="primary" 
           type="submit">
           Save
         </Button>
+
+
 
       </Form>
     )

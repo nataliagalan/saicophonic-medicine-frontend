@@ -26,11 +26,13 @@ class LyricsCard extends Component {
 
   render() {
     const { id } = this.props
-    // const { lyrics, title, timestamp } = this.props.songs[0]
+    const { lyrics, title, timestamp } = this.props.songs[0]
+    
     return (
       <Accordion defaultActiveKey="0">
           {/* {on click event that setStates the selected song} */}
-        {/* <Card>
+
+        <Card>
           <Accordion.Toggle as={Card.Header} eventKey="1">
             {timestamp} - {title}
           </Accordion.Toggle>
@@ -39,7 +41,7 @@ class LyricsCard extends Component {
             {lyrics} 
             </Card.Body>
           </Accordion.Collapse>
-          </Card> */}
+          </Card>
 
           {/* Edit and Delete buttons */}
           <Row>

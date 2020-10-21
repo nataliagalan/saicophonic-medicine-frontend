@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 
-import Sidebar from './components/Sidebar';
 import MyNavbar from './components/MyNavbar';
 import New from './pages/New';
 import VideoDashboard from './components/VideoDashboard';
@@ -17,18 +16,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
-          <MyNavbar />
-        {/* <!-- .wrapper --> */}
-        <div className="wrapper">
-          <Sidebar />
-          <Route exact path="/videos" component={VideoDashboard} />
-        </div>
-        {/* <!-- /#wrapper --> */}
-
+        <MyNavbar />
+        <Route exact path="/videos" component={VideoDashboard} />
         <Route exact path="/videos/new" component={New} />
         <Route exact path="/videos/:id" component={Show} />
         <Route exact path="/videos/edit/:id" component={Edit} />
-
       </div>
       {/* <!-- /.App --> */}
     </BrowserRouter>
