@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-// import Card from 'react-bootstrap/Card';
-// import CardGroup from 'react-bootstrap/CardGroup';
-
 import VideoCard from './VideoCard';
 import LyricsCard from './LyricsCard';
 import Line from './Line';
@@ -23,7 +20,7 @@ class VideoContainer extends Component {
             <VideoCard {...this.props.video}/>
           </Col>
           <Col sm={4}>
-            <LyricsCard />
+            <LyricsCard {...this.props.video}/>
           </Col>
         </Row>
         <Line color="black" />

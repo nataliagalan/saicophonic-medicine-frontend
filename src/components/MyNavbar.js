@@ -12,6 +12,8 @@ import Sidebar from './Sidebar';
 import VideoContainer from './VideoContainer';
 import { getVideos } from '../actions/videos';
 
+// import New from '../pages/New';
+
 
 class MyNavbar extends Component {
 
@@ -30,8 +32,6 @@ class MyNavbar extends Component {
   };
 
   render() {
-console.log(this.props.videos, "inside myNavbar");
-
 
     return (
       <>
@@ -47,6 +47,7 @@ console.log(this.props.videos, "inside myNavbar");
       {/* <!-- Wrapper --> */}
       <div id="wrapper">
         <Sidebar />
+        {/* <New /> */}
         {/* <!-- Page Content --> */}
         <div id="page-content-wrapper">
           <Container fluid>
