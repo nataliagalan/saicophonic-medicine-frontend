@@ -20,3 +20,10 @@ export const updateVideo = (videos) => {
     videos: videos,
   };
 };
+
+export const deleteVideo = (videos) => {
+  return {
+    type: "DELETE_VIDEO",
+    videos: videos,
+  };
+};
