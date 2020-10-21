@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -14,11 +15,12 @@ import Line from './Line';
 class VideoContainer extends Component {
 
   render() {
+    // console.log(this.props.video, "inside video container");
     return (
       <>
         <Row>
           <Col sm={8}>
-            <VideoCard />
+            <VideoCard {...this.props.video}/>
           </Col>
           <Col sm={4}>
             <LyricsCard />
@@ -30,5 +32,14 @@ class VideoContainer extends Component {
   }
 }
 
+const setStateToProps = (state) => {
+  return {
+    videos: state.videos
+  }
+}
 
-export default VideoContainer 
+// const setDispatchToProps = {
+  // deleteVideo
+// }
+
+export default connect(setStateToProps, null)(VideoContainer);
