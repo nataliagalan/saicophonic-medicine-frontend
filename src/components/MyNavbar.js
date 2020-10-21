@@ -1,35 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-import $ from 'jquery';
-
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-
-import Sidebar from './Sidebar';
-import VideoContainer from './VideoContainer';
-import { getVideos } from '../actions/videos';
-
-// import New from '../pages/New';
-
-
 class MyNavbar extends Component {
-
-  componentDidMount() {
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-    this.fetchVideos()
-  }
-
-  fetchVideos = async () => {
-    const res = await fetch('http://localhost:3001/api/v1/videos');
-    const videos = await res.json();
-    this.props.getVideos(videos);
-  };
 
   render() {
 
@@ -44,40 +17,9 @@ class MyNavbar extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {/* <!-- Wrapper --> */}
-      <div id="wrapper">
-        <Sidebar />
-        {/* <New /> */}
-        {/* <!-- Page Content --> */}
-        <div id="page-content-wrapper">
-          <Container fluid>
-            {
-            this.props.videos.map((video) => {
-              return <VideoContainer
-                video={video}
-                key={video.id}
-               />
-              }
-            )
-            }
-          </Container>
-        </div>
-        {/* <!-- /#page-content-wrapper --> */}
-      </div>
-      {/* <!-- /#wrapper --> */}
       </>
     )
   }
 }
 
-const setStateToProps = (state) => {
-  return {
-    videos: state.videos
-  };
-};
-
-const setDispatchToProps = {
-  getVideos
-};
-
-export default connect(setStateToProps, setDispatchToProps)(MyNavbar);
+export default MyNavbar

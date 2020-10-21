@@ -6,3 +6,10 @@ export const getVideos = (videos) => {
     videos: videos,
   };
 };
+
+export const addVideo = (videos) => {
+  return {
+    type: "ADD_VIDEO",
+    videos: videos,
+  };
+};
