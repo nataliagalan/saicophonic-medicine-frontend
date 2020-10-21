@@ -25,16 +25,7 @@ class LyricsCard extends Component {
   };
 
   render() {
-    const { lyrics, videos, id } = this.props
-    // const { videos } = this.props;
-
-    // const path = this.props.location.pathname.split("/");
-    // const id = parseInt(path[path.length - 1]);
-    // const video = videos.find((video) => video.id === id);
-    // console.log(id, "id");
-    // console.log(video, "video");
-    // console.log(this.props, "props");
-
+    const { lyrics, id } = this.props
     return (
       <Accordion defaultActiveKey="0">
         <Card>
@@ -55,8 +46,13 @@ class LyricsCard extends Component {
           </Accordion.Collapse>
           <Row>
             <Col>
-              <Card.Link href="#">✏️</Card.Link>
-              <Card.Link href="#">👀</Card.Link>
+              <Button 
+                as={Link} 
+                to={`/videos/edit/${id}`}>              ✏️</Button>
+              <Button 
+                as={Link} 
+                to={`/videos/${id}`}>
+                👀</Button>
               <Button 
                 onClick={() => this.delVideo(id)}
                 >🗑</Button>
