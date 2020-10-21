@@ -13,8 +13,7 @@ class Show extends Component {
     const id = parseInt(path[2]);
     const { videos } = this.props;
     const video = videos.find((video) => video.id === id);
-    console.log(this.props, "props");
-    console.log(video, "video");
+
     return (
       <>
         {video === undefined ? (
