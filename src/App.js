@@ -7,6 +7,7 @@ import './App.css';
 
 import Sidebar from './components/Sidebar';
 import MyNavbar from './components/MyNavbar';
+import New from './pages/New';
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
         <MyNavbar />
         {/* <Sidebar /> */}
         <Switch>
-          {/* <Route exact path="/videos" component={Sidebar}/> */}
+          {/* <Route exact path="/videos/new" component={New}/> */}
         </Switch>
       </div>
     </BrowserRouter>
