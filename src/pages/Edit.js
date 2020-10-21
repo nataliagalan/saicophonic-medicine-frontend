@@ -25,7 +25,7 @@ class Edit extends Component {
   setInitialState = async (id) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
     const video = await res.json();
-    console.log(video);
+  
     this.setState({
       id: id,
       url: video.url,
