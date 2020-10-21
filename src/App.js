@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 //potentially delete this files
 import logo from './logo.svg';
 import './App.css';
+
 import Sidebar from './components/Sidebar';
 import MyNavbar from './components/MyNavbar';
 

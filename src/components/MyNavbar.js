@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-import $ from "jquery"
+import $ from 'jquery';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 import Sidebar from './Sidebar';
 import VideoContainer from './VideoContainer';
+import { getVideos } from '../actions/videos';
 
 
 class MyNavbar extends Component {
@@ -18,9 +20,19 @@ class MyNavbar extends Component {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
+    this.fetchVideos()
   }
 
+  fetchVideos = async () => {
+    const res = await fetch('http://localhost:3001/api/v1/videos');
+    const videos = await res.json();
+    this.props.getVideos(videos);
+  };
+
   render() {
+console.log(this.props.videos, "inside myNavbar");
+
+
     return (
       <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -35,13 +47,18 @@ class MyNavbar extends Component {
       {/* <!-- Wrapper --> */}
       <div id="wrapper">
         <Sidebar />
-        {/* render video container with map */}
         {/* <!-- Page Content --> */}
         <div id="page-content-wrapper">
           <Container fluid>
-            {/* <Row> */}
-              <VideoContainer />
-            {/* </Row> */}
+            {
+            this.props.videos.map((video) => {
+              return <VideoContainer
+                video={video}
+                key={video.id}
+               />
+              }
+            )
+            }
           </Container>
         </div>
         {/* <!-- /#page-content-wrapper --> */}
@@ -52,5 +69,14 @@ class MyNavbar extends Component {
   }
 }
 
+const setStateToProps = (state) => {
+  return {
+    videos: state.videos
+  };
+};
 
-export default MyNavbar
+const setDispatchToProps = {
+  getVideos
+};
+
+export default connect(setStateToProps, setDispatchToProps)(MyNavbar);

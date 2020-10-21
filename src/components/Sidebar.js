@@ -17,8 +17,8 @@ class Sidebar extends Component {
      <>
         {/* Sidebar */}
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
+            <ul className="sidebar-nav">
+                <li className="sidebar-brand">
                     <a href="#">
                         Home
                     </a>

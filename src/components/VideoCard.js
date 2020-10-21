@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 
+import ReactPlayer from 'react-player'
+
 class VideoCard extends Component {
   render() {
+    const { url } = this.props
     return (
       <>
         <ResponsiveEmbed aspectRatio="16by9">
-          <iframe src="https://www.youtube.com/embed/VEUe1J0c2k4" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-          </iframe>
+          <ReactPlayer 
+          width='100%'
+          height='100%'
+          url={url} />
         </ResponsiveEmbed>
       </>
     )

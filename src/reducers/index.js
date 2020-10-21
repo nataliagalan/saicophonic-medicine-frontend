@@ -3,4 +3,5 @@ import videos from "./videos";
 
 export default combineReducers({
   videos: videos
+  //paintings: paintingsReducer
 });
