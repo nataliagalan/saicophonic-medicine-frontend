@@ -13,7 +13,7 @@ class MyNavbar extends Component {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="#menu-toggle" id="menu-toggle">Toggle Menu</Nav.Link>
+            <Nav.Link href="/videos/new" id="menu-toggle">ADD VIDEO +</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

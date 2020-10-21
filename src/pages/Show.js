@@ -16,7 +16,8 @@ class Show extends Component {
 
     return (
       <>
-        {video === undefined ? (
+        {
+        video === undefined ? (
           <h2>Video not found</h2>
         ) : (
           <div className="page-content-wrapper">
