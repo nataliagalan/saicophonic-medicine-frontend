@@ -13,3 +13,10 @@ export const addVideo = (videos) => {
     videos: videos,
   };
 };
+
+export const updateVideo = (videos) => {
+  return {
+    type: "UPDATE_VIDEO",
+    videos: videos,
+  };
+};
