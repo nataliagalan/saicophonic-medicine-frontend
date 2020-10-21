@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar';
 import MyNavbar from './components/MyNavbar';
 import New from './pages/New';
 import VideoDashboard from './components/VideoDashboard';
+import Edit from './pages/Edit';
 
 
 const App = () => {
@@ -16,22 +17,19 @@ const App = () => {
     <BrowserRouter>
       <div className="App">
           <MyNavbar />
-
+        {/* <!-- .wrapper --> */}
         <div className="wrapper">
           <Sidebar />
-
-          <Route exact path="/videos">
-            <VideoDashboard />
-          </Route>
-
+          <Route exact path="/videos" component={VideoDashboard} />
         </div>
+        {/* <!-- /#wrapper --> */}
 
-        <Route exact path="/videos/new">
-            <New />
-        </Route>
+        <Route exact path="/videos/new" component={New} />
+        <Route exact path="/videos/edit/:id" component={Edit} />
 
 
       </div>
+      {/* <!-- /.App --> */}
     </BrowserRouter>
   );
 }

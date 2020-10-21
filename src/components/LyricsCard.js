@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
 
 
 class LyricsCard extends Component {
@@ -24,6 +29,13 @@ class LyricsCard extends Component {
           <Accordion.Collapse eventKey="1">
             <Card.Body>Lyrics Here</Card.Body>
           </Accordion.Collapse>
+          <Row>
+            <Col>
+              <Card.Link href="#">✏️</Card.Link>
+              <Card.Link href="#">👀</Card.Link>
+              <Card.Link href="#">🗑</Card.Link>
+            </Col>
+          </Row>
         </Card>
       </Accordion>
     )
