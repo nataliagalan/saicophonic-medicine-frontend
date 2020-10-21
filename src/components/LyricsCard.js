@@ -13,7 +13,7 @@ import Row from 'react-bootstrap/Row';
 
 
 class LyricsCard extends Component {
-  delVideo = async (id) => {
+  delVideo =  async (id) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`, {
       method: "DELETE",
     });
@@ -25,20 +25,11 @@ class LyricsCard extends Component {
   };
 
   render() {
-    const { lyrics, id } = this.props
+    const { id } = this.props
+    // const { lyrics, title, timestamp } = this.props.songs[0]
     return (
       <Accordion defaultActiveKey="0">
           {/* {on click event that setStates the selected song} */}
-        <Card>
-          <Accordion.Toggle as={Card.Header} eventKey="1">
-            02:00 - Has This Hit
-          </Accordion.Toggle>
-          <Accordion.Collapse eventKey="1">
-            <Card.Body>{lyrics}
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-
         {/* <Card>
           <Accordion.Toggle as={Card.Header} eventKey="1">
             {timestamp} - {title}
@@ -74,7 +65,7 @@ const setStateToProps = (state) => {
 };
 
 const setDispatchToProps = {
-  deleteVideo,
+  deleteVideo
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(LyricsCard));

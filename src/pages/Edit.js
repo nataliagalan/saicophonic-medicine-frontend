@@ -13,7 +13,7 @@ class Edit extends Component {
     id: '',
     url: '',
     lyrics: '',
-    user_id: 2,
+    user_id: 5,
   };
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class Edit extends Component {
       id: id,
       url: video.url,
       lyrics: video.lyrics,
-      user_id: 2,
+      user_id: 5,
     })
   }
 

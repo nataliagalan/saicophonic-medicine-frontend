@@ -12,7 +12,9 @@ class New extends Component {
   state = {
     url: '',
     lyrics: '',
-    user_id: 2,
+    title: '',
+    timestamp: '',
+    user_id: 5,
     error: null
   };
 
@@ -41,6 +43,7 @@ class New extends Component {
       const updatedVideos = [...this.props.videos, newVideo];
       this.props.addVideo(updatedVideos);
       // this.props.history.push(`/videos/${newVideo.id}`);
+      // this.props.history.push(`/videos`);
     }
   };
 
@@ -64,10 +67,18 @@ class New extends Component {
         <br></br>
         <Form.Row>
           <Col>
-            <Form.Control placeholder="Time" />
+            <Form.Control 
+              name="time" 
+              value={this.state.url} 
+              onChange={this.handleChange}
+              placeholder="Time" />
           </Col>
           <Col xs={7}>
-            <Form.Control placeholder="Song Title" />
+            <Form.Control
+              name="title" 
+              value={this.state.url} 
+              onChange={this.handleChange} 
+              placeholder="Song Title" />
           </Col>
         </Form.Row>
         <br></br>
