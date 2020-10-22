@@ -46,9 +46,6 @@ const New = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    //change this.state to hooks state using inputList (array)
-    //and videoInput (object)
-    // construct a new object
     let videoToAdd = {
       songs: inputList,
       url: videoInput.url,
@@ -137,7 +134,6 @@ const New = (props) => {
 
         <br></br>
         <Button
-          // onClick={() => dispatch(addVideo())} 
           variant="primary" 
           type="submit">
           Save
