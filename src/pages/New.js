@@ -1,120 +1,155 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
+import React, { useState } from 'react';
+import { useDispatch, useSelector  } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { addVideo } from '../actions/videos'
 
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+const New = (props) => {
+  //useSelector is similar to setStateToProps
+  const videos = useSelector(state => state.videos);
+  //useDispatch is similar to setDispatchToProps
+  const dispatch = useDispatch();
 
-class New extends Component {
+  const [inputList, setInputList] = useState([
+    { 
+      timestamp: '',
+      title: '',
+      lyrics: '',
+    }
+  ]);
 
-  state = {
-    url: '',
-    lyrics: '',
-    title: '',
-    timestamp: '',
-    user_id: 5,
-    error: null,
-  };
+  const [videoInput, setVideoInput] = useState({url: ''});
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+  const handleChange = (e, i) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[i][name] = value
+    setInputList(list);
   }
 
-  handleSubmit = async (e) => {
+  const handleVideoInputChange = (e) => {
+    setVideoInput({[e.target.name]: e.target.value});
+  }
+ 
+  const handleAddInput = () => {
+    setInputList([...inputList, { timestamp: '', title: '', lyrics: '' }]);
+  }
+
+  const handleRemoveInput = (i) => {
+    const list = [...inputList];
+    list.splice(i, 1);
+    setInputList(list);
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    //change this.state to hooks state using inputList (array)
+    //and videoInput (object)
+    // construct a new object
+    let videoToAdd = {
+      songs: inputList,
+      url: videoInput.url,
+      user_id: 5
+    }
      const reqObj = {
        method: 'POST',
        headers: {
        'Content-Type': 'application/json',
        'Accept': 'application/json'
        },
-       body: JSON.stringify(this.state)
+       body: JSON.stringify(videoToAdd)
      };
 
     const res = await fetch('http://localhost:3001/api/v1/videos', reqObj);
     const newVideo = await res.json();
-    if (newVideo.error) {
-      this.setState({ error: newVideo.error });
-    } else {
-      const updatedVideos = [...this.props.videos, newVideo];
-      this.props.addVideo(updatedVideos);
-      // this.props.history.push(`/videos/${newVideo.id}`);
-      // this.props.history.push(`/videos`);
-    }
+    // ...videos comes from useSelector
+      const updatedVideos = [...videos, newVideo];
+      dispatch(addVideo(updatedVideos));
+      props.history.push(`/videos`);
   };
 
 
-
-
-  render() {
     return (
       <Form
-      onSubmit={this.handleSubmit}
-      >
+        onSubmit={handleSubmit}
+        >
         <br></br>
         <Form.Row>
           <Col>
             <Form.Control 
               name="url" 
-              value={this.state.url} 
-              onChange={this.handleChange}
+              value={videoInput.url} 
+              onChange={(e) => handleVideoInputChange(e)}
               placeholder="Url" />
           </Col>
         </Form.Row>
         <br></br>
-        <Form.Row>
-          <Col>
-            <Form.Control 
-              name="timestamp" 
-              value={this.state.timestamp} 
-              onChange={this.handleChange}
-              placeholder="Time" />
-          </Col>
-          <Col xs={7}>
-            <Form.Control
-              name="title" 
-              value={this.state.title} 
-              onChange={this.handleChange} 
-              placeholder="Song Title" />
-          </Col>
-        </Form.Row>
-        <br></br>
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Control 
-            as="textarea"
-            name="lyrics" 
-            value={this.state.lyrics} 
-            onChange={this.handleChange}
-            placeholder="Lyrics"
-            rows={11} />
-        </Form.Group>
+        {
+          inputList.map((input, i) =>  {
+            return (
+              <div 
+                key={i}>
+                  <br/>
+              <Form.Row>
+                <Col>
+                  <Form.Control 
+                    name="timestamp"
+                    label="timestamp" 
+                    value={input.timestamp} 
+                    onChange={(e) => handleChange(e, i)}
+                    placeholder="Time" />
+                </Col>
+                <Col xs={7}>
+                  <Form.Control
+                    name="title"
+                    label="title"  
+                    value={input.title} 
+                    onChange={(e) => handleChange(e, i)} 
+                    placeholder="Song Title" />
+                </Col>
+              </Form.Row>
+              <br></br>
+                <Form.Control 
+                  as="textarea"
+                  name="lyrics" 
+                  label="lyrics" 
+                  value={input.lyrics} 
+                  onChange={(e) => handleChange(e, i)}
+                  placeholder="Lyrics"
+                  rows={6} />
+              { inputList.length - 1 === i && <Button 
+                value="add"
+                onClick={handleAddInput}
+                variant="primary">+</Button> }
+              { inputList.length !== 1 && <Button 
+                value="remove"
+                onClick={() => handleRemoveInput(i)}
+                variant="primary">-</Button>}
+              </div>
+            )
+            }
+          )
+        } 
 
 
         <br></br>
-        <Button 
+        <Button
+          // onClick={() => dispatch(addVideo())} 
           variant="primary" 
           type="submit">
           Save
         </Button>
 
 
-
+          <pre>
+            {JSON.stringify(inputList, null, 1)}
+            {JSON.stringify(videoInput, null, 1)}
+          </pre>
       </Form>
     )
   }
-}
 
-const setStateToProps = (state) => {
-  return {
-    videos: state.videos
-  }
-};
-
-const setDispatchToProps = { addVideo };
-
-export default connect(setStateToProps, setDispatchToProps)(New);
+  export default withRouter(New);
