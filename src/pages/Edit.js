@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect  } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { updateVideo } from '../actions/videos'
@@ -12,46 +12,52 @@ class Edit extends Component {
   state = {
     id: '',
     url: '',
-    lyrics: '',
-    user_id: 5,
-  };
+    songs: [
+      {
+        title: '',
+        lyrics: '',
+        timestamp: '',
+      }
+    ]
+  }
 
   componentDidMount() {
     const path = this.props.location.pathname.split("/");
     const id = parseInt(path[path.length - 1]);
-    this.setInitialState(id)
+    this.setInitialState(id);
   }
 
   setInitialState = async (id) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
     const video = await res.json();
-  
+    this.setState({ id: id, songs: video.songs, url: video.url });
+  };
+
+  handleChange = (e, i) => {
+    const { name, value } = e.target;
+    const list = [...this.state.songs];
+    list[i][name] = value
+    console.log(list);
     this.setState({
-      id: id,
-      url: video.url,
-      lyrics: video.lyrics,
-      user_id: 5,
+      songs: list,
+      url: e.target.value
     })
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleSubmit = async (e) => {
+   handleSubmit = async (e) => {
     e.preventDefault();
+    // let videoToUpdate = {
+    //   songs: inputList, (array)
+    //   url: videoInput.url, (object key)
+    //   user_id: 5
+    // }
     const reqObj = {
       method: 'PATCH',
       headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
       },
-      body: JSON.stringify({
-        url: this.state.url,
-        lyrics: this.state.lyrics
-      })
+      body: JSON.stringify(this.state)
     };
     const res = await fetch(`http://localhost:3001/api/v1/videos/${this.state.id}` ,reqObj);
     const updatedVideo = await res.json();
@@ -62,14 +68,15 @@ class Edit extends Component {
       );
       const allVideos = [...prevVideos, updatedVideo];
       this.props.updateVideo(allVideos);
-      this.props.history.push(`/videos/${this.state.id}`);
+      this.props.history.push(`/videos`);
     }
-
   }
 
   render() {
+    const { songs } = this.state
+    // console.log(songs[0].timestamp);
     return (
-    <Form
+      <Form
       onSubmit={this.handleSubmit}
       >
         <br></br>
@@ -77,44 +84,77 @@ class Edit extends Component {
           <Col>
             <Form.Control 
               name="url" 
-              value={this.state.url} 
-              onChange={this.handleChange}
+              defaultValue={this.state.url} 
+              onChange={(e) => this.handleChange(e, 0)}
               placeholder="Url" />
           </Col>
         </Form.Row>
         <br></br>
-        {/* <Form.Row>
-          <Col>
-            <Form.Control placeholder="Time" />
-          </Col>
-          <Col xs={7}>
-            <Form.Control placeholder="Song Title" />
-          </Col>
-        </Form.Row> */}
-        <br></br>
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Control 
-            as="textarea"
-            name="lyrics" 
-            value={this.state.lyrics} 
-            onChange={this.handleChange}
-            placeholder="Lyrics"
-            rows={11} />
-        </Form.Group>
+        {
+          songs.map((song, i) => {
+            return (
+              <div 
+              key={i}>
+                <br/>
+            <Form.Row>
+              <Col>
+                <Form.Control 
+                  name="timestamp"
+                  label="timestamp" 
+                  defaultValue={song.timestamp} 
+                  onChange={(e) => this.handleChange(e, i)}
+                  placeholder="Time" />
+              </Col>
+              <Col xs={7}>
+                <Form.Control
+                  name="title"
+                  label="title"  
+                  defaultValue={song.title} 
+                  onChange={(e) => this.handleChange(e, i)} 
+                  placeholder="Song Title" />
+              </Col>
+            </Form.Row>
+            <br></br>
+              <Form.Control 
+                as="textarea"
+                name="lyrics" 
+                label="lyrics" 
+                defaultValue={song.lyrics} 
+                onChange={(e) => this.handleChange(e, i)}
+                placeholder="Lyrics"
+                rows={6} />
+            { songs.length - 1 === i && <Button 
+              value="add"
+              // onClick={handleAddInput}
+              variant="primary">+</Button> }
+            { songs.length !== 1 && <Button 
+              value="remove"
+              // onClick={() => handleRemoveInput(i)}
+              variant="primary">-</Button>}
+            </div>
+            )
+          })
+        }
+
         <Button 
           variant="primary" 
           type="submit">
           Save
         </Button>
-
+         <pre>
+            {/* {JSON.stringify(inputList, null, 1)} */}
+            {/* {JSON.stringify(videoInput, null, 1)} */}
+          </pre>
       </Form>        
     )
   }
+
+
 }
 
 const setStateToProps = (state) => {
   return {
-    videos: state.videos
+    videos: state.videos,
   };
 };
 
@@ -123,3 +163,14 @@ const setDispatchToProps = {
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(Edit));
+
+
+
+ 
+
+  
+  
+
+
+
+

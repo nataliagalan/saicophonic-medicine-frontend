@@ -27,7 +27,7 @@ class LyricsCard extends Component {
   render() {
     const { id } = this.props
     // const { lyrics, title, timestamp } = this.props.songs[0]
-    console.log(this.props.songs, "lyricsCard");
+    // console.log(this.props.songs, "lyricsCard");
     return (
       <Accordion defaultActiveKey="0">
           {/* {on click event that setStates the selected song} */}
