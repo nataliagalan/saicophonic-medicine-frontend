@@ -28,7 +28,7 @@ class VideoDashboard extends Component {
       <div className="page-content-wrapper">
         <Container fluid>
           {
-            this.props.videos.map((video) => {
+            [...this.props.videos].reverse().map((video) => {
               return <VideoContainer
                 video={video}
                 key={video.id}

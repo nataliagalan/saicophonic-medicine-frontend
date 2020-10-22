@@ -37,20 +37,15 @@ class Edit extends Component {
     const { name, value } = e.target;
     const list = [...this.state.songs];
     list[i][name] = value
-    console.log(list);
-    this.setState({
-      songs: list,
-      url: e.target.value
-    })
+    this.setState((prevState) => 
+      ({songs: list, 
+        url: prevState.url
+      })
+    )
   }
 
    handleSubmit = async (e) => {
     e.preventDefault();
-    // let videoToUpdate = {
-    //   songs: inputList, (array)
-    //   url: videoInput.url, (object key)
-    //   user_id: 5
-    // }
     const reqObj = {
       method: 'PATCH',
       headers: {
@@ -71,6 +66,21 @@ class Edit extends Component {
       this.props.history.push(`/videos`);
     }
   }
+
+ handleAddInput = () => {
+    this.setState((prevState) => 
+      ({songs: [...prevState.songs,  { title: '', lyrics: '', timestamp: '' }]})
+    )
+  }
+
+  handleRemoveInput = (i) => {
+    let songs = [...this.state.songs];
+    songs.splice(i, 1);
+    this.setState({
+      songs: songs
+    })
+  }
+
 
   render() {
     const { songs } = this.state
@@ -125,11 +135,11 @@ class Edit extends Component {
                 rows={6} />
             { songs.length - 1 === i && <Button 
               value="add"
-              // onClick={handleAddInput}
+              onClick={this.handleAddInput}
               variant="primary">+</Button> }
             { songs.length !== 1 && <Button 
               value="remove"
-              // onClick={() => handleRemoveInput(i)}
+              onClick={() => this.handleRemoveInput(i)}
               variant="primary">-</Button>}
             </div>
             )
@@ -141,10 +151,12 @@ class Edit extends Component {
           type="submit">
           Save
         </Button>
-         <pre>
-            {/* {JSON.stringify(inputList, null, 1)} */}
-            {/* {JSON.stringify(videoInput, null, 1)} */}
-          </pre>
+         {/* <pre> */}
+            {/* {JSON.stringify(this.state.url, null, 1)} */}
+            {/* {JSON.stringify(this.state.songs, null, 1)} */}
+            {/* {JSON.stringify(this.state.id, null, 1)} */}
+            {/* {JSON.stringify(this.state, null, 1)} */}
+          {/* </pre> */}
       </Form>        
     )
   }
