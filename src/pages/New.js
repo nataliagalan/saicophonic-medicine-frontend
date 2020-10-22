@@ -142,12 +142,11 @@ const New = (props) => {
           type="submit">
           Save
         </Button>
-
-
-          <pre>
+        
+          {/* <pre>
             {JSON.stringify(inputList, null, 1)}
             {JSON.stringify(videoInput, null, 1)}
-          </pre>
+          </pre> */}
       </Form>
     )
   }

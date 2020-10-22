@@ -23,7 +23,7 @@ class VideoDashboard extends Component {
 
 
   render() {
-    console.log(this.props.videos);
+    // console.log(this.props.videos);
     return (
       <div className="page-content-wrapper">
         <Container fluid>
