@@ -28,19 +28,21 @@ class LyricsCard extends Component {
     const { id } = this.props
     // const { lyrics, title, timestamp } = this.props.songs[0]
     // console.log(this.props.songs, "lyricsCard");
+
     return (
-      <Accordion defaultActiveKey="0">
+      <Accordion >
           {/* {on click event that setStates the selected song} */}
 
           {
             this.props.songs.map((song, i) => {
+              console.log(i, '------');
               return (
               <Card key={i}> 
-                <Accordion.Toggle as={Card.Header} eventKey="1">
+                <Accordion.Toggle as={Card.Header} eventKey={i + 1}>
                   {song.timestamp} - {song.title}
                 </Accordion.Toggle>
-                <Accordion.Collapse eventKey="1">
-                  <Card.Body>
+                <Accordion.Collapse eventKey={i + 1}>
+                <Card.Body style={{textAlign: "left"}} style={{whiteSpace: "pre-line"}}>
                   {song.lyrics} 
                   </Card.Body>
                 </Accordion.Collapse>
@@ -48,7 +50,6 @@ class LyricsCard extends Component {
               )
             })
           }
-
 
 
           {/* Edit and Delete buttons */}
