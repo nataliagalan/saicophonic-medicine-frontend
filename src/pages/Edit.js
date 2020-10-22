@@ -151,12 +151,12 @@ class Edit extends Component {
           type="submit">
           Save
         </Button>
-         {/* <pre> */}
+         <pre>
             {/* {JSON.stringify(this.state.url, null, 1)} */}
             {/* {JSON.stringify(this.state.songs, null, 1)} */}
             {/* {JSON.stringify(this.state.id, null, 1)} */}
-            {/* {JSON.stringify(this.state, null, 1)} */}
-          {/* </pre> */}
+            {JSON.stringify(this.state, null, 1)}
+          </pre>
       </Form>        
     )
   }
