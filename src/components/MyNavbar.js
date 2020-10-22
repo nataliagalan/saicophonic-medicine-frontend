@@ -9,7 +9,7 @@ class MyNavbar extends Component {
     return (
       <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Logo</Navbar.Brand>
+        <Navbar.Brand href="/videos">Logo</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
