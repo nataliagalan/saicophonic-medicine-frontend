@@ -17,16 +17,16 @@ const VideoContainer = (props) => {
     // console.log(props.video, "inside video container");
     return (
       <>
-        <Row>
-          <Col sm={8}>
+        {/* <Row>
+          <Col sm={8}> */}
             <VideoCard 
               {...props.video}/>
-          </Col>
-          <Col sm={4}>
-            <SongContainer {...props.video}/>
-          </Col>
+          {/* </Col>
+          <Col sm={4}> */}
+            {/* <SongContainer {...props.video}/> */}
+          {/* </Col>
         </Row>
-        <Line color="black" />
+        <Line color="black" /> */}
       </>
     )
 
