@@ -16,25 +16,18 @@ const VideoCard = (props) => {
     const ref = React.createRef()
     //useSelector is similar to setStateToProps
     const payload = useSelector(state => state.video);
-  
-    console.log(payload, '11---------------');
+    // console.log(payload, '11---------------');
 
-    // use the payload coming from dispatched actions
-    // te set state
+  
     const [playerState, setPlayerState] = useState(() => ({playing: false}));
 
-   
 
     //setPlayerState triggers a rerender
       // use the payload coming from dispatched actions
       // to set state
-    const handlePlayerToggle = (payload) => {
-      setPlayerState(prevState => ({playing: !playerState.playing}) );
-      ref.current.seekTo(payload, "seconds")
-    }
 
     const please = (seconds) => {
-      console.log(seconds);
+      // console.log(seconds);
       setPlayerState(prevState => ({playing: !playerState.playing}) );
       ref.current.seekTo(seconds, "seconds")
       
@@ -67,8 +60,7 @@ const VideoCard = (props) => {
           </Col>
         </Row>
         <Line color="black" />
-        {/* <button onClick={() => handlePlayerToggle(payload)}>
-          handlePlayerToggle</button> */}
+
       </>
     )
 

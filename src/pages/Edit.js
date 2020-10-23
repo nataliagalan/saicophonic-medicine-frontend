@@ -30,20 +30,6 @@ class Edit extends Component {
     duration: 0,
   }
 
-  // state = {
-  //   url: null,
-  //   pip: false,
-  //   playing: true,
-  //   controls: false,
-  //   light: false,
-  //   volume: 0.8,
-  //   muted: false,
-  //   played: 0,
-  //   loaded: 0,
-  //   duration: 0,
-  //   playbackRate: 1.0,
-  //   loop: false
-  // }
 
   componentDidMount() {
     const path = this.props.location.pathname.split("/");
@@ -70,6 +56,16 @@ class Edit extends Component {
 
    handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formatSongs = this.state.songs.map(song => { 
+      let formatTimestamp = song.timestamp.split(':')
+      let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
+      song.timestamp = formatSeconds
+      return { ...song }
+    });
+
+    this.setState({songs: formatSongs})
+    
     const reqObj = {
       method: 'PATCH',
       headers: {
@@ -123,13 +119,16 @@ class Edit extends Component {
     //seems to only run once at the beginning
     // and corresponds to video length in seconds
     // takes those seconds and adds them to state
-    console.log('onDuration', duration)
+    // console.log('onDuration', duration)
     this.setState({ duration })
   }
 
   ref = player => {
     this.player = player
   }
+
+
+  
 
   render() {
     const { songs } = this.state
@@ -142,6 +141,7 @@ class Edit extends Component {
           onDuration={this.handleDuration} 
           width='100%'
           height='100%'
+          controls={true}
           url={this.state.url} />
         </ResponsiveEmbed>
         <input
@@ -161,13 +161,17 @@ class Edit extends Component {
       onSubmit={this.handleSubmit}
       >
         <br></br>
+     
+
         <Form.Row>
           <Col>
             <Form.Control 
-              name="url" 
+              name="url"
+              ref={input => { this.urlInput = input }} 
               defaultValue={this.state.url} 
               onChange={(e) => this.handleChange(e, 0)}
               placeholder="Url" />
+              <Button onClick={() => this.setState({ url: this.urlInput.value })}>Load</Button>
           </Col>
         </Form.Row>
         <br></br>
@@ -222,13 +226,13 @@ class Edit extends Component {
           type="submit">
           Save
         </Button>
-         <pre>
+         {/* <pre> */}
             {/* {JSON.stringify(this.state.url, null, 1)} */}
             {/* {JSON.stringify(this.state.songs, null, 1)} */}
             {/* {JSON.stringify(this.state.id, null, 1)} */}
-            {JSON.stringify(this.state, null, 1)}
+            {/* {JSON.stringify(this.state, null, 1)} */}
 
-          </pre>
+          {/* </pre> */}
       </Form>
       </>        
     )

@@ -7,6 +7,10 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
+import ReactPlayer from 'react-player/lazy';
+
+
 const New = (props) => {
   //useSelector is similar to setStateToProps
   const videos = useSelector(state => state.videos);
@@ -44,6 +48,16 @@ const New = (props) => {
     setInputList(list);
   }
 
+  // const formatSongs = this.state.songs.map(song => { 
+  //   let formatTimestamp = song.timestamp.split(':')
+  //   let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
+  //   song.timestamp = formatSeconds
+  //   return { ...song }
+  // });
+
+  // this.setState({songs: formatSongs})
+
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     let videoToAdd = {
@@ -67,9 +81,19 @@ const New = (props) => {
       dispatch(addVideo(updatedVideos));
       props.history.push(`/videos`);
   };
-
+  const ref = React.createRef()
 
     return (
+      <>
+        <ResponsiveEmbed aspectRatio="16by9">
+          <ReactPlayer
+          ref={ref}
+          width='100%'
+          height='100%'
+          controls={true}
+          url={videoInput.url} />
+        </ResponsiveEmbed>
+     
       <Form
         onSubmit={handleSubmit}
         >
@@ -144,6 +168,7 @@ const New = (props) => {
             {JSON.stringify(videoInput, null, 1)}
           </pre> */}
       </Form>
+      </>
     )
   }
 
