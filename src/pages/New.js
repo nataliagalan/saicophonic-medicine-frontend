@@ -48,20 +48,18 @@ const New = (props) => {
     setInputList(list);
   }
 
-  // const formatSongs = this.state.songs.map(song => { 
-  //   let formatTimestamp = song.timestamp.split(':')
-  //   let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
-  //   song.timestamp = formatSeconds
-  //   return { ...song }
-  // });
-
-  // this.setState({songs: formatSongs})
-
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const formatSongs = inputList.map(song => { 
+      let formatTimestamp = song.timestamp.split(':')
+      let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
+      song.timestamp = formatSeconds
+      return { ...song }
+    });
+
     let videoToAdd = {
-      songs: inputList,
+      songs: formatSongs,
       url: videoInput.url,
       user_id: 5
     }
