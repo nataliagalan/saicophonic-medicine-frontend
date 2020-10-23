@@ -34,7 +34,8 @@ const LyricsCard = (props) => {
 
   
     const { id, songs } = props
-    const payload = "uuuuh lala"
+    // const payload = "uuuuh lala"
+    // console.log(props.please, "lyricscarddddddddddddd");
 
     return (
       <Accordion >
@@ -45,7 +46,8 @@ const LyricsCard = (props) => {
               return (
               <Card key={i}> 
                 <Accordion.Toggle
-                  onClick={ () => dispatch(togglePlayVideo(payload)) } 
+                  onClick={ (e) => props.please(e.target.innerText.split(' - ')[0]) } 
+                  // onClick={ (e) => dispatch(togglePlayVideo(e.target.innerText.split(' - ')[0])) } 
                   as={Card.Header} 
                   eventKey={i + 1}>
                   {song.timestamp} - {song.title}
