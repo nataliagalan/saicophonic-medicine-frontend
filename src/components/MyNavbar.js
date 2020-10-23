@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import {Link} from 'react-router-dom';
 
-class MyNavbar extends Component {
-
-  render() {
+const MyNavbar = () => {
 
     return (
       <>
@@ -20,10 +18,9 @@ class MyNavbar extends Component {
         </Navbar.Collapse>
       </Navbar>
       </>
-    )
-  }
+    );
+  
 }
 
 export default MyNavbar
 
-//react router dom LINK
