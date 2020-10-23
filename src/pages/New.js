@@ -82,7 +82,9 @@ const New = (props) => {
   const ref = React.createRef()
 
     return (
-      <>
+      <div className="new-video-page">
+      {
+      videoInput.url ? 
         <ResponsiveEmbed aspectRatio="16by9">
           <ReactPlayer
           ref={ref}
@@ -91,6 +93,9 @@ const New = (props) => {
           controls={true}
           url={videoInput.url} />
         </ResponsiveEmbed>
+        :
+        null
+      }
      
       <Form
         onSubmit={handleSubmit}
@@ -141,12 +146,15 @@ const New = (props) => {
                   rows={6} />
               { inputList.length - 1 === i && <Button 
                 value="add"
+                data-slider-id="BC"
                 onClick={handleAddInput}
+                className="dynamic-input-btn"
                 variant="primary">+</Button> }
               { inputList.length !== 1 && <Button 
                 value="remove"
+                className="dynamic-input-btn"
                 onClick={() => handleRemoveInput(i)}
-                variant="primary">-</Button>}
+                variant="primary">–</Button>}
               </div>
             )
             }
@@ -166,7 +174,7 @@ const New = (props) => {
             {JSON.stringify(videoInput, null, 1)}
           </pre> */}
       </Form>
-      </>
+      </div>
     )
   }
 

@@ -134,7 +134,7 @@ class Edit extends Component {
     const { songs } = this.state
     // console.log(songs[0].timestamp);
     return (
-      <>
+      <div className="new-video-page">
        <ResponsiveEmbed aspectRatio="16by9">
           <ReactPlayer
           ref={this.ref}
@@ -144,18 +144,28 @@ class Edit extends Component {
           controls={true}
           url={this.state.url} />
         </ResponsiveEmbed>
-        <input
+        <br></br>
+        <Form>
+        <Form.Group controlId="formBasicRangeCustom">
+        <Form.Control 
+        // <input
+          custom
           type='range' min={0} max={0.999999} step='any'
           value={this.state.played}
           onMouseDown={this.handleSeekMouseDown}
           onChange={this.handleSeekChange}
           onMouseUp={this.handleSeekMouseUp}
+        // />
         />
+        </Form.Group>
+        </Form>
         {/* what gets displayed is the length of video times played (float)
         those seconds get passed as input to duration and it converts them
         to 00:00 format, then they get displayed
         */}
+        <div className="duration-seconds">
         <Duration seconds={this.state.duration * this.state.played}/>
+        </div>
     
       <Form
       onSubmit={this.handleSubmit}
@@ -171,6 +181,7 @@ class Edit extends Component {
               defaultValue={this.state.url} 
               onChange={(e) => this.handleChange(e, 0)}
               placeholder="Url" />
+              <br></br>
               <Button onClick={() => this.setState({ url: this.urlInput.value })}>Load</Button>
           </Col>
         </Form.Row>
@@ -210,10 +221,12 @@ class Edit extends Component {
                 rows={6} />
             { songs.length - 1 === i && <Button 
               value="add"
+              className="dynamic-input-btn"
               onClick={this.handleAddInput}
               variant="primary">+</Button> }
             { songs.length !== 1 && <Button 
               value="remove"
+              className="dynamic-input-btn"
               onClick={() => this.handleRemoveInput(i)}
               variant="primary">-</Button>}
             </div>
@@ -234,7 +247,7 @@ class Edit extends Component {
 
           {/* </pre> */}
       </Form>
-      </>        
+      </div>        
     )
   }
 

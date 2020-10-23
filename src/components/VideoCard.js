@@ -39,9 +39,9 @@ const VideoCard = (props) => {
   
     return (
       <>
-
+<br></br>
         <Row>
-          <Col sm={8}>
+          <Col sm={8} className="custom-spacer">
               <ResponsiveEmbed aspectRatio="16by9">
               <ReactPlayer
               ref={ref}
@@ -53,14 +53,15 @@ const VideoCard = (props) => {
               height='100%'/>
             </ResponsiveEmbed>
           </Col>
+          
           <Col sm={4}>
             <SongContainer
             please={please} 
               {...props} />
           </Col>
         </Row>
+        <br></br>
         <Line color="#EBDFF7" />
-
       </>
     )
 
