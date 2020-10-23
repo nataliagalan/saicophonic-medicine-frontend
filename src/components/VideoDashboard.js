@@ -8,10 +8,6 @@ import VideoContainer from './VideoContainer';
 class VideoDashboard extends Component {
 
   componentDidMount() {
-    // $("#menu-toggle").click(function(e) {
-    //   e.preventDefault();
-    //   $("#wrapper").toggleClass("toggled");
-    // });
     this.fetchVideos()
   }
 
@@ -28,7 +24,8 @@ class VideoDashboard extends Component {
       <div className="page-content-wrapper">
         <Container fluid>
           {
-            [...this.props.videos].reverse().map((video) => {
+            // [...this.props.videos].reverse().map((video) => {
+            this.props.videos.map((video) => {
               return <VideoContainer
                 video={video}
                 key={video.id}
