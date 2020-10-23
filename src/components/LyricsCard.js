@@ -44,8 +44,12 @@ const LyricsCard = (props) => {
           {
             songs.map((song, i) => {
               return (
-              <Card key={i}> 
+              <Card 
+              className="song-accordion"
+              key={i}> 
                 <Accordion.Toggle
+                
+                  style={{cursor: 'pointer'}} 
                   onClick={ (e) => props.please(e.target.innerText.split(' - ')[0]) } 
                   // onClick={ (e) => dispatch(togglePlayVideo(e.target.innerText.split(' - ')[0])) } 
                   as={Card.Header} 
@@ -67,17 +71,39 @@ const LyricsCard = (props) => {
           }
 
           {/* Edit and Delete buttons */}
-          <Row>
+
+          <Card> 
+
+            <Accordion.Toggle
+             className="plus-accordion"
+              style={{cursor: 'pointer'}} 
+              as={Card.Header} 
+              eventKey="1">
+              +
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="1">
+            <Card.Body className="plus-accordion">
+            <Row>
             <Col>
-              <Button 
+              <Button
+                style={{border: 'none'}} 
                 as={Link} 
                 to={`/videos/edit/${id}`}>✏️</Button>
               <Button 
+                style={{border: 'none'}}
                 as={Link} 
                 onClick={() => delVideo(id)}
                 >🗑</Button>
             </Col>
           </Row>
+              </Card.Body>
+            </Accordion.Collapse>
+
+          </Card>
+
+
+
+          
       </Accordion>
     )
   

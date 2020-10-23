@@ -34,7 +34,7 @@ code {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: #EBDFF7;
 }
 
@@ -50,6 +50,20 @@ code {
   font-weight: 600;
   font-size: 4.5rem;
   color: #EBDFF7;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+
+@media screen and (max-width: 768px) {
+  .header-text { 
+    font-size: 3em; 
+ }
+  .header-subttext { 
+    font-size: 1rem; 
+ }
+
+ 
 }
 
 .header-subtext {
@@ -60,4 +74,58 @@ code {
   letter-spacing: .09em;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.btn-primary {
+  background: none;
+  border: 1;
+  border-color: #ebdff7de;
+  font-size: 1.2rem;
+}
+
+.btn-primary:hover {
+  background: #ebdff7;
+  border-color: #ebdff7de;
+  color: #000;
+}
+
+.dynamic-input-btn {
+  font-size: 2rem;
+  border: none;
+}
+.dynamic-input-btn:hover {
+  color: rgb(250, 192, 0);
+  background: none;
+}
+.new-video-page {
+  padding-top: 8rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+.duration-seconds {
+  color: #EBDFF7;
+  letter-spacing: .09em;
+}
+#formBasicRangeCustom::-webkit-slider-thumb {
+  background: rgb(250, 192, 0);
+  
+}
+
+.page-content-wrapper {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.song-accordion {
+  background: #fdfbff;
+  border-radius: 0;
+}
+
+.plus-accordion {
+  background: #fffced;
+  /* border-radius: 0; */
+}
+
+.custom-spacer {
+  padding-bottom: 1.8rem;
 }
