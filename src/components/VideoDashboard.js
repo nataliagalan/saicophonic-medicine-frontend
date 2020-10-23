@@ -22,6 +22,10 @@ class VideoDashboard extends Component {
     // console.log(this.props.videos);
     return (
       <div className="page-content-wrapper">
+        <div className="dashboard-header">
+          <h1 className="header-text">Saicophonic Medicine</h1>
+          <h5 className="header-subtext">An expanding library of live music sessions</h5>
+        </div>
         <Container fluid>
           {
             // [...this.props.videos].reverse().map((video) => {

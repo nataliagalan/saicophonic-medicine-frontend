@@ -16,6 +16,10 @@ $font-family-base: "Futura-Pt";
 $btn-border-radius: 0;
 
 
+$link-hover-color: darken(#EBDFF7, 15%);
+// $link-hover-color: darken($link-color, 15%) !default;
+
+
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
 

@@ -119,7 +119,7 @@ const New = (props) => {
                     label="timestamp" 
                     value={input.timestamp} 
                     onChange={(e) => handleChange(e, i)}
-                    placeholder="Time" />
+                    placeholder="Time in 00:00" />
                 </Col>
                 <Col xs={7}>
                   <Form.Control
