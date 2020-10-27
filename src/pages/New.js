@@ -27,6 +27,8 @@ const New = (props) => {
 
   const [videoInput, setVideoInput] = useState({url: ''});
 
+
+
   const handleChange = (e, i) => {
     const { name, value } = e.target;
     const list = [...inputList];
