@@ -1,4 +1,6 @@
 
+
+// potentially delete this, using hooks now
 const initialValue = []
 const video = (state = initialValue, action) => {
   switch (action.type) {
