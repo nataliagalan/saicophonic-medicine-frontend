@@ -129,3 +129,9 @@ code {
 .custom-spacer {
   padding-bottom: 1.8rem;
 }
+
+.login-page-content-wrapper {
+  padding-top: 13rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
