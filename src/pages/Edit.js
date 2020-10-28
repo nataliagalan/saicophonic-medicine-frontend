@@ -77,16 +77,23 @@ class Edit extends Component {
     const { name, value } = e.target;
     const list = [...this.state.songs];
     list[i][name] = value
+
     this.setState((prevState) => 
       ({songs: list, 
-        url: prevState.url
+        // url: prevState.url
       })
     )
+  }
+
+  handleVideoInputChange = (e) => {
+    this.setState({ url: e.target.value })
   }
 
    handleSubmit = async (e) => {
     e.preventDefault();
 
+    //after I change the BE to accept timestamps as strings,
+    //I won't need this here
     const formatSongs = this.state.songs.map(song => { 
       let formatTimestamp = song.timestamp.split(':')
       let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
@@ -207,12 +214,10 @@ class Edit extends Component {
           <Col>
             <Form.Control 
               name="url"
-              ref={input => { this.urlInput = input }} 
+              // ref={input => { this.urlInput = input }} 
               defaultValue={this.state.url} 
-              onChange={(e) => this.handleChange(e, 0)}
+              onChange={(e) => this.handleVideoInputChange(e)}
               placeholder="Url" />
-              <br></br>
-              <Button onClick={() => this.setState({ url: this.urlInput.value })}>Load</Button>
           </Col>
         </Form.Row>
         <br></br>

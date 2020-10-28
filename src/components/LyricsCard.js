@@ -9,6 +9,7 @@ import { togglePlayVideo } from "../actions/videos";
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -51,11 +52,18 @@ const LyricsCard = (props) => {
                 <Accordion.Toggle
                 
                   style={{cursor: 'pointer'}} 
-                  onClick={ (e) => props.please(e.target.innerText.split(' - ')[0]) } 
+                  // onClick={ (e) => props.please(e.target.innerText.split(' - ')[0]) } 
                   // onClick={ (e) => dispatch(togglePlayVideo(e.target.innerText.split(' - ')[0])) } 
                   as={Card.Header} 
                   eventKey={i + 1}>
-                  {song.timestamp} - {song.title}
+                    <Row>
+                    <Col>
+                    <Button 
+                      onClick={ (e) => props.please(e.target.innerText) } 
+                      className="accordion-time-title"> {song.timestamp} </Button>
+                    <Button className="accordion-time-title">{song.title}</Button>
+                    </Col>
+                    </Row>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={i + 1}>
                 <Card.Body style={{textAlign: "left"}} style={{whiteSpace: "pre-line"}}>
