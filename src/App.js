@@ -5,6 +5,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 
+// added after watching this video but didn't have it before and styles where still working
+// TODO look into this https://www.youtube.com/watch?v=8pKjULHzs0s&feature=youtu.be
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import MyNavbar from './components/MyNavbar';
 import New from './pages/New';
 import VideoDashboard from './components/VideoDashboard';

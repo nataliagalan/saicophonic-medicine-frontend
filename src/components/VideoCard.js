@@ -26,15 +26,25 @@ const VideoCard = (props) => {
       // use the payload coming from dispatched actions
       // to set state
 
-    const please = (seconds) => {
-      // console.log(seconds);
+    const please = (timeString) => {
+      //turns the timeString 00:00 into seconds
+      const seconds = hmsToSeconds(timeString)
       setPlayerState(prevState => ({playing: !playerState.playing}) );
       ref.current.seekTo(seconds, "seconds")
-      
+    }
+
+    const hmsToSeconds = (str) => {
+      let p = str.split(':'),
+          s = 0, m = 1;
+
+      while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+      }
+      return s;
     }
   
- 
-  
+
     const { url } = props
   
     return (
