@@ -13,6 +13,11 @@ const MyNavbar = () => {
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
 
+    const handleLogout = () => {
+      localStorage.removeItem('myAppToken')
+      dispatch(logoutSuccess())
+    }
+
 
     return (
       <>
@@ -33,7 +38,8 @@ const MyNavbar = () => {
           (<Link 
             to='/admin' 
             id="menu-toggle" className="nav-font-style"
-            onClick={() => dispatch(logoutSuccess())}>
+            onClick={ handleLogout }>
+            {/* onClick={() => dispatch(logoutSuccess()) }> */}
             Logout
           </Link>)
           : 

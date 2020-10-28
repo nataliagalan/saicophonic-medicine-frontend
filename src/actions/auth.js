@@ -11,3 +11,10 @@ export const logoutSuccess = () => {
     type: "LOGOUT_SUCCESS"
   };
 };
+
+export const currentUser = (user) => {
+  return {
+    type: "CURRENT_USER",
+    user: user
+  };
+};
