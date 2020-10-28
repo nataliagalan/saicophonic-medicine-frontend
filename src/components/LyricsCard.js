@@ -91,7 +91,7 @@ const LyricsCard = (props) => {
                 to={`/videos/edit/${id}`}>✏️</Button>
               <Button 
                 style={{border: 'none'}}
-                as={Link} 
+                // as={Link} 
                 onClick={() => delVideo(id)}
                 >🗑</Button>
             </Col>
