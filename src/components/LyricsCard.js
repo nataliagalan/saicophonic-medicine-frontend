@@ -18,6 +18,7 @@ const LyricsCard = (props) => {
 
     //useSelector is similar to setStateToProps
     const videos = useSelector(state => state.videos);
+    const auth = useSelector(state => state.auth);
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
 
@@ -85,15 +86,21 @@ const LyricsCard = (props) => {
             <Card.Body className="plus-accordion">
             <Row>
             <Col>
-              <Button
-                style={{border: 'none'}} 
-                as={Link} 
-                to={`/videos/edit/${id}`}>✏️</Button>
-              <Button 
-                style={{border: 'none'}}
-                // as={Link} 
-                onClick={() => delVideo(id)}
-                >🗑</Button>
+          {
+          (auth.id) ?
+            (<><Button
+              style={{border: 'none'}} 
+              as={Link} 
+              to={`/videos/edit/${id}`}>✏️</Button>
+            <Button 
+              style={{border: 'none'}}
+              // as={Link} 
+              onClick={() => delVideo(id)}
+              >🗑</Button></>)
+            : 
+            null
+          }
+          {/* display share button and tags here  */}
             </Col>
           </Row>
               </Card.Body>

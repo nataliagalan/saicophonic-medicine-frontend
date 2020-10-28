@@ -33,20 +33,20 @@ const MyNavbar = () => {
           <Nav className="ml-auto">
             {/* <Nav.Link href="/videos/new" id="menu-toggle">ADD VIDEO +</Nav.Link> */}
             <Link to="/videos/new" id="menu-toggle" className="nav-font-style">Add Video +</Link>
-            {
+          {
           (auth.id) ?
-          (<Link 
-            to='/admin' 
-            id="menu-toggle" className="nav-font-style"
-            onClick={ handleLogout }>
-            {/* onClick={() => dispatch(logoutSuccess()) }> */}
-            Logout
-          </Link>)
-          : 
-        (<Link to='/admin' id="menu-toggle" className="nav-font-style" >
-          Login
-        </Link>)
-        }
+            (<Link 
+              to='/admin' 
+              id="menu-toggle" className="nav-font-style"
+              onClick={ handleLogout }>
+              {/* onClick={() => dispatch(logoutSuccess()) }> */}
+              Logout
+            </Link>)
+            : 
+            (<Link to='/admin' id="menu-toggle" className="nav-font-style" >
+              Login
+            </Link>)
+          }
           </Nav>
         </Navbar.Collapse>
       </Navbar>

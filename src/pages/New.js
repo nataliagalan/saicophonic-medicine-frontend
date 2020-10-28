@@ -40,7 +40,6 @@ const New = (props) => {
       }
     }
 
-
     if(!token){
       props.history.push('/admin')
     } else {
@@ -96,14 +95,13 @@ const New = (props) => {
 
     let videoToAdd = {
       songs: formatSongs,
-      url: videoInput.url,
-      user_id: 6
+      url: videoInput.url
     }
      const reqObj = {
        method: 'POST',
        headers: {
        'Content-Type': 'application/json',
-       'Accept': 'application/json'
+       id: `${auth.id}`
        },
        body: JSON.stringify(videoToAdd)
      };

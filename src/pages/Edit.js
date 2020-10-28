@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect  } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 
+// import { loginSuccess } from '../actions/auth'
+import { currentUser } from '../actions/auth'
 import { updateVideo } from '../actions/videos'
 
 import Form from 'react-bootstrap/Form';
@@ -15,6 +17,7 @@ import Duration from '../components/Duration';
 
 
 class Edit extends Component {
+
   state = {
     id: '',
     url: '',
@@ -30,11 +33,38 @@ class Edit extends Component {
     duration: 0,
   }
 
+  
 
   componentDidMount() {
     const path = this.props.location.pathname.split("/");
     const id = parseInt(path[path.length - 1]);
     this.setInitialState(id);
+
+    const token = localStorage.getItem('myAppToken') 
+    if(!token){
+      this.props.history.push('/admin')
+    } else {
+      this.fetchData()
+    }
+
+  }
+
+  fetchData = async () => {
+    const token = localStorage.getItem('myAppToken') 
+    const reqObj = {
+      method: 'GET',
+      headers: {
+      'Authorization': `Bearer ${token}`
+      }
+    }
+    const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
+    const data = await res.json();
+    if(data.error) {
+      this.props.history.push('/admin')
+    } else {
+      //need to store the user (data) in store state
+      this.props.currentUser(data)
+    }
   }
 
   setInitialState = async (id) => {
@@ -257,14 +287,18 @@ class Edit extends Component {
 const setStateToProps = (state) => {
   return {
     videos: state.videos,
+    auth: state.auth
   };
 };
 
 const setDispatchToProps = {
-  updateVideo
+  //possibly delete this updateVideo
+  updateVideo,
+  currentUser,
 };
 
-export default withRouter(connect(setStateToProps, setDispatchToProps)(Edit));
+export default connect(setStateToProps, setDispatchToProps)(Edit);
+// export default withRouter(connect(setStateToProps, setDispatchToProps)(Edit));
 
 
 
