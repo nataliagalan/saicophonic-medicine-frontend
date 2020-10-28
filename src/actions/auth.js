@@ -5,3 +5,9 @@ export const loginSuccess = (user) => {
     user: user
   };
 };
+
+export const logoutSuccess = () => {
+  return {
+    type: "LOGOUT_SUCCESS"
+  };
+};

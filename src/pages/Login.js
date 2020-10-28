@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect  } from 'react-redux';
 import { loginSuccess } from '../actions/auth'
+import { logoutSuccess } from '../actions/auth'
+import {Link} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -43,7 +45,7 @@ class Login extends React.Component {
   }
 
   render() {
-console.log(this.props, 'login');
+
   return (
     <div className="login-page-content-wrapper">
     <Form onSubmit={this.handleSubmit}>
@@ -80,8 +82,15 @@ console.log(this.props, 'login');
   }
 }
 
-const mapDispatchToProps = {
-  loginSuccess
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+const mapDispatchToProps = {
+  loginSuccess,
+  logoutSuccess
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

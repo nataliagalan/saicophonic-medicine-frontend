@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { addVideo } from '../actions/videos'
@@ -14,8 +14,16 @@ import ReactPlayer from 'react-player/lazy';
 const New = (props) => {
   //useSelector is similar to setStateToProps
   const videos = useSelector(state => state.videos);
+  const auth = useSelector(state => state.auth);
   //useDispatch is similar to setDispatchToProps
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // code to run on component mount
+    if(!auth.id){
+      props.history.push('/admin')
+    } 
+  }, [])
 
   const [inputList, setInputList] = useState([
     { 
@@ -63,7 +71,7 @@ const New = (props) => {
     let videoToAdd = {
       songs: formatSongs,
       url: videoInput.url,
-      user_id: 5
+      user_id: 6
     }
      const reqObj = {
        method: 'POST',
