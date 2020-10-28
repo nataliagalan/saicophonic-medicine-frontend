@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { addVideo } from '../actions/videos'
+import { currentUser } from '../actions/auth'
 
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -20,10 +21,35 @@ const New = (props) => {
 
   useEffect(() => {
     // code to run on component mount
-    if(!auth.id){
+    const token = localStorage.getItem('myAppToken')
+
+    const fetchData = async () => {
+      const reqObj = {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${token}`
+        }
+      }
+      const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
+      const data = await res.json();
+      if(data.error) {
+        props.history.push('/admin')
+      } else {
+        //need to store the user (data) in store state
+        dispatch(currentUser(data));
+      }
+    }
+
+
+    if(!token){
       props.history.push('/admin')
-    } 
+    } else {
+      fetchData()
+    }
   }, [])
+
+
+ 
 
   const [inputList, setInputList] = useState([
     { 

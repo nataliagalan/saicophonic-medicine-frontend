@@ -31,12 +31,14 @@ class Login extends React.Component {
       },
       body: JSON.stringify(this.state)
     }
-
+    // /auth is a custom route on rails backend that triggers auth#create 
     const res = await fetch('http://localhost:3001/api/v1/auth', reqObj);
     const data = await res.json();
     if(data.error){
       this.setState({error: data.error});
     } else {
+      // console.log(data, "------------");
+      localStorage.setItem('myAppToken', data.token)
       this.props.loginSuccess(data)
       this.props.history.push('/videos/new')
 
@@ -82,6 +84,7 @@ class Login extends React.Component {
   }
 }
 
+//what gets returned here becomes available as props within this component
 const mapStateToProps = (state) => {
   return {
     auth: state.auth
