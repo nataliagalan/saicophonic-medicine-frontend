@@ -33,8 +33,6 @@ class Edit extends Component {
     duration: 0,
   }
 
-  
-
   componentDidMount() {
     const path = this.props.location.pathname.split("/");
     const id = parseInt(path[path.length - 1]);
@@ -94,14 +92,14 @@ class Edit extends Component {
 
     //after I change the BE to accept timestamps as strings,
     //I won't need this here
-    const formatSongs = this.state.songs.map(song => { 
-      let formatTimestamp = song.timestamp.split(':')
-      let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
-      song.timestamp = formatSeconds
-      return { ...song }
-    });
+    // const formatSongs = this.state.songs.map(song => { 
+    //   let formatTimestamp = song.timestamp.split(':')
+    //   let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
+    //   song.timestamp = formatSeconds
+    //   return { ...song }
+    // });
 
-    this.setState({songs: formatSongs})
+    // this.setState({songs: formatSongs})
     
     const reqObj = {
       method: 'PATCH',
@@ -152,12 +150,12 @@ class Edit extends Component {
     this.player.seekTo(parseFloat(e.target.value))
   }
 
-  handleDuration = (duration) => {
+  handleDuration = (d) => {
     //seems to only run once at the beginning
     // and corresponds to video length in seconds
     // takes those seconds and adds them to state
-    // console.log('onDuration', duration)
-    this.setState({ duration })
+    // console.log('ond', duration)
+    this.setState({ duration: d })
   }
 
   ref = player => {
@@ -233,6 +231,7 @@ class Edit extends Component {
                   name="timestamp"
                   label="timestamp" 
                   defaultValue={song.timestamp} 
+                  // defaultValue={this.state.played}
                   onChange={(e) => this.handleChange(e, i)}
                   placeholder="Time" />
               </Col>

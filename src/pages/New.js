@@ -10,9 +10,12 @@ import Button from 'react-bootstrap/Button';
 
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
+import Duration from '../components/Duration';
 
 
 const New = (props) => {
+  const ref = React.createRef()
+
   //useSelector is similar to setStateToProps
   const videos = useSelector(state => state.videos);
   const auth = useSelector(state => state.auth);
@@ -48,7 +51,87 @@ const New = (props) => {
   }, [])
 
 
+  //SLIDER FUNCTIONS
+  const [played, setPlayed] = useState(0);
+  const [seeking, setSeeking] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const [inputToUpdate, setInputToUpdate] = useState(0);
+
+  
+
+  
+  
+  let secondsForSeekTo = Math.round(duration * played)
+  
+  //format (and pad) takes seconds, returns 00:00 to display
+  function format (seconds) {
+    const date = new Date(seconds * 1000)
+    const hh = date.getUTCHours()
+    const mm = date.getUTCMinutes()
+    const ss = pad(date.getUTCSeconds())
+    if (hh) {
+      return `${hh}:${pad(mm)}:${ss}`
+    }
+    return `${mm}:${ss}`
+  }
+  
+  function pad (string) {
+    return ('0' + string).slice(-2)
+  }
+  
+  const handleSeekMouseDown = () => {
+    setSeeking(true)
+  }
+
+  const handleSeekMouseUp = e => {
+    setSeeking(false)
+    //e.target.value is state.played (played)
+
+    //temporarily player off during testing
+    // ref.current.seekTo(parseFloat(e.target.value))
+  }
+
+  const handleSeekChange = (e) => {
+    setPlayed(e.target.value)
+    // e.target.value = played
+    let timeToDisplay = format(duration * e.target.value)
+    
+    //inputToUpdate is the index of the item that is focused
+    //inputList[inputToUpdate] is the item in the array that needs to be updated
+    const updatedSongArr = inputList.map((song, i) => {
+      if (i === inputToUpdate) {
+        return {
+          ...song,
+          timestamp: timeToDisplay
+        }
+      } else {
+        return song
+      }
+    })
+
+    setInputList(updatedSongArr);
+    //call setInputList use the value of inputToUpdate to find which object to update
+    // update it's timestamp to e.target.value
+    //iterate to only update a specific key value pair
+  }
+
  
+
+  const handleDuration = (d) => {
+    //seems to only run once at the beginning
+    // and corresponds to video length in seconds
+    // takes those seconds and adds them to state
+    setDuration(d)
+  }
+
+  const handleFocus = (e, i) => {
+    setInputToUpdate(i)
+    console.log(i, "index");
+  }
+
+
+
+  //END OF SLIDER FUNCTIONS
 
   const [inputList, setInputList] = useState([
     { 
@@ -86,15 +169,16 @@ const New = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const formatSongs = inputList.map(song => { 
-      let formatTimestamp = song.timestamp.split(':')
-      let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
-      song.timestamp = formatSeconds
-      return { ...song }
-    });
+    //don't need this code because timestamps in backend accept strings now
+    // const formatSongs = inputList.map(song => { 
+    //   let formatTimestamp = song.timestamp.split(':')
+    //   let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
+    //   song.timestamp = formatSeconds
+    //   return { ...song }
+    // });
 
     let videoToAdd = {
-      songs: formatSongs,
+      songs: inputList,
       url: videoInput.url
     }
      const reqObj = {
@@ -113,7 +197,7 @@ const New = (props) => {
       dispatch(addVideo(updatedVideos));
       props.history.push(`/videos`);
   };
-  const ref = React.createRef()
+
 
     return (
       <div className="new-video-page">
@@ -122,6 +206,7 @@ const New = (props) => {
         <ResponsiveEmbed aspectRatio="16by9">
           <ReactPlayer
           ref={ref}
+          onDuration={handleDuration} 
           width='100%'
           height='100%'
           controls={true}
@@ -130,6 +215,25 @@ const New = (props) => {
         :
         null
       }
+
+      <Form>
+        <Form.Group controlId="formBasicRangeCustom">
+        <Form.Control 
+        // <input
+          custom
+          type='range' min={0} max={0.999999} step='any'
+          value={played}
+          onMouseDown={handleSeekMouseDown}
+          onChange={(e) => handleSeekChange(e)}
+          onMouseUp={handleSeekMouseUp}
+        // />
+        />
+        </Form.Group>
+      </Form>
+
+      <div className="duration-seconds">
+        <Duration seconds={duration * played}/>
+      </div>
      
       <Form
         onSubmit={handleSubmit}
@@ -156,8 +260,11 @@ const New = (props) => {
                   <Form.Control 
                     name="timestamp"
                     label="timestamp" 
-                    value={input.timestamp} 
-                    onChange={(e) => handleChange(e, i)}
+                    defaultValue={input.timestamp} 
+                    //handleFocus sets inputToUpdate with corresponding index
+                    onFocus={(e) => handleFocus(e, i)}
+                    // value={input.timestamp} 
+                    // onChange={(e) => handleChange(e, i)}
                     placeholder="Time in 00:00" />
                 </Col>
                 <Col xs={7}>

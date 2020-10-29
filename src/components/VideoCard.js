@@ -26,7 +26,7 @@ const VideoCard = (props) => {
       // use the payload coming from dispatched actions
       // to set state
 
-    const please = (timeString) => {
+    const handlePlay = (timeString) => {
       //turns the timeString 00:00 into seconds
       const seconds = hmsToSeconds(timeString)
       setPlayerState(prevState => ({playing: !playerState.playing}) );
@@ -66,7 +66,7 @@ const VideoCard = (props) => {
           
           <Col sm={4}>
             <SongContainer
-            please={please} 
+            handlePlay={handlePlay} 
               {...props} />
           </Col>
         </Row>
