@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getVideos } from '../actions/videos';
+import { currentUser } from '../actions/auth';
+
 import Container from 'react-bootstrap/Container';
 import VideoContainer from './VideoContainer';
 // import $ from 'jquery';
@@ -8,7 +10,18 @@ import VideoContainer from './VideoContainer';
 class VideoDashboard extends Component {
 
   componentDidMount() {
-    this.fetchVideos()
+
+    const token = localStorage.getItem('myAppToken') 
+    if(!token){
+      this.props.history.push('/admin')
+    } else {
+      this.fetchUser()
+    }
+
+    // this.state.auth.id ?
+    // this.fetchVideos()
+    // :
+    // this.props.history.push('/admin')
   }
 
   fetchVideos = async () => {
@@ -17,6 +30,24 @@ class VideoDashboard extends Component {
     this.props.getVideos(videos);
   };
 
+  fetchUser = async () => {
+    const token = localStorage.getItem('myAppToken') 
+    const reqObj = {
+      method: 'GET',
+      headers: {
+      'Authorization': `Bearer ${token}`
+      }
+    }
+    const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
+    const data = await res.json();
+    if(data.error) {
+      this.props.history.push('/admin')
+    } else {
+      //need to store the user (data) in store state
+      this.props.currentUser(data)
+      this.fetchVideos()
+    }
+  }
 
   render() {
     // console.log(this.props.videos);
@@ -44,11 +75,13 @@ class VideoDashboard extends Component {
 
 const setStateToProps = (state) => {
   return {
-    videos: state.videos
+    videos: state.videos,
+    auth: state.auth
   };
 };
 
 const setDispatchToProps = {
+  currentUser,
   getVideos
 };
 
