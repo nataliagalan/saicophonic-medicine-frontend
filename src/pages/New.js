@@ -57,12 +57,6 @@ const New = (props) => {
   const [duration, setDuration] = useState(0);
   const [inputToUpdate, setInputToUpdate] = useState(0);
 
-  
-
-  
-  
-  let secondsForSeekTo = Math.round(duration * played)
-  
   //format (and pad) takes seconds, returns 00:00 to display
   function format (seconds) {
     const date = new Date(seconds * 1000)
@@ -86,9 +80,8 @@ const New = (props) => {
   const handleSeekMouseUp = e => {
     setSeeking(false)
     //e.target.value is state.played (played)
-
-    //temporarily player off during testing
-    // ref.current.seekTo(parseFloat(e.target.value))
+    let secondsForSeekTo = Math.round(duration * played)
+    ref.current.seekTo( secondsForSeekTo )
   }
 
   const handleSeekChange = (e) => {
