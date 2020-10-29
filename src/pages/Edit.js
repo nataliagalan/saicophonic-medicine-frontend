@@ -31,6 +31,7 @@ class Edit extends Component {
     played: 0,
     seeking: false,
     duration: 0,
+    inputToUpdate: 0
   }
 
   componentDidMount() {
@@ -88,19 +89,7 @@ class Edit extends Component {
   }
 
    handleSubmit = async (e) => {
-    e.preventDefault();
-
-    //after I change the BE to accept timestamps as strings,
-    //I won't need this here
-    // const formatSongs = this.state.songs.map(song => { 
-    //   let formatTimestamp = song.timestamp.split(':')
-    //   let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
-    //   song.timestamp = formatSeconds
-    //   return { ...song }
-    // });
-
-    // this.setState({songs: formatSongs})
-    
+    e.preventDefault();    
     const reqObj = {
       method: 'PATCH',
       headers: {
@@ -136,34 +125,72 @@ class Edit extends Component {
     })
   }
 
+  //SLIDER METHODS
+
+  //format (and pad) takes seconds, returns 00:00 to display
+  format = (seconds) => {
+    const date = new Date(seconds * 1000)
+    const hh = date.getUTCHours()
+    const mm = date.getUTCMinutes()
+    const ss = this.pad(date.getUTCSeconds())
+    if (hh) {
+      return `${hh}:${this.pad(mm)}:${ss}`
+    }
+    return `${mm}:${ss}`
+  }
+  
+  pad = (string) => {
+    return ('0' + string).slice(-2)
+  }
+
   handleSeekMouseDown = e => {
     this.setState({ seeking: true })
   }
 
   handleSeekChange = e => {
     this.setState({ played: parseFloat(e.target.value) })
+    // e.target.value = played
+    let timeToDisplay = this.format( this.state.duration * e.target.value )
+
+    const updatedSongArr = this.state.songs.map((song, i) => {
+      if (i === this.state.inputToUpdate) {
+        return {
+          ...song,
+          timestamp: timeToDisplay
+        }
+      } else {
+        return song
+      }
+    })
+
+    this.setState({songs: updatedSongArr})
+
   }
 
   handleSeekMouseUp = e => {
     this.setState({ seeking: false })
+    const { duration, played } = this.state
     //e.target.value is this.state.played
-    this.player.seekTo(parseFloat(e.target.value))
+    let secondsForSeekTo = Math.round(duration * played)
+    this.player.seekTo( secondsForSeekTo )
+    // this.player.seekTo(parseFloat(e.target.value))
   }
 
   handleDuration = (d) => {
-    //seems to only run once at the beginning
-    // and corresponds to video length in seconds
-    // takes those seconds and adds them to state
-    // console.log('ond', duration)
+    // d corresponds to video length in seconds
     this.setState({ duration: d })
   }
+  
+  handleFocus = (e, i) => {
+    this.setState({inputToUpdate: i})
+    // setInputToUpdate(i)
+  }
 
+  // END OF SLIDER METHODS
   ref = player => {
     this.player = player
   }
 
-
-  
 
   render() {
     const { songs } = this.state
@@ -206,8 +233,6 @@ class Edit extends Component {
       onSubmit={this.handleSubmit}
       >
         <br></br>
-     
-
         <Form.Row>
           <Col>
             <Form.Control 
@@ -230,10 +255,13 @@ class Edit extends Component {
                 <Form.Control 
                   name="timestamp"
                   label="timestamp" 
-                  defaultValue={song.timestamp} 
+                  defaultValue={song.timestamp}
+                  //handleFocus sets inputToUpdate with corresponding index
+                  onFocus={(e) => this.handleFocus(e, i)} 
                   // defaultValue={this.state.played}
-                  onChange={(e) => this.handleChange(e, i)}
-                  placeholder="Time" />
+                  // onChange={(e) => this.handleChange(e, i)}
+                  // placeholder="Time" 
+                  />
               </Col>
               <Col xs={7}>
                 <Form.Control
