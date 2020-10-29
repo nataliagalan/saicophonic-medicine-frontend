@@ -38,14 +38,3 @@ const App = () => {
 export default App;
 
 
-        // {/* <MyNavbar /> */}
-        // {/* <Sidebar /> */}
-        // <Route exact path="/videos/">
-        //   <MyNavbar />
-        // </Route>
-        // <Route path="/videos/new">
-        //   <New />
-        // </Route>
-        // <Switch>
-        //   {/* <Route exact path="/videos/new" component={New}/> */}
-        // </Switch>
