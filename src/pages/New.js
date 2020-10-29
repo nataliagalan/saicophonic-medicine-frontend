@@ -51,7 +51,7 @@ const New = (props) => {
   }, [])
 
 
-  //SLIDER FUNCTIONS
+  //SLIDER METHODS
   const [played, setPlayed] = useState(0);
   const [seeking, setSeeking] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -103,12 +103,7 @@ const New = (props) => {
     })
 
     setInputList(updatedSongArr);
-    //call setInputList use the value of inputToUpdate to find which object to update
-    // update it's timestamp to e.target.value
-    //iterate to only update a specific key value pair
   }
-
- 
 
   const handleDuration = (d) => {
     //seems to only run once at the beginning
@@ -119,10 +114,7 @@ const New = (props) => {
 
   const handleFocus = (e, i) => {
     setInputToUpdate(i)
-    console.log(i, "index");
   }
-
-
 
   //END OF SLIDER FUNCTIONS
 
@@ -135,8 +127,6 @@ const New = (props) => {
   ]);
 
   const [videoInput, setVideoInput] = useState({url: ''});
-
-
 
   const handleChange = (e, i) => {
     const { name, value } = e.target;
@@ -159,16 +149,8 @@ const New = (props) => {
     setInputList(list);
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    //don't need this code because timestamps in backend accept strings now
-    // const formatSongs = inputList.map(song => { 
-    //   let formatTimestamp = song.timestamp.split(':')
-    //   let formatSeconds = ((parseInt(formatTimestamp[0]) * 60) + parseInt(formatTimestamp[1]))
-    //   song.timestamp = formatSeconds
-    //   return { ...song }
-    // });
 
     let videoToAdd = {
       songs: inputList,
@@ -256,9 +238,9 @@ const New = (props) => {
                     defaultValue={input.timestamp} 
                     //handleFocus sets inputToUpdate with corresponding index
                     onFocus={(e) => handleFocus(e, i)}
-                    // value={input.timestamp} 
                     // onChange={(e) => handleChange(e, i)}
-                    placeholder="Time in 00:00" />
+                    // placeholder="Time in 00:00" 
+                    />
                 </Col>
                 <Col xs={7}>
                   <Form.Control
