@@ -10,18 +10,11 @@ import VideoContainer from './VideoContainer';
 class VideoDashboard extends Component {
 
   componentDidMount() {
-
+    this.fetchVideos()
     const token = localStorage.getItem('myAppToken') 
-    if(!token){
-      this.props.history.push('/admin')
-    } else {
+    if(token){
       this.fetchUser()
-    }
-
-    // this.state.auth.id ?
-    // this.fetchVideos()
-    // :
-    // this.props.history.push('/admin')
+    } 
   }
 
   fetchVideos = async () => {
@@ -45,7 +38,6 @@ class VideoDashboard extends Component {
     } else {
       //need to store the user (data) in store state
       this.props.currentUser(data)
-      this.fetchVideos()
     }
   }
 
