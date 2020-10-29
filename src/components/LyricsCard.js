@@ -37,13 +37,17 @@ const LyricsCard = (props) => {
   
     const { id, songs } = props
     // const payload = "uuuuh lala"
-    // console.log(props.please, "lyricscarddddddddddddd");
+    // console.log(props, "lyricscarddddddddddddd");
 
     return (
       <Accordion >
           {/* {on click event that setStates the selected song} */}
 
           {
+            //first time around songs are undefined. if that's the case, don't do anything. else, iterate over songs
+            !songs ?
+            null
+            :
             songs.map((song, i) => {
               return (
               <Card 
