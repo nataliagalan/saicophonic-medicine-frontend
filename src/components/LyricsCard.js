@@ -59,7 +59,7 @@ const LyricsCard = (props) => {
                     <Row>
                     <Col>
                     <Button 
-                      onClick={ (e) => props.please(e.target.innerText) } 
+                      onClick={ (e) => props.handlePlay(e.target.innerText) } 
                       className="accordion-time-title"> {song.timestamp} </Button>
                     <Button className="accordion-time-title">{song.title}</Button>
                     </Col>
