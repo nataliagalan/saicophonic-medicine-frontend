@@ -250,7 +250,8 @@ const New = (props) => {
                 <Col>
                   <Form.Control 
                     name="timestamp"
-                    label="timestamp" 
+                    label="timestamp"
+                    autoComplete="off" 
                     defaultValue={input.timestamp} 
                     //handleFocus sets inputToUpdate with corresponding index
                     onFocus={(e) => handleFocus(e, i)}

@@ -270,6 +270,7 @@ class Edit extends Component {
               <Col>
                 <Form.Control 
                   name="timestamp"
+                  autoComplete="off"
                   label="timestamp" 
                   defaultValue={song.timestamp}
                   //handleFocus sets inputToUpdate with corresponding index
