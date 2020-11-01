@@ -28,6 +28,8 @@ export const deleteVideo = (videos) => {
   };
 };
 
+
+//TODO DELETE THIS
 export const togglePlayVideo = (payload) => {
   return {
     type: "TOGGLE_PLAY",

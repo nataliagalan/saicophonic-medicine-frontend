@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import {Link} from 'react-router-dom';
 import logo from '../logo.png'
+import SearchForm from './SearchForm';
 
 const MyNavbar = () => {
     //useSelector is similar to setStateToProps
@@ -18,6 +19,30 @@ const MyNavbar = () => {
       dispatch(logoutSuccess())
     }
 
+    //transform all this for hooks
+    // state = {
+    //   songs: []
+    // }
+  
+    // fetchSongs = (query) => {
+      
+    //   fetch(`http://localhost:3001/search/${query}`)
+    //     .then(res => res.json())
+    //     .then(data => console.log(data));
+    //     //this.setState({songs: data});
+    // }
+  
+    // searchSongs = (e) => {
+  
+    //   console.log(e.target.value, "searchsongs");
+    //   if (e.target.value) {
+    //     let query = e.target.value
+    //     this.fetchSongs(query);
+    //   }
+    //   // else {
+        
+    //   // }
+    // }
 
     return (
       <>
@@ -25,8 +50,13 @@ const MyNavbar = () => {
         {/* <Link to="/videos">Logo</Link> */}
         <Navbar style={{cursor: 'pointer'}}>
         <Link to="/videos">
-        <Navbar.Brand><img src={logo} style={{maxWidth: '80px'}} /></Navbar.Brand>
+        <Navbar.Brand><img src={logo} className="imgFluid" style={{maxWidth: '70px'}} /></Navbar.Brand>
         </Link>
+
+        <SearchForm 
+          // searchSongs={this.searchVideos}
+        />
+
         </Navbar>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
         <Navbar.Collapse id="responsive-navbar-nav">

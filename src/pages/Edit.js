@@ -21,6 +21,7 @@ class Edit extends Component {
   state = {
     id: '',
     url: '',
+    band: '',
     songs: [
       {
         title: '',
@@ -69,7 +70,7 @@ class Edit extends Component {
   setInitialState = async (id) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
     const video = await res.json();
-    this.setState({ id: id, songs: video.songs, url: video.url });
+    this.setState({ id: id, songs: video.songs, url: video.url, band: video.band });
   };
 
   handleChange = (e, i) => {
@@ -86,6 +87,10 @@ class Edit extends Component {
 
   handleVideoInputChange = (e) => {
     this.setState({ url: e.target.value })
+  }
+
+  handleBandInputChange = (e) => {
+    this.setState({ band: e.target.value })
   }
 
    handleSubmit = async (e) => {
@@ -187,6 +192,7 @@ class Edit extends Component {
   }
 
   // END OF SLIDER METHODS
+
   ref = player => {
     this.player = player
   }
@@ -241,6 +247,16 @@ class Edit extends Component {
               defaultValue={this.state.url} 
               onChange={(e) => this.handleVideoInputChange(e)}
               placeholder="Url" />
+          </Col>
+        </Form.Row>
+        <br></br>
+        <Form.Row>
+          <Col>
+            <Form.Control 
+              name="band"
+              defaultValue={this.state.band} 
+              onChange={(e) => this.handleBandInputChange(e)}
+              placeholder="Artist/Band" />
           </Col>
         </Form.Row>
         <br></br>
