@@ -127,6 +127,7 @@ const New = (props) => {
   ]);
 
   const [videoInput, setVideoInput] = useState({url: ''});
+  const [bandInput, setBandInput] = useState({band: ''});
 
   const handleChange = (e, i) => {
     const { name, value } = e.target;
@@ -137,6 +138,10 @@ const New = (props) => {
 
   const handleVideoInputChange = (e) => {
     setVideoInput({[e.target.name]: e.target.value});
+  }
+
+  const handleBandInputChange = (e) => {
+    setBandInput({[e.target.name]: e.target.value});
   }
  
   const handleAddInput = () => {
@@ -154,7 +159,8 @@ const New = (props) => {
 
     let videoToAdd = {
       songs: inputList,
-      url: videoInput.url
+      url: videoInput.url,
+      band: bandInput.band
     }
      const reqObj = {
        method: 'POST',
@@ -221,6 +227,16 @@ const New = (props) => {
               value={videoInput.url} 
               onChange={(e) => handleVideoInputChange(e)}
               placeholder="Url" />
+          </Col>
+        </Form.Row>
+        <br></br>
+        <Form.Row>
+          <Col>
+            <Form.Control 
+              name="band" 
+              value={bandInput.band} 
+              onChange={(e) => handleBandInputChange(e)}
+              placeholder="Artist/Band" />
           </Col>
         </Form.Row>
         <br></br>
