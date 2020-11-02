@@ -25,11 +25,20 @@ class SearchResults extends Component {
   // "/videos/search/:query"
   render() {
     // console.log(this.props,"======search results page========");
+    //TODO make a function accounts for 1 video
     let query = this.props.location.pathname.split('/')[3]
     return (
       <div>
 
-        <VideoDashboard {...this.props.videos} resultCount={`2 results for “${query}”`}/>
+        <VideoDashboard 
+          {...this.props.videos} 
+          resultCount={ 
+            this.props.videos.length === 1 ?
+            (`${this.props.videos.length} result for “${query}”`)
+            :
+            (`${this.props.videos.length} results for “${query}”`)
+          }
+          />
 
       </div>
     )
@@ -49,3 +58,5 @@ const setDispatchToProps = {
 };
 
 export default connect(setStateToProps, setDispatchToProps)(SearchResults);
+
+

@@ -42,7 +42,7 @@ class VideoDashboard extends Component {
   }
 
   render() {
-    console.log(this.props, "======VIDEO DASHBOARD=====");
+    // console.log(this.props, "======VIDEO DASHBOARD=====");
     return (
       <div className="page-content-wrapper">
         <div className="dashboard-header">
