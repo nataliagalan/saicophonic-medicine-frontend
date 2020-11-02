@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router';
 import {Link} from 'react-router-dom';
+import { connect } from "react-redux";
+import { getVideo } from "../actions/video";
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead, Menu, MenuItem  } from 'react-bootstrap-typeahead';
@@ -51,6 +53,10 @@ class SearchForm extends Component {
   };
 
   _handleSearch = query => {
+
+    //fetchvideo here
+
+
     //double check this 3 lines below
     // if (this._cache[query]) {
     //   this.setState({ options: this._cache[query].filteredVideos });
@@ -61,6 +67,13 @@ class SearchForm extends Component {
 
     this.makeAndHandleRequest(query)
   };
+
+  fetchVideo = async (id) => {
+    const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
+    const videoToShow = await res.json();
+    this.props.getVideo(videoToShow);
+  }
+
 
  
   
@@ -89,39 +102,30 @@ class SearchForm extends Component {
         paginate
         placeholder="Search by Artist/Band, Song or Lyrics..."
         options={this.state.options}
-        // renderMenuItemChildren={option => (
-        //   <>
-        //   <div key={option.id}>
-        //     <Link 
-        //       to={`/videos/${option.id}`}
-        //       //without this activeClassName video embed does not load without refresh
-        //       activeClassName="active">
-        //       {option.band}
-        //     </Link>
-        //   </div>
-        //   </>
-        // )}     
+     
 
         renderMenu={(options, menuProps) => {
           return (
             <Menu {...menuProps}>
               <MenuItem>
-              <Link 
-              // "/videos/search/:query"
-                to={`/videos/search/${this.state.query}`}
-               // without this activeClassName video embed does not load without refresh
-                activeClassName="active">
-              {`See all results for "${this.state.query}"`}
-              </Link>
+                <Link 
+                // "/videos/search/:query"
+                  to={`/videos/search/${this.state.query}`}
+                // without this activeClassName video embed does not load without refresh
+                  activeClassName="active">
+                {`See all results for "${this.state.query}"`}
+                </Link>
               </MenuItem>
               {options.map((opt, ind) => 
                 <MenuItem option={opt} key={ind} position={ind} >
-              <Link 
-                to={`/videos/${opt.id}`}
-               // without this activeClassName video embed does not load without refresh
-                activeClassName="active">
-                  {opt.band}
-              </Link>
+                  <Link 
+                    to={`/videos/${opt.id}`}
+                  // without this activeClassName video embed does not load without refresh
+                    activeClassName="active"
+                    onClick={() => this.fetchVideo(opt.id)}
+                    >
+                      {opt.band}
+                  </Link>
                 </MenuItem>
               )}
             </Menu>
@@ -139,4 +143,16 @@ class SearchForm extends Component {
   }
 }
 
-export default withRouter(SearchForm);
+
+const setStateToProps = (state) => {
+  return {
+    video: state.video
+  };
+};
+
+const setDispatchToProps = {
+  getVideo
+};
+
+export default withRouter(connect(setStateToProps, setDispatchToProps)(SearchForm));
+// export default withRouter(SearchForm);

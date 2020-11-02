@@ -13,8 +13,10 @@ import VideoCard from '../components/VideoCard';
 class Show extends Component {
 
   componentDidMount(){
-    const path = this.props.location.pathname.split("/");
-    const id = parseInt(path[2]);
+    // console.log(this.props.match.params.id, "==========PROPS IN SHOW PAGE=========");
+    // const path = this.props.location.pathname.split("/");
+    // const id = parseInt(path[2]);
+    const id = parseInt(this.props.match.params.id);
     const { videos } = this.props;
     const video = videos.find((video) => video.id === id);
     if(!video){
