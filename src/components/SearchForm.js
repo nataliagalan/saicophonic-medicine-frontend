@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import {Link} from 'react-router-dom';
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
-import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import { AsyncTypeahead, Menu, MenuItem  } from 'react-bootstrap-typeahead';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
@@ -89,53 +89,45 @@ class SearchForm extends Component {
         paginate
         placeholder="Search by Artist/Band, Song or Lyrics..."
         options={this.state.options}
-        renderMenuItemChildren={option => (
-          <div key={option.id}>
-            <Link 
-              to={`/videos/${option.id}`}
-              //without this activeClassName video embed does not load without refresh
-              activeClassName="active">
-              {option.band}
-            </Link>
-            {/* <span onClick={() => this.props.history.push(`/videos/${option.id}`)}>{option.band}</span> */}
-          </div>
-        )}
-
- 
-        // renderMenu={(results, menuProps) => (
-        //   <Menu {...menuProps} className="typeahead typeahead-menu">
-        //     {results.map((result, index) => (
-        //       <MenuItem
-        //         onClick={() => this.props.history.push(`/videos/${result.id}`)}
-        //         option={result}
-        //         key={`${result}_${index}`}
-        //         position={index}>
-        //         <Highlighter search={menuProps.text}>
-        //           {result.band}
-        //         </Highlighter>
-        //       </MenuItem>
-        //     ))}
-        //   </Menu>
-        // )}
-
         // renderMenuItemChildren={option => (
+        //   <>
         //   <div key={option.id}>
-        // {( option.band.toLowerCase().includes(this.state.query.toLowerCase()) )?
-        // (<><span>{option.band}</span><br></br>
-        //   <span>Artist/Band</span></>)
-        // :
-        // (
-      
-        // <><span>{option.songTitle}</span>
-        // <span>Song</span></>)}
-        //       {/* <span>{option.band}</span>
-        //         <span>Artist/Band</span>
-        //       <span>{option.songTitle}</span>
-        //         <span>Song</span> */}
-              
+        //     <Link 
+        //       to={`/videos/${option.id}`}
+        //       //without this activeClassName video embed does not load without refresh
+        //       activeClassName="active">
+        //       {option.band}
+        //     </Link>
         //   </div>
-        // )}
-     
+        //   </>
+        // )}     
+
+        renderMenu={(options, menuProps) => {
+          return (
+            <Menu {...menuProps}>
+              <MenuItem>
+              <Link 
+              // "/videos/search/:query"
+                to={`/videos/search/${this.state.query}`}
+               // without this activeClassName video embed does not load without refresh
+                activeClassName="active">
+              {`See all results for "${this.state.query}"`}
+              </Link>
+              </MenuItem>
+              {options.map((opt, ind) => 
+                <MenuItem option={opt} key={ind} position={ind} >
+              <Link 
+                to={`/videos/${opt.id}`}
+               // without this activeClassName video embed does not load without refresh
+                activeClassName="active">
+                  {opt.band}
+              </Link>
+                </MenuItem>
+              )}
+            </Menu>
+          );
+        }}
+
         useCache={false}
       /> 
 
