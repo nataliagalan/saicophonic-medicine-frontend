@@ -19,30 +19,6 @@ const MyNavbar = () => {
       dispatch(logoutSuccess())
     }
 
-    //transform all this for hooks
-    // state = {
-    //   songs: []
-    // }
-  
-    // fetchSongs = (query) => {
-      
-    //   fetch(`http://localhost:3001/search/${query}`)
-    //     .then(res => res.json())
-    //     .then(data => console.log(data));
-    //     //this.setState({songs: data});
-    // }
-  
-    // searchSongs = (e) => {
-  
-    //   console.log(e.target.value, "searchsongs");
-    //   if (e.target.value) {
-    //     let query = e.target.value
-    //     this.fetchSongs(query);
-    //   }
-    //   // else {
-        
-    //   // }
-    // }
 
     return (
       <>
@@ -53,9 +29,7 @@ const MyNavbar = () => {
         <Navbar.Brand><img src={logo} className="imgFluid" style={{maxWidth: '70px'}} /></Navbar.Brand>
         </Link>
 
-        <SearchForm 
-          // searchSongs={this.searchVideos}
-        />
+        <SearchForm />
 
         </Navbar>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
@@ -69,7 +43,6 @@ const MyNavbar = () => {
               to='/admin' 
               id="menu-toggle" className="nav-font-style"
               onClick={ handleLogout }>
-              {/* onClick={() => dispatch(logoutSuccess()) }> */}
               Logout
             </Link>)
             : 

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
+import { withRouter } from 'react-router';
+import {Link} from 'react-router-dom';
+
+// import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 
-export default class SearchForm extends Component {
+class SearchForm extends Component {
 
   state = {
     isLoading: false,
@@ -24,9 +25,18 @@ export default class SearchForm extends Component {
     const options = filteredVideos.map(i => ({
       band: i.band,
       id: i.id,
-
+      songs: i.songs
     }));
-    console.log(options,"--------OPTIONSOBJ---------");
+
+    //currently not using this but maybe useful for displaying purposes
+    // filteredVideos.forEach((video, videoIndex) => {
+    //   video.songs.forEach((song, songIndex) => {
+    //     songIndex ++
+    //     options[videoIndex][`song${songIndex}`] = song.title
+    //   })
+    // })
+
+    // console.log(options,"--------OPTIONSOBJ---------");
 
     // this._cache[query] = filteredVideos
 
@@ -52,21 +62,25 @@ export default class SearchForm extends Component {
     this.makeAndHandleRequest(query)
   };
 
+ 
+  
   render() {
     // console.log(this.props, "search form");
 
     return (
 
-      
-
     <>
-    {/* <Form inline> */}
-
-
       <AsyncTypeahead
         {...this.state}
-        id="async-pagination-example"
-        labelKey="band"
+        id="video-archive-typeahead"
+        //labelkey determines the option keys that get searched
+        labelKey={
+          option => {
+            let songString = option.songs.map(song => song.title).join(' ')
+            let lyricsString = option.songs.map(song => song.lyrics).join(' ')
+            return `${option.band} ${songString} ${lyricsString}`
+          }
+        }
         maxResults={10}
         minLength={2}
         onInputChange={this._handleInputChange}
@@ -77,24 +91,54 @@ export default class SearchForm extends Component {
         options={this.state.options}
         renderMenuItemChildren={option => (
           <div key={option.id}>
-            {option.band}
+            <Link 
+              to={`/videos/${option.id}`}
+              //without this activeClassName video embed does not load without refresh
+              activeClassName="active">
+              {option.band}
+            </Link>
+            {/* <span onClick={() => this.props.history.push(`/videos/${option.id}`)}>{option.band}</span> */}
           </div>
         )}
+
+ 
+        // renderMenu={(results, menuProps) => (
+        //   <Menu {...menuProps} className="typeahead typeahead-menu">
+        //     {results.map((result, index) => (
+        //       <MenuItem
+        //         onClick={() => this.props.history.push(`/videos/${result.id}`)}
+        //         option={result}
+        //         key={`${result}_${index}`}
+        //         position={index}>
+        //         <Highlighter search={menuProps.text}>
+        //           {result.band}
+        //         </Highlighter>
+        //       </MenuItem>
+        //     ))}
+        //   </Menu>
+        // )}
+
+        // renderMenuItemChildren={option => (
+        //   <div key={option.id}>
+        // {( option.band.toLowerCase().includes(this.state.query.toLowerCase()) )?
+        // (<><span>{option.band}</span><br></br>
+        //   <span>Artist/Band</span></>)
+        // :
+        // (
+      
+        // <><span>{option.songTitle}</span>
+        // <span>Song</span></>)}
+        //       {/* <span>{option.band}</span>
+        //         <span>Artist/Band</span>
+        //       <span>{option.songTitle}</span>
+        //         <span>Song</span> */}
+              
+        //   </div>
+        // )}
      
         useCache={false}
       /> 
 
-
-
-
-
-
-
-
-
-
-
-    {/* </Form> */}
     </>
 
 
@@ -102,3 +146,5 @@ export default class SearchForm extends Component {
     )
   }
 }
+
+export default withRouter(SearchForm);
