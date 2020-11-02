@@ -42,13 +42,19 @@ class VideoDashboard extends Component {
   }
 
   render() {
-    // console.log(this.props.videos);
+    console.log(this.props, "======VIDEO DASHBOARD=====");
     return (
       <div className="page-content-wrapper">
         <div className="dashboard-header">
           <h1 className="header-text">Saicophonic Medicine</h1>
           <h5 className="header-subtext">An expanding library of live music sessions</h5>
         </div>
+        {
+          this.props.resultCount ?
+          (<h3>{this.props.resultCount}</h3>)
+          :
+          (null)
+        }
         <Container fluid>
           {
             // [...this.props.videos].reverse().map((video) => {

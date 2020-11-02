@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
 import { getVideo } from "../actions/video";
+import { getVideos } from '../actions/videos';
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead, Menu, MenuItem  } from 'react-bootstrap-typeahead';
@@ -46,6 +47,14 @@ class SearchForm extends Component {
           isLoading: false,
           options: options,
         });  
+
+        
+  }
+
+  handleAllResults = async (query) => {
+    const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
+    const filteredVideos = await res.json();
+    this.props.getVideos(filteredVideos);
   }
 
   _handleInputChange = query => {
@@ -74,8 +83,10 @@ class SearchForm extends Component {
     this.props.getVideo(videoToShow);
   }
 
-
  
+
+
+
   
   render() {
     // console.log(this.props, "search form");
@@ -111,8 +122,9 @@ class SearchForm extends Component {
                 <Link 
                 // "/videos/search/:query"
                   to={`/videos/search/${this.state.query}`}
-                // without this activeClassName video embed does not load without refresh
-                  activeClassName="active">
+                  onClick={() => this.handleAllResults(this.state.query)}
+                  // activeClassName="active"
+                  >
                 {`See all results for "${this.state.query}"`}
                 </Link>
               </MenuItem>
@@ -120,8 +132,7 @@ class SearchForm extends Component {
                 <MenuItem option={opt} key={ind} position={ind} >
                   <Link 
                     to={`/videos/${opt.id}`}
-                  // without this activeClassName video embed does not load without refresh
-                    activeClassName="active"
+                    // activeClassName="active"
                     onClick={() => this.fetchVideo(opt.id)}
                     >
                       {opt.band}
@@ -146,12 +157,14 @@ class SearchForm extends Component {
 
 const setStateToProps = (state) => {
   return {
-    video: state.video
+    video: state.video,
+    videos: state.videos,
   };
 };
 
 const setDispatchToProps = {
-  getVideo
+  getVideo,
+  getVideos
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(SearchForm));
