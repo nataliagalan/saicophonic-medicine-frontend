@@ -8,7 +8,7 @@ import { getVideos } from '../actions/videos';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
-import { AsyncTypeahead, Menu, MenuItem  } from 'react-bootstrap-typeahead';
+import { AsyncTypeahead, Menu, MenuItem, Highlighter  } from 'react-bootstrap-typeahead';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
@@ -140,7 +140,13 @@ class SearchForm extends Component {
                     // activeClassName="active"
                     onClick={() => this.fetchVideo(opt.id)}
                     >
-                      {opt.band}
+
+                      <Highlighter search={this.state.query}>
+                        {opt.band}
+                        {/* {opt[menuProps.labelKey]} */}
+                      </Highlighter>
+
+
                   </Link>
                 </MenuItem>
               )}
