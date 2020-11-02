@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { getVideo } from "../actions/video";
 import { getVideos } from '../actions/videos';
 
+import Dropdown from 'react-bootstrap/Dropdown';
+
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead, Menu, MenuItem  } from 'react-bootstrap-typeahead';
 
@@ -15,6 +17,7 @@ class SearchForm extends Component {
 
   state = {
     isLoading: false,
+    open: false,
     options: [],
     query: '',
   };
@@ -45,34 +48,35 @@ class SearchForm extends Component {
 
     this.setState({
           isLoading: false,
-          options: options,
+          options: options
         });  
 
         
   }
 
   handleAllResults = async (query) => {
+    this.setState({ open: false });
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
     this.props.getVideos(filteredVideos);
   }
 
   _handleInputChange = query => {
-    this.setState({ query });
+    if (query === ""){
+      this.setState({ open: false });
+    } else {
+    this.setState({ query: query, open: true });
+    }
   };
 
   _handleSearch = query => {
-
-    //fetchvideo here
-
-
     //double check this 3 lines below
     // if (this._cache[query]) {
     //   this.setState({ options: this._cache[query].filteredVideos });
     //   return;
     // }
 
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true  });
 
     this.makeAndHandleRequest(query)
   };
@@ -117,6 +121,7 @@ class SearchForm extends Component {
 
         renderMenu={(options, menuProps) => {
           return (
+
             <Menu {...menuProps}>
               <MenuItem>
                 <Link 
@@ -140,9 +145,10 @@ class SearchForm extends Component {
                 </MenuItem>
               )}
             </Menu>
+
           );
         }}
-
+        open={this.state.open}
         useCache={false}
       /> 
 
