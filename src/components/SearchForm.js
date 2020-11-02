@@ -8,7 +8,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 
 export default class SearchForm extends Component {
-  
+
   state = {
     isLoading: false,
     options: [],
@@ -17,6 +17,41 @@ export default class SearchForm extends Component {
 
   _cache = {};
 
+  //removed page 1 from here for testing
+  makeAndHandleRequest = async (query) => {
+    const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
+    const filteredVideos = await res.json();
+    const options = filteredVideos.map(i => ({
+      band: i.band,
+      id: i.id,
+
+    }));
+    console.log(options,"--------OPTIONSOBJ---------");
+
+    // this._cache[query] = filteredVideos
+
+    this.setState({
+          isLoading: false,
+          options: options,
+        });  
+  }
+
+  _handleInputChange = query => {
+    this.setState({ query });
+  };
+
+  _handleSearch = query => {
+    //double check this 3 lines below
+    // if (this._cache[query]) {
+    //   this.setState({ options: this._cache[query].filteredVideos });
+    //   return;
+    // }
+
+    this.setState({ isLoading: true });
+
+    this.makeAndHandleRequest(query)
+  };
+
   render() {
     // console.log(this.props, "search form");
 
@@ -24,35 +59,30 @@ export default class SearchForm extends Component {
 
       
 
-    <Form inline>
+    <>
+    {/* <Form inline> */}
+
 
       <AsyncTypeahead
-        // {...this.state}
+        {...this.state}
         id="async-pagination-example"
-        labelKey="login"
-        // maxResults={PER_PAGE - 1}
+        labelKey="band"
+        maxResults={10}
         minLength={2}
-        // onInputChange={this._handleInputChange}
+        onInputChange={this._handleInputChange}
         // onPaginate={this._handlePagination}
-        // onSearch={this._handleSearch}
+        onSearch={this._handleSearch}
         paginate
-        placeholder="Search for a Github user..."
-        // renderMenuItemChildren={option => (
-        //   <div key={option.id}>
-        //     <img
-        //       alt={option.login}
-        //       src={option.avatar_url}
-        //       style={{
-        //         height: '24px',
-        //         marginRight: '10px',
-        //         width: '24px',
-        //       }}
-        //     />
-        //     <span>{option.login}</span>
-        //   </div>
-        //)}
+        placeholder="Search by Artist/Band, Song or Lyrics..."
+        options={this.state.options}
+        renderMenuItemChildren={option => (
+          <div key={option.id}>
+            {option.band}
+          </div>
+        )}
+     
         useCache={false}
-      />  
+      /> 
 
 
 
@@ -61,16 +91,11 @@ export default class SearchForm extends Component {
 
 
 
-      {/* <FormControl 
-        name="query"
-        type="text" 
-        // onChange={(event) => this.props.searchSongs(event) }
-        placeholder="Search" 
-        className="mr-sm-2" />
-      <Button variant="outline-success">Search</Button> */}
 
 
-    </Form>
+
+    {/* </Form> */}
+    </>
 
 
 

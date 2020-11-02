@@ -14,7 +14,7 @@ const VideoContainer = (props) => {
   //props.video.songs[0].timestamp - value of first stamp by default
  
  
-    console.log(props.video, "inside video container");
+    // console.log(props.video, "inside video container");
     return (
       <>
         {/* <Row>
