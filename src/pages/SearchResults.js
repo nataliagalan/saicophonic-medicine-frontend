@@ -7,7 +7,8 @@ class SearchResults extends Component {
 
   state = {
     filteredVideos: [],
-    query: ""
+    query: "",
+    bandCount: 0
   }
 
   //THIS IS THE PARENT OF VIDEO DASHBOARD
@@ -28,9 +29,18 @@ class SearchResults extends Component {
     const res = await fetch(`http://localhost:3001/api/v1/${path}`);
     const videos = await res.json();
 
+
     this.filterResults(videos, tab)
+    this.setLocalStateCount(videos)
     // this.props.getVideos(videos);
   };
+
+  setLocalStateCount = (videos) => {
+    let query = this.props.location.pathname.split('/')[3].toLowerCase()
+    this.setState({
+      bandCount: videos.filter( video => video.band.toLowerCase().includes(query) ).length
+    })
+  }
 
   filterResults = (videos, tab) => {
     let query = this.props.location.pathname.split('/')[3].toLowerCase()
@@ -38,11 +48,11 @@ class SearchResults extends Component {
     
     switch (tab) {
       case "all":
-        this.props.getVideos(videos);
+        this.props.getVideos(videos, "all");
         break;
       case "band":
         filteredVideos = videos.filter( video => video.band.toLowerCase().includes(query) )
-          this.props.getVideos(filteredVideos);
+          this.props.getVideos(filteredVideos, "bands");
           break;
       case "songTitle":
         filteredVideos = videos.filter(function(video) {
@@ -50,7 +60,7 @@ class SearchResults extends Component {
             return song.title.toLowerCase().includes(query);
           });
         });
-        this.props.getVideos(filteredVideos);
+        this.props.getVideos(filteredVideos, "songs");
         break;
       case "songLyrics":
         filteredVideos = videos.filter(function(video) {
@@ -58,25 +68,12 @@ class SearchResults extends Component {
             return song.lyrics.toLowerCase().includes(query);
           });
         });
-        this.props.getVideos(filteredVideos);
+        this.props.getVideos(filteredVideos, "lyrics");
         break;
       default:
-        this.props.getVideos(filteredVideos);
+        this.props.getVideos(filteredVideos, "all");
       }
-      
-    
-    //if I clicked on all tab
-      //display all videos
-    //if I clicked on artist/band tab
-      //display videos that contain query in band attribute
-      // if none, don't display anything
-    //if I clicked on song tab
-      //display videos that contain query in song title attribute
-      // if none, don't display anything
-    //if I clicked on lyrics tab
-      //display videos that contain query in song lyrics attribute
-      // if none, don't display anything
-
+  
   }
 
 
@@ -84,7 +81,7 @@ class SearchResults extends Component {
 
   // "/videos/search/:query"
   render() {
-    // console.log(this.props,"======search results page========");
+    console.log(this.props,"======search results page========");
     //TODO make a function accounts for 1 video
     let query = this.props.location.pathname.split('/')[3]
     
@@ -104,6 +101,7 @@ class SearchResults extends Component {
           }
           filterResults={this.filterResults}
           fetchVideos={this.fetchVideos}
+          bandCount={this.state.bandCount}
           />
       </>
     )
@@ -112,7 +110,7 @@ class SearchResults extends Component {
 
 const setStateToProps = (state) => {
   return {
-    videos: state.videos,
+    videos: state.videos.videos,
     // auth: state.auth
   };
 };

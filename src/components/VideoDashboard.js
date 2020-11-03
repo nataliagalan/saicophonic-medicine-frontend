@@ -15,7 +15,7 @@ class VideoDashboard extends Component {
 
   state = {
     filteredVideos: [],
-    query: ""
+    query: "",
   }
 
   componentDidMount() {
@@ -34,7 +34,7 @@ class VideoDashboard extends Component {
   fetchVideos = async () => {
     const res = await fetch('http://localhost:3001/api/v1/videos');
     const videos = await res.json();
-    this.props.getVideos(videos);
+    this.props.getVideos(videos, "all");
   };
 
   fetchUser = async () => {
@@ -55,28 +55,38 @@ class VideoDashboard extends Component {
     }
   }
 
+  // countResults = (key) => {
+  //   this.setState({
+  //     [key]: this.props.videos.length
+  //   })
+  // }
+  
   displayFilterTabs = () => {
     return (
       <Nav fill variant="tabs" defaultActiveKey="link-1">
         <Nav.Item>
           <Nav.Link 
             onClick={() => this.props.fetchVideos("all")}
-            eventKey="link-1">All</Nav.Link>
+          //   onClick={() => {this.props.fetchVideos("all")
+          //   this.countResults("all")
+          // }}
+            eventKey="link-1">All({this.props.all})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
             onClick={() => this.props.fetchVideos("band")}
-            eventKey="link-2">Artist/Bands</Nav.Link>
+            // eventKey="link-2">Artist/Bands({this.props.bands})</Nav.Link>
+            eventKey="link-2">Artist/Bands({this.props.bandCount})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
             onClick={() => this.props.fetchVideos("songTitle")}
-            eventKey="link-3">Songs</Nav.Link>
+            eventKey="link-3">Songs({this.props.songs})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
             onClick={() => this.props.fetchVideos("songLyrics")}
-            eventKey="link-4">Lyrics</Nav.Link>
+            eventKey="link-4">Lyrics({this.props.lyrics})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
@@ -98,7 +108,7 @@ class VideoDashboard extends Component {
           :
           (null)
         }
-        <Container fluid>
+        {/* <Container fluid> */}
         <>
         {
           this.props.resultCount ?
@@ -109,7 +119,7 @@ class VideoDashboard extends Component {
           
         </>
           {
-            // [...this.props.videos].reverse().map((video) => {
+           
             this.props.videos.map((video) => {
               return <VideoContainer
                 video={video}
@@ -117,7 +127,7 @@ class VideoDashboard extends Component {
                />
               })
           }
-        </Container>
+        {/* </Container> */}
       </div>
     )
   }
@@ -125,7 +135,11 @@ class VideoDashboard extends Component {
 
 const setStateToProps = (state) => {
   return {
-    videos: state.videos,
+    videos: state.videos.videos,
+    all: state.videos.all,
+    bands: state.videos.bands,
+    songs: state.videos.songs,
+    lyrics: state.videos.lyrics,
     auth: state.auth
   };
 };
