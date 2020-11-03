@@ -7,6 +7,7 @@ import { currentUser } from '../actions/auth'
 import { updateVideo } from '../actions/videos'
 
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
@@ -203,8 +204,14 @@ class Edit extends Component {
     // console.log(songs[0].timestamp);
     return (
       <div className="new-video-page">
+        <Row>
+          <Col>
+
+
        <ResponsiveEmbed aspectRatio="16by9">
           <ReactPlayer
+          className="video-embed"
+          placement="top"
           ref={this.ref}
           onDuration={this.handleDuration} 
           width='100%'
@@ -213,6 +220,8 @@ class Edit extends Component {
           url={this.state.url} />
         </ResponsiveEmbed>
         <br></br>
+
+        
         <Form>
         <Form.Group controlId="formBasicRangeCustom">
         <Form.Control 
@@ -227,6 +236,7 @@ class Edit extends Component {
         />
         </Form.Group>
         </Form>
+
         {/* what gets displayed is the length of video times played (float)
         those seconds get passed as input to duration and it converts them
         to 00:00 format, then they get displayed
@@ -234,7 +244,16 @@ class Edit extends Component {
         <div className="duration-seconds">
         <Duration seconds={this.state.duration * this.state.played}/>
         </div>
-    
+
+
+        </Col>
+
+
+
+
+        <Col>
+
+
       <Form
       onSubmit={this.handleSubmit}
       >
@@ -326,6 +345,11 @@ class Edit extends Component {
 
           {/* </pre> */}
       </Form>
+
+
+      </Col>
+
+      </Row>
       </div>        
     )
   }

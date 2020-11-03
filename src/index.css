@@ -150,3 +150,10 @@ code {
   padding-left: 3rem;
 }
 
+.video-embed {
+  position: fixed;
+  right: 50px;
+  bottom: 100px;
+
+}
+
