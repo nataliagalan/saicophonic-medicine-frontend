@@ -4,10 +4,18 @@ import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
 
 import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
 import VideoContainer from './VideoContainer';
 // import $ from 'jquery';
 
 class VideoDashboard extends Component {
+
+  //THIS IS THE CHILD OF SEARCH RESULTS
+
+  state = {
+    filteredVideos: [],
+    query: ""
+  }
 
   componentDidMount() {
     this.fetchVideos()
@@ -41,8 +49,31 @@ class VideoDashboard extends Component {
     }
   }
 
+  displayFilterTabs = () => {
+    return (
+      <Nav fill variant="tabs" defaultActiveKey="link-0">
+        <Nav.Item>
+          <Nav.Link eventKey="link-0">All</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link 
+            onClick={this.props.fetchVideos}
+            eventKey="link-1">Artist/Bands</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link-2">Songs</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link-3">Lyrics</Nav.Link>
+        </Nav.Item>
+      </Nav> )
+  }
+
+  
+
+
   render() {
-    // console.log(this.props, "======VIDEO DASHBOARD=====");
+    console.log(this.props, "======VIDEO DASHBOARD=====");
     return (
       <div className="page-content-wrapper">
         <div className="dashboard-header">
@@ -51,11 +82,20 @@ class VideoDashboard extends Component {
         </div>
         {
           this.props.resultCount ?
-          (<h3>{this.props.resultCount}</h3>)
+          (<><h3>{this.props.resultCount}</h3><br></br></>)
           :
           (null)
         }
         <Container fluid>
+        <>
+        {
+          this.props.resultCount ?
+          (this.displayFilterTabs())
+          :
+          (null)
+        }
+          
+        </>
           {
             // [...this.props.videos].reverse().map((video) => {
             this.props.videos.map((video) => {
