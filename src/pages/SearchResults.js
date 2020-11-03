@@ -24,6 +24,13 @@ class SearchResults extends Component {
     // this.fetchVideos(path)
   }
 
+  // define fetchvideos in app js
+  //info needed: query / path  and tab name 
+  // pass in the tab and the path as arguments when invoked
+  // how will the video dashboard know the pathname or query
+
+  //invoke it from both the video dashboard and the searchform
+
   fetchVideos = async (tab) => {
   // fetchVideos = (tab) => {
     // console.log(tab, "=====EVENT IN FETCH VIDEOS=====");

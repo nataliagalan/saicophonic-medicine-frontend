@@ -25,7 +25,6 @@ const App = () => {
         <MyNavbar />
         <Switch>
           <Route exact path="/admin" component={Login} />
-          {/* think I need to pass a variable to this url below */}
           <Route exact path="/videos/search/:query" component={SearchResults} />
           <Route exact path="/videos" component={VideoDashboard} />
           <Route exact path="/videos/new" component={New} />
