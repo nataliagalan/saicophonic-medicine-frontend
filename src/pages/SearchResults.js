@@ -17,18 +17,24 @@ class SearchResults extends Component {
     let query = this.props.location.pathname.split('/')[3]
     this.setState({ query })
     let path = this.props.location.pathname
-    this.fetchVideos(path)
+    // this.fetchVideos(path)
   }
 
-  fetchVideos = async (path) => {
+  fetchVideos = async () => {
+    let path = this.props.location.pathname
     const res = await fetch(`http://localhost:3001/api/v1/${path}`);
     const videos = await res.json();
+    // this.filterResults(videos)
     this.props.getVideos(videos);
   };
 
-  filterResults = (query) => {
-    console.log("filterResults");
-    // let filteredVideos = this.props.videos.filter( video => video.band.toLowerCase().includes(query) )
+  filterResults = (videos) => {
+    let query = this.props.location.pathname.split('/')[3]
+    console.log(videos, "====VIDEOS ARGUMENT=====");
+    let filteredVideos = videos.filter( video => video.band.toLowerCase().includes(query) )
+    this.props.getVideos(filteredVideos);
+    // console.log("filterResults");
+    
 
     // this.setState({ filteredVideos })
 
@@ -36,7 +42,7 @@ class SearchResults extends Component {
 
   //on artist/band tab click
   //trigger a function that
-  //check to see if band name includes the query
+  //checks to see if band name includes the query
   // only render those videos whose band name includes the query
   // only send those videos whose band name includes the query
   //as props to videodashboard
@@ -66,6 +72,7 @@ class SearchResults extends Component {
             (`${this.props.videos.length} results for “${query}”`)
           }
           filterResults={this.filterResults}
+          fetchVideos={this.fetchVideos}
           />
       </>
     )
