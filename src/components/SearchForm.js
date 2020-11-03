@@ -5,12 +5,12 @@ import { connect } from "react-redux";
 import { getVideo } from "../actions/video";
 import { getVideos } from '../actions/videos';
 
-import Dropdown from 'react-bootstrap/Dropdown';
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead, Menu, MenuItem, Highlighter  } from 'react-bootstrap-typeahead';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import '../SearchForm.css';
 
 
 class SearchForm extends Component {
@@ -39,6 +39,7 @@ class SearchForm extends Component {
       video.songs.forEach((song, songIndex) => {
         songIndex ++
         options[videoIndex][`song${songIndex}`] = song.title
+        options[videoIndex][`lyrics${songIndex}`] = song.lyrics
       })
     })
 
@@ -143,7 +144,7 @@ class SearchForm extends Component {
                     >
 
                       <Highlighter search={this.state.query}>
-                        {opt.band}
+                        {`${opt.band} ${opt.song1} ${opt.lyrics1} `}
                        
                       </Highlighter>
 
@@ -155,6 +156,7 @@ class SearchForm extends Component {
 
           );
         }}
+        
         open={this.state.open}
         useCache={false}
       /> 
