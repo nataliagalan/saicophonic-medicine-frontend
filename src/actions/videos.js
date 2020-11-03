@@ -1,17 +1,17 @@
 
 
-export const getVideos = (videos, key) => {
-  return {
-    type: "GET_VIDEOS",
-    payload: {videos: videos, key: key} 
-  };
-};
-// export const getVideos = (videos) => {
+// export const getVideos = (videos, key) => {
 //   return {
 //     type: "GET_VIDEOS",
-//     videos: videos
+//     payload: {videos: videos, key: key} 
 //   };
 // };
+export const getVideos = (videos) => {
+  return {
+    type: "GET_VIDEOS",
+    videos: videos
+  };
+};
 
 export const addVideo = (videos) => {
   return {
