@@ -57,20 +57,26 @@ class VideoDashboard extends Component {
 
   displayFilterTabs = () => {
     return (
-      <Nav fill variant="tabs" defaultActiveKey="link-0">
+      <Nav fill variant="tabs" defaultActiveKey="link-1">
         <Nav.Item>
-          <Nav.Link eventKey="link-0">All</Nav.Link>
+          <Nav.Link 
+            onClick={() => this.props.fetchVideos("all")}
+            eventKey="link-1">All</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={this.props.fetchVideos}
-            eventKey="link-1">Artist/Bands</Nav.Link>
+            onClick={() => this.props.fetchVideos("band")}
+            eventKey="link-2">Artist/Bands</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2">Songs</Nav.Link>
+          <Nav.Link 
+            onClick={() => this.props.fetchVideos("songTitle")}
+            eventKey="link-3">Songs</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-3">Lyrics</Nav.Link>
+          <Nav.Link 
+            onClick={() => this.props.fetchVideos("songLyrics")}
+            eventKey="link-4">Lyrics</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
@@ -79,7 +85,7 @@ class VideoDashboard extends Component {
 
 
   render() {
-    console.log(this.props, "======VIDEO DASHBOARD=====");
+    // console.log(this.props, "======VIDEO DASHBOARD=====");
     return (
       <div className="page-content-wrapper">
         <div className="dashboard-header">

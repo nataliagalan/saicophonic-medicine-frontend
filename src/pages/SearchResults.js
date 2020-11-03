@@ -20,32 +20,63 @@ class SearchResults extends Component {
     // this.fetchVideos(path)
   }
 
-  fetchVideos = async () => {
+  fetchVideos = async (tab) => {
+  // fetchVideos = (tab) => {
+    // console.log(tab, "=====EVENT IN FETCH VIDEOS=====");
+
     let path = this.props.location.pathname
     const res = await fetch(`http://localhost:3001/api/v1/${path}`);
     const videos = await res.json();
-    // this.filterResults(videos)
-    this.props.getVideos(videos);
+
+    this.filterResults(videos, tab)
+    // this.props.getVideos(videos);
   };
 
-  filterResults = (videos) => {
-    let query = this.props.location.pathname.split('/')[3]
-    console.log(videos, "====VIDEOS ARGUMENT=====");
-    let filteredVideos = videos.filter( video => video.band.toLowerCase().includes(query) )
-    this.props.getVideos(filteredVideos);
-    // console.log("filterResults");
+  filterResults = (videos, tab) => {
+    let query = this.props.location.pathname.split('/')[3].toLowerCase()
+    let filteredVideos = videos
     
+    switch (tab) {
+      case "all":
+        this.props.getVideos(videos);
+        break;
+      case "band":
+        filteredVideos = videos.filter( video => video.band.toLowerCase().includes(query) )
+          this.props.getVideos(filteredVideos);
+          break;
+      case "songTitle":
+        filteredVideos = videos.filter(function(video) {
+          return video.songs.some(function(song) {
+            return song.title.toLowerCase().includes(query);
+          });
+        });
+        this.props.getVideos(filteredVideos);
+        break;
+      case "songLyrics":
+        filteredVideos = videos.filter(function(video) {
+          return video.songs.some(function(song) {
+            return song.lyrics.toLowerCase().includes(query);
+          });
+        });
+        this.props.getVideos(filteredVideos);
+        break;
+      default:
+        this.props.getVideos(filteredVideos);
+      }
+      
+    
+    //if I clicked on all tab
+      //display all videos
+    //if I clicked on artist/band tab
+      //display videos that contain query in band attribute
+      // if none, don't display anything
+    //if I clicked on song tab
+      //display videos that contain query in song title attribute
+      // if none, don't display anything
+    //if I clicked on lyrics tab
+      //display videos that contain query in song lyrics attribute
+      // if none, don't display anything
 
-    // this.setState({ filteredVideos })
-
-    // this.videosToShow(query)
-
-  //on artist/band tab click
-  //trigger a function that
-  //checks to see if band name includes the query
-  // only render those videos whose band name includes the query
-  // only send those videos whose band name includes the query
-  //as props to videodashboard
   }
 
 
@@ -53,7 +84,7 @@ class SearchResults extends Component {
 
   // "/videos/search/:query"
   render() {
-    console.log(this.props,"======search results page========");
+    // console.log(this.props,"======search results page========");
     //TODO make a function accounts for 1 video
     let query = this.props.location.pathname.split('/')[3]
     
