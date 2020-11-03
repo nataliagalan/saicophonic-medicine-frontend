@@ -34,7 +34,8 @@ class VideoDashboard extends Component {
   fetchVideos = async () => {
     const res = await fetch('http://localhost:3001/api/v1/videos');
     const videos = await res.json();
-    this.props.getVideos(videos, "all");
+    // this.props.getVideos(videos, "all");
+    this.props.getVideos(videos);
   };
 
   fetchUser = async () => {
@@ -70,7 +71,7 @@ class VideoDashboard extends Component {
           //   onClick={() => {this.props.fetchVideos("all")
           //   this.countResults("all")
           // }}
-            eventKey="link-1">All({this.props.all})</Nav.Link>
+            eventKey="link-1">All({this.props.allCount})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
@@ -81,12 +82,12 @@ class VideoDashboard extends Component {
         <Nav.Item>
           <Nav.Link 
             onClick={() => this.props.fetchVideos("songTitle")}
-            eventKey="link-3">Songs({this.props.songs})</Nav.Link>
+            eventKey="link-3">Songs({this.props.songCount})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
             onClick={() => this.props.fetchVideos("songLyrics")}
-            eventKey="link-4">Lyrics({this.props.lyrics})</Nav.Link>
+            eventKey="link-4">Lyrics({this.props.lyricsCount})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
@@ -135,11 +136,12 @@ class VideoDashboard extends Component {
 
 const setStateToProps = (state) => {
   return {
-    videos: state.videos.videos,
-    all: state.videos.all,
-    bands: state.videos.bands,
-    songs: state.videos.songs,
-    lyrics: state.videos.lyrics,
+    videos: state.videos,
+    // videos: state.videos.videos,
+    // all: state.videos.all,
+    // bands: state.videos.bands,
+    // songs: state.videos.songs,
+    // lyrics: state.videos.lyrics,
     auth: state.auth
   };
 };

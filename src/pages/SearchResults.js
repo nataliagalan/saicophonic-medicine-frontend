@@ -8,7 +8,10 @@ class SearchResults extends Component {
   state = {
     filteredVideos: [],
     query: "",
-    bandCount: 0
+    allCount: 0,
+    bandCount: 0,
+    songCount: 0,
+    lyricsCount: 0
   }
 
   //THIS IS THE PARENT OF VIDEO DASHBOARD
@@ -37,8 +40,23 @@ class SearchResults extends Component {
 
   setLocalStateCount = (videos) => {
     let query = this.props.location.pathname.split('/')[3].toLowerCase()
+    let filteredBySong = videos.filter(function(video) {
+      return video.songs.some(function(song) {
+        return song.lyrics.toLowerCase().includes(query);
+      });
+    });
+
+    let filteredByLyrics = videos.filter(function(video) {
+      return video.songs.some(function(song) {
+        return song.lyrics.toLowerCase().includes(query);
+      });
+    });
+
     this.setState({
-      bandCount: videos.filter( video => video.band.toLowerCase().includes(query) ).length
+      allCount: videos.length,
+      bandCount: videos.filter( video => video.band.toLowerCase().includes(query) ).length,
+      songCount: filteredBySong.length,
+      lyricsCount: filteredByLyrics.length
     })
   }
 
@@ -48,11 +66,11 @@ class SearchResults extends Component {
     
     switch (tab) {
       case "all":
-        this.props.getVideos(videos, "all");
+        this.props.getVideos(videos);
         break;
       case "band":
         filteredVideos = videos.filter( video => video.band.toLowerCase().includes(query) )
-          this.props.getVideos(filteredVideos, "bands");
+          this.props.getVideos(filteredVideos);
           break;
       case "songTitle":
         filteredVideos = videos.filter(function(video) {
@@ -60,7 +78,7 @@ class SearchResults extends Component {
             return song.title.toLowerCase().includes(query);
           });
         });
-        this.props.getVideos(filteredVideos, "songs");
+        this.props.getVideos(filteredVideos);
         break;
       case "songLyrics":
         filteredVideos = videos.filter(function(video) {
@@ -68,10 +86,10 @@ class SearchResults extends Component {
             return song.lyrics.toLowerCase().includes(query);
           });
         });
-        this.props.getVideos(filteredVideos, "lyrics");
+        this.props.getVideos(filteredVideos);
         break;
       default:
-        this.props.getVideos(filteredVideos, "all");
+        this.props.getVideos(filteredVideos);
       }
   
   }
@@ -101,7 +119,10 @@ class SearchResults extends Component {
           }
           filterResults={this.filterResults}
           fetchVideos={this.fetchVideos}
+          allCount={this.state.allCount}
           bandCount={this.state.bandCount}
+          songCount={this.state.songCount}
+          lyricsCount={this.state.lyricsCount}
           />
       </>
     )
@@ -110,7 +131,8 @@ class SearchResults extends Component {
 
 const setStateToProps = (state) => {
   return {
-    videos: state.videos.videos,
+    videos: state.videos,
+    // videos: state.videos.videos,
     // auth: state.auth
   };
 };
