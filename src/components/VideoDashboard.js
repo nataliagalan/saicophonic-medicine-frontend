@@ -57,7 +57,7 @@ class VideoDashboard extends Component {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={this.props.fetchVideos}
+            onClick={this.props.filterResults}
             eventKey="link-1">Artist/Bands</Nav.Link>
         </Nav.Item>
         <Nav.Item>

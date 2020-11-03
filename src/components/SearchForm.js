@@ -82,6 +82,7 @@ class SearchForm extends Component {
   };
 
   fetchVideo = async (id) => {
+    this.setState({ open: false });
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
     const videoToShow = await res.json();
     this.props.getVideo(videoToShow);
