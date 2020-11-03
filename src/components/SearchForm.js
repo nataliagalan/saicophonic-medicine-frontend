@@ -35,12 +35,12 @@ class SearchForm extends Component {
     }));
 
     //currently not using this but maybe useful for displaying purposes
-    // filteredVideos.forEach((video, videoIndex) => {
-    //   video.songs.forEach((song, songIndex) => {
-    //     songIndex ++
-    //     options[videoIndex][`song${songIndex}`] = song.title
-    //   })
-    // })
+    filteredVideos.forEach((video, videoIndex) => {
+      video.songs.forEach((song, songIndex) => {
+        songIndex ++
+        options[videoIndex][`song${songIndex}`] = song.title
+      })
+    })
 
     // console.log(options,"--------OPTIONSOBJ---------");
 
@@ -143,10 +143,10 @@ class SearchForm extends Component {
 
                       <Highlighter search={this.state.query}>
                         {opt.band}
-                        {/* {opt[menuProps.labelKey]} */}
+                       
                       </Highlighter>
 
-
+                 
                   </Link>
                 </MenuItem>
               )}
