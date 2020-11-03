@@ -22,7 +22,7 @@ class SearchForm extends Component {
     query: '',
   };
 
-  _cache = {};
+  // _cache = {};
 
   //removed page 1 from here for testing
   makeAndHandleRequest = async (query) => {
@@ -34,7 +34,7 @@ class SearchForm extends Component {
       songs: i.songs
     }));
 
-    //currently not using this but maybe useful for displaying purposes
+    //useful for displaying highlighted options
     filteredVideos.forEach((video, videoIndex) => {
       video.songs.forEach((song, songIndex) => {
         songIndex ++
@@ -57,6 +57,7 @@ class SearchForm extends Component {
 
   handleAllResults = async (query) => {
     this.setState({ open: false });
+    
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
     this.props.getVideos(filteredVideos);
@@ -131,6 +132,7 @@ class SearchForm extends Component {
                 // "/videos/search/:query"
                   to={`/videos/search/${this.state.query}`}
                   onClick={() => this.handleAllResults(this.state.query)}
+                  // and also/ OR INSTEAD: onClick={() => this.props.fetchVideos("all")}
                   // activeClassName="active"
                   >
                 {`See all results for "${this.state.query}"`}
