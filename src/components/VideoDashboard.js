@@ -12,13 +12,19 @@ class VideoDashboard extends Component {
 
   //THIS IS THE CHILD OF SEARCH RESULTS
 
+
   state = {
     filteredVideos: [],
     query: ""
   }
 
   componentDidMount() {
-    this.fetchVideos()
+    if(this.props.resultCount){
+      this.props.fetchVideos()
+    } else {
+      this.fetchVideos()
+    }
+    
     const token = localStorage.getItem('myAppToken') 
     if(token){
       this.fetchUser()
@@ -57,7 +63,7 @@ class VideoDashboard extends Component {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={this.props.filterResults}
+            onClick={this.props.fetchVideos}
             eventKey="link-1">Artist/Bands</Nav.Link>
         </Nav.Item>
         <Nav.Item>
