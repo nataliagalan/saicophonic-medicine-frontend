@@ -102,6 +102,7 @@ class SearchForm extends Component {
     <>
       <AsyncTypeahead
         {...this.state}
+        className="searchForm"
         id="video-archive-typeahead"
         //labelkey determines the option keys that get searched
         labelKey={
@@ -117,7 +118,7 @@ class SearchForm extends Component {
         // onPaginate={this._handlePagination}
         onSearch={this._handleSearch}
         paginate
-        placeholder="Search by Artist/Band, Song or Lyrics..."
+        placeholder="Search by artist, band, song, lyrics..."
         options={this.state.options}
      
 
@@ -148,7 +149,6 @@ class SearchForm extends Component {
                        
                       </Highlighter>
 
-                 
                   </Link>
                 </MenuItem>
               )}
