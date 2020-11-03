@@ -1,24 +1,57 @@
+// import React from 'react';
+// class Search extends  React.Component {
 
+// 	state = {
+// 			query: '',
+//       results: {},
+//       loading: false,
+//       message: '',
+//     };
 
-    //   <AsyncTypeahead
-    //   {...this.state}
-    //   // isLoading={this.state.isLoading}
-    //   id="async-pagination-example"
-    //   labelKey={option => `${option.id}`}
-    //   // labelKey="login"
-    //   // maxResults={PER_PAGE - 1}
-    //   minLength={2}
-    //   onInputChange={this._handleInputChange}
-    //   // onPaginate={this._handlePagination}
-    //   onSearch={this._handleSearch}
-    //   paginate
-    //   placeholder="Search by Artist/Band, Song or Lyrics..."
-    //   options={this.state.options}
-    //   renderMenuItemChildren={option => (
-    //     <div key={option.id}>
-    //       {option.band}
-    //     </div>
-    //   )}
-   
-    //   // useCache={false}
-    // /> 
+//   handleOnInputChange = (event) => {
+//     const query = event.target.value;
+//       this.setState({ query, loading: true, message: ''  } );
+//   };
+
+//   renderSearchResults = () => {
+//     const {results} = this.state;
+//     if (Object.keys(results).length && results.length) {
+//       return (
+//         <div className="results-container">
+//           {results.map((result) => {
+//             return (
+//               <a key={result.id} href={result.previewURL} className="result-items">
+//                 <h6 className="image-username">{result.user}</h6>
+//                 <div className="image-wrapper">
+//                   <img className="image" src={result.previewURL} alt={result.user}/>
+//                 </div>
+//               </a>
+//             );
+//           })}
+//         </div>
+//       );
+//     }
+//   };
+    
+// 	render() {
+// 		return (
+// 			<div className="container">
+// 				{/*Heading*/}
+// 				<h2 className="heading">Live Search: React Application</h2>
+// 				{/*Search Input*/}
+// 				<label className="search-label" htmlFor="search-input">
+//         <input
+//           type="text"
+//           value=""
+//           id="search-input"
+//           placeholder="Search..."
+//           onChange={this.handleOnInputChange}
+//         />
+// 					<i className="fa fa-search search-icon"/>
+// 				</label>
+				
+// 			</div>
+// 			)
+// 	}
+// }
+// export default Search;
