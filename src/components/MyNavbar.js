@@ -36,7 +36,7 @@ const MyNavbar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
             {/* <Nav.Link href="/videos/new" id="menu-toggle">ADD VIDEO +</Nav.Link> */}
-            <Link to="/videos/new" id="menu-toggle" className="nav-font-style">Add Video +</Link>
+            <Link to="/videos/new" id="menu-toggle" className="nav-font-style">Add Video</Link>
           {
           (auth.id) ?
             (<Link 

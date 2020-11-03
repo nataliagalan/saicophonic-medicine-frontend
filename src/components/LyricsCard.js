@@ -70,7 +70,10 @@ const LyricsCard = (props) => {
                     </Row>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={i + 1}>
-                <Card.Body style={{textAlign: "left"}} style={{whiteSpace: "pre-line"}}>
+                <Card.Body 
+                  className="overflow-auto"
+                  scrollable={true}
+                  style={{whiteSpace: "pre-line"}}>
                   {song.lyrics} 
                   </Card.Body>
                 </Accordion.Collapse>

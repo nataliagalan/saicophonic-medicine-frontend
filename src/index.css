@@ -34,8 +34,10 @@ code {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   color: #EBDFF7;
+  padding-left: 1.5rem;
+
 }
 
 .dashboard-header {
@@ -113,6 +115,8 @@ code {
 }
 
 .page-content-wrapper {
+  /* TODO ADJUST THIS SOLUTION LATER */
+  padding-top: 3.8rem;
   margin-left: 2rem;
   margin-right: 2rem;
 }
@@ -139,3 +143,10 @@ code {
 .accordion-time-title {
   color: #000;
 }
+
+.overflow-auto {
+  max-height: 380px;
+  text-align: left;
+  padding-left: 3rem;
+}
+
