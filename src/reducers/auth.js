@@ -1,5 +1,5 @@
 
-const initialValue = []
+const initialValue = {}
 const auth = (state = initialValue, action) => {
   switch (action.type) {
     case "LOGIN_SUCCESS":

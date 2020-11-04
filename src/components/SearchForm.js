@@ -100,7 +100,7 @@ class SearchForm extends Component {
 
   
   render() {
-    console.log(this.props, "============SEARCH FORM=========");
+    // console.log(this.props, "============SEARCH FORM=========");
 
     return (
 

@@ -14,7 +14,7 @@ import LyricsCard from './LyricsCard';
 
 const VideoCard = (props) => {
 
-  console.log(props, "=======VIDEO CARD PROPS==========");
+  // console.log(props, "=======VIDEO CARD PROPS==========");
     const ref = React.createRef()
     //useSelector is similar to setStateToProps
     const payload = useSelector(state => state.video);

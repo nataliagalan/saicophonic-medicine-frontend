@@ -2,14 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
-import { Switch, Route } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 
-import New from './New';
-import Edit from './Edit';
-import Show from './Show';
 import VideoCard from '../components/VideoCard';
 
 
@@ -21,16 +17,24 @@ class VideoDashboard extends Component {
   }
 
   componentDidMount() {
-    if(this.props.resultCount){
-      this.props.fetchVideos(this.props.query, "all")
-    } else {
-      this.fetchVideos()
-    }
-    
+
     const token = localStorage.getItem('myAppToken') 
-    if(token){
+    if(!token){
+      this.fetchVideos()
+    } else {
       this.fetchUser()
-    } 
+    }
+
+    this.fetchVideos()
+
+    //TODO change this and use store
+    // if(this.props.resultCount){
+    //   this.props.fetchVideos(this.props.query, "all")
+    // } else {
+    //   this.fetchVideos()
+    // }
+    
+
   }
 
 
@@ -59,11 +63,6 @@ class VideoDashboard extends Component {
     }
   }
 
-  // countResults = (key) => {
-  //   this.setState({
-  //     [key]: this.props.videos.length
-  //   })
-  // }
   
   displayFilterTabs = () => {
     // console.log(this.props.query, "============query video dashboard===========");
@@ -128,16 +127,7 @@ class VideoDashboard extends Component {
         }
           
         </>
-          {/* {
-           
-            this.props.videos.map((video) => {
-              return <VideoContainer
-                video={video}
-                key={video.id}
-               />
-              })
-          } */}
-
+          
           {
             this.props.videos.map((video) => {
               return <VideoCard
@@ -149,11 +139,6 @@ class VideoDashboard extends Component {
           
         {/* </Container> */}
 
-        <Switch>
-          <Route exact path="/videos/new" component={New} />
-          <Route exact path="/videos/:id" component={Show} />
-          <Route exact path="/videos/edit/:id" component={Edit} />
-        </Switch>
 
       </div>
     )
