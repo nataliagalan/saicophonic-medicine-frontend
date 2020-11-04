@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getVideos } from '../actions/videos';
+import VideoCard from '../components/VideoCard';
 import VideoDashboard from './VideoDashboard'
 
 class SearchResults extends Component {
@@ -112,34 +113,11 @@ class SearchResults extends Component {
     
     return (
       <>
-      {/* <VideoDashboard  
-      fetchVideos={this.fetchVideos}
-      /> */}
-        <VideoDashboard 
-          // {...this.props.videos} 
-          // {...this.videosToShow} 
-          resultCount={ 
-            this.props.videos.length === 1 ?
-            (`${this.props.videos.length} result for “${query}”`)
-            :
-            (`${this.props.videos.length} results for “${query}”`)
-          }
-
-          fetchVideos={this.props.fetchVideos}
-          query={query}
-          allCount={this.props.allCount}
-          bandCount={this.props.bandCount}
-          songCount={this.props.songCount}
-          lyricsCount={this.props.lyricsCount}
-          
-          // filterResults={this.filterResults}
-          // fetchVideos={this.fetchVideos}
-          // allCount={this.state.allCount}
-          // bandCount={this.state.bandCount}
-          // songCount={this.state.songCount}
-          // lyricsCount={this.state.lyricsCount}
-          />
+    <VideoDashboard /> 
+   
+    
       </>
+
     )
   }
 }
@@ -147,6 +125,7 @@ class SearchResults extends Component {
 const setStateToProps = (state) => {
   return {
     videos: state.videos,
+    filteredByAll: state.filteredByAll,
     // videos: state.videos.videos,
     // auth: state.auth
   };

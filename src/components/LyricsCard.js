@@ -137,15 +137,3 @@ const LyricsCard = (props) => {
 
 
 export default withRouter(LyricsCard)
-
-// const setStateToProps = (state) => {
-//   return {
-//     videos: state.videos
-//   };
-// };
-
-// const setDispatchToProps = {
-//   deleteVideo
-// };
-
-// export default withRouter(connect(setStateToProps, setDispatchToProps)(LyricsCard));

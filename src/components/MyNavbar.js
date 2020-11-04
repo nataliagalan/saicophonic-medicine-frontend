@@ -29,12 +29,14 @@ const MyNavbar = (props) => {
         <Navbar.Brand><img src={logo} className="imgFluid" style={{maxWidth: '70px'}} /></Navbar.Brand>
         </Link>
 
-        <SearchForm 
+        {/* <SearchForm 
           fetchVideos={props.fetchVideos}
           allCount={props.allCount}
           bandCount={props.bandCount}
           songCount={props.songCount}
-          lyricsCount={props.lyricsCount} />
+          lyricsCount={props.lyricsCount} /> */}
+
+        <SearchForm  />
 
         </Navbar>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
