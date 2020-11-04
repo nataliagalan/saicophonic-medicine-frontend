@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getVideos } from '../actions/videos';
-import VideoDashboard from '../components/VideoDashboard'
+import VideoDashboard from './VideoDashboard'
 
 class SearchResults extends Component {
 

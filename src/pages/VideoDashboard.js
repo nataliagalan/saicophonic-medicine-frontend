@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
+import { Switch, Route } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import VideoContainer from './VideoContainer';
-// import $ from 'jquery';
+
+import New from './New';
+import Edit from './Edit';
+import Show from './Show';
+import VideoCard from '../components/VideoCard';
+
 
 class VideoDashboard extends Component {
-
-  //THIS IS THE CHILD OF SEARCH RESULTS
-
 
   state = {
     filteredVideos: [],
@@ -126,7 +128,7 @@ class VideoDashboard extends Component {
         }
           
         </>
-          {
+          {/* {
            
             this.props.videos.map((video) => {
               return <VideoContainer
@@ -134,8 +136,25 @@ class VideoDashboard extends Component {
                 key={video.id}
                />
               })
+          } */}
+
+          {
+            this.props.videos.map((video) => {
+              return <VideoCard
+                {...video}
+                key={video.id}
+               />
+              })
           }
+          
         {/* </Container> */}
+
+        <Switch>
+          <Route exact path="/videos/new" component={New} />
+          <Route exact path="/videos/:id" component={Show} />
+          <Route exact path="/videos/edit/:id" component={Edit} />
+        </Switch>
+
       </div>
     )
   }
