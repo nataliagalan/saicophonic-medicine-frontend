@@ -20,7 +20,7 @@ class VideoDashboard extends Component {
 
   componentDidMount() {
     if(this.props.resultCount){
-      this.props.fetchVideos()
+      this.props.fetchVideos(this.props.query, "all")
     } else {
       this.fetchVideos()
     }
@@ -64,31 +64,37 @@ class VideoDashboard extends Component {
   // }
   
   displayFilterTabs = () => {
+    // console.log(this.props.query, "============query video dashboard===========");
+    const { query } = this.props
     return (
-      <Nav fill variant="tabs" defaultActiveKey="link-1">
+      <Nav fill variant="tabs" defaultActiveKey="all">
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.props.fetchVideos("all")}
-          //   onClick={() => {this.props.fetchVideos("all")
-          //   this.countResults("all")
-          // }}
-            eventKey="link-1">All({this.props.allCount})</Nav.Link>
+            eventKey="all"
+            title="all"
+            onClick={() => this.props.fetchVideos(query, "all")}
+          >
+              All({this.props.allCount})
+          </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.props.fetchVideos("band")}
+            onClick={() => this.props.fetchVideos(query, "band")}
+            title="band"
             // eventKey="link-2">Artist/Bands({this.props.bands})</Nav.Link>
-            eventKey="link-2">Artist/Bands({this.props.bandCount})</Nav.Link>
+            eventKey="band">Artist/Bands({this.props.bandCount})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.props.fetchVideos("songTitle")}
-            eventKey="link-3">Songs({this.props.songCount})</Nav.Link>
+            onClick={() => this.props.fetchVideos(query, "songTitle")}
+            title="songTitle"
+            eventKey="songTitle">Songs({this.props.songCount})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.props.fetchVideos("songLyrics")}
-            eventKey="link-4">Lyrics({this.props.lyricsCount})</Nav.Link>
+            onClick={() => this.props.fetchVideos(query, "songLyrics")}
+            title="songLyrics"
+            eventKey="songLyrics">Lyrics({this.props.lyricsCount})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }

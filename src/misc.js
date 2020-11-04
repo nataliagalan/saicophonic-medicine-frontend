@@ -55,3 +55,20 @@
 // 	}
 // }
 // export default Search;
+
+
+{/* <div style={{width: '300px'}}> */}
+<Popup trigger={<button>Edit</button>} position="right center" className='my-popup'>
+<div style={{ width: '250px'}}>
+<Form onSubmit={this.handleSubmit} style={{width: '250px', height: '400px'}}>
+<label name='username'>Username</label>
+<input onChange={this.handleChange} type="text" name="username" value={this.state.username}></input>
+<label>Email</label>
+<input onChange={this.handleChange} type="text" name="email" value={this.state.email}></input>
+<label>Bio</label>
+<TextArea style={{height: '200px'}} onChange={this.handleChange} name="bio" value={this.state.bio}/>
+<Button type='submit'>Signup</Button>
+</Form>
+</div>
+</Popup>
+{/* </div> */}

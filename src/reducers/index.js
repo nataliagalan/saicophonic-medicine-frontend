@@ -12,4 +12,7 @@ export default combineReducers({
   video: video,
 
   auth: authReducer
+
+  //all: 
+  //songs: songReducer
 });
