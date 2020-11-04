@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
 import { setFilter } from '../actions/setFilter';
+import { toggleTabs } from '../actions/toggleTabs';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -105,6 +106,13 @@ class VideoDashboard extends Component {
 
   }
 
+
+    //this.props.showTabs === true, run displaytabs
+    //else null
+    // don't display tabs initially
+    // hide tabs if query === ""
+
+
   render() {
     const videosToDisplay = this.findVideos()
     // const videosToDisplay = this.props.videos
@@ -116,7 +124,8 @@ class VideoDashboard extends Component {
           <h1 className="header-text">Saicophonic Medicine</h1>
           <h5 className="header-subtext">An expanding library of live music sessions</h5>
         </div>
-        {this.displayFilterTabs()}
+        {/* {this.displayFilterTabs()} */}
+        {this.props.showTabs === "true" ? this.displayFilterTabs() : null}
         <VideoContainer videos={videosToDisplay} />
       </div>
     )
@@ -131,6 +140,7 @@ const setStateToProps = (state) => {
     filteredBySong: state.filteredBySong,
     filteredByLyrics: state.filteredByLyrics,
     filter: state.setFilter,
+    showTabs: state.toggleTabs.showTabs,
     //note to self: naming the key setFilter here will not work because the props already have a key called setFilter pointing to the reducer
     //setFilter: state.setFilter,
     auth: state.auth
@@ -140,7 +150,8 @@ const setStateToProps = (state) => {
 const setDispatchToProps = {
   currentUser,
   getVideos,
-  setFilter
+  setFilter,
+  toggleTabs
   
 };
 

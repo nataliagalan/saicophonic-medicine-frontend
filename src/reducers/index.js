@@ -7,6 +7,7 @@ import filteredByBand from "./filteredByBand";
 import filteredBySong from "./filteredBySong";
 import filteredByLyrics from "./filteredByLyrics";
 import setFilter from "./setFilter";
+import toggleTabs from "./toggleTabs";
 
 //keys below correspond to state keys
 //and the value corresponds to the reducer in charge of updating that particular key
@@ -20,7 +21,9 @@ export default combineReducers({
   filteredByAll,
   filteredByBand,
   filteredBySong,
-  filteredByLyrics 
+  filteredByLyrics,
+
+  toggleTabs
  
   //songs: songReducer
 });
