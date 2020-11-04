@@ -1,11 +1,6 @@
 
 
-// export const getVideos = (videos, key) => {
-//   return {
-//     type: "GET_VIDEOS",
-//     payload: {videos: videos, key: key} 
-//   };
-// };
+
 export const getVideos = (videos) => {
   return {
     type: "GET_VIDEOS",

@@ -15,7 +15,6 @@ const videos = (state = initialValue, action) => {
         bands: filteredVideos, 
         query: action.payload.query
       }
-
     default:
       return state;
   }
