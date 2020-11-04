@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 import logo from '../logo.png'
 import SearchForm from './SearchForm';
 
-const MyNavbar = () => {
+const MyNavbar = (props) => {
     //useSelector is similar to setStateToProps
     const auth = useSelector(state => state.auth);
     //useDispatch is similar to setDispatchToProps
@@ -18,7 +18,7 @@ const MyNavbar = () => {
       localStorage.removeItem('myAppToken')
       dispatch(logoutSuccess())
     }
-
+    // console.log(props,"==========MY NAVBAR PROPS==========");
 
     return (
       <>
@@ -29,7 +29,12 @@ const MyNavbar = () => {
         <Navbar.Brand><img src={logo} className="imgFluid" style={{maxWidth: '70px'}} /></Navbar.Brand>
         </Link>
 
-        <SearchForm />
+        <SearchForm 
+          fetchVideos={props.fetchVideos}
+          allCount={props.allCount}
+          bandCount={props.bandCount}
+          songCount={props.songCount}
+          lyricsCount={props.lyricsCount} />
 
         </Navbar>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />

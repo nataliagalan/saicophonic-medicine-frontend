@@ -55,6 +55,10 @@ class SearchForm extends Component {
         
   }
 
+  //CURRENTLY NOT USING THIS, USING THIS.PROPS.FETCHVIDEOS
+  closeDropdown = () => {
+    this.setState({ open: false });
+  }
   handleAllResults = async (query) => {
     this.setState({ open: false });
     
@@ -96,7 +100,7 @@ class SearchForm extends Component {
 
   
   render() {
-    // console.log(this.props, "search form");
+    console.log(this.props, "============SEARCH FORM=========");
 
     return (
 
@@ -131,7 +135,10 @@ class SearchForm extends Component {
                 <Link 
                 // "/videos/search/:query"
                   to={`/videos/search/${this.state.query}`}
-                  onClick={() => this.handleAllResults(this.state.query)}
+                  onClick={() => { 
+                    this.props.fetchVideos(this.state.query, "all");
+                    this.closeDropdown(); 
+                  }} 
                   // and also/ OR INSTEAD: onClick={() => this.props.fetchVideos("all")}
                   // activeClassName="active"
                   >
