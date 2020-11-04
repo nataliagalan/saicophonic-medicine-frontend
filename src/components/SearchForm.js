@@ -157,12 +157,12 @@ class SearchForm extends Component {
         paginate
         placeholder="Search by artist, band, song, lyrics..."
         options={this.state.options}
-     
+        onBlur={this.closeDropdown} 
 
         renderMenu={(options, menuProps) => {
           return (
 
-            <Menu {...menuProps}>
+            <Menu {...menuProps} >
               <MenuItem>
                 <Link 
                 // "/videos/search/:query"
