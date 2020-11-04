@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
 import { getVideo } from "../actions/video";
+import { setFilter } from '../actions/setFilter';
 import { filteredByAll } from '../actions/filteredByAll';
 import { filteredByBand } from '../actions/filteredByBand';
 
@@ -31,6 +32,7 @@ class SearchForm extends Component {
     const filteredVideos = await res.json();
 
     //dispatch here
+    this.props.setFilter("all");
     this.props.filteredByAll(filteredVideos);
     this.props.filteredByBand(filteredVideos, query);
 
@@ -200,7 +202,8 @@ const setStateToProps = (state) => {
 const setDispatchToProps = {
   getVideo,
   filteredByAll,
-  filteredByBand
+  filteredByBand,
+  setFilter
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(SearchForm));

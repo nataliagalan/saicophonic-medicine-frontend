@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
-import { filteredByBand } from '../actions/filteredByBand';
+import { setFilter } from '../actions/setFilter';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 
-import VideoCard from '../components/VideoCard';
+// import VideoCard from '../components/VideoCard';
 import VideoContainer from './VideoContainer';
 
 
@@ -20,24 +20,12 @@ class VideoDashboard extends Component {
     } else {
       this.fetchUser()
     }
-
     this.fetchVideos()
-
-    //TODO change this and use store
-    // if(this.props.resultCount){
-    //   this.props.fetchVideos(this.props.query, "all")
-    // } else {
-    //   this.fetchVideos()
-    // }
-    
-
   }
-
 
   fetchVideos = async () => {
     const res = await fetch('http://localhost:3001/api/v1/videos');
     const videos = await res.json();
-    // this.props.getVideos(videos, "all");
     this.props.getVideos(videos);
   };
 
@@ -59,17 +47,14 @@ class VideoDashboard extends Component {
     }
   }
 
-  
   displayFilterTabs = () => {
-    // console.log(this.props.query, "============query video dashboard===========");
-    const { query } = this.props
     return (
       <Nav fill variant="tabs" defaultActiveKey="all">
         <Nav.Item>
           <Nav.Link 
             eventKey="all"
             title="all"
-            onClick={() => this.findVideos("all")}
+            onClick={() => this.handleTabClick("all") }
           >
               All({this.props.filteredByAll.length})
           </Nav.Link>
@@ -84,101 +69,40 @@ class VideoDashboard extends Component {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.findVideos("songs")}
+            onClick={() => this.handleTabClick("songs")}
             title="songs"
             eventKey="songs">Songs({this.props.songCount})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.findVideos("lyrics")}
+            onClick={() => this.handleTabClick("lyrics")}
             title="lyrics"
             eventKey="lyrics">Lyrics({this.props.lyricsCount})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
 
-
-    // else if (tab === "bands"){
-    //   let videos = this.props.filteredByBand.bands.map((video) => {
-    //     return (<VideoCard
-    //       {...video}
-    //       key={video.id}
-    //      />)
-    //     })
-    //     return videos
-    // }
-
-    // switch (tab) {
-    //   case "all":
-    //     let videos = this.props.filteredByAll.map((video) => {
-    //       return (<VideoCard
-    //         {...video}
-    //         key={video.id}
-    //        />)
-    //       })
-    //       return videos
-    //     break;
-    //   case "band":
-    //     videos = this.props.filteredByAll.filter( video => video.band.toLowerCase().includes(query) )
-    //       this.props.getVideos(filteredVideos);
-    //       break;
-    //   case "songTitle":
-    //     filteredVideos = this.props.filteredByAll.filter(function(video) {
-    //       return video.songs.some(function(song) {
-    //         return song.title.toLowerCase().includes(query);
-    //       });
-    //     });
-    //     this.props.getVideos(filteredVideos);
-    //     break;
-    //   case "songLyrics":
-    //     filteredVideos = this.props.filteredByAll.filter(function(video) {
-    //       return video.songs.some(function(song) {
-    //         return song.lyrics.toLowerCase().includes(query);
-    //       });
-    //     });
-    //     this.props.getVideos(filteredVideos);
-    //     break;
-    //   default:
-    //     this.props.getVideos(filteredVideos);
-    //   }
-
-  
-  findVideos = (tab) => {
-    let videosToShow = this.props.videos
-
-    switch (tab) {
-      case "all":
-        videosToShow = this.props.filteredByAll
-         return videosToShow
-        break;
+  findVideos = () => {
+    switch (this.props.filter) {
       case "none":
-        videosToShow = this.props.videos
-         return videosToShow
-        break;
+        return this.props.videos
+      case "all":
+        return this.props.filteredByAll
       case "bands":
-        videosToShow = this.props.filteredByBand.bands
-        
-         return videosToShow
-        break;
-    
+        return this.props.filteredByBand.bands 
       default:
-        videosToShow = this.props.filteredByAll
-         return videosToShow
-        break;
+        return this.props.videos
     }
-
-    return videosToShow
-
   }
 
   handleTabClick = (tab) => {
-console.log("====ohmyfuckinggod");
+ 
+    this.props.setFilter(tab)
 
   }
 
-
   render() {
-    const videosToDisplay = this.findVideos("bands")
+    const videosToDisplay = this.findVideos()
     // const videosToDisplay = this.props.videos
     // console.log(this.props, "======VIDEO DASHBOARD=====");
     return (
@@ -190,34 +114,6 @@ console.log("====ohmyfuckinggod");
         </div>
         {this.displayFilterTabs()}
         <VideoContainer videos={videosToDisplay} />
-        {
-          this.props.resultCount ?
-          (<><h3>{this.props.resultCount}</h3><br></br></>)
-          :
-          (null)
-        }
-        {/* <Container fluid> */}
-
-        {/* {
-          this.props.resultCount ?
-          (this.displayFilterTabs())
-          :
-          (null)
-        } */}
-        {/* {this.renderVideos("none")} */}
-
-        {/* {
-          this.props.videos.map((video) => {
-            return (<VideoCard
-              {...video}
-              key={video.id}
-             />)
-            })
-        } */}
-          
-        {/* </Container> */}
-
-
       </div>
     )
   }
@@ -228,18 +124,15 @@ const setStateToProps = (state) => {
     videos: state.videos,
     filteredByAll: state.filteredByAll,
     filteredByBand: state.filteredByBand,
-    // videos: state.videos.videos,
-    // all: state.videos.all,
-    // bands: state.videos.bands,
-    // songs: state.videos.songs,
-    // lyrics: state.videos.lyrics,
+    filter: state.setFilter,
     auth: state.auth
   };
 };
 
 const setDispatchToProps = {
   currentUser,
-  getVideos
+  getVideos,
+  setFilter
   
 };
 
