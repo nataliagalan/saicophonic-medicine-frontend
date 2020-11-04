@@ -27,21 +27,26 @@ class SearchForm extends Component {
     query: '',
   };
 
-  // _cache = {};
 
-  //removed page 1 from here for testing
+
+  //removed page 1 from argument below for testing
   makeAndHandleRequest = async (query) => {
+
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
- 
-    
-    //dispatch here    
-    // this.props.setFilter("all");
-    this.props.filteredByAll(filteredVideos);
-    this.props.filteredByBand(filteredVideos, query);
-    this.props.filteredBySong(filteredVideos, query);
-    this.props.filteredByLyrics(filteredVideos, query);
 
+    if(filteredVideos.error) {
+
+      console.log(`====${filteredVideos.error}====`)
+      this.setState({
+        isLoading: false,
+      }); 
+    } else {
+      //dispatch here    
+      this.props.filteredByAll(filteredVideos);
+      this.props.filteredByBand(filteredVideos, query);
+      this.props.filteredBySong(filteredVideos, query);
+      this.props.filteredByLyrics(filteredVideos, query);
     const options = filteredVideos.map(i => ({
       band: i.band,
       id: i.id,
@@ -57,15 +62,13 @@ class SearchForm extends Component {
       })
     })
 
-    // console.log(options,"--------OPTIONSOBJ---------");
-
-    // this._cache[query] = filteredVideos
-
     this.setState({
           isLoading: false,
           options: options
         });  
+      }
 
+    
         
   }
 

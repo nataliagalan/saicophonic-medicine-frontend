@@ -7,8 +7,6 @@ import { toggleTabs } from '../actions/toggleTabs';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-
-// import VideoCard from '../components/VideoCard';
 import VideoContainer from './VideoContainer';
 
 
@@ -107,15 +105,8 @@ class VideoDashboard extends Component {
   }
 
 
-    //this.props.showTabs === true, run displaytabs
-    //else null
-    // don't display tabs initially
-    // hide tabs if query === ""
-
-
   render() {
     const videosToDisplay = this.findVideos()
-    // const videosToDisplay = this.props.videos
     // console.log(this.props, "======VIDEO DASHBOARD=====");
     return (
     
