@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
 import { getVideo } from "../actions/video";
 import { setFilter } from '../actions/setFilter';
+import { toggleTabs } from '../actions/toggleTabs';
 import { filteredByAll } from '../actions/filteredByAll';
 import { filteredByBand } from '../actions/filteredByBand';
 import { filteredBySong } from '../actions/filteredBySong';
@@ -32,9 +33,10 @@ class SearchForm extends Component {
   makeAndHandleRequest = async (query) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
-
-    //dispatch here
-    this.props.setFilter("all");
+ 
+    
+    //dispatch here    
+    // this.props.setFilter("all");
     this.props.filteredByAll(filteredVideos);
     this.props.filteredByBand(filteredVideos, query);
     this.props.filteredBySong(filteredVideos, query);
@@ -69,6 +71,8 @@ class SearchForm extends Component {
 
   closeDropdown = () => {
     this.setState({ open: false });
+    
+
   }
   
   //CURRENTLY NOT USING THIS, USING THIS.PROPS.FETCHVIDEOS
@@ -85,10 +89,20 @@ class SearchForm extends Component {
   _handleInputChange = query => {
     if (query === ""){
       this.setState({ open: false });
+      this.props.setFilter("none");
+      this.props.toggleTabs("false");
+      //HIDE TABS
+      
     } else {
-    this.setState({ query: query, open: true });
+      //SHOW TABS
+      this.setState({ query: query, open: true });
+      this.props.setFilter("all");
+      this.props.toggleTabs("true");
     }
-  };
+  }
+
+
+
 
   _handleSearch = query => {
     //double check this 3 lines below
@@ -96,7 +110,7 @@ class SearchForm extends Component {
     //   this.setState({ options: this._cache[query].filteredVideos });
     //   return;
     // }
-
+    
     this.setState({ isLoading: true  });
 
     this.makeAndHandleRequest(query)
@@ -201,7 +215,9 @@ const setStateToProps = (state) => {
     filteredByAll: state.filteredByAll,
     filteredByBand: state.filteredByBand,
     filteredBySong: state.filteredBySong,
-    filteredByLyrics: state.filteredByLyrics
+    filteredByLyrics: state.filteredByLyrics,
+    filter: state.setFilter,
+    showTabs: state.toggleTabs.showTabs
   };
 };
 
@@ -211,6 +227,7 @@ const setDispatchToProps = {
   filteredByBand,
   filteredBySong,
   filteredByLyrics,
+  toggleTabs,
   setFilter
 };
 
