@@ -71,13 +71,13 @@ class VideoDashboard extends Component {
           <Nav.Link 
             onClick={() => this.handleTabClick("songs")}
             title="songs"
-            eventKey="songs">Songs({this.props.songCount})</Nav.Link>
+            eventKey="songs">Songs({this.props.filteredBySong.songs.length})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
             onClick={() => this.handleTabClick("lyrics")}
             title="lyrics"
-            eventKey="lyrics">Lyrics({this.props.lyricsCount})</Nav.Link>
+            eventKey="lyrics">Lyrics({this.props.filteredBySong.songs.length})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
@@ -90,6 +90,10 @@ class VideoDashboard extends Component {
         return this.props.filteredByAll
       case "bands":
         return this.props.filteredByBand.bands 
+      case "songs":
+        return this.props.filteredBySong.songs
+      case "lyrics":
+        return this.props.filteredByLyrics.lyrics
       default:
         return this.props.videos
     }
@@ -124,7 +128,11 @@ const setStateToProps = (state) => {
     videos: state.videos,
     filteredByAll: state.filteredByAll,
     filteredByBand: state.filteredByBand,
+    filteredBySong: state.filteredBySong,
+    filteredByLyrics: state.filteredByLyrics,
     filter: state.setFilter,
+    //note to self: naming the key setFilter here will not work because the props already have a key called setFilter pointing to the reducer
+    //setFilter: state.setFilter,
     auth: state.auth
   };
 };

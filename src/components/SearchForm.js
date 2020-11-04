@@ -6,6 +6,8 @@ import { getVideo } from "../actions/video";
 import { setFilter } from '../actions/setFilter';
 import { filteredByAll } from '../actions/filteredByAll';
 import { filteredByBand } from '../actions/filteredByBand';
+import { filteredBySong } from '../actions/filteredBySong';
+import { filteredByLyrics } from '../actions/filteredByLyrics';
 
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
@@ -35,6 +37,8 @@ class SearchForm extends Component {
     this.props.setFilter("all");
     this.props.filteredByAll(filteredVideos);
     this.props.filteredByBand(filteredVideos, query);
+    this.props.filteredBySong(filteredVideos, query);
+    this.props.filteredByLyrics(filteredVideos, query);
 
     const options = filteredVideos.map(i => ({
       band: i.band,
@@ -195,7 +199,9 @@ const setStateToProps = (state) => {
     video: state.video,
     videos: state.videos,
     filteredByAll: state.filteredByAll,
-    filteredByBand: state.filteredByBand
+    filteredByBand: state.filteredByBand,
+    filteredBySong: state.filteredBySong,
+    filteredByLyrics: state.filteredByLyrics
   };
 };
 
@@ -203,6 +209,8 @@ const setDispatchToProps = {
   getVideo,
   filteredByAll,
   filteredByBand,
+  filteredBySong,
+  filteredByLyrics,
   setFilter
 };
 
