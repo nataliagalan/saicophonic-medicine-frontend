@@ -1,3 +1,50 @@
+// else if (tab === "bands"){
+    //   let videos = this.props.filteredByBand.bands.map((video) => {
+    //     return (<VideoCard
+    //       {...video}
+    //       key={video.id}
+    //      />)
+    //     })
+    //     return videos
+    // }
+
+    // switch (tab) {
+    //   case "all":
+    //     let videos = this.props.filteredByAll.map((video) => {
+    //       return (<VideoCard
+    //         {...video}
+    //         key={video.id}
+    //        />)
+    //       })
+    //       return videos
+    //     break;
+    //   case "band":
+    //     videos = this.props.filteredByAll.filter( video => video.band.toLowerCase().includes(query) )
+    //       this.props.getVideos(filteredVideos);
+    //       break;
+    //   case "songTitle":
+    //     filteredVideos = this.props.filteredByAll.filter(function(video) {
+    //       return video.songs.some(function(song) {
+    //         return song.title.toLowerCase().includes(query);
+    //       });
+    //     });
+    //     this.props.getVideos(filteredVideos);
+    //     break;
+    //   case "songLyrics":
+    //     filteredVideos = this.props.filteredByAll.filter(function(video) {
+    //       return video.songs.some(function(song) {
+    //         return song.lyrics.toLowerCase().includes(query);
+    //       });
+    //     });
+    //     this.props.getVideos(filteredVideos);
+    //     break;
+    //   default:
+    //     this.props.getVideos(filteredVideos);
+    //   }
+
+
+
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getVideos } from './actions/videos';

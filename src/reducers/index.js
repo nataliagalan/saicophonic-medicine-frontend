@@ -4,6 +4,7 @@ import video from "./video";
 import auth from "./auth";
 import filteredByAll from "./filteredByAll";
 import filteredByBand from "./filteredByBand";
+import setFilter from "./setFilter";
 
 //keys below correspond to state keys
 //and the value corresponds to the reducer in charge of updating that particular key
@@ -14,7 +15,9 @@ export default combineReducers({
   auth,
 
   filteredByAll,
-  filteredByBand
+  filteredByBand,
+  setFilter
+
   //filteredBySongs: 
   //filteredByLyrics: 
  
