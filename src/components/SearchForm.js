@@ -119,6 +119,12 @@ class SearchForm extends Component {
     this.makeAndHandleRequest(query)
   };
 
+  handleKeyDown = (event) => {
+    if(event.key === 'Enter'){
+      this.handleAllResults(this.state.query, "all");
+    }
+  }
+
   fetchVideo = async (id) => {
     this.setState({ open: false });
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
@@ -158,7 +164,8 @@ class SearchForm extends Component {
         placeholder="Search by artist, band, song, lyrics..."
         options={this.state.options}
         onBlur={this.closeDropdown} 
-
+        onKeyDown={this.handleKeyDown}
+        
         renderMenu={(options, menuProps) => {
           return (
 
