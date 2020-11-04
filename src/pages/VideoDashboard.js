@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
+import { filteredByBand } from '../actions/filteredByBand';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 
 import VideoCard from '../components/VideoCard';
+import VideoContainer from './VideoContainer';
 
 
 class VideoDashboard extends Component {
@@ -67,44 +69,35 @@ class VideoDashboard extends Component {
           <Nav.Link 
             eventKey="all"
             title="all"
-            onClick={() => this.videosToshow("all")}
+            onClick={() => this.findVideos("all")}
           >
               All({this.props.filteredByAll.length})
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.videosToshow("bands")}
-            title="band"
+            // onClick={() => this.findVideos("bands")}
+            onClick={() => this.handleTabClick("bands") }
+            title="bands"
             // eventKey="link-2">Artist/Bands({this.props.bands})</Nav.Link>
             eventKey="band">Artist/Bands({this.props.filteredByBand.bands.length})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.videosToshow("songs")}
-            title="songTitle"
-            eventKey="songTitle">Songs({this.props.songCount})</Nav.Link>
+            onClick={() => this.findVideos("songs")}
+            title="songs"
+            eventKey="songs">Songs({this.props.songCount})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.videosToshow("lyrics")}
-            title="songLyrics"
-            eventKey="songLyrics">Lyrics({this.props.lyricsCount})</Nav.Link>
+            onClick={() => this.findVideos("lyrics")}
+            title="lyrics"
+            eventKey="lyrics">Lyrics({this.props.lyricsCount})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
 
-  videosToshow = (tab) => {
-    //check a boolean in state
-    if(tab === "all") {
-      let videos = this.props.filteredByAll.map((video) => {
-        return (<VideoCard
-          {...video}
-          key={video.id}
-         />)
-        })
-        return videos
-    } 
+
     // else if (tab === "bands"){
     //   let videos = this.props.filteredByBand.bands.map((video) => {
     //     return (<VideoCard
@@ -149,17 +142,54 @@ class VideoDashboard extends Component {
     //     this.props.getVideos(filteredVideos);
     //   }
 
+  
+  findVideos = (tab) => {
+    let videosToShow = this.props.videos
+
+    switch (tab) {
+      case "all":
+        videosToShow = this.props.filteredByAll
+         return videosToShow
+        break;
+      case "none":
+        videosToShow = this.props.videos
+         return videosToShow
+        break;
+      case "bands":
+        videosToShow = this.props.filteredByBand.bands
+        
+         return videosToShow
+        break;
+    
+      default:
+        videosToShow = this.props.filteredByAll
+         return videosToShow
+        break;
+    }
+
+    return videosToShow
+
+  }
+
+  handleTabClick = (tab) => {
+console.log("====ohmyfuckinggod");
+
   }
 
 
   render() {
+    const videosToDisplay = this.findVideos("bands")
+    // const videosToDisplay = this.props.videos
     // console.log(this.props, "======VIDEO DASHBOARD=====");
     return (
+    
       <div className="page-content-wrapper">
         <div className="dashboard-header">
           <h1 className="header-text">Saicophonic Medicine</h1>
           <h5 className="header-subtext">An expanding library of live music sessions</h5>
         </div>
+        {this.displayFilterTabs()}
+        <VideoContainer videos={videosToDisplay} />
         {
           this.props.resultCount ?
           (<><h3>{this.props.resultCount}</h3><br></br></>)
@@ -174,8 +204,16 @@ class VideoDashboard extends Component {
           :
           (null)
         } */}
-        {this.displayFilterTabs()}
-        {this.videosToshow()}
+        {/* {this.renderVideos("none")} */}
+
+        {/* {
+          this.props.videos.map((video) => {
+            return (<VideoCard
+              {...video}
+              key={video.id}
+             />)
+            })
+        } */}
           
         {/* </Container> */}
 
@@ -202,6 +240,7 @@ const setStateToProps = (state) => {
 const setDispatchToProps = {
   currentUser,
   getVideos
+  
 };
 
 export default connect(setStateToProps, setDispatchToProps)(VideoDashboard);
