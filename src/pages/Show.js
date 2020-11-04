@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { deleteVideo } from "../actions/videos";
@@ -13,16 +13,10 @@ import VideoCard from '../components/VideoCard';
 class Show extends Component {
 
   componentDidMount(){
-    // console.log(this.props.match.params.id, "==========PROPS IN SHOW PAGE=========");
-    // const path = this.props.location.pathname.split("/");
-    // const id = parseInt(path[2]);
-    const id = parseInt(this.props.match.params.id);
-    const { videos } = this.props;
-    const video = videos.find((video) => video.id === id);
-    if(!video){
-      this.fetchVideo(id)
-    }
 
+    const id = parseInt(this.props.match.params.id);
+
+    this.fetchVideo(id)
     const token = localStorage.getItem('myAppToken') 
     if(token){
       this.fetchUser()
@@ -77,7 +71,6 @@ class Show extends Component {
 
 const setStateToProps = (state) => {
   return {
-    videos: state.videos,
     video: state.video,
     auth: state.auth
   };

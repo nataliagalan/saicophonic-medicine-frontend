@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { Link, withRouter } from "react-router-dom";
 
+
 import { deleteVideo } from "../actions/videos";
 import { togglePlayVideo } from "../actions/videos";
 
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import Breadcrumb from 'react-bootstrap/Breadcrumb'
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -31,6 +31,7 @@ const LyricsCard = (props) => {
     if (data.status === 200) {
       const updatedVideos = videos.filter((video) => video.id !== id);
       dispatch(deleteVideo(updatedVideos));
+      props.history.push('/videos');
     }
   };
 
@@ -72,7 +73,7 @@ const LyricsCard = (props) => {
                 <Accordion.Collapse eventKey={i + 1}>
                 <Card.Body 
                   className="overflow-auto"
-                  scrollable={true}
+                  scrollable="true"
                   style={{whiteSpace: "pre-line"}}>
                   {song.lyrics} 
                   </Card.Body>
@@ -106,12 +107,15 @@ const LyricsCard = (props) => {
             (<><Button
               style={{border: 'none'}} 
               as={Link} 
-              to={`/videos/edit/${id}`}>✏️</Button>
+              to={`/videos/edit/${id}`}>
+                <span role="img" aria-label="edit">✏️</span>
+              </Button>
             <Button 
               style={{border: 'none'}}
               // as={Link} 
-              onClick={() => delVideo(id)}
-              >🗑</Button></>)
+              onClick={() => delVideo(id)}>
+                <span role="img" aria-label="delete">🗑</span>
+            </Button></>)
             : 
             null
           }
@@ -132,7 +136,7 @@ const LyricsCard = (props) => {
 }
 
 
-export default LyricsCard
+export default withRouter(LyricsCard)
 
 // const setStateToProps = (state) => {
 //   return {
