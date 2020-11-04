@@ -8,11 +8,13 @@ import Row from 'react-bootstrap/Row';
 import Line from './Line';
 
 import ReactPlayer from 'react-player/lazy'
-import SongContainer from './SongContainer';
+
+import LyricsCard from './LyricsCard';
 
 
 const VideoCard = (props) => {
 
+  console.log(props, "=======VIDEO CARD PROPS==========");
     const ref = React.createRef()
     //useSelector is similar to setStateToProps
     const payload = useSelector(state => state.video);
@@ -49,7 +51,7 @@ const VideoCard = (props) => {
   
     return (
       <>
-<br></br>
+      <br></br>
         <Row>
           <Col sm={8} className="custom-spacer">
               <ResponsiveEmbed aspectRatio="16by9">
@@ -65,9 +67,11 @@ const VideoCard = (props) => {
           </Col>
           
           <Col sm={4}>
-            <SongContainer
+            {/* <SongContainer
             handlePlay={handlePlay} 
-              {...props} />
+              {...props} /> */}
+            <LyricsCard {...props} handlePlay={handlePlay} />
+            
           </Col>
         </Row>
         <br></br>

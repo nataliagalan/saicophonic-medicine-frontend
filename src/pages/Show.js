@@ -6,7 +6,7 @@ import { deleteVideo } from "../actions/videos";
 import { getVideo } from "../actions/video";
 import { currentUser } from '../actions/auth';
 
-import VideoContainer from '../components/VideoContainer';
+
 import Container from 'react-bootstrap/Container';
 import VideoCard from '../components/VideoCard';
 
