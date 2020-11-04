@@ -3,7 +3,8 @@ import { withRouter } from 'react-router';
 import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
 import { getVideo } from "../actions/video";
-import { getVideos } from '../actions/videos';
+import { filteredByAll } from '../actions/filteredByAll';
+import { filteredByBand } from '../actions/filteredByBand';
 
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
@@ -28,6 +29,11 @@ class SearchForm extends Component {
   makeAndHandleRequest = async (query) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
+
+    //dispatch here
+    this.props.filteredByAll(filteredVideos);
+    this.props.filteredByBand(filteredVideos, query);
+
     const options = filteredVideos.map(i => ({
       band: i.band,
       id: i.id,
@@ -55,16 +61,19 @@ class SearchForm extends Component {
         
   }
 
-  //CURRENTLY NOT USING THIS, USING THIS.PROPS.FETCHVIDEOS
   closeDropdown = () => {
     this.setState({ open: false });
   }
+  
+  //CURRENTLY NOT USING THIS, USING THIS.PROPS.FETCHVIDEOS
   handleAllResults = async (query) => {
     this.setState({ open: false });
     
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
-    this.props.getVideos(filteredVideos);
+
+    this.props.filteredByAll(filteredVideos);
+   
   }
 
   _handleInputChange = query => {
@@ -136,7 +145,7 @@ class SearchForm extends Component {
                 // "/videos/search/:query"
                   to={`/videos/search/${this.state.query}`}
                   onClick={() => { 
-                    this.props.fetchVideos(this.state.query, "all");
+                    this.handleAllResults(this.state.query, "all");
                     this.closeDropdown(); 
                   }} 
                   // and also/ OR INSTEAD: onClick={() => this.props.fetchVideos("all")}
@@ -183,12 +192,15 @@ const setStateToProps = (state) => {
   return {
     video: state.video,
     videos: state.videos,
+    filteredByAll: state.filteredByAll,
+    filteredByBand: state.filteredByBand
   };
 };
 
 const setDispatchToProps = {
   getVideo,
-  getVideos
+  filteredByAll,
+  filteredByBand
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(SearchForm));

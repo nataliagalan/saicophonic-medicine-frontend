@@ -11,13 +11,7 @@ import VideoCard from '../components/VideoCard';
 
 class VideoDashboard extends Component {
 
-  state = {
-    filteredVideos: [],
-    query: "",
-  }
-
   componentDidMount() {
-
     const token = localStorage.getItem('myAppToken') 
     if(!token){
       this.fetchVideos()
@@ -73,34 +67,89 @@ class VideoDashboard extends Component {
           <Nav.Link 
             eventKey="all"
             title="all"
-            onClick={() => this.props.fetchVideos(query, "all")}
+            onClick={() => this.videosToshow("all")}
           >
-              All({this.props.allCount})
+              All({this.props.filteredByAll.length})
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.props.fetchVideos(query, "band")}
+            onClick={() => this.videosToshow("bands")}
             title="band"
             // eventKey="link-2">Artist/Bands({this.props.bands})</Nav.Link>
-            eventKey="band">Artist/Bands({this.props.bandCount})</Nav.Link>
+            eventKey="band">Artist/Bands({this.props.filteredByBand.bands.length})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.props.fetchVideos(query, "songTitle")}
+            onClick={() => this.videosToshow("songs")}
             title="songTitle"
             eventKey="songTitle">Songs({this.props.songCount})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.props.fetchVideos(query, "songLyrics")}
+            onClick={() => this.videosToshow("lyrics")}
             title="songLyrics"
             eventKey="songLyrics">Lyrics({this.props.lyricsCount})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
 
-  
+  videosToshow = (tab) => {
+    //check a boolean in state
+    if(tab === "all") {
+      let videos = this.props.filteredByAll.map((video) => {
+        return (<VideoCard
+          {...video}
+          key={video.id}
+         />)
+        })
+        return videos
+    } 
+    // else if (tab === "bands"){
+    //   let videos = this.props.filteredByBand.bands.map((video) => {
+    //     return (<VideoCard
+    //       {...video}
+    //       key={video.id}
+    //      />)
+    //     })
+    //     return videos
+    // }
+
+    // switch (tab) {
+    //   case "all":
+    //     let videos = this.props.filteredByAll.map((video) => {
+    //       return (<VideoCard
+    //         {...video}
+    //         key={video.id}
+    //        />)
+    //       })
+    //       return videos
+    //     break;
+    //   case "band":
+    //     videos = this.props.filteredByAll.filter( video => video.band.toLowerCase().includes(query) )
+    //       this.props.getVideos(filteredVideos);
+    //       break;
+    //   case "songTitle":
+    //     filteredVideos = this.props.filteredByAll.filter(function(video) {
+    //       return video.songs.some(function(song) {
+    //         return song.title.toLowerCase().includes(query);
+    //       });
+    //     });
+    //     this.props.getVideos(filteredVideos);
+    //     break;
+    //   case "songLyrics":
+    //     filteredVideos = this.props.filteredByAll.filter(function(video) {
+    //       return video.songs.some(function(song) {
+    //         return song.lyrics.toLowerCase().includes(query);
+    //       });
+    //     });
+    //     this.props.getVideos(filteredVideos);
+    //     break;
+    //   default:
+    //     this.props.getVideos(filteredVideos);
+    //   }
+
+  }
 
 
   render() {
@@ -118,24 +167,15 @@ class VideoDashboard extends Component {
           (null)
         }
         {/* <Container fluid> */}
-        <>
-        {
+
+        {/* {
           this.props.resultCount ?
           (this.displayFilterTabs())
           :
           (null)
-        }
-          
-        </>
-          
-          {
-            this.props.videos.map((video) => {
-              return <VideoCard
-                {...video}
-                key={video.id}
-               />
-              })
-          }
+        } */}
+        {this.displayFilterTabs()}
+        {this.videosToshow()}
           
         {/* </Container> */}
 
@@ -148,6 +188,8 @@ class VideoDashboard extends Component {
 const setStateToProps = (state) => {
   return {
     videos: state.videos,
+    filteredByAll: state.filteredByAll,
+    filteredByBand: state.filteredByBand,
     // videos: state.videos.videos,
     // all: state.videos.all,
     // bands: state.videos.bands,
