@@ -78,7 +78,7 @@ class SearchForm extends Component {
 
   }
   
-  //CURRENTLY NOT USING THIS, USING THIS.PROPS.FETCHVIDEOS
+  
   handleAllResults = async (query) => {
     this.setState({ open: false });
     
