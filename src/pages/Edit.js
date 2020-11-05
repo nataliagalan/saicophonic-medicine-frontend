@@ -204,9 +204,10 @@ class Edit extends Component {
     // console.log(songs[0].timestamp);
     return (
       <div className="new-and-edit-video-page">
-        <Row>
-          <Col>
-          <div class="my-video-wrapper">
+        <Row >
+          <Col sm={6}>
+           
+          <div class="video-wrapper" >
             <ResponsiveEmbed aspectRatio="16by9" >
               <ReactPlayer
               className="react-player"
@@ -242,18 +243,20 @@ class Edit extends Component {
         <Duration seconds={this.state.duration * this.state.played}/>
         </div>
 
-      {/* !STICKY TOP DIV */}
+      {/* !VIDEO WRAPPER DIV */}
       </div>
+
         </Col>
 
 
 
 
-        <Col>
+        <Col sm={6}>
 
 
       <Form
       onSubmit={this.handleSubmit}
+      className="edit-and-new-form"
       >
         <Form.Row>
           <Col>
