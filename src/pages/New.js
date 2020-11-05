@@ -181,7 +181,7 @@ const New = (props) => {
 
 
     return (
-      <div className="new-video-page">
+      <div className="new-and-edit-video-page">
       {
       videoInput.url ? 
         <ResponsiveEmbed aspectRatio="16by9">

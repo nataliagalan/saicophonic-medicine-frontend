@@ -203,35 +203,32 @@ class Edit extends Component {
     const { songs } = this.state
     // console.log(songs[0].timestamp);
     return (
-      <div className="new-video-page">
+      <div className="new-and-edit-video-page">
         <Row>
           <Col>
-
-
-       <ResponsiveEmbed aspectRatio="16by9">
-          <ReactPlayer
-          className="video-embed"
-          placement="top"
-          ref={this.ref}
-          onDuration={this.handleDuration} 
-          width='100%'
-          height='100%'
-          controls={true}
-          url={this.state.url} />
-        </ResponsiveEmbed>
-        <br></br>
-
+          <div class="my-video-wrapper">
+            <ResponsiveEmbed aspectRatio="16by9" >
+              <ReactPlayer
+              className="react-player"
+              placement="top"
+              ref={this.ref}
+              onDuration={this.handleDuration} 
+              width='100%'
+              height='100%'
+              controls={true}
+              url={this.state.url} />
+            </ResponsiveEmbed>
         
         <Form>
         <Form.Group controlId="formBasicRangeCustom">
         <Form.Control 
         // <input
-          custom
-          type='range' min={0} max={0.999999} step='any'
-          value={this.state.played}
-          onMouseDown={this.handleSeekMouseDown}
-          onChange={this.handleSeekChange}
-          onMouseUp={this.handleSeekMouseUp}
+        custom
+        type='range' min={0} max={0.999999} step='any'
+        value={this.state.played}
+        onMouseDown={this.handleSeekMouseDown}
+        onChange={this.handleSeekChange}
+        onMouseUp={this.handleSeekMouseUp}
         // />
         />
         </Form.Group>
@@ -240,12 +237,13 @@ class Edit extends Component {
         {/* what gets displayed is the length of video times played (float)
         those seconds get passed as input to duration and it converts them
         to 00:00 format, then they get displayed
-        */}
+      */}
         <div className="duration-seconds">
         <Duration seconds={this.state.duration * this.state.played}/>
         </div>
 
-
+      {/* !STICKY TOP DIV */}
+      </div>
         </Col>
 
 
@@ -257,7 +255,6 @@ class Edit extends Component {
       <Form
       onSubmit={this.handleSubmit}
       >
-        <br></br>
         <Form.Row>
           <Col>
             <Form.Control 
