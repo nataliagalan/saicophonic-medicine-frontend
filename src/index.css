@@ -65,6 +65,25 @@ code {
     font-size: 1rem; 
  }
 
+ .video-wrapper {
+  /* position: -webkit-sticky !important; */
+  position: fixed !important;
+  top: 8rem !important;
+  -webkit-backface-visibility: hidden;
+  width: 58%;
+  z-index: 2;
+  background-color: rgb(15, 15, 15);;
+}
+.edit-and-new-form {
+  margin-top: 11rem;
+  z-index: 1;
+}
+.duration-seconds {
+  display: none;
+  
+}
+
+
  
 }
 
@@ -155,7 +174,7 @@ code {
   padding-left: 3rem;
 }
 
-.my-video-wrapper {
+.video-wrapper {
   position: -webkit-sticky;
   position: sticky;
   top: 8rem;
