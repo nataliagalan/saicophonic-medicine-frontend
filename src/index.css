@@ -99,16 +99,19 @@ code {
   color: rgb(250, 192, 0);
   background: none;
 }
-.new-video-page {
+
+.new-and-edit-video-page {
   padding-top: 8rem;
   margin-left: 5rem;
   margin-right: 5rem;
+  text-align: center;
 }
 
 .duration-seconds, h3 {
   color: #EBDFF7;
   letter-spacing: .09em;
 }
+
 #formBasicRangeCustom::-webkit-slider-thumb {
   background: rgb(250, 192, 0);
   
@@ -152,10 +155,11 @@ code {
   padding-left: 3rem;
 }
 
-.video-embed {
-  position: fixed;
-  right: 50px;
-  bottom: 100px;
-
+.my-video-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 8rem;
 }
+
+
 
