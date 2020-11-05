@@ -109,7 +109,7 @@ class VideoDashboard extends Component {
     const videosToDisplay = this.findVideos()
     // console.log(this.props, "======VIDEO DASHBOARD=====");
     return (
-    
+      <Container fluid>
       <div className="page-content-wrapper">
         <div className="dashboard-header">
           <h1 className="header-text">Saicophonic Medicine</h1>
@@ -119,6 +119,7 @@ class VideoDashboard extends Component {
         {this.props.showTabs === "true" ? this.displayFilterTabs() : null}
         <VideoContainer videos={videosToDisplay} />
       </div>
+      </Container>
     )
   }
 }

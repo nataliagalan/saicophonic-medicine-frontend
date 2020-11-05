@@ -32,8 +32,7 @@ const App = () => {
             <Route exact path="/videos/new" component={New} />
             <Route exact path="/videos/:id" component={Show} />
             <Route exact path="/videos/edit/:id" component={Edit} />
-            <Route exact path="/videos/search/:query" component={SearchResults} />
-            
+            <Route exact path="/videos/search/:query" component={SearchResults} />  
           </Switch>
         </div>
       </BrowserRouter>
