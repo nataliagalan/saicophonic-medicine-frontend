@@ -10,6 +10,8 @@ import { filteredByBand } from '../actions/filteredByBand';
 import { filteredBySong } from '../actions/filteredBySong';
 import { filteredByLyrics } from '../actions/filteredByLyrics';
 
+import Button from 'react-bootstrap/Button';
+
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead, Menu, MenuItem, Highlighter  } from 'react-bootstrap-typeahead';
@@ -170,20 +172,24 @@ class SearchForm extends Component {
           return (
 
             <Menu {...menuProps} >
+
               <MenuItem>
                 <Link 
-                // "/videos/search/:query"
                   to={`/videos/search/${this.state.query}`}
                   onClick={() => { 
                     this.handleAllResults(this.state.query, "all");
                     this.closeDropdown(); 
                   }} 
-                  // and also/ OR INSTEAD: onClick={() => this.props.fetchVideos("all")}
-                  // activeClassName="active"
                   >
-                {`See all results for "${this.state.query}"`}
+                  <div>
+                    {`See all results for "${this.state.query}"`}
+                  </div>
                 </Link>
               </MenuItem>
+
+              
+             
+
               {options.map((opt, ind) => 
                 <MenuItem option={opt} key={ind} position={ind} >
                   <Link 
@@ -191,12 +197,11 @@ class SearchForm extends Component {
                     // activeClassName="active"
                     onClick={() => this.fetchVideo(opt.id)}
                     >
-
+                    <div>
                       <Highlighter search={this.state.query}>
                         {`${opt.band} ${opt.song1} ${opt.lyrics1} `}
-                       
                       </Highlighter>
-
+                    </div>
                   </Link>
                 </MenuItem>
               )}
