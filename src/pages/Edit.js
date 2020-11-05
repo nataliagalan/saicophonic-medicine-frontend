@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
@@ -203,12 +204,15 @@ class Edit extends Component {
     const { songs } = this.state
     // console.log(songs[0].timestamp);
     return (
+      <Container Fluid>
+         
       <div className="new-and-edit-video-page">
         <Row >
-          <Col sm={6}>
+          <Col md={6} sm={6}>
+     
            
-          <div class="video-wrapper" >
-            <ResponsiveEmbed aspectRatio="16by9" >
+          <div className="video-wrapper" >
+            <ResponsiveEmbed aspectRatio="16by9">
               <ReactPlayer
               className="react-player"
               placement="top"
@@ -246,12 +250,13 @@ class Edit extends Component {
       {/* !VIDEO WRAPPER DIV */}
       </div>
 
+
         </Col>
 
 
 
 
-        <Col sm={6}>
+        <Col md={6} sm={6}>
 
 
       <Form
@@ -350,7 +355,8 @@ class Edit extends Component {
       </Col>
 
       </Row>
-      </div>        
+      </div>    
+      </Container>    
     )
   }
 

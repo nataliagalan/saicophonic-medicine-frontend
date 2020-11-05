@@ -1,3 +1,61 @@
+@media screen and (max-width: 667px) {
+  .video-wrapper {
+    /* position: -webkit-sticky !important; */
+    position: fixed !important;
+    top: 8rem !important;
+    -webkit-backface-visibility: hidden;
+    /* width: 58%; */
+    width: 50%;
+  margin: 0 auto;
+
+    z-index: 2;
+    background-color: rgb(15, 15, 15);
+  }
+  .edit-and-new-form {
+    margin-top: 11rem;
+    z-index: 1;
+
+  }
+
+  .duration-seconds {
+    display: none;
+  }
+
+}
+
+
+
+
+@media screen and (max-width: 766px) {
+
+  .video-wrapper {
+    /* position: -webkit-sticky !important; */
+    position: fixed !important;
+    top: 3rem;
+    width: 100vw;
+    padding-right: 11px;
+    padding-left: 11px;
+    margin-left: -50vw;
+    margin-top: 100px;
+    left: 50%;
+    z-index: 2;
+    
+  }
+
+  .edit-and-new-form {
+    margin-top: 17rem;
+    z-index: 1;
+  }
+
+  .duration-seconds {
+    display: none;
+  }
+
+}
+
+
+
+
 
 
 import React, { Component } from 'react'

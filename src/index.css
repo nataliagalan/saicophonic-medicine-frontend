@@ -64,28 +64,46 @@ code {
   .header-subttext { 
     font-size: 1rem; 
  }
-
- .video-wrapper {
-  /* position: -webkit-sticky !important; */
-  position: fixed !important;
-  top: 8rem !important;
-  -webkit-backface-visibility: hidden;
-  width: 58%;
-  z-index: 2;
-  background-color: rgb(15, 15, 15);;
-}
-.edit-and-new-form {
-  margin-top: 11rem;
-  z-index: 1;
-}
-.duration-seconds {
-  display: none;
-  
-}
-
-
  
 }
+
+/* FIXING THE VIDEO IN PLACE */
+
+
+.video-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 8rem;
+}
+
+@media screen and (max-width: 766px) {
+
+  .video-wrapper {
+    /* position: -webkit-sticky !important; */
+    position: fixed !important;
+    top: 3rem;
+    width: 100vw;
+    padding-right: 11px;
+    padding-left: 11px;
+    margin-left: -50vw;
+    margin-top: 100px;
+    left: 50%;
+    z-index: 2;
+    
+  }
+
+  .edit-and-new-form {
+    margin-top: 17rem;
+    z-index: 1;
+  }
+
+  .duration-seconds {
+    display: none;
+  }
+
+}
+
+
 
 .header-subtext {
   font-weight: 400;
@@ -172,12 +190,6 @@ code {
   max-height: 380px;
   text-align: left;
   padding-left: 3rem;
-}
-
-.video-wrapper {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 8rem;
 }
 
 
