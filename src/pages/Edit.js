@@ -6,7 +6,7 @@ import { connect  } from 'react-redux';
 import { currentUser } from '../actions/auth'
 import { updateVideo } from '../actions/videos'
 
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -204,6 +204,14 @@ class Edit extends Component {
     this.player = player
   }
 
+  // DRAGGABLE METHODS
+
+  onDragEnd = () => {
+    // the only one that is required
+  };
+
+  // END OF DRAGGABLE METHODS
+
 
   render() {
     const { songs } = this.state
@@ -257,6 +265,10 @@ class Edit extends Component {
 
         <Col md={6} sm={6}>
 
+        <DragDropContext 
+          onDragEnd={(...props) => {
+            console.log(props)
+          }}>
           <Form
           onSubmit={this.handleSubmit}
           className="edit-and-new-form"
@@ -284,19 +296,34 @@ class Edit extends Component {
               <br></br>
 
               {/* DROPPABLE DIV */}
-              <div> 
-              
+          <Droppable key={this.state.id} droppableId="droppable-1">
+          {(provided, snapshot) => (
+            <div
+            ref={provided.innerRef}
+            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
+            {...provided.droppableProps}
+            > 
               {
                 songs.map((song, i) => {
                   return (
+                    
+          <Draggable key={i} draggableId={`draggable-${i}`} index={i}>
+            {(provided, snapshot) => (
+            <div 
+              key={i}
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+            >
 
-            <Row>
-              <Col xs={1}>
-                <DragHandle />
+            <Row key={i}>
+              <Col xs={1} >
+                <DragHandle 
+                // {...provided.dragHandleProps}
+                />
               </Col>
 
               <Col>
-                <div key={i}>
                   <Form.Row>
                     <Col>
                       <Form.Control 
@@ -340,16 +367,20 @@ class Edit extends Component {
                     className="dynamic-input-btn"
                     onClick={() => this.handleRemoveInput(i)}
                     variant="primary">-</Button> }
-
-                  </div>
               </Col>
             </Row>
- 
-                  )
-                })
-              }
-              {/* !DROPPABLE DIV */}
-              </div>
+
+            </div>
+            )}
+          </Draggable>
+              )
+              })
+            }
+            {provided.placeholder}
+          </div>
+          )}
+          </Droppable>;
+        {/* !DROPPABLE DIV */}
 
               <Button 
                 variant="primary" 
@@ -357,7 +388,7 @@ class Edit extends Component {
                 Save
               </Button>
           </Form>
-
+        </DragDropContext>
 
       </Col>
 
