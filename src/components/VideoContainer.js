@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector  } from 'react-redux';
 import VideoCard from './VideoCard'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,28 +8,32 @@ import GridGenerator from './GridGenerator';
 import LyricsCard from './LyricsCard';
 
 const VideoContainer = (props) => {
+  //useSelector is similar to setStateToProps
+  const showGrid = useSelector(state => state.toggleGrid);
 
 
-  // <GridGenerator cols={1}>
-  return (<GridGenerator cols={4}>
+  const handleToggleGrid = () => {
+    if(showGrid){
+       return (<GridGenerator cols={4}>
     {
       props.videos.map(video => {
         return <VideoCard {...video} key={video.id} />
       })
     }
     </GridGenerator>)
-    // </GridGenerator>
-    
-}
+    } else {
+       return (<Row>
+    {
+      props.videos.map(video => {
+        return <VideoCard {...video} key={video.id} />
+      })
+    }
+    </Row>)
+    }
+  }
 
-export default VideoContainer
-
-//on click, dispatch an action that toggles
-
-//this.props.state === true ? <GridGenerator cols={4}> : <Row>
+  // VIDEO CONTAINER
 // =====GRID=====
-
-// VIDEO CONTAINER
   // return (<GridGenerator cols={4}>
   //   {
   //     props.videos.map(video => {
@@ -37,8 +42,46 @@ export default VideoContainer
   //   }
   //   </GridGenerator>)
 
+// ====NO GRID====
+  // return (<Row>
+  //   {
+  //     props.videos.map(video => {
+  //       return <VideoCard {...video} key={video.id} />
+  //     })
+  //   }
+  //   </Row>)
+
+
+  // <GridGenerator cols={1}>
+  return handleToggleGrid();
+    // </GridGenerator>
+    
+}
+
+export default VideoContainer
+
+// VIDEO CONTAINER
+// =====GRID=====
+  // return (<GridGenerator cols={4}>
+  //   {
+  //     props.videos.map(video => {
+  //       return <VideoCard {...video} key={video.id} />
+  //     })
+  //   }
+  //   </GridGenerator>)
+
+// ====NO GRID====
+  // return (<Row>
+  //   {
+  //     props.videos.map(video => {
+  //       return <VideoCard {...video} key={video.id} />
+  //     })
+  //   }
+  //   </Row>)
+
 
 // VIDEO CARD
+// =====GRID=====
   // return (
   //       <>
   //         <ResponsiveEmbed aspectRatio="16by9">
@@ -58,8 +101,6 @@ export default VideoContainer
 
 
 // ====NO GRID====
-
-// VIDEO CARD
   // return (
   //   <>
   //       <Col sm={8} className="custom-spacer">
@@ -85,11 +126,4 @@ export default VideoContainer
   // )
 
 
-  // VIDEO CONTAINER
-  // return (<Row>
-  //   {
-  //     props.videos.map(video => {
-  //       return <VideoCard {...video} key={video.id} />
-  //     })
-  //   }
-  //   </Row>)
+ 
