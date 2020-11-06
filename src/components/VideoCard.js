@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector  } from 'react-redux';
 // import { useDispatch, useSelector  } from 'react-redux';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import Col from 'react-bootstrap/Col';
@@ -9,6 +10,103 @@ import LyricsCard from './LyricsCard';
 
 
 const VideoCard = (props) => {
+
+  //useSelector is similar to setStateToProps
+  const showGrid = useSelector(state => state.toggleGrid);
+  
+  const handleToggleGrid = () => {
+    if(showGrid){
+        return (
+        <>
+          <ResponsiveEmbed aspectRatio="16by9">
+            <ReactPlayer
+            ref={ref}
+            url={url} 
+            playing={playerState.playing}
+            controls={true}
+            width='100%'
+            height='100%'/>
+          </ResponsiveEmbed>
+          <br></br>
+          <LyricsCard {...props} handlePlay={handlePlay} />
+          <br></br>
+        </>
+      )
+    } else {
+          return (
+        <>
+            <Col sm={8} className="custom-spacer">
+              <ResponsiveEmbed aspectRatio="16by9">
+                <ReactPlayer
+                ref={ref}
+                url={url} 
+                playing={playerState.playing}
+                controls={true}
+                width='100%'
+                height='100%'/>
+              </ResponsiveEmbed>
+            </Col >
+
+            
+            <Col sm={4}>
+            <LyricsCard {...props} handlePlay={handlePlay} />
+            </Col>
+
+          <br></br>
+          <Line color="#EBDFF7" />
+        </>
+      )
+    }
+  }
+
+
+
+// VIDEO CARD
+// =====GRID=====
+  // return (
+  //       <>
+  //         <ResponsiveEmbed aspectRatio="16by9">
+  //           <ReactPlayer
+  //           ref={ref}
+  //           url={url} 
+  //           playing={playerState.playing}
+  //           controls={true}
+  //           width='100%'
+  //           height='100%'/>
+  //         </ResponsiveEmbed>
+  //         <br></br>
+  //         <LyricsCard {...props} handlePlay={handlePlay} />
+  //         <br></br>
+  //       </>
+  //     )
+
+
+// ====NO GRID====
+  // return (
+  //   <>
+  //       <Col sm={8} className="custom-spacer">
+  //         <ResponsiveEmbed aspectRatio="16by9">
+  //           <ReactPlayer
+  //           ref={ref}
+  //           url={url} 
+  //           playing={playerState.playing}
+  //           controls={true}
+  //           width='100%'
+  //           height='100%'/>
+  //         </ResponsiveEmbed>
+  //       </Col >
+
+        
+  //       <Col sm={4}>
+  //       <LyricsCard {...props} handlePlay={handlePlay} />
+  //       </Col>
+
+  //     <br></br>
+  //     <Line color="#EBDFF7" />
+  //   </>
+  // )
+
+
 
   // console.log(props, "=======VIDEO CARD PROPS==========");
     const ref = React.createRef()
@@ -45,22 +143,7 @@ const VideoCard = (props) => {
 // if video.count > 4, add a new row
     const { url } = props
   
-    return (
-      <>
-        <ResponsiveEmbed aspectRatio="16by9">
-          <ReactPlayer
-          ref={ref}
-          url={url} 
-          playing={playerState.playing}
-          controls={true}
-          width='100%'
-          height='100%'/>
-        </ResponsiveEmbed>
-        <br></br>
-        <LyricsCard {...props} handlePlay={handlePlay} />
-        <br></br>
-      </>
-    )
+    return handleToggleGrid();
 
 }
 
