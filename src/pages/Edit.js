@@ -204,7 +204,7 @@ class Edit extends Component {
     const { songs } = this.state
     // console.log(songs[0].timestamp);
     return (
-      <Container Fluid>
+      <Container fluid>
          
       <div className="new-and-edit-video-page">
         <Row >
@@ -355,6 +355,7 @@ class Edit extends Component {
       </Col>
 
       </Row>
+      {/* !new-and-edit-video-page DIV */}
       </div>    
       </Container>    
     )

@@ -1,5 +1,11 @@
 
 
-.searchForm {
-  width: 380px;
+
+
+
+
+@media screen and (min-width: 1024px) {
+  .searchForm {
+    width: 20vw;
+  }
 }
