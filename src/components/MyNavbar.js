@@ -27,32 +27,41 @@ const MyNavbar = (props) => {
       <>
 <Container fluid >
 
-      <Navbar collapseOnSelect expand="lg" className="nav-bg" fixed="top" >
-
-          <Link to="/videos">
+      <Navbar fluid collapseOnSelect expand="lg" className="nav-bg" fixed="top" >
+      {/* <div className="testt"> */}
+          <Nav.Link as={Link} to="/videos" href="/videos">
             <Navbar.Brand><img src={logo} className="imgFluid" style={{maxWidth: '50px'}} /> </Navbar.Brand>
-          </Link>
-   
+          </Nav.Link>
           <SearchForm  />
-        
           <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
+   
+      {/* </div> */}
   
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
             {/* <Nav.Link href="/videos/new" id="menu-toggle">ADD VIDEO +</Nav.Link> */}
-            <Link to="/videos/new" id="menu-toggle" className="nav-font-style">Add Video</Link>
+            <Nav.Link 
+              as={Link} 
+              to="/videos/new"
+              href="/videos/new" 
+              id="menu-toggle" 
+              className="nav-font-style">
+                Add Video
+              </Nav.Link>
           {
             (auth.id) ?
-            (<Link 
+            (<Nav.Link 
+              as={Link}
               to='/admin' 
+              href='/admin'
               id="menu-toggle" className="nav-font-style"
               onClick={ handleLogout }>
               Logout
-            </Link>)
+            </Nav.Link>)
             : 
-            (<Link to='/admin' id="menu-toggle" className="nav-font-style" >
+            (<Nav.Link as={Link} to='/admin' href='/admin' id="menu-toggle" className="nav-font-style" >
               Login
-            </Link>)
+            </Nav.Link>)
           }
           </Nav>
         </Navbar.Collapse>

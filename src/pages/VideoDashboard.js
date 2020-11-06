@@ -112,7 +112,7 @@ class VideoDashboard extends Component {
       <Container fluid>
       <div className="page-content-wrapper">
         <div className="dashboard-header">
-          <h1 className="header-text">Saicophonic Medicine</h1>
+          <div className="dashboard-header-title"><h1 className="header-text">Saicophonic Medicine</h1></div>
           <h5 className="header-subtext">An expanding library of live music sessions</h5>
         </div>
         {/* {this.displayFilterTabs()} */}

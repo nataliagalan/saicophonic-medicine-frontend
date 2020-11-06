@@ -1,3 +1,248 @@
+
+
+
+body {
+  margin: 0;
+  font-family: "Futura-Pt", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.dashboard-header {
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+}
+
+.header-text {
+  font-family: pragmatapro-fraktur, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+  font-size: 4.5rem;
+  color: #EBDFF7;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.nav-bg {
+  /* background-color: rgb(15, 15, 15); */
+  background: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.738) 19%, rgba(0, 0, 0, 0.541) 34%, rgba(0, 0, 0, 0.382) 47%, rgba(0, 0, 0, 0.278) 56.5%, rgba(0, 0, 0, 0.194) 65%, rgba(0, 0, 0, 0.126) 73%, rgba(0, 0, 0, 0.075) 80.2%, rgba(0, 0, 0, 0.042) 86.1%, rgba(0, 0, 0, 0.021) 91%, rgba(0, 0, 0, 0.008) 95.2%, rgba(0, 0, 0, 0.002) 98.2%, transparent 100%);
+  /* padding-right: 8rem;
+  padding-left: 8rem; */
+  
+}
+
+.nav-toggle {
+  border: none;
+}
+
+
+.nav-toggle,
+.btn:active,
+.btn:focus,
+.btn.active {
+  /* background-image: none; */
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+   outline: none !important;
+}
+
+.nav-font-style {
+  font-family: pragmatapro-fraktur, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #EBDFF7;
+  padding-left: 1.5rem;
+
+}
+
+@media screen and (max-width: 766px) {
+  .header-text { 
+    font-size: 3em; 
+ }
+  .header-subttext { 
+    font-size: 1rem; 
+ }
+
+ /* .nav-bg {
+  padding-right: 1rem;
+  padding-left: 1.2rem;
+} */
+ 
+}
+
+/* @media screen and (max-width: 320px) {
+  .nav-bg {
+    padding-right: 0rem;
+    padding-left: 0.2rem;
+   
+  }
+
+} */
+
+
+/* FIXES THE VIDEO IN PLACE */
+.video-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 8rem;
+}
+
+@media screen and (max-width: 766px) {
+
+  .video-wrapper {
+    position: fixed !important;
+    /* top: 3rem; */
+    top: 1vw;
+    width: 100vw;
+    padding-right: 11px;
+    padding-left: 11px;
+    margin-left: -50vw;
+    margin-top: 100px;
+    left: 50%;
+    z-index: 2;
+    
+  }
+
+  .edit-and-new-form {
+    margin-top: 70vw;;
+    z-index: 1;
+  }
+
+  .duration-seconds {
+    display: none;
+  }
+
+  /* ! adjusts form width */
+
+  .new-and-edit-video-page {
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
+  }
+
+}
+
+/* FIXES THE VIDEO IN PLACE */
+
+.header-subtext {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #EBDFF7;
+  padding-top: 1.7rem;
+  letter-spacing: .09em;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.btn-primary {
+  background: none;
+  border: 1;
+  border-color: #ebdff7de;
+  font-size: 1.2rem;
+}
+
+.btn-primary:hover {
+  background: #ebdff7;
+  border-color: #ebdff7de;
+  color: #000;
+}
+
+.dynamic-input-btn {
+  font-size: 2rem;
+  border: none;
+}
+.dynamic-input-btn:hover {
+  color: rgb(250, 192, 0);
+  background: none;
+}
+
+.new-and-edit-video-page {
+  padding-top: 8rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  text-align: center;
+}
+
+.duration-seconds, h3 {
+  color: #EBDFF7;
+  letter-spacing: .09em;
+}
+
+#formBasicRangeCustom::-webkit-slider-thumb {
+  background: rgb(250, 192, 0);
+  
+}
+
+.page-content-wrapper {
+  /* TODO ADJUST THIS SOLUTION LATER */
+  padding-top: 3.8rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  text-align: center;
+}
+.song-accordion {
+  background: #fdfbff;
+  border-radius: 0;
+}
+
+.plus-accordion {
+  background: #fffced;
+  /* border-radius: 0; */
+}
+
+.custom-spacer {
+  padding-bottom: 1.8rem;
+}
+
+.login-page-content-wrapper {
+  padding-top: 13rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.accordion-time-title {
+  color: #000;
+}
+
+/* this adds scrolling ability to lyrics accordion */
+.overflow-auto {
+  max-height: 380px;
+  text-align: left;
+  padding-left: 3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CSSS
+
+
+
+
+
+
+
 return (
   <>
   <Navbar collapseOnSelect expand="lg" className="nav-bg" fixed="top" >
