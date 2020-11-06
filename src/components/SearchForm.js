@@ -131,14 +131,15 @@ class SearchForm extends Component {
     this.setState({ open: false });
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
     const videoToShow = await res.json();
-    this.props.getVideo(videoToShow);
+    if(videoToShow.error) {
+      console.log('video not found')
+    } else {
+      this.props.getVideo(videoToShow);
+      this.props.history.push(`/videos/${id}`)
+    }
   }
 
  
-
-
-
-  
   render() {
     // console.log(this.props, "============SEARCH FORM=========");
 
@@ -173,7 +174,7 @@ class SearchForm extends Component {
 
             <Menu {...menuProps} >
 
-              <MenuItem>
+              {/* <MenuItem>
                 <Link 
                   to={`/videos/search/${this.state.query}`}
                   onClick={() => { 
@@ -185,21 +186,15 @@ class SearchForm extends Component {
                     {`See all results for "${this.state.query}"`}
                   </div>
                 </Link>
-              </MenuItem>
+              </MenuItem> */}
 
               {options.map((opt, ind) => 
-                <MenuItem option={opt} key={ind} position={ind} >
-                  <Link 
-                    to={`/videos/${opt.id}`}
-                    // activeClassName="active"
-                    onClick={() => this.fetchVideo(opt.id)}
-                    >
+                <MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
                     <div>
                       <Highlighter search={this.state.query}>
                         {`${opt.band} ${opt.song1} ${opt.lyrics1} `}
                       </Highlighter>
                     </div>
-                  </Link>
                 </MenuItem>
               )}
             </Menu>

@@ -26,7 +26,7 @@ const MyNavbar = (props) => {
     return (
       <>
 
-    <Navbar fluid collapseOnSelect expand="lg" className="nav-bg" fixed="top" >
+    <Navbar fluid="true" collapseOnSelect expand="lg" className="nav-bg" fixed="top" >
 
       <Container fluid >
         <Navbar.Brand as={Link} to="/videos" href="/videos">

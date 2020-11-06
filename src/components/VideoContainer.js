@@ -1,5 +1,5 @@
 import React from 'react'
-import VideoCard from '../components/VideoCard'
+import VideoCard from './VideoCard'
 
 
 const VideoContainer = (props) => {

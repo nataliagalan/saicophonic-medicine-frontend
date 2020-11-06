@@ -7,7 +7,7 @@ import { toggleTabs } from '../actions/toggleTabs';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import VideoContainer from './VideoContainer';
+import VideoContainer from '../components/VideoContainer';
 
 
 class VideoDashboard extends Component {
