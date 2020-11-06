@@ -6,6 +6,8 @@ import { connect  } from 'react-redux';
 import { currentUser } from '../actions/auth'
 import { updateVideo } from '../actions/videos'
 
+import { DragDropContext } from 'react-beautiful-dnd';
+
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -15,6 +17,9 @@ import Container from 'react-bootstrap/Container';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
 import Duration from '../components/Duration';
+import DragHandle from '../components/DragHandle';
+
+
 
 
 
@@ -250,7 +255,6 @@ class Edit extends Component {
           </div>
         </Col>
 
-
         <Col md={6} sm={6}>
 
           <Form
@@ -278,11 +282,21 @@ class Edit extends Component {
               </Col>
               </Form.Row>
               <br></br>
+
+              {/* DROPPABLE DIV */}
+              <div> 
+              
               {
                 songs.map((song, i) => {
                   return (
+
+            <Row>
+              <Col xs={1}>
+                <DragHandle />
+              </Col>
+
+              <Col>
                 <div key={i}>
-                  <br/>
                   <Form.Row>
                     <Col>
                       <Form.Control 
@@ -328,15 +342,22 @@ class Edit extends Component {
                     variant="primary">-</Button> }
 
                   </div>
+              </Col>
+            </Row>
+ 
                   )
                 })
               }
+              {/* !DROPPABLE DIV */}
+              </div>
+
               <Button 
                 variant="primary" 
                 type="submit">
                 Save
               </Button>
           </Form>
+
 
       </Col>
 
