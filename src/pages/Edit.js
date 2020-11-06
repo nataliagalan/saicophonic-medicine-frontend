@@ -204,14 +204,13 @@ class Edit extends Component {
     const { songs } = this.state
     // console.log(songs[0].timestamp);
     return (
-      <Container fluid>
-         
+    <Container fluid>
       <div className="new-and-edit-video-page">
-        <Row >
-          <Col md={6} sm={6}>
-     
-           
+      <Row>
+          
+        <Col md={6} sm={6}>
           <div className="video-wrapper" >
+
             <ResponsiveEmbed aspectRatio="16by9">
               <ReactPlayer
               className="react-player"
@@ -224,140 +223,127 @@ class Edit extends Component {
               url={this.state.url} />
             </ResponsiveEmbed>
         
-        <Form>
-        <Form.Group controlId="formBasicRangeCustom">
-        <Form.Control 
-        // <input
-        custom
-        type='range' min={0} max={0.999999} step='any'
-        value={this.state.played}
-        onMouseDown={this.handleSeekMouseDown}
-        onChange={this.handleSeekChange}
-        onMouseUp={this.handleSeekMouseUp}
-        // />
-        />
-        </Form.Group>
-        </Form>
+            <Form>
+            <Form.Group controlId="formBasicRangeCustom">
+            <Form.Control 
+            // <input
+            custom
+            type='range' min={0} max={0.999999} step='any'
+            value={this.state.played}
+            onMouseDown={this.handleSeekMouseDown}
+            onChange={this.handleSeekChange}
+            onMouseUp={this.handleSeekMouseUp}
+            // />
+            />
+            </Form.Group>
+            </Form>
 
-        {/* what gets displayed is the length of video times played (float)
-        those seconds get passed as input to duration and it converts them
-        to 00:00 format, then they get displayed
-      */}
-        <div className="duration-seconds">
-        <Duration seconds={this.state.duration * this.state.played}/>
-        </div>
+            {/* what gets displayed is the length of video times played (float)
+            those seconds get passed as input to duration and it converts them
+            to 00:00 format, then they get displayed
+            */}
+            <div className="duration-seconds">
+            <Duration seconds={this.state.duration * this.state.played}/>
+            </div>
 
       {/* !VIDEO WRAPPER DIV */}
-      </div>
-
-
+          </div>
         </Col>
-
-
 
 
         <Col md={6} sm={6}>
 
-
-      <Form
-      onSubmit={this.handleSubmit}
-      className="edit-and-new-form"
-      >
-        <Form.Row>
-          <Col>
-            <Form.Control 
-              name="url"
-              // ref={input => { this.urlInput = input }} 
-              defaultValue={this.state.url} 
-              onChange={(e) => this.handleVideoInputChange(e)}
-              placeholder="Url" />
-          </Col>
-        </Form.Row>
-        <br></br>
-        <Form.Row>
-          <Col>
-            <Form.Control 
-              name="band"
-              defaultValue={this.state.band} 
-              onChange={(e) => this.handleBandInputChange(e)}
-              placeholder="Artist/Band" />
-          </Col>
-        </Form.Row>
-        <br></br>
-        {
-          songs.map((song, i) => {
-            return (
-              <div 
-              key={i}>
-                <br/>
+          <Form
+          onSubmit={this.handleSubmit}
+          className="edit-and-new-form"
+          >
             <Form.Row>
               <Col>
                 <Form.Control 
-                  name="timestamp"
-                  autoComplete="off"
-                  label="timestamp" 
-                  defaultValue={song.timestamp}
-                  //handleFocus sets inputToUpdate with corresponding index
-                  onFocus={(e) => this.handleFocus(e, i)} 
-                  // defaultValue={this.state.played}
-                  // onChange={(e) => this.handleChange(e, i)}
-                  // placeholder="Time" 
-                  />
-              </Col>
-              <Col xs={7}>
-                <Form.Control
-                  name="title"
-                  label="title"  
-                  defaultValue={song.title} 
-                  onChange={(e) => this.handleChange(e, i)} 
-                  placeholder="Song Title" />
+                  name="url"
+                  // ref={input => { this.urlInput = input }} 
+                  defaultValue={this.state.url} 
+                  onChange={(e) => this.handleVideoInputChange(e)}
+                  placeholder="Url" />
               </Col>
             </Form.Row>
             <br></br>
-              <Form.Control 
-                as="textarea"
-                name="lyrics" 
-                label="lyrics" 
-                defaultValue={song.lyrics} 
-                onChange={(e) => this.handleChange(e, i)}
-                placeholder="Lyrics"
-                rows={6} />
-            { songs.length - 1 === i && <Button 
-              value="add"
-              className="dynamic-input-btn"
-              onClick={this.handleAddInput}
-              variant="primary">+</Button> }
-            { songs.length !== 1 && <Button 
-              value="remove"
-              className="dynamic-input-btn"
-              onClick={() => this.handleRemoveInput(i)}
-              variant="primary">-</Button>}
-            </div>
-            )
-          })
-        }
+            <Form.Row>
+              <Col>
+                <Form.Control 
+                  name="band"
+                  defaultValue={this.state.band} 
+                  onChange={(e) => this.handleBandInputChange(e)}
+                  placeholder="Artist/Band" />
+              </Col>
+              </Form.Row>
+              <br></br>
+              {
+                songs.map((song, i) => {
+                  return (
+                <div key={i}>
+                  <br/>
+                  <Form.Row>
+                    <Col>
+                      <Form.Control 
+                        name="timestamp"
+                        autoComplete="off"
+                        label="timestamp" 
+                        defaultValue={song.timestamp}
+                        //handleFocus sets inputToUpdate with corresponding index
+                        onFocus={(e) => this.handleFocus(e, i)} 
+                        // defaultValue={this.state.played}
+                        // onChange={(e) => this.handleChange(e, i)}
+                        // placeholder="Time" 
+                        />
+                    </Col>
+                    <Col xs={7}>
+                      <Form.Control
+                        name="title"
+                        label="title"  
+                        defaultValue={song.title} 
+                        onChange={(e) => this.handleChange(e, i)} 
+                        placeholder="Song Title" />
+                    </Col>
+                  </Form.Row>
+                  <br></br>
+                    <Form.Control 
+                      as="textarea"
+                      name="lyrics" 
+                      label="lyrics" 
+                      defaultValue={song.lyrics} 
+                      onChange={(e) => this.handleChange(e, i)}
+                      placeholder="Lyrics"
+                      rows={6} />
 
-        <Button 
-          variant="primary" 
-          type="submit">
-          Save
-        </Button>
-         {/* <pre> */}
-            {/* {JSON.stringify(this.state.url, null, 1)} */}
-            {/* {JSON.stringify(this.state.songs, null, 1)} */}
-            {/* {JSON.stringify(this.state.id, null, 1)} */}
-            {/* {JSON.stringify(this.state, null, 1)} */}
+                  { songs.length - 1 === i && <Button 
+                    value="add"
+                    className="dynamic-input-btn"
+                    onClick={this.handleAddInput}
+                    variant="primary">+</Button>  }
+                  { songs.length !== 1 && <Button 
+                    value="remove"
+                    className="dynamic-input-btn"
+                    onClick={() => this.handleRemoveInput(i)}
+                    variant="primary">-</Button> }
 
-          {/* </pre> */}
-      </Form>
-
+                  </div>
+                  )
+                })
+              }
+              <Button 
+                variant="primary" 
+                type="submit">
+                Save
+              </Button>
+          </Form>
 
       </Col>
 
-      </Row>
+    </Row>
       {/* !new-and-edit-video-page DIV */}
-      </div>    
-      </Container>    
+    </div>    
+  </Container>    
     )
   }
 

@@ -25,7 +25,6 @@ class Login extends React.Component {
     }
   }
 
-
   fetchData = async () => {
     const token = localStorage.getItem('myAppToken') 
     const reqObj = {

@@ -65,7 +65,15 @@ code {
 
 }
 
+/* hide togglegrid button at any screen less than 375 */
 
+@media screen and (max-width: 414px) {
+  #toggle-grid-btn { 
+    display: none;
+ }
+ 
+ 
+}
 @media screen and (max-width: 766px) {
   .header-text { 
     font-size: 3em; 

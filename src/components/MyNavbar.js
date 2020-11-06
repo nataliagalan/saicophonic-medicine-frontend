@@ -43,7 +43,7 @@ const MyNavbar = (props) => {
           <SearchForm /> 
         </Nav.Item>
         <Nav.Item style={{cursor: 'pointer'}} onClick={handleToggleGrid}> 
-          <span role="img" aria-label="toggle grid">>🏁</span> 
+          <span role="img" id="toggle-grid-btn" aria-label="toggle grid">🏁</span> 
         </Nav.Item>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
       </Container>
