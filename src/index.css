@@ -181,12 +181,20 @@ code {
 .song-accordion {
   background: #fdfbff;
   border-radius: 0;
+  
 }
 
 .plus-accordion {
   background: #fffced;
   /* border-radius: 0; */
+  
 }
+.plus-accordion-card {
+  background: #fffced;
+  margin-bottom: 1rem;
+  
+}
+
 
 .custom-spacer {
   padding-bottom: 1.8rem;
@@ -206,7 +214,7 @@ code {
 .overflow-auto {
   max-height: 380px;
   text-align: left;
-  padding-left: 3rem;
+
 }
 
 
