@@ -12,12 +12,16 @@ code {
 
 .nav-bg {
   background: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.738) 19%, rgba(0, 0, 0, 0.541) 34%, rgba(0, 0, 0, 0.382) 47%, rgba(0, 0, 0, 0.278) 56.5%, rgba(0, 0, 0, 0.194) 65%, rgba(0, 0, 0, 0.126) 73%, rgba(0, 0, 0, 0.075) 80.2%, rgba(0, 0, 0, 0.042) 86.1%, rgba(0, 0, 0, 0.021) 91%, rgba(0, 0, 0, 0.008) 95.2%, rgba(0, 0, 0, 0.002) 98.2%, transparent 100%);
-  padding-right: 4rem;
+  padding-right: 8rem;
+  padding-left: 8rem;
+  
 }
 
 .nav-toggle {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><path stroke='rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+  border: none;
 }
+
+
 .nav-toggle,
 .btn:active,
 .btn:focus,
@@ -57,19 +61,31 @@ code {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 766px) {
   .header-text { 
     font-size: 3em; 
  }
   .header-subttext { 
     font-size: 1rem; 
  }
+
+ .nav-bg {
+  padding-right: 1rem;
+  padding-left: 1.2rem;
+
+}
  
 }
 
-/* FIXING THE VIDEO IN PLACE */
+@media screen and (max-width: 320px) {
+  .nav-bg {
+    padding-right: 0.1rem;
+    padding-left: 0.8rem;
+  }
+}
 
 
+/* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
   position: -webkit-sticky;
   position: sticky;
@@ -79,9 +95,9 @@ code {
 @media screen and (max-width: 766px) {
 
   .video-wrapper {
-    /* position: -webkit-sticky !important; */
     position: fixed !important;
-    top: 3rem;
+    /* top: 3rem; */
+    top: 1vw;
     width: 100vw;
     padding-right: 11px;
     padding-left: 11px;
@@ -93,7 +109,7 @@ code {
   }
 
   .edit-and-new-form {
-    margin-top: 17rem;
+    margin-top: 70vw;;
     z-index: 1;
   }
 
@@ -101,9 +117,16 @@ code {
     display: none;
   }
 
+  /* ! adjusts form width */
+
+  .new-and-edit-video-page {
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
+  }
+
 }
 
-
+/* FIXES THE VIDEO IN PLACE */
 
 .header-subtext {
   font-weight: 400;
@@ -139,8 +162,8 @@ code {
 
 .new-and-edit-video-page {
   padding-top: 8rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
   text-align: center;
 }
 

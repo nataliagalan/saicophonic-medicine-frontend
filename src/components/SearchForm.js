@@ -187,9 +187,6 @@ class SearchForm extends Component {
                 </Link>
               </MenuItem>
 
-              
-             
-
               {options.map((opt, ind) => 
                 <MenuItem option={opt} key={ind} position={ind} >
                   <Link 
