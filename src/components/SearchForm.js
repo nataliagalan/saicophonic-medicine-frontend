@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router';
-import {Link} from 'react-router-dom';
 import { connect } from "react-redux";
 import { getVideo } from "../actions/video";
 import { setFilter } from '../actions/setFilter';
@@ -9,8 +8,6 @@ import { filteredByAll } from '../actions/filteredByAll';
 import { filteredByBand } from '../actions/filteredByBand';
 import { filteredBySong } from '../actions/filteredBySong';
 import { filteredByLyrics } from '../actions/filteredByLyrics';
-
-import Button from 'react-bootstrap/Button';
 
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';

@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { logoutSuccess } from '../actions/auth'
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import {Link} from 'react-router-dom';
 import logo from '../logo.png'
 import SearchForm from './SearchForm';
@@ -30,7 +28,7 @@ const MyNavbar = (props) => {
 
       <Container fluid >
         <Navbar.Brand as={Link} to="/videos" href="/videos">
-          <img src={logo} className="imgFluid" style={{maxWidth: '50px'}} /> 
+          <img src={logo} className="imgFluid" style={{maxWidth: '50px'}} alt="logo that looks like a yin yang symbol inside a pill"/> 
         </Navbar.Brand>
         <Nav.Item> 
           <SearchForm /> 

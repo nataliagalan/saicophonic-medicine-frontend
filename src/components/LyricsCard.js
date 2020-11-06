@@ -1,11 +1,9 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { Link, withRouter } from "react-router-dom";
 
-
 import { deleteVideo } from "../actions/videos";
-import { togglePlayVideo } from "../actions/videos";
 
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
