@@ -87,7 +87,7 @@ const LyricsCard = (props) => {
 
           {/* Edit and Delete buttons */}
 
-          <Card> 
+          <Card className="plus-accordion-card"> 
 
             <Accordion.Toggle
              className="plus-accordion"
