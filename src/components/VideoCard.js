@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector  } from 'react-redux';
+import React, { useState } from 'react';
+// import { useDispatch, useSelector  } from 'react-redux';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
-
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-
 import Line from './Line';
-
 import ReactPlayer from 'react-player/lazy'
-
 import LyricsCard from './LyricsCard';
 
 
@@ -17,17 +13,14 @@ const VideoCard = (props) => {
   // console.log(props, "=======VIDEO CARD PROPS==========");
     const ref = React.createRef()
     //useSelector is similar to setStateToProps
-    const payload = useSelector(state => state.video);
+    // const payload = useSelector(state => state.video);
     // console.log(payload, '11---------------');
 
   
     const [playerState, setPlayerState] = useState(() => ({playing: false}));
-
-
     //setPlayerState triggers a rerender
       // use the payload coming from dispatched actions
       // to set state
-
     const handlePlay = (timeString) => {
       //turns the timeString 00:00 into seconds
       const seconds = hmsToSeconds(timeString)
@@ -58,7 +51,6 @@ const VideoCard = (props) => {
               <ReactPlayer
               ref={ref}
               url={url} 
-              // *********change playing
               playing={playerState.playing}
               controls={true}
               width='100%'
@@ -67,9 +59,7 @@ const VideoCard = (props) => {
           </Col>
           
           <Col sm={4}>
-            {/* <SongContainer
-            handlePlay={handlePlay} 
-              {...props} /> */}
+
             <LyricsCard {...props} handlePlay={handlePlay} />
             
           </Col>
