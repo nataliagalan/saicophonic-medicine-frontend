@@ -8,10 +8,6 @@ import LyricsCard from './LyricsCard';
 
 const VideoContainer = (props) => {
 
-  //NO GRID:
-    //HIDE GRID GENERATOR FROM VIDEOCONTAINER
-  //GRID
-    //USE GRID GENERATOR FROM VIDEOCONTAINER, COLS 4
 
   // <GridGenerator cols={1}>
   return (<GridGenerator cols={4}>
@@ -27,7 +23,9 @@ const VideoContainer = (props) => {
 
 export default VideoContainer
 
+//on click, dispatch an action that toggles
 
+//this.props.state === true ? <GridGenerator cols={4}> : <Row>
 // =====GRID=====
 
 // VIDEO CONTAINER
@@ -38,6 +36,7 @@ export default VideoContainer
   //     })
   //   }
   //   </GridGenerator>)
+
 
 // VIDEO CARD
   // return (
@@ -57,17 +56,8 @@ export default VideoContainer
   //       </>
   //     )
 
-  
-// ====NO GRID====
 
-// VIDEO CONTAINER
-  // return (<Row>
-  //   {
-  //     props.videos.map(video => {
-  //       return <VideoCard {...video} key={video.id} />
-  //     })
-  //   }
-  //   </Row>)
+// ====NO GRID====
 
 // VIDEO CARD
   // return (
@@ -94,3 +84,12 @@ export default VideoContainer
   //   </>
   // )
 
+
+  // VIDEO CONTAINER
+  // return (<Row>
+  //   {
+  //     props.videos.map(video => {
+  //       return <VideoCard {...video} key={video.id} />
+  //     })
+  //   }
+  //   </Row>)

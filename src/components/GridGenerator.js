@@ -13,10 +13,10 @@ const colWidth = 12 / cols
 const rows = chunk(React.Children.toArray(children), cols)
 return (
     <>
-      {rows.map((cols) => (
-        <Row>
-          {cols.map((col) => (
-            <Col sm={12} md={colWidth}>
+      {rows.map((cols, idx) => (
+        <Row key={idx}>
+          {cols.map((col, idx) => (
+            <Col sm={12} md={colWidth} key={idx}>
               {col}
             </Col>
           ))}

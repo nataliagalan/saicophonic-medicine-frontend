@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { logoutSuccess } from '../actions/auth'
+import { toggleGrid } from '../actions/toggleGrid'
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -12,14 +13,22 @@ import SearchForm from './SearchForm';
 const MyNavbar = (props) => {
     //useSelector is similar to setStateToProps
     const auth = useSelector(state => state.auth);
+    const showGrid = useSelector(state => state.toggleGrid);
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
+
+   
 
     const handleLogout = () => {
       localStorage.removeItem('myAppToken')
       dispatch(logoutSuccess())
     }
-    // console.log(props,"==========MY NAVBAR PROPS==========");
+    const handleToggleGrid = () => {
+      // console.log(props,"==========CLICKED==========");
+      dispatch(toggleGrid())
+    }
+    
+    // console.log(showGrid,"==========MY NAVBAR PROPS==========");
 
     return (
       <>
@@ -32,6 +41,9 @@ const MyNavbar = (props) => {
         </Navbar.Brand>
         <Nav.Item> 
           <SearchForm /> 
+        </Nav.Item>
+        <Nav.Item style={{cursor: 'pointer'}} onClick={handleToggleGrid}> 
+          <span role="img" aria-label="toggle grid">>🏁</span> 
         </Nav.Item>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
       </Container>
