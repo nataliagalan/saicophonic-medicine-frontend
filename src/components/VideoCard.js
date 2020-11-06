@@ -39,40 +39,37 @@ const VideoCard = (props) => {
       return s;
     }
   
-
+//on click, change store state boolean
+// if showGrid=true
+//hide row 
+// if video.count > 4, add a new row
     const { url } = props
   
     return (
       <>
-      <br></br>
-        <Row>
-          <Col sm={8} className="custom-spacer">
-              <ResponsiveEmbed aspectRatio="16by9">
-              <ReactPlayer
-              ref={ref}
-              url={url} 
-              playing={playerState.playing}
-              controls={true}
-              width='100%'
-              height='100%'/>
-            </ResponsiveEmbed>
-          </Col>
-          
-          <Col sm={4}>
-
-            <LyricsCard {...props} handlePlay={handlePlay} />
-            
-          </Col>
-        </Row>
+        <ResponsiveEmbed aspectRatio="16by9">
+          <ReactPlayer
+          ref={ref}
+          url={url} 
+          playing={playerState.playing}
+          controls={true}
+          width='100%'
+          height='100%'/>
+        </ResponsiveEmbed>
         <br></br>
-        <Line color="#EBDFF7" />
+        <LyricsCard {...props} handlePlay={handlePlay} />
+        <br></br>
       </>
     )
 
 }
 
 
-
-
 export default VideoCard
+
+
+
+// NO GRID OPTION, ISSUE WITH HANDLE PLAY
+  //JUST RENDER THE RESPONSIVE EMBED HERE ONLY
+
 
