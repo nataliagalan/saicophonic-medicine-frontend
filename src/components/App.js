@@ -2,13 +2,10 @@ import React from 'react'
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-//potentially delete this files
+//TODO delete this files
 // import logo from './logo.svg';
 // import './App.css';
 
-// added after watching this video but didn't have it before and styles where still working
-// TODO look into this https://www.youtube.com/watch?v=8pKjULHzs0s&feature=youtu.be
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 import MyNavbar from './MyNavbar';
 import VideoDashboard from '../pages/VideoDashboard';

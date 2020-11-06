@@ -21,6 +21,10 @@ $link-hover-color: darken(#EBDFF7, 15%);
 
 $navbar-light-color: #EBDFF7;
 
+$navbar-light-active-color: #EBDFF7;
+
+$navbar-light-hover-color: rgb(253, 214, 85);
+
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";

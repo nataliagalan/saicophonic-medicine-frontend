@@ -9,3 +9,8 @@
     width: 20vw;
   }
 }
+@media screen and (max-width: 320px) {
+  .searchForm {
+    width: 43vw;
+  }
+}

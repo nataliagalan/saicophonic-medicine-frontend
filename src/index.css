@@ -10,12 +10,42 @@ code {
     monospace;
 }
 
+
+.dashboard-header {
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+
+}
+
+
+.header-text {
+  font-family: pragmatapro-fraktur, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+  font-size: 4.5rem;
+  color: #EBDFF7;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .nav-bg {
+  /* background-color: rgb(15, 15, 15); */
   background: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.738) 19%, rgba(0, 0, 0, 0.541) 34%, rgba(0, 0, 0, 0.382) 47%, rgba(0, 0, 0, 0.278) 56.5%, rgba(0, 0, 0, 0.194) 65%, rgba(0, 0, 0, 0.126) 73%, rgba(0, 0, 0, 0.075) 80.2%, rgba(0, 0, 0, 0.042) 86.1%, rgba(0, 0, 0, 0.021) 91%, rgba(0, 0, 0, 0.008) 95.2%, rgba(0, 0, 0, 0.002) 98.2%, transparent 100%);
-  padding-right: 8rem;
-  padding-left: 8rem;
+  /* padding-right: 1rem;
+  padding-left: 1rem; */
+  /* width: 100vw;  */
+  /* margin: 0 auto; */
+  /* margin-left: -50vw; */
+  /* left: 50%; */
   
 }
+
+/* .testt {
+  display: inline-block;
+} */
+
+
 
 .nav-toggle {
   border: none;
@@ -44,22 +74,6 @@ code {
 
 }
 
-.dashboard-header {
-  padding-top: 8rem;
-  padding-bottom: 5rem;
-}
-
-.header-text {
-  font-family: pragmatapro-fraktur, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 600;
-  font-size: 4.5rem;
-  color: #EBDFF7;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
 
 @media screen and (max-width: 766px) {
   .header-text { 
@@ -69,20 +83,21 @@ code {
     font-size: 1rem; 
  }
 
- .nav-bg {
+ /* .nav-bg {
   padding-right: 1rem;
   padding-left: 1.2rem;
-
-}
+} */
  
 }
 
-@media screen and (max-width: 320px) {
+/* @media screen and (max-width: 320px) {
   .nav-bg {
-    padding-right: 0.1rem;
-    padding-left: 0.8rem;
+    padding-right: 0rem;
+    padding-left: 0.2rem;
+   
   }
-}
+
+} */
 
 
 /* FIXES THE VIDEO IN PLACE */

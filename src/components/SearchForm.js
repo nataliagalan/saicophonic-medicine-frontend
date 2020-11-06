@@ -163,7 +163,7 @@ class SearchForm extends Component {
         // onPaginate={this._handlePagination}
         onSearch={this._handleSearch}
         paginate
-        placeholder="Search by artist, band, song, lyrics..."
+        placeholder="Search by artist, band, song or lyrics."
         options={this.state.options}
         onBlur={this.closeDropdown} 
         onKeyDown={this.handleKeyDown}
