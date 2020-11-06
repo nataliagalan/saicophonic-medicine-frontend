@@ -25,18 +25,20 @@ const MyNavbar = (props) => {
 
     return (
       <>
-<Container fluid >
 
-      <Navbar fluid collapseOnSelect expand="lg" className="nav-bg" fixed="top" >
-      {/* <div className="testt"> */}
-          <Nav.Link as={Link} to="/videos" href="/videos">
-            <Navbar.Brand><img src={logo} className="imgFluid" style={{maxWidth: '50px'}} /> </Navbar.Brand>
-          </Nav.Link>
-          <SearchForm  />
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
-   
-      {/* </div> */}
+    <Navbar fluid collapseOnSelect expand="lg" className="nav-bg" fixed="top" >
+
+      <Container fluid >
+        <Navbar.Brand as={Link} to="/videos" href="/videos">
+          <img src={logo} className="imgFluid" style={{maxWidth: '50px'}} /> 
+        </Navbar.Brand>
+        <Nav.Item> 
+          <SearchForm /> 
+        </Nav.Item>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
+      </Container>
   
+      <Container fluid >
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
             {/* <Nav.Link href="/videos/new" id="menu-toggle">ADD VIDEO +</Nav.Link> */}
@@ -65,11 +67,10 @@ const MyNavbar = (props) => {
           }
           </Nav>
         </Navbar.Collapse>
-
+      </Container>
           
-      </Navbar>
+    </Navbar>
  
-</Container>
       </>
     );
   
