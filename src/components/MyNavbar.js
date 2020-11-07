@@ -54,12 +54,20 @@ const MyNavbar = (props) => {
             {/* <Nav.Link href="/videos/new" id="menu-toggle">ADD VIDEO +</Nav.Link> */}
             <Nav.Link 
               as={Link} 
+              to="/random"
+              href="/random" 
+              id="menu-toggle" 
+              className="nav-font-style">
+                Random
+            </Nav.Link>
+            <Nav.Link 
+              as={Link} 
               to="/videos/new"
               href="/videos/new" 
               id="menu-toggle" 
               className="nav-font-style">
                 Add Video
-              </Nav.Link>
+            </Nav.Link>
           {
             (auth.id) ?
             (<Nav.Link 
