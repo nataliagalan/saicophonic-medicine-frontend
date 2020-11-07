@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState} from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { Link, withRouter } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import { deleteVideo } from "../actions/videos";
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -20,6 +21,7 @@ const LyricsCard = (props) => {
     const auth = useSelector(state => state.auth);
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
+    const [show, setShow] = useState(false);
 
   const delVideo =  async (id) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`, {
@@ -32,6 +34,13 @@ const LyricsCard = (props) => {
       props.history.push('/videos');
     }
   };
+
+  const copyUrlToClipboard = (id) => {
+    let base = window.location.origin.toString()
+    navigator.clipboard.writeText(`${base}/videos/${id}`)
+    setShow(true);
+  }
+
 
   
     const { id, songs } = props
@@ -118,16 +127,31 @@ const LyricsCard = (props) => {
             null
           }
           {/* display share button and tags here  */}
-            </Col>
-          </Row>
-              </Card.Body>
-            </Accordion.Collapse>
+          <Button onClick={() => copyUrlToClipboard (id)}>
+            Copy video url to clipboard
+          </Button>
+          <Modal
+            show={show}
+            onHide={() => setShow(false)}
+            dialogClassName="modal-90w"
+            aria-labelledby="copy-success"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="copy-success">
+                Copied!
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            </Modal.Body>
+          </Modal>
 
-          </Card>
+             </Col>
+            </Row>
+          </Card.Body>
+        </Accordion.Collapse>
 
+      </Card>
 
-
-          
       </Accordion>
     )
   

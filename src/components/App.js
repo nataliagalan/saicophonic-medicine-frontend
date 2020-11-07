@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import logo from './logo.svg';
 // import './App.css';
 
-
 import MyNavbar from './MyNavbar';
 import VideoDashboard from '../pages/VideoDashboard';
 import Login from '../pages/Login';

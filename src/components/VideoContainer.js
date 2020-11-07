@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import GridGenerator from './GridGenerator';
-import LyricsCard from './LyricsCard';
+
 
 const VideoContainer = (props) => {
   //useSelector is similar to setStateToProps

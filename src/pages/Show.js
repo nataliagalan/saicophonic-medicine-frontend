@@ -53,8 +53,8 @@ class Show extends Component {
       <>
         {
           <div className="page-content-wrapper">
-            <br></br>
           <Container fluid>
+            <br></br>
             {
             (video === []) ?
               null
