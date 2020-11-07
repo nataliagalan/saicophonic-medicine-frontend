@@ -76,7 +76,7 @@ class VideoDashboard extends Component {
           <Nav.Link 
             onClick={() => this.handleTabClick("lyrics")}
             title="lyrics"
-            eventKey="lyrics">Lyrics({this.props.filteredBySong.songs.length})</Nav.Link>
+            eventKey="lyrics">Lyrics({this.props.filteredByLyrics.lyrics.length})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
