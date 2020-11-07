@@ -206,9 +206,44 @@ class Edit extends Component {
 
   // DRAGGABLE METHODS
 
-  onDragEnd = () => {
-    // the only one that is required
-  };
+  onDragEnd = (params) => {
+    const id = params.draggableId
+    const srcI = params.source.index;
+    const desI = params.destination.index;
+    // const list = this.state.songs;
+    console.log(this.state.songs, "==BEFORE=");
+    const list = Array.from(this.state.songs);
+    list.splice(desI, 0, list.splice(srcI, 1)[0])
+    
+    // this.setState({
+    //   songs: list
+    // })
+    this.setState((prevState) => 
+      ({ songs: list })
+    )
+
+
+    console.log(list, "==AFTER=");
+
+    // this.saveSongs();
+  }; 
+
+
+
+  saveSongs = async () => {  
+    const reqObj = {
+      method: 'PATCH',
+      headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    };
+    const res = await fetch(`http://localhost:3001/api/v1/videos/${this.state.id}`, reqObj);
+    const updatedVideo = await res.json();
+    this.setState({ id: this.state.id, songs: updatedVideo.songs, url: updatedVideo.url, band: updatedVideo.band });
+  }
+  
 
   // END OF DRAGGABLE METHODS
 
@@ -266,9 +301,7 @@ class Edit extends Component {
         <Col md={6} sm={6}>
 
         <DragDropContext 
-          onDragEnd={(...props) => {
-            console.log(props)
-          }}>
+          onDragEnd={this.onDragEnd}>
           <Form
           onSubmit={this.handleSubmit}
           className="edit-and-new-form"
@@ -331,6 +364,7 @@ class Edit extends Component {
                         autoComplete="off"
                         label="timestamp" 
                         defaultValue={song.timestamp}
+                        value={song.timestamp}
                         //handleFocus sets inputToUpdate with corresponding index
                         onFocus={(e) => this.handleFocus(e, i)} 
                         // defaultValue={this.state.played}
@@ -343,6 +377,7 @@ class Edit extends Component {
                         name="title"
                         label="title"  
                         defaultValue={song.title} 
+                        value={song.title} 
                         onChange={(e) => this.handleChange(e, i)} 
                         placeholder="Song Title" />
                     </Col>
@@ -353,6 +388,7 @@ class Edit extends Component {
                       name="lyrics" 
                       label="lyrics" 
                       defaultValue={song.lyrics} 
+                      value={song.lyrics} 
                       onChange={(e) => this.handleChange(e, i)}
                       placeholder="Lyrics"
                       rows={6} />
