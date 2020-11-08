@@ -108,9 +108,6 @@ class Edit extends Component {
 
   prepareSubmit = (e) => {
     e.preventDefault();
-    // this.setState((prevState) => 
-    // ({tags: this.props.video.tags}))
-
     let videoToUpdate = {
       id: this.state.id,
       url: this.state.url,
@@ -120,9 +117,9 @@ class Edit extends Component {
     }
     this.handleSubmit(videoToUpdate)
   }
-  handleSubmit = async (videoToUpdate) => {
 
-    // e.preventDefault();    
+  handleSubmit = async (videoToUpdate) => {
+ 
     const reqObj = {
       method: 'PATCH',
       headers: {
@@ -140,7 +137,7 @@ class Edit extends Component {
       );
       const allVideos = [...prevVideos, updatedVideo];
       this.props.updateVideo(allVideos);
-      this.props.history.push(`/videos`);
+      this.props.history.push(`/videos/${this.state.id}`);
     }
   }
 
