@@ -12,3 +12,10 @@ export const tags = (newTag) => {
     newTag: newTag
   };
 };
+
+export const removeTagsAction = (tagNameToRemove) => {
+  return {
+    type: "REMOVE_TAG",
+    tagNameToRemove: tagNameToRemove
+  };
+};
