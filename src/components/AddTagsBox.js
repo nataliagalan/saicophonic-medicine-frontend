@@ -4,7 +4,6 @@ import { useDispatch, useSelector  } from 'react-redux';
 import '../Tags.css';
 
 import { tags } from '../actions/tags'
-import { removeTagsAction } from '../actions/tags'
 import { getVideo } from '../actions/video'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -31,27 +30,9 @@ const AddTagsBox = (props) => {
   }
 
   const removeTag = (idxToRemove) => {
-
-    console.log(idxToRemove, "idxtoremove");
-    // optimistic tags do not have id yet
-    
     let filteredTags = video.tags.filter((_, index) => index !== idxToRemove);
-    console.log(filteredTags, "filteredTags");
-    
     dispatch(getVideo(video));
-    
     setCurrentVideo(video.tags = filteredTags)
-    // video.tags = video.tags.filter((tag) => tag.id !== idToRemove);
-
-    // dispatch(getVideo(video));
-    // dispatch(removeTagsAction(tagNameToRemove));
-
-
-    // let tagToRemove = video.tags.find((tag) => tag.id === idToRemove);
-    // console.log(tagToRemove, "====tagtoremove===");
-
-    // dispatch(deleteVideo(updatedVideos));
-
   }
 
   return (
