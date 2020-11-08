@@ -30,12 +30,10 @@ class SearchForm extends Component {
 
   //removed page 1 from argument below for testing
   makeAndHandleRequest = async (query) => {
-
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
 
     if(filteredVideos.error) {
-
       console.log(`====${filteredVideos.error}====`)
       this.setState({
         isLoading: false,
@@ -71,8 +69,6 @@ class SearchForm extends Component {
         isLoading: false
         });  
       }
-
-    console.log(this.state.options, "====options====");
         
   }
 
@@ -173,7 +169,6 @@ class SearchForm extends Component {
         filterBy={() => true}
         
         renderMenu={(options, menuProps) => {
-          console.log(menuProps, "====menuProps====");
           return (
 
             <Menu {...menuProps} >

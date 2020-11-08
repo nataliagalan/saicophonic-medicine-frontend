@@ -19,6 +19,8 @@ import ReactPlayer from 'react-player/lazy';
 import Duration from '../components/Duration';
 import DragHandle from '../components/DragHandle';
 
+import { GrabberIcon } from '@primer/octicons-react'
+
 
 
 
@@ -351,9 +353,10 @@ class Edit extends Component {
 
             <Row key={i}>
               <Col xs={1} >
-                <DragHandle 
-                // {...provided.dragHandleProps}
-                />
+              <GrabberIcon size={26} />
+                {/* <DragHandle  */}
+                {/* // {...provided.dragHandleProps} */}
+                {/* /> */}
               </Col>
 
               <Col>
