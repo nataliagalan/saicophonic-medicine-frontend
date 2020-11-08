@@ -5,6 +5,7 @@ import { connect  } from 'react-redux';
 // import { loginSuccess } from '../actions/auth'
 import { currentUser } from '../actions/auth'
 import { updateVideo } from '../actions/videos'
+import { getVideo } from '../actions/video'
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -33,6 +34,11 @@ class Edit extends Component {
         title: '',
         lyrics: '',
         timestamp: '',
+      }
+    ],
+    tags: [
+      {
+        name: '',
       }
     ],
     played: 0,
@@ -76,7 +82,9 @@ class Edit extends Component {
   setInitialState = async (id) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
     const video = await res.json();
-    this.setState({ id: id, songs: video.songs, url: video.url, band: video.band });
+    this.setState({ id: id, songs: video.songs, tags: video.tags, url: video.url, band: video.band });
+    this.props.getVideo(video)
+
   };
 
   handleChange = (e, i) => {
@@ -85,10 +93,9 @@ class Edit extends Component {
     list[i][name] = value
 
     this.setState((prevState) => 
-      ({songs: list, 
+      ({songs: list 
         // url: prevState.url
-      })
-    )
+      }))
   }
 
   handleVideoInputChange = (e) => {
@@ -99,15 +106,30 @@ class Edit extends Component {
     this.setState({ band: e.target.value })
   }
 
-   handleSubmit = async (e) => {
-    e.preventDefault();    
+  prepareSubmit = (e) => {
+    e.preventDefault();
+    // this.setState((prevState) => 
+    // ({tags: this.props.video.tags}))
+
+    let videoToUpdate = {
+      id: this.state.id,
+      url: this.state.url,
+      band: this.state.band,
+      songs: this.state.songs,
+      tags: this.props.video.tags
+    }
+    this.handleSubmit(videoToUpdate)
+  }
+  handleSubmit = async (videoToUpdate) => {
+
+    // e.preventDefault();    
     const reqObj = {
       method: 'PATCH',
       headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(videoToUpdate)
     };
     const res = await fetch(`http://localhost:3001/api/v1/videos/${this.state.id}` ,reqObj);
     const updatedVideo = await res.json();
@@ -277,7 +299,8 @@ class Edit extends Component {
         <DragDropContext 
           onDragEnd={this.onDragEnd}>
           <Form
-          onSubmit={this.handleSubmit}
+          // onSubmit={this.handleSubmit}
+          onSubmit={this.prepareSubmit}
           className="edit-and-new-form"
           >
             <Form.Row>
@@ -419,14 +442,16 @@ class Edit extends Component {
 const setStateToProps = (state) => {
   return {
     videos: state.videos,
-    auth: state.auth
+    auth: state.auth,
+    video: state.video,
+    updatedTags: state.tags
   };
 };
 
 const setDispatchToProps = {
-  //possibly delete this updateVideo
   updateVideo,
   currentUser,
+  getVideo
 };
 
 export default connect(setStateToProps, setDispatchToProps)(Edit);
