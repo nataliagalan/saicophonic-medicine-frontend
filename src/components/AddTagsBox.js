@@ -19,12 +19,12 @@ const AddTagsBox = (props) => {
 
 
   const handleAddTag = (e) => {
-    let newTag = e.target.value
-    if (e.key === "Enter") {
+    let newTag = e.target.value.trim()
+    if (e.key === "Enter" && newTag !== "") {
     dispatch(tags(newTag));
     video.tags = [...video.tags, {name: newTag}]
     dispatch(getVideo(video));
-
+    e.target.value = ""
     }
   }
 
@@ -46,9 +46,11 @@ const AddTagsBox = (props) => {
       <Form.Group controlId="tags-input">
         <Form.Control 
         placeholder="Press enter to add tags"
-        as="textarea"
-        onKeyUp={(e) => handleAddTag(e)} 
-        rows={3} />
+        as="textarea" 
+        rows={1}
+        // onKeyUp={(e) => (e.key === "Enter" ? handleAddTag(e) : null)} 
+        onKeyUp={handleAddTag} 
+       />
       </Form.Group>
     </div>
     </>
