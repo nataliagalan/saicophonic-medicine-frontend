@@ -46,6 +46,11 @@ class SearchForm extends Component {
       this.props.filteredByBand(filteredVideos, query);
       this.props.filteredBySong(filteredVideos, query);
       this.props.filteredByLyrics(filteredVideos, query);
+    // const options = filteredVideos.map(i => ({
+    //   band: i.band,
+    //   id: i.id,
+    //   songs: i.songs
+    // }));
     const options = filteredVideos.map(i => ({
       band: i.band,
       id: i.id,
@@ -62,12 +67,12 @@ class SearchForm extends Component {
     })
 
     this.setState({
-          isLoading: false,
-          options: options
+        options: options,
+        isLoading: false
         });  
       }
 
-    
+    console.log(this.state.options, "====options====");
         
   }
 
@@ -165,8 +170,10 @@ class SearchForm extends Component {
         options={this.state.options}
         onBlur={this.closeDropdown} 
         onKeyDown={this.handleKeyDown}
+        filterBy={() => true}
         
         renderMenu={(options, menuProps) => {
+          console.log(menuProps, "====menuProps====");
           return (
 
             <Menu {...menuProps} >
@@ -187,11 +194,11 @@ class SearchForm extends Component {
 
               {options.map((opt, ind) => 
                 <MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
-                    <div>
-                      <Highlighter search={this.state.query}>
-                        {`${opt.band} ${opt.song1} ${opt.lyrics1} `}
-                      </Highlighter>
-                    </div>
+                  <div>
+                    <Highlighter search={this.state.query}>
+                      {`${opt.band} ${opt.song1} ${opt.lyrics1} `}
+                    </Highlighter>
+                  </div>
                 </MenuItem>
               )}
             </Menu>
