@@ -18,6 +18,7 @@ import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
 import Duration from '../components/Duration';
 import { GrabberIcon } from '@primer/octicons-react'
+import AddTagsBox from '../components/AddTagsBox';
 
 
 
@@ -205,7 +206,6 @@ class Edit extends Component {
   // DRAGGABLE METHODS
 
   onDragEnd = (params) => {
-    const id = params.draggableId
     const srcI = params.source.index;
     const desI = params.destination.index;
     // const list = this.state.songs;
@@ -213,36 +213,11 @@ class Edit extends Component {
     const list = Array.from(this.state.songs);
     list.splice(desI, 0, list.splice(srcI, 1)[0])
     
-    // this.setState({
-    //   songs: list
-    // })
     this.setState((prevState) => 
       ({ songs: list })
     )
-
-
-    console.log(list, "==AFTER=");
-
-    // this.saveSongs();
   }; 
-
-
-
-  saveSongs = async () => {  
-    const reqObj = {
-      method: 'PATCH',
-      headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    };
-    const res = await fetch(`http://localhost:3001/api/v1/videos/${this.state.id}`, reqObj);
-    const updatedVideo = await res.json();
-    this.setState({ id: this.state.id, songs: updatedVideo.songs, url: updatedVideo.url, band: updatedVideo.band });
-  }
   
-
   // END OF DRAGGABLE METHODS
 
 
@@ -295,6 +270,7 @@ class Edit extends Component {
       {/* !VIDEO WRAPPER DIV */}
           </div>
         </Col>
+
 
         <Col md={6} sm={6}>
 
@@ -412,20 +388,26 @@ class Edit extends Component {
           </div>
           )}
           </Droppable>;
-        {/* !DROPPABLE DIV */}
+          {/* !DROPPABLE DIV */}
 
-              <Button 
-                variant="primary" 
-                type="submit">
-                Save
-              </Button>
+            <AddTagsBox />
+
+            <Button 
+              variant="primary" 
+              type="submit">
+              Save
+            </Button>
           </Form>
         </DragDropContext>
 
       </Col>
 
     </Row>
-      {/* !new-and-edit-video-page DIV */}
+
+    
+
+
+      {/* !new-and-edit-video-page DIV below */}
     </div>    
   </Container>    
     )
