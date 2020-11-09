@@ -150,8 +150,6 @@ const VideoDashboard = (props) => {
   
   return ( 
     <Container fluid>
-      {/* {test()} */}
-      {/* {status === 'success' ? dispatch(getVideos(resolvedData)) : null} */}
     <div className="page-content-wrapper">
       <div className="dashboard-header">
         <div className="dashboard-header-title"><h1 className="header-text">Saicophonic Medicine</h1></div>
@@ -160,13 +158,14 @@ const VideoDashboard = (props) => {
       {showTabs === "true" ? displayFilterTabs() : null}
       <VideoContainer videos={findVideos()} />
       <Pagination>
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Item>{2}</Pagination.Item>
-        <Pagination.Item>{3}</Pagination.Item>
-        <Pagination.Next />
+        <Pagination.Prev 
+          onClick={() => setPage(old => Math.max(old - 1, 1))}
+        />
+        <Pagination.Item>{ page }</Pagination.Item>
+        <Pagination.Next 
+          onClick={() => setPage(old => (!latestData ? old : old + 1))}
+        />
       </Pagination>
-
     </div>
     </Container>
   );
