@@ -19,8 +19,6 @@ class TagSearchForm extends Component {
     query: '',
   };
 
-
-
   //removed page 1 from argument below for testing
   makeAndHandleRequest = async (query) => {
     const res = await fetch(`http://localhost:3001/api/v1/tags/search/${query}`);
@@ -32,16 +30,7 @@ class TagSearchForm extends Component {
         isLoading: false,
       }); 
     } else {
-      //dispatch here    
-      // this.props.filteredByAll(filteredVideos);
-      // this.props.filteredByBand(filteredVideos, query);
-      // this.props.filteredBySong(filteredVideos, query);
-      // this.props.filteredByLyrics(filteredVideos, query);
-    // const options = filteredVideos.map(i => ({
-    //   band: i.band,
-    //   id: i.id,
-    //   songs: i.songs
-    // }));
+
     const options = filteredTags.map(tag => ({
       name: tag.name,
       id: tag.id
