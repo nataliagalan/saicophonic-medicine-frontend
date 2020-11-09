@@ -108,12 +108,6 @@ class SearchForm extends Component {
 
 
   _handleSearch = query => {
-    //double check this 3 lines below
-    // if (this._cache[query]) {
-    //   this.setState({ options: this._cache[query].filteredVideos });
-    //   return;
-    // }
-    
     this.setState({ isLoading: true  });
 
     this.makeAndHandleRequest(query)
@@ -172,21 +166,6 @@ class SearchForm extends Component {
           return (
 
             <Menu {...menuProps} >
-
-              {/* <MenuItem>
-                <Link 
-                  to={`/videos/search/${this.state.query}`}
-                  onClick={() => { 
-                    this.handleAllResults(this.state.query, "all");
-                    this.closeDropdown(); 
-                  }} 
-                  >
-                  <div>
-                    {`See all results for "${this.state.query}"`}
-                  </div>
-                </Link>
-              </MenuItem> */}
-
               {options.map((opt, ind) => 
                 <MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
                   <div>
