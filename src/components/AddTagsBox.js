@@ -8,6 +8,7 @@ import { getVideo } from '../actions/video'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { XIcon } from '@primer/octicons-react'
+import TagSearchForm from './TagSearchForm';
 
 const AddTagsBox = (props) => {
 
@@ -19,6 +20,7 @@ const AddTagsBox = (props) => {
   const dispatch = useDispatch();
   const [currentVideo, setCurrentVideo] = useState(video);
 
+  //possibly delete this, moved functionality to TagSearchForm
   const handleAddTag = (e) => {
     let newTag = e.target.value.trim()
     if (newTag !== "") {
@@ -38,6 +40,16 @@ const AddTagsBox = (props) => {
   return (
     <>
     <div className="tags-input">
+      <TagSearchForm />
+      <br></br>
+      {/* <Form.Group controlId="tags-input">
+        <Form
+        placeholder="Press enter to add tags"
+        as="textarea" 
+        rows={1}
+        onKeyUp={(e) => (e.key === "Enter" ? handleAddTag(e) : null)} 
+       />
+      </Form.Group> */}
       <ul id="tags">
         {
           video.tags ?
@@ -54,14 +66,6 @@ const AddTagsBox = (props) => {
         }
         
       </ul>
-      <Form.Group controlId="tags-input">
-        <Form
-        placeholder="Press enter to add tags"
-        as="textarea" 
-        rows={1}
-        onKeyUp={(e) => (e.key === "Enter" ? handleAddTag(e) : null)} 
-       />
-      </Form.Group>
     </div>
     </>
   )

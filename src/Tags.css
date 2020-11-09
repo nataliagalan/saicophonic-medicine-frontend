@@ -4,3 +4,9 @@
   list-style: none;
   color: #fff;
 }
+
+.ind-tag {
+  background-color: lavender;
+  padding: .3rem;
+  margin: .3rem;
+}
