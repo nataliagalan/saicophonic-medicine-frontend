@@ -159,7 +159,9 @@ const VideoDashboard = (props) => {
     let paginationArray = []
 
     for(let i = 0; i < totalPages; i++){
-      paginationArray.push(<Pagination.Item>{ i + 1 }</Pagination.Item>)
+      paginationArray.push(<Pagination.Item 
+        onClick={() => setPage(i + 1)}
+      >{ i + 1 }</Pagination.Item>)
     }
     return (
       <Pagination>
