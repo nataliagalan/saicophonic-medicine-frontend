@@ -29,8 +29,9 @@ const Tags = (props) => {
 
   return (
     tags ? 
-    (tags.map(tag => (
+    (tags.map((tag, idx) => (
       <Button
+        key={idx}
         style={{border: 'none'}} 
         className="ind-tag"
         as={Link} 
