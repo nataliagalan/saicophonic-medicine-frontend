@@ -170,14 +170,15 @@ const VideoDashboard = (props) => {
         {paginationArray}
         <Pagination.Next 
           onClick={() => setPage(old => (!latestData ? old : old + 1))}
-          disabled={!latestData}
+          disabled={page === totalPages }
         />
       </Pagination>
     );
   }
 
-  //conditional for next button
+
   //on click for each number
+  //active state for current page
 
   
   return ( 
