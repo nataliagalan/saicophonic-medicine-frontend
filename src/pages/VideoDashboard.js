@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector  } from 'react-redux';
 import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
 import { setFilter } from '../actions/setFilter';
@@ -10,141 +10,127 @@ import Nav from 'react-bootstrap/Nav';
 import VideoContainer from '../components/VideoContainer';
 
 
-class VideoDashboard extends Component {
+const VideoDashboard = (props) => {
 
-  componentDidMount() {
-    const token = localStorage.getItem('myAppToken') 
-    if(!token){
-      this.fetchVideos()
-    } else {
-      this.fetchUser()
-    }
-    this.fetchVideos()
-  }
+   //useSelector is similar to setStateToProps
+   const videos = useSelector(state => state.videos);
+   const auth = useSelector(state => state.auth);
 
-  fetchVideos = async () => {
-    const res = await fetch('http://localhost:3001/api/v1/videos');
-    const videos = await res.json();
-    this.props.getVideos(videos);
-  };
+   const filteredByAll = useSelector(state => state.filteredByAll);
+   const filteredByBand = useSelector(state => state.filteredByBand);
+   const filteredBySong = useSelector(state => state.filteredBySong);
+   const filteredByLyrics = useSelector(state => state.filteredByLyrics);
+   const filter = useSelector(state => state.setFilter);
+   const showTabs = useSelector(state => state.toggleTabs.showTabs);
 
-  fetchUser = async () => {
-    const token = localStorage.getItem('myAppToken') 
-    const reqObj = {
-      method: 'GET',
-      headers: {
-      'Authorization': `Bearer ${token}`
+   //useDispatch is similar to setDispatchToProps
+   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // code to run on component mount
+    const token = localStorage.getItem('myAppToken')
+
+    const fetchVideos = async () => {
+      const res = await fetch(`http://localhost:3001/api/v1/videos`);
+      // const res = await fetch(`http://localhost:3001/api/v1/videos?page=3`);
+      const videos = await res.json();
+      dispatch(getVideos(videos));
+
+    };
+
+    const fetchUser = async () => {
+      const token = localStorage.getItem('myAppToken') 
+      const reqObj = {
+        method: 'GET',
+        headers: {
+        'Authorization': `Bearer ${token}`
+        }
+      }
+      const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
+      const data = await res.json();
+      if(data.error) {
+        props.history.push('/admin')
+      } else {
+        //need to store the user (data) in store state
+        dispatch(currentUser(data));
       }
     }
-    const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
-    const data = await res.json();
-    if(data.error) {
-      this.props.history.push('/admin')
-    } else {
-      //need to store the user (data) in store state
-      this.props.currentUser(data)
-    }
-  }
 
-  displayFilterTabs = () => {
+    if(!token){
+      fetchVideos()
+    } else {
+      fetchUser()
+      fetchVideos()
+    }
+  }, [])
+
+  const displayFilterTabs = () => {
     return (
       <Nav fill variant="tabs" defaultActiveKey="all">
         <Nav.Item>
           <Nav.Link 
             eventKey="all"
             title="all"
-            onClick={() => this.handleTabClick("all") }
+            onClick={() => handleTabClick("all") }
           >
-              All({this.props.filteredByAll.length})
+              All({filteredByAll.length})
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            // onClick={() => this.findVideos("bands")}
-            onClick={() => this.handleTabClick("bands") }
+            onClick={() => handleTabClick("bands") }
             title="bands"
-            // eventKey="link-2">Artist/Bands({this.props.bands})</Nav.Link>
-            eventKey="band">Artist/Bands({this.props.filteredByBand.bands.length})</Nav.Link>
+            eventKey="band">Artist/Bands({filteredByBand.bands.length})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.handleTabClick("songs")}
+            onClick={() => handleTabClick("songs")}
             title="songs"
-            eventKey="songs">Songs({this.props.filteredBySong.songs.length})</Nav.Link>
+            eventKey="songs">Songs({filteredBySong.songs.length})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
-            onClick={() => this.handleTabClick("lyrics")}
+            onClick={() => handleTabClick("lyrics")}
             title="lyrics"
-            eventKey="lyrics">Lyrics({this.props.filteredByLyrics.lyrics.length})</Nav.Link>
+            eventKey="lyrics">Lyrics({filteredByLyrics.lyrics.length})</Nav.Link>
         </Nav.Item>
       </Nav> )
   }
 
-  findVideos = () => {
-    switch (this.props.filter) {
+  const findVideos = () => {
+    switch (filter) {
       case "none":
-        return this.props.videos
+        return videos
       case "all":
-        return this.props.filteredByAll
+        return filteredByAll
       case "bands":
-        return this.props.filteredByBand.bands 
+        return filteredByBand.bands 
       case "songs":
-        return this.props.filteredBySong.songs
+        return filteredBySong.songs
       case "lyrics":
-        return this.props.filteredByLyrics.lyrics
+        return filteredByLyrics.lyrics
       default:
-        return this.props.videos
+        return videos
     }
   }
 
-  handleTabClick = (tab) => {
- 
-    this.props.setFilter(tab)
-
+  const handleTabClick = (tab) => {
+    dispatch(setFilter(tab));
   }
 
 
-  render() {
-    const videosToDisplay = this.findVideos()
-    // console.log(this.props, "======VIDEO DASHBOARD=====");
-    return (
-      <Container fluid>
-      <div className="page-content-wrapper">
-        <div className="dashboard-header">
-          <div className="dashboard-header-title"><h1 className="header-text">Saicophonic Medicine</h1></div>
-          <h5 className="header-subtext">An expanding library of live music sessions</h5>
-        </div>
-        {/* {this.displayFilterTabs()} */}
-        {this.props.showTabs === "true" ? this.displayFilterTabs() : null}
-        <VideoContainer videos={videosToDisplay} />
+  return ( 
+    <Container fluid>
+    <div className="page-content-wrapper">
+      <div className="dashboard-header">
+        <div className="dashboard-header-title"><h1 className="header-text">Saicophonic Medicine</h1></div>
+        <h5 className="header-subtext">An expanding library of live music sessions</h5>
       </div>
-      </Container>
-    )
-  }
+      {showTabs === "true" ? displayFilterTabs() : null}
+      <VideoContainer videos={findVideos()} />
+    </div>
+    </Container>
+  );
 }
-
-const setStateToProps = (state) => {
-  return {
-    videos: state.videos,
-    filteredByAll: state.filteredByAll,
-    filteredByBand: state.filteredByBand,
-    filteredBySong: state.filteredBySong,
-    filteredByLyrics: state.filteredByLyrics,
-    filter: state.setFilter,
-    showTabs: state.toggleTabs.showTabs,
-    //note to self: naming the key setFilter here will not work because the props already have a key called setFilter pointing to the reducer
-    //setFilter: state.setFilter,
-    auth: state.auth
-  };
-};
-
-const setDispatchToProps = {
-  currentUser,
-  getVideos,
-  setFilter,
-  toggleTabs
-  
-};
-
-export default connect(setStateToProps, setDispatchToProps)(VideoDashboard);
+ 
+export default VideoDashboard;
