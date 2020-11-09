@@ -117,7 +117,7 @@ const VideoDashboard = (props) => {
   }
 
   const findVideos = () => {
-    console.log(resolvedData, "==resolvedData under findVideos==");
+    console.log(resolvedData, "==resolvedData hearder under findVideos==");
     console.log(latestData, "==latestData under findVideos==");
     
     switch (filter) {
@@ -146,6 +146,38 @@ const VideoDashboard = (props) => {
     dispatch(setFilter(tab));
   }
 
+  // const totalPages = (totalCount, perPage) => {
+
+  //   //let perPage = resolvedData.lenth
+  //   //let totalCount = parseInt(videos[0].number_of_pages)
+  //   return Math.ceil(totalCount / perPage)
+  // }
+
+  const renderPagination = () => {
+    // debugger
+    let totalPages = videos[0].number_of_pages
+    let paginationArray = []
+
+    for(let i = 0; i < totalPages; i++){
+      paginationArray.push(<Pagination.Item>{ i + 1 }</Pagination.Item>)
+    }
+    return (
+      <Pagination>
+        <Pagination.Prev 
+          onClick={() => setPage(old => Math.max(old - 1, 1))}
+          disabled={page === 1}
+        />
+        {paginationArray}
+        <Pagination.Next 
+          onClick={() => setPage(old => (!latestData ? old : old + 1))}
+          disabled={!latestData}
+        />
+      </Pagination>
+    );
+  }
+
+  //conditional for next button
+  //on click for each number
 
   
   return ( 
@@ -157,18 +189,24 @@ const VideoDashboard = (props) => {
       </div>
       {showTabs === "true" ? displayFilterTabs() : null}
       <VideoContainer videos={findVideos()} />
-      <Pagination>
-        <Pagination.Prev 
-          onClick={() => setPage(old => Math.max(old - 1, 1))}
-        />
-        <Pagination.Item>{ page }</Pagination.Item>
-        <Pagination.Next 
-          onClick={() => setPage(old => (!latestData ? old : old + 1))}
-        />
-      </Pagination>
+      {status === "success" ? renderPagination() : null}
+
     </div>
     </Container>
   );
 }
  
 export default VideoDashboard;
+
+
+{/* <Pagination>
+<Pagination.Prev 
+  onClick={() => setPage(old => Math.max(old - 1, 1))}
+  disabled={page === 1}
+/>
+<Pagination.Item>{ page }</Pagination.Item>
+<Pagination.Next 
+  onClick={() => setPage(old => (!latestData ? old : old + 1))}
+  disabled={!latestData}
+/>
+</Pagination> */}
