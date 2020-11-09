@@ -28,3 +28,10 @@ export const deleteVideo = (videos) => {
     videos: videos
   };
 };
+
+export const getTaggedVideos = (videos) => {
+  return {
+    type: "GET_TAGGED_VIDEOS",
+    videos: videos
+  };
+};

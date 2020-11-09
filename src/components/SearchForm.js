@@ -105,8 +105,6 @@ class SearchForm extends Component {
   }
 
 
-
-
   _handleSearch = query => {
     this.setState({ isLoading: true  });
 

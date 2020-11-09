@@ -14,6 +14,7 @@ import Show from '../pages/Show';
 import Edit from '../pages/Edit';
 import SearchResults from '../pages/SearchResults';
 import Random from '../pages/Random';
+import TaggedResults from '../pages/TaggedResults';
 
 
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route exact path="/videos/:id" component={Show} />
             <Route exact path="/videos/edit/:id" component={Edit} />
             <Route exact path="/videos/search/:query" component={SearchResults} />  
+            <Route exact path="/videos/tagged/:tag" component={TaggedResults} /> 
             <Route exact path="/random" component={Random} />  
           </Switch>
         </div>
