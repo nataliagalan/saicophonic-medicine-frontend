@@ -32,6 +32,7 @@ const Tags = (props) => {
     (tags.map(tag => (
       <Button
         style={{border: 'none'}} 
+        className="ind-tag"
         as={Link} 
         onClick={() => fetchTaggedVideos(tag.name)}
         to={`/videos/tagged/${tag.name}`}
