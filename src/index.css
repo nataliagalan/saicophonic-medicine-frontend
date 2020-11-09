@@ -226,5 +226,11 @@ code {
 
 }
 
+.ind-tag {
+  background-color: lavender;
+  color: #000;
+  padding: .3rem;
+  margin: .3rem;
+}
 
 
