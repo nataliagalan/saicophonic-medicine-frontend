@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector  } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { getTaggedVideos } from '../actions/videos';
@@ -10,10 +10,6 @@ const Tags = (props) => {
 
   const { tags } = props
 
-   // useSelector is similar to setStateToProps
-   const videos = useSelector(state => state.videos);
-
-     //useDispatch is similar to setDispatchToProps
   const dispatch = useDispatch();
 
   const fetchTaggedVideos = async (tag) => {
@@ -22,7 +18,6 @@ const Tags = (props) => {
     if(filteredVideosByTag.error) {
     } else {
       dispatch(getTaggedVideos(filteredVideosByTag));
-      // props.history.push(`/videos/tagged/${tag}`)
     }
 
   }

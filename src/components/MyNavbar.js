@@ -13,7 +13,7 @@ import SearchForm from './SearchForm';
 const MyNavbar = (props) => {
     //useSelector is similar to setStateToProps
     const auth = useSelector(state => state.auth);
-    const showGrid = useSelector(state => state.toggleGrid);
+    // const showGrid = useSelector(state => state.toggleGrid);
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
 

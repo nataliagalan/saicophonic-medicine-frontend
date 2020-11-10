@@ -4,7 +4,7 @@ import { useDispatch, useSelector  } from 'react-redux';
 import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
 import { setFilter } from '../actions/setFilter';
-import { toggleTabs } from '../actions/toggleTabs';
+// import { toggleTabs } from '../actions/toggleTabs';
 
 import Container from 'react-bootstrap/Container';
 import Pagination from 'react-bootstrap/Pagination';
@@ -16,41 +16,35 @@ const VideoDashboard = (props) => {
   
   //useSelector is similar to setStateToProps
   const videos = useSelector(state => state.videos);
-  const auth = useSelector(state => state.auth);
+  // const auth = useSelector(state => state.auth);
   const filteredByAll = useSelector(state => state.filteredByAll);
   const filteredByBand = useSelector(state => state.filteredByBand);
   const filteredBySong = useSelector(state => state.filteredBySong);
   const filteredByLyrics = useSelector(state => state.filteredByLyrics);
   const filter = useSelector(state => state.setFilter);
   const showTabs = useSelector(state => state.toggleTabs.showTabs);
+  // const showGrid = useSelector(state => state.toggleGrid);
   
   //useDispatch is similar to setDispatchToProps
   const dispatch = useDispatch();
+
+ 
   
   const fetchVideos = async (key, page) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos?page=${page}`);
     // const res = await fetch(`http://localhost:3001/api/v1/videos`);
     const videos = await res.json();
     dispatch(getVideos(videos));
-    
     // return res.json();
-    
     return videos
   };
 
   const [ page, setPage ] = useState(1);
   
   const { resolvedData, latestData, status } = usePaginatedQuery(['videos', page], fetchVideos);
-  // console.log(resolvedData, "==resolvedData under usePaginatedQuery==");
 
-//componentdidupdate
-  
   useEffect(() => {
-
     //both resolvedData and latestDate are always undefined here
-    // console.log(resolvedData, "==resolveddata in useeffect====");
-    // console.log(latestData, "==latestdata in useffect====");
-
     // code to run on component mount
     const token = localStorage.getItem('myAppToken')
 
@@ -117,18 +111,12 @@ const VideoDashboard = (props) => {
   }
 
   const findVideos = () => {
-    console.log(resolvedData, "==resolvedData hearder under findVideos==");
-    console.log(latestData, "==latestData under findVideos==");
-    
     switch (filter) {
       case "none":
-        //here return resolvedData if status === 'success'
         if(status === 'success'){
         return resolvedData } else {
           return videos
         }
-    
-        // return videos
       case "all":
         return filteredByAll
       case "bands":
@@ -146,20 +134,14 @@ const VideoDashboard = (props) => {
     dispatch(setFilter(tab));
   }
 
-  // const totalPages = (totalCount, perPage) => {
-
-  //   //let perPage = resolvedData.lenth
-  //   //let totalCount = parseInt(videos[0].number_of_pages)
-  //   return Math.ceil(totalCount / perPage)
-  // }
 
   const renderPagination = () => {
-    // debugger
     let totalPages = videos[0].number_of_pages
     let paginationArray = []
 
     for(let i = 0; i < totalPages; i++){
       paginationArray.push(<Pagination.Item 
+        key={i + 1}
         onClick={() => setPage(i + 1)}
       >{ i + 1 }</Pagination.Item>)
     }
@@ -177,10 +159,6 @@ const VideoDashboard = (props) => {
       </Pagination>
     );
   }
-
-
-  //on click for each number
-  //active state for current page
 
   
   return ( 
@@ -201,15 +179,3 @@ const VideoDashboard = (props) => {
  
 export default VideoDashboard;
 
-
-{/* <Pagination>
-<Pagination.Prev 
-  onClick={() => setPage(old => Math.max(old - 1, 1))}
-  disabled={page === 1}
-/>
-<Pagination.Item>{ page }</Pagination.Item>
-<Pagination.Next 
-  onClick={() => setPage(old => (!latestData ? old : old + 1))}
-  disabled={!latestData}
-/>
-</Pagination> */}

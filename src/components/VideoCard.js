@@ -3,7 +3,6 @@ import { useSelector  } from 'react-redux';
 // import { useDispatch, useSelector  } from 'react-redux';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Line from './Line';
 import ReactPlayer from 'react-player/lazy'
 import LyricsCard from './LyricsCard';
