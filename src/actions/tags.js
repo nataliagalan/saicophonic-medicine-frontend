@@ -7,4 +7,9 @@ export const tags = (newTag) => {
     newTag: newTag
   };
 };
+export const clearTags = () => {
+  return {
+    type: "CLEAR_TAGS"
+  };
+};
 

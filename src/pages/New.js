@@ -5,6 +5,7 @@ import { connect  } from 'react-redux';
 // import { loginSuccess } from '../actions/auth'
 import { currentUser } from '../actions/auth'
 import { addVideo } from '../actions/videos'
+import { clearTags } from '../actions/tags'
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -123,6 +124,7 @@ class New extends Component {
       this.props.addVideo(allVideos);
       this.props.history.push(`/videos/${newVideo.id}`);
     }
+    this.props.clearTags();
   }
 
  handleAddInput = () => {
@@ -431,7 +433,8 @@ const setStateToProps = (state) => {
 
 const setDispatchToProps = {
   addVideo,
-  currentUser
+  currentUser,
+  clearTags
 };
 
 export default connect(setStateToProps, setDispatchToProps)(New);
