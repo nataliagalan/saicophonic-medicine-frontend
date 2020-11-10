@@ -4,6 +4,7 @@ import { useDispatch, useSelector  } from 'react-redux';
 import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
 import { setFilter } from '../actions/setFilter';
+// import { filteredByAll } from '../actions/filteredByAll';
 // import { toggleTabs } from '../actions/toggleTabs';
 
 import Container from 'react-bootstrap/Container';
@@ -32,6 +33,8 @@ const VideoDashboard = (props) => {
   
   const fetchVideos = async (key, page) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos?page=${page}`);
+
+    //if something do a new request
     // const res = await fetch(`http://localhost:3001/api/v1/videos`);
     const videos = await res.json();
     dispatch(getVideos(videos));
@@ -40,6 +43,7 @@ const VideoDashboard = (props) => {
   };
 
   const [ page, setPage ] = useState(1);
+
   
   const { resolvedData, latestData, status } = usePaginatedQuery(['videos', page], fetchVideos);
 
@@ -137,7 +141,8 @@ const VideoDashboard = (props) => {
 
   const renderPagination = () => {
 
-    let totalPages = videos[0].number_of_pages
+    let isSearched = showTabs === "true"
+    let totalPages = isSearched ? Math.ceil(filteredByAll.length / 8) : videos[0].number_of_pages
 
     let paginationArray = []
 
@@ -147,6 +152,7 @@ const VideoDashboard = (props) => {
         onClick={() => setPage(i + 1)}
       >{ i + 1 }</Pagination.Item>)
     }
+
     return (
       <Pagination>
         <Pagination.Prev 
@@ -160,49 +166,9 @@ const VideoDashboard = (props) => {
         />
       </Pagination>
     );
-  
   }
 
-  const renderTabsPagination = () => {
-    // let totalPages = 0
-    //   switch (filter) {
-    //     case "none":
-    //       totalPages = videos[0].number_of_pages
-    //     case "all":
-    //       let count = filteredByAll.length
-    //       totalPages = Math.ceil(count / 8)
-    //       // debugger
-    //     default:
-    //       totalPages = videos[0].number_of_pages
-    //   }
-  
-      let count = filteredByAll.length
-      let totalPages = Math.ceil(count / 8)
-      // let totalPages = videos[0].number_of_pages
-  
-      let paginationArray = []
-  
-      for(let i = 0; i < totalPages; i++){
-        paginationArray.push(<Pagination.Item 
-          key={i + 1}
-          onClick={() => setPage(i + 1)}
-        >{ i + 1 }</Pagination.Item>)
-      }
-      return (
-        <Pagination>
-          <Pagination.Prev 
-            onClick={() => setPage(old => Math.max(old - 1, 1))}
-            disabled={page === 1}
-          />
-          {paginationArray}
-          <Pagination.Next 
-            onClick={() => setPage(old => (!latestData ? old : old + 1))}
-            disabled={page === totalPages }
-          />
-        </Pagination>
-      );
-    
-    }
+
   
   return ( 
     <Container fluid>
@@ -213,8 +179,9 @@ const VideoDashboard = (props) => {
       </div>
       {showTabs === "true" ? displayFilterTabs() : null}
       <VideoContainer videos={findVideos()} />
-      {showTabs === "true" ? renderTabsPagination() : null} 
-      {status === "success" && showTabs === "false" ? renderPagination() : null}
+      {/* {showTabs === "true" ? renderTabsPagination() : null}  */}
+      {/* {status === "success" ? renderPagination() : null} */}
+      {status === "success" && renderPagination()}
 
     </div>
     </Container>
@@ -222,23 +189,3 @@ const VideoDashboard = (props) => {
 }
  
 export default VideoDashboard;
-
-//I think this would require refactoring the searchform as functional component
-//and using react-query
-//if showtabs === true
-//displayfiltertabs
-//renderpagination where   
-  //send total count from backend
-  //use that to display tab count
-  // only send 8 per page via search
-  //incorporate page params
-  //do the fetchrequest with params
-  //increment page by clicking of prev
-  // let count = filteredByAll.length
-  // totalPages = Math.ceil(count / 8)
-
-//if showtabs === true
-//displayfiltertabs
-//renderpagination where   
-  // let count = filteredByAll.length
-  // totalPages = Math.ceil(count / 8)
