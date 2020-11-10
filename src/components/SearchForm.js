@@ -44,11 +44,7 @@ class SearchForm extends Component {
       this.props.filteredByBand(filteredVideos, query);
       this.props.filteredBySong(filteredVideos, query);
       this.props.filteredByLyrics(filteredVideos, query);
-    // const options = filteredVideos.map(i => ({
-    //   band: i.band,
-    //   id: i.id,
-    //   songs: i.songs
-    // }));
+
     const options = filteredVideos.map(i => ({
       band: i.band,
       id: i.id,
@@ -148,7 +144,7 @@ class SearchForm extends Component {
             return `${option.band} ${songString} ${lyricsString}`
           }
         }
-        maxResults={10}
+        maxResults={6}
         minLength={2}
         onInputChange={this._handleInputChange}
         // onPaginate={this._handlePagination}

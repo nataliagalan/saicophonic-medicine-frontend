@@ -6,7 +6,8 @@ import { deleteVideo } from "../actions/videos";
 import { getVideo } from "../actions/video";
 import { currentUser } from '../actions/auth';
 
-
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import VideoCard from '../components/VideoCard';
 
@@ -52,17 +53,17 @@ class Show extends Component {
     return (
       <>
         {
-          <div className="page-content-wrapper">
           <Container fluid>
+          <div className="new-and-edit-video-page">
             <br></br>
             {
             (video === []) ?
               null
               :
-              <VideoCard {...video} />
+              <Row><VideoCard {...video} /></Row>
             }
-          </Container>
           </div>
+          </Container>
         }
       </>
     )
