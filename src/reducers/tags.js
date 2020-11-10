@@ -9,6 +9,8 @@ const tags = (state = initialValue, action) => {
       return [...state, action.newTag ]
     case "CLEAR_TAGS":
       return []
+    case "DELETE_TAG":
+      return [...action.tags ]
     default:
       return state;
   }
