@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router';
 import { connect } from "react-redux";
 import { getVideo } from "../actions/video";
+import { getTaggedVideos } from '../actions/videos';
 import { setFilter } from '../actions/setFilter';
 import { toggleTabs } from '../actions/toggleTabs';
 import { filteredByAll } from '../actions/filteredByAll';
@@ -45,10 +46,11 @@ class SearchForm extends Component {
       this.props.filteredBySong(filteredVideos, query);
       this.props.filteredByLyrics(filteredVideos, query);
 
-    const options = filteredVideos.map(i => ({
-      band: i.band,
-      id: i.id,
-      songs: i.songs
+    const options = filteredVideos.map((video, idx) => ({
+      one: idx,
+      band: video.band,
+      id: video.id,
+      songs: video.songs
     }));
 
     //useful for displaying highlighted options
@@ -82,6 +84,8 @@ class SearchForm extends Component {
     const filteredVideos = await res.json();
 
     this.props.filteredByAll(filteredVideos);
+    this.props.history.push(`/videos/search/${query}`)
+    this.typeahead.clear();
    
   }
 
@@ -125,6 +129,18 @@ class SearchForm extends Component {
     }
   }
 
+  fetchTaggedVideos = async (tag) => {
+    this.typeahead.clear();
+    this.closeDropdown()
+    const res = await fetch(`http://localhost:3001/api/v1/videos/tagged/${tag}`);
+    const filteredVideosByTag = await res.json();
+    if(filteredVideosByTag.error) {
+      console.log("error");
+    } else {
+      this.props.getTaggedVideos(filteredVideosByTag);
+      this.props.history.push(`/videos/tagged/${tag}`)
+    }
+  }
  
   render() {
     // console.log(this.props, "============SEARCH FORM=========");
@@ -134,6 +150,7 @@ class SearchForm extends Component {
     <>
       <AsyncTypeahead
         {...this.state}
+        ref={typeahead => this.typeahead = typeahead}
         className="searchForm"
         id="video-archive-typeahead"
         //labelkey determines the option keys that get searched
@@ -160,16 +177,33 @@ class SearchForm extends Component {
           return (
 
             <Menu {...menuProps} >
-              {options.map((opt, ind) => 
-                <MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
-                  <div>
-                    <Highlighter search={this.state.query}>
-                      {`${opt.band} ${opt.song1} ${opt.lyrics1} `}
-                    </Highlighter>
-                  </div>
-                </MenuItem>
-              )}
-            </Menu>
+        
+            {options.map((opt, ind) => 
+              <MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
+                <div>
+                  <Highlighter search={this.state.query}>
+                    {`${opt.band} ${opt.song1} ${opt.lyrics1} `}
+                  </Highlighter>
+                </div>
+              </MenuItem>
+            )}
+
+            <MenuItem option={options[0]} 
+            onClick={() => this.handleAllResults(this.state.query)}
+            >
+              <div>
+                {`See all results`}
+              </div>
+            </MenuItem>
+            <MenuItem option={options[0]} 
+            onClick={() => this.fetchTaggedVideos(this.state.query)}
+            >
+              <div>
+                {`Videos tagged with ${this.state.query}`}
+              </div>
+            </MenuItem>
+
+          </Menu>
 
           );
         }}
@@ -207,7 +241,8 @@ const setDispatchToProps = {
   filteredBySong,
   filteredByLyrics,
   toggleTabs,
-  setFilter
+  setFilter,
+  getTaggedVideos
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(SearchForm));

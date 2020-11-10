@@ -140,9 +140,16 @@ const VideoDashboard = (props) => {
 
 
   const renderPagination = () => {
-
+  //TODO feature in progress: pagination for search results
     let isSearched = showTabs === "true"
-    let totalPages = isSearched ? Math.ceil(filteredByAll.length / 8) : videos[0].number_of_pages
+    // let totalPages = isSearched ? Math.ceil(filteredByAll.length / 8) : videos[0].number_of_pages
+    // let totalPages = videos[0].number_of_pages
+    let totalPages = 0
+    if(videos[0]){
+      totalPages = videos[0].number_of_pages
+    }else{
+      totalPages = 0
+    }
 
     let paginationArray = []
 
@@ -152,20 +159,23 @@ const VideoDashboard = (props) => {
         onClick={() => setPage(i + 1)}
       >{ i + 1 }</Pagination.Item>)
     }
-
-    return (
-      <Pagination>
-        <Pagination.Prev 
-          onClick={() => setPage(old => Math.max(old - 1, 1))}
-          disabled={page === 1}
-        />
-        {paginationArray}
-        <Pagination.Next 
-          onClick={() => setPage(old => (!latestData ? old : old + 1))}
-          disabled={page === totalPages }
-        />
-      </Pagination>
-    );
+    if(isSearched){
+      return
+    } else {
+      return (
+        <Pagination>
+          <Pagination.Prev 
+            onClick={() => setPage(old => Math.max(old - 1, 1))}
+            disabled={page === 1}
+          />
+          {paginationArray}
+          <Pagination.Next 
+            onClick={() => setPage(old => (!latestData ? old : old + 1))}
+            disabled={page === totalPages }
+          />
+        </Pagination>
+      );
+    }
   }
 
 
@@ -173,15 +183,20 @@ const VideoDashboard = (props) => {
   return ( 
     <Container fluid>
     <div className="page-content-wrapper">
-      <div className="dashboard-header">
+      {props.hideHeader ?
+        null
+        :
+      (<div className="dashboard-header">
         <div className="dashboard-header-title"><h1 className="header-text">Saicophonic Medicine</h1></div>
         <h5 className="header-subtext">An expanding library of live music sessions</h5>
-      </div>
+      </div>)
+      }
       {showTabs === "true" ? displayFilterTabs() : null}
       <VideoContainer videos={findVideos()} />
       {/* {showTabs === "true" ? renderTabsPagination() : null}  */}
       {/* {status === "success" ? renderPagination() : null} */}
       {status === "success" && renderPagination()}
+      {/* {status === "success" && !props.hideHeader ? renderPagination() : null} */}
 
     </div>
     </Container>

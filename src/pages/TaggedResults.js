@@ -19,7 +19,7 @@ class TaggedResults extends Component {
         {this.props.videos ?
         (<VideoContainer videos={this.props.videos} />)
         :
-        null
+        <h5 className="header-subtext">no videos tagged with "{tag}"</h5>
         }
     </div>
     </Container>

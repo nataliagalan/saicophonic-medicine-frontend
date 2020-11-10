@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import VideoDashboard from './VideoDashboard'
+import VideoContainer from '../components/VideoContainer';
+import Container from 'react-bootstrap/Container';
+
 
 class SearchResults extends Component {
 
   render() {
-    // console.log(this.props,"======search results page========");
+    let query = this.props.location.pathname.split('/')[3]
     return (
       <>
-        <VideoDashboard /> 
+    <Container fluid>
+      <div className="page-content-wrapper">
+        <div className="dashboard-header">
+        <h5 className="header-subtext">All results for "{query}"</h5>
+        </div>
+        <VideoDashboard hideHeader={true}/> 
+        
+    </div>
+    </Container>
       </>
     )
   }
