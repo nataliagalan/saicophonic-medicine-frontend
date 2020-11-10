@@ -215,7 +215,6 @@ class New extends Component {
     const srcI = params.source.index;
     const desI = params.destination.index;
     // const list = this.state.songs;
-    console.log(this.state.songs, "==BEFORE=");
     const list = Array.from(this.state.songs);
     list.splice(desI, 0, list.splice(srcI, 1)[0])
     
@@ -343,7 +342,7 @@ class New extends Component {
                         autoComplete="off"
                         label="timestamp" 
                         defaultValue={song.timestamp}
-                        value={song.timestamp}
+                        // value={song.timestamp}
                         //handleFocus sets inputToUpdate with corresponding index
                         onFocus={(e) => this.handleFocus(e, i)} 
                         // defaultValue={this.state.played}
