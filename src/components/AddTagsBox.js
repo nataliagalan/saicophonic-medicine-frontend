@@ -2,10 +2,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import '../Tags.css';
-
-import { tags } from '../actions/tags'
 import { getVideo } from '../actions/video'
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { XIcon } from '@primer/octicons-react'
 import TagSearchForm from './TagSearchForm';
@@ -14,22 +11,22 @@ const AddTagsBox = (props) => {
 
   // useSelector is similar to setStateToProps
   const video = useSelector(state => state.video);
-  let currentTags = useSelector(state => state.tags);
+  // let currentTags = useSelector(state => state.tags);
 
   //useDispatch is similar to setDispatchToProps
   const dispatch = useDispatch();
   const [currentVideo, setCurrentVideo] = useState(video);
 
   //possibly delete this, moved functionality to TagSearchForm
-  const handleAddTag = (e) => {
-    let newTag = e.target.value.trim()
-    if (newTag !== "") {
-    dispatch(tags(newTag));
-    video.tags = [...video.tags, {name: newTag}]
-    dispatch(getVideo(video));
-    e.target.value = ""
-    }
-  }
+  // const handleAddTag = (e) => {
+  //   let newTag = e.target.value.trim()
+  //   if (newTag !== "") {
+  //   dispatch(tags(newTag));
+  //   video.tags = [...video.tags, {name: newTag}]
+  //   dispatch(getVideo(video));
+  //   e.target.value = ""
+  //   }
+  // }
 
   const removeTag = (idxToRemove) => {
     let filteredTags = video.tags.filter((_, index) => index !== idxToRemove);
