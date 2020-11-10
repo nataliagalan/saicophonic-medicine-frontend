@@ -1,98 +1,172 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector  } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { addVideo } from '../actions/videos'
+import React, { Component } from 'react';
+import { connect  } from 'react-redux';
+// import { withRouter } from 'react-router-dom';
+
+// import { loginSuccess } from '../actions/auth'
 import { currentUser } from '../actions/auth'
+import { addVideo } from '../actions/videos'
+
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
 import Duration from '../components/Duration';
+import { GrabberIcon } from '@primer/octicons-react'
+import AddTagsBox from '../components/AddTagsBox';
 
 
-const New = (props) => {
-  const ref = React.createRef()
 
-  //useSelector is similar to setStateToProps
-  const videos = useSelector(state => state.videos);
-  const auth = useSelector(state => state.auth);
-  //useDispatch is similar to setDispatchToProps
-  const dispatch = useDispatch();
+class New extends Component {
 
-  useEffect(() => {
-    // code to run on component mount
-    const token = localStorage.getItem('myAppToken')
-
-    const fetchData = async () => {
-      const reqObj = {
-        method: 'GET',
-        headers: {
-        'Authorization': `Bearer ${token}`
-        }
+  state = {
+    id: '',
+    url: '',
+    band: '',
+    songs: [
+      {
+        title: '',
+        lyrics: '',
+        timestamp: '',
       }
-      const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
-      const data = await res.json();
-      if(data.error) {
-        props.history.push('/admin')
-      } else {
-        //need to store the user (data) in store state
-        dispatch(currentUser(data));
+    ],
+    tags: [
+      {
+        name: '',
       }
-    }
+    ],
+    played: 0,
+    seeking: false,
+    duration: 0,
+    inputToUpdate: 0
+  }
 
+  componentDidMount() {
+    const token = localStorage.getItem('myAppToken') 
     if(!token){
-      props.history.push('/admin')
+      this.props.history.push('/admin')
     } else {
-      fetchData()
+      this.fetchData()
     }
-  }, [])
 
+  }
+
+  fetchData = async () => {
+    const token = localStorage.getItem('myAppToken') 
+    const reqObj = {
+      method: 'GET',
+      headers: {
+      'Authorization': `Bearer ${token}`
+      }
+    }
+    const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
+    const data = await res.json();
+    if(data.error) {
+      this.props.history.push('/admin')
+    } else {
+      //need to store the user (data) in store state
+      this.props.currentUser(data)
+    }
+  }
+
+  handleChange = (e, i) => {
+    const { name, value } = e.target;
+    const list = [...this.state.songs];
+    list[i][name] = value
+
+    this.setState((prevState) => 
+      ({songs: list }))
+  }
+
+  handleVideoInputChange = (e) => {
+    this.setState({ url: e.target.value })
+  }
+
+  handleBandInputChange = (e) => {
+    this.setState({ band: e.target.value })
+  }
+
+  prepareSubmit = (e) => {
+    e.preventDefault();
+    let videoToAdd = {
+      id: this.state.id,
+      url: this.state.url,
+      band: this.state.band,
+      songs: this.state.songs,
+      tags: this.props.video.tags
+    }
+    this.handleSubmit(videoToAdd)
+  }
+
+  handleSubmit = async (videoToAdd) => {
+    const reqObj = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      id: `${this.props.auth.id}`
+      },
+      body: JSON.stringify(videoToAdd)
+    };
+    const res = await fetch(`http://localhost:3001/api/v1/videos`,reqObj);
+    const newVideo = await res.json();
+
+    if (newVideo.error) {
+      console.log(newVideo.error)}
+    else {
+      const allVideos = [...this.props.videos, newVideo];
+      this.props.addVideo(allVideos);
+      this.props.history.push(`/videos/${newVideo.id}`);
+    }
+  }
+
+ handleAddInput = () => {
+    this.setState((prevState) => 
+      ({songs: [...prevState.songs,  { title: '', lyrics: '', timestamp: '' }]})
+    )
+  }
+
+  handleRemoveInput = (i) => {
+    let songs = [...this.state.songs];
+    songs.splice(i, 1);
+    this.setState({
+      songs: songs
+    })
+  }
 
   //SLIDER METHODS
-  const [played, setPlayed] = useState(0);
-  const [seeking, setSeeking] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [inputToUpdate, setInputToUpdate] = useState(0);
 
   //format (and pad) takes seconds, returns 00:00 to display
-  function format (seconds) {
+  format = (seconds) => {
     const date = new Date(seconds * 1000)
     const hh = date.getUTCHours()
     const mm = date.getUTCMinutes()
-    const ss = pad(date.getUTCSeconds())
+    const ss = this.pad(date.getUTCSeconds())
     if (hh) {
-      return `${hh}:${pad(mm)}:${ss}`
+      return `${hh}:${this.pad(mm)}:${ss}`
     }
     return `${mm}:${ss}`
   }
   
-  function pad (string) {
+  pad = (string) => {
     return ('0' + string).slice(-2)
   }
-  
-  const handleSeekMouseDown = () => {
-    setSeeking(true)
+
+  handleSeekMouseDown = e => {
+    this.setState({ seeking: true })
   }
 
-  const handleSeekMouseUp = e => {
-    setSeeking(false)
-    //e.target.value is state.played (played)
-    let secondsForSeekTo = Math.round(duration * played)
-    ref.current.seekTo( secondsForSeekTo )
-  }
-
-  const handleSeekChange = (e) => {
-    setPlayed(e.target.value)
+  handleSeekChange = e => {
+    this.setState({ played: parseFloat(e.target.value) })
     // e.target.value = played
-    let timeToDisplay = format(duration * e.target.value)
-    
-    //inputToUpdate is the index of the item that is focused
-    //inputList[inputToUpdate] is the item in the array that needs to be updated
-    const updatedSongArr = inputList.map((song, i) => {
-      if (i === inputToUpdate) {
+    let timeToDisplay = this.format( this.state.duration * e.target.value )
+
+    const updatedSongArr = this.state.songs.map((song, i) => {
+      if (i === this.state.inputToUpdate) {
         return {
           ...song,
           timestamp: timeToDisplay
@@ -102,213 +176,261 @@ const New = (props) => {
       }
     })
 
-    setInputList(updatedSongArr);
+    this.setState({songs: updatedSongArr})
+
   }
 
-  const handleDuration = (d) => {
-    //seems to only run once at the beginning
-    // and corresponds to video length in seconds
-    // takes those seconds and adds them to state
-    setDuration(d)
+  handleSeekMouseUp = e => {
+    this.setState({ seeking: false })
+    const { duration, played } = this.state
+    //e.target.value is this.state.played
+    let secondsForSeekTo = Math.round(duration * played)
+    this.player.seekTo( secondsForSeekTo )
+    // this.player.seekTo(parseFloat(e.target.value))
   }
 
-  const handleFocus = (e, i) => {
-    setInputToUpdate(i)
+  handleDuration = (d) => {
+    // d corresponds to video length in seconds
+    this.setState({ duration: d })
+  }
+  
+  handleFocus = (e, i) => {
+    this.setState({inputToUpdate: i})
+    // setInputToUpdate(i)
   }
 
-  //END OF SLIDER FUNCTIONS
+  // END OF SLIDER METHODS
 
-  const [inputList, setInputList] = useState([
-    { 
-      timestamp: '',
-      title: '',
-      lyrics: '',
-    }
-  ]);
-
-  const [videoInput, setVideoInput] = useState({url: ''});
-  const [bandInput, setBandInput] = useState({band: ''});
-
-  const handleChange = (e, i) => {
-    const { name, value } = e.target;
-    const list = [...inputList];
-    list[i][name] = value
-    setInputList(list);
+  ref = player => {
+    this.player = player
   }
 
-  const handleVideoInputChange = (e) => {
-    setVideoInput({[e.target.name]: e.target.value});
-  }
+  // DRAGGABLE METHODS
 
-  const handleBandInputChange = (e) => {
-    setBandInput({[e.target.name]: e.target.value});
-  }
- 
-  const handleAddInput = () => {
-    setInputList([...inputList, { timestamp: '', title: '', lyrics: '' }]);
-  }
-
-  const handleRemoveInput = (i) => {
-    const list = [...inputList];
-    list.splice(i, 1);
-    setInputList(list);
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    let videoToAdd = {
-      songs: inputList,
-      url: videoInput.url,
-      band: bandInput.band
-    }
-     const reqObj = {
-       method: 'POST',
-       headers: {
-       'Content-Type': 'application/json',
-       id: `${auth.id}`
-       },
-       body: JSON.stringify(videoToAdd)
-     };
-
-    const res = await fetch('http://localhost:3001/api/v1/videos', reqObj);
-    const newVideo = await res.json();
-    // ...videos comes from useSelector
-      const updatedVideos = [...videos, newVideo];
-      dispatch(addVideo(updatedVideos));
-      props.history.push(`/videos`);
-  };
+  onDragEnd = (params) => {
+    const srcI = params.source.index;
+    const desI = params.destination.index;
+    // const list = this.state.songs;
+    console.log(this.state.songs, "==BEFORE=");
+    const list = Array.from(this.state.songs);
+    list.splice(desI, 0, list.splice(srcI, 1)[0])
+    
+    this.setState((prevState) => 
+      ({ songs: list })
+    )
+  }; 
+  
+  // END OF DRAGGABLE METHODS
 
 
+  render() {
+    const { songs } = this.state
+    // console.log(songs[0].timestamp);
     return (
+    <Container fluid>
       <div className="new-and-edit-video-page">
-      {
-      videoInput.url ? 
-        <ResponsiveEmbed aspectRatio="16by9">
-          <ReactPlayer
-          ref={ref}
-          onDuration={handleDuration} 
-          width='100%'
-          height='100%'
-          controls={true}
-          url={videoInput.url} />
-        </ResponsiveEmbed>
-        :
-        null
-      }
+      <Row>
+          
+        <Col md={6} sm={6}>
+          <div className="video-wrapper" >
 
-      <Form>
-        <Form.Group controlId="formBasicRangeCustom">
-        <Form.Control 
-        // <input
-          custom
-          type='range' min={0} max={0.999999} step='any'
-          value={played}
-          onMouseDown={handleSeekMouseDown}
-          onChange={(e) => handleSeekChange(e)}
-          onMouseUp={handleSeekMouseUp}
-        // />
-        />
-        </Form.Group>
-      </Form>
+            <ResponsiveEmbed aspectRatio="16by9">
+              <ReactPlayer
+              className="react-player"
+              placement="top"
+              ref={this.ref}
+              onDuration={this.handleDuration} 
+              width='100%'
+              height='100%'
+              controls={true}
+              url={this.state.url} />
+            </ResponsiveEmbed>
+        
+            <Form>
+            <Form.Group controlId="formBasicRangeCustom">
+            <Form.Control 
+            // <input
+            custom
+            type='range' min={0} max={0.999999} step='any'
+            value={this.state.played}
+            onMouseDown={this.handleSeekMouseDown}
+            onChange={this.handleSeekChange}
+            onMouseUp={this.handleSeekMouseUp}
+            // />
+            />
+            </Form.Group>
+            </Form>
 
-      <div className="duration-seconds">
-        <Duration seconds={duration * played}/>
-      </div>
-     
-      <Form
-        onSubmit={handleSubmit}
-        >
-        <br></br>
-        <Form.Row>
-          <Col>
-            <Form.Control 
-              name="url" 
-              value={videoInput.url} 
-              onChange={(e) => handleVideoInputChange(e)}
-              placeholder="Url" />
-          </Col>
-        </Form.Row>
-        <br></br>
-        <Form.Row>
-          <Col>
-            <Form.Control 
-              name="band" 
-              value={bandInput.band} 
-              onChange={(e) => handleBandInputChange(e)}
-              placeholder="Artist/Band" />
-          </Col>
-        </Form.Row>
-        <br></br>
-        {
-          inputList.map((input, i) =>  {
-            return (
-              <div 
-                key={i}>
-                  <br/>
-              <Form.Row>
-                <Col>
-                  <Form.Control 
-                    name="timestamp"
-                    label="timestamp"
-                    autoComplete="off" 
-                    defaultValue={input.timestamp} 
-                    //handleFocus sets inputToUpdate with corresponding index
-                    onFocus={(e) => handleFocus(e, i)}
-                    // onChange={(e) => handleChange(e, i)}
-                    // placeholder="Time in 00:00" 
-                    />
-                </Col>
-                <Col xs={7}>
-                  <Form.Control
-                    name="title"
-                    label="title"  
-                    value={input.title} 
-                    onChange={(e) => handleChange(e, i)} 
-                    placeholder="Song Title" />
-                </Col>
+            {/* what gets displayed is the length of video times played (float)
+            those seconds get passed as input to duration and it converts them
+            to 00:00 format, then they get displayed
+            */}
+            <div className="duration-seconds">
+            <Duration seconds={this.state.duration * this.state.played}/>
+            </div>
+
+      {/* !VIDEO WRAPPER DIV */}
+          </div>
+        </Col>
+
+
+        <Col md={6} sm={6}>
+
+        <DragDropContext 
+          onDragEnd={this.onDragEnd}>
+          <Form
+          // onSubmit={this.handleSubmit}
+          onSubmit={this.prepareSubmit}
+          className="edit-and-new-form"
+          >
+            <Form.Row>
+              <Col>
+                <Form.Control 
+                  name="url"
+                  // ref={input => { this.urlInput = input }} 
+                  value={this.state.url} 
+                  onChange={(e) => this.handleVideoInputChange(e)}
+                  placeholder="Url" />
+              </Col>
+            </Form.Row>
+            <br></br>
+            <Form.Row>
+              <Col>
+                <Form.Control 
+                  name="band"
+                  value={this.state.band} 
+                  onChange={(e) => this.handleBandInputChange(e)}
+                  placeholder="Artist/Band" />
+              </Col>
               </Form.Row>
               <br></br>
-                <Form.Control 
-                  as="textarea"
-                  name="lyrics" 
-                  label="lyrics" 
-                  value={input.lyrics} 
-                  onChange={(e) => handleChange(e, i)}
-                  placeholder="Lyrics"
-                  rows={6} />
-              { inputList.length - 1 === i && <Button 
-                value="add"
-                data-slider-id="BC"
-                onClick={handleAddInput}
-                className="dynamic-input-btn"
-                variant="primary">+</Button> }
-              { inputList.length !== 1 && <Button 
-                value="remove"
-                className="dynamic-input-btn"
-                onClick={() => handleRemoveInput(i)}
-                variant="primary">–</Button>}
-              </div>
-            )
+
+              {/* DROPPABLE DIV */}
+          <Droppable key={this.state.id} droppableId="droppable-1">
+          {(provided, snapshot) => (
+            <div
+            ref={provided.innerRef}
+            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
+            {...provided.droppableProps}
+            > 
+              {
+                songs.map((song, i) => {
+                  return (
+                    
+          <Draggable key={i} draggableId={`draggable-${i}`} index={i}>
+            {(provided, snapshot) => (
+            <div 
+              key={i}
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+            >
+
+            <Row key={i}>
+              <Col xs={1} >
+                <GrabberIcon size={26} />
+              </Col>
+
+              <Col>
+                  <Form.Row>
+                    <Col>
+                      <Form.Control 
+                        name="timestamp"
+                        autoComplete="off"
+                        label="timestamp" 
+                        defaultValue={song.timestamp}
+                        value={song.timestamp}
+                        //handleFocus sets inputToUpdate with corresponding index
+                        onFocus={(e) => this.handleFocus(e, i)} 
+                        // defaultValue={this.state.played}
+                        // onChange={(e) => this.handleChange(e, i)}
+                        // placeholder="Time" 
+                        />
+                    </Col>
+                    <Col xs={7}>
+                      <Form.Control
+                        name="title"
+                        label="title"  
+                        // defaultValue={song.title} 
+                        value={song.title} 
+                        onChange={(e) => this.handleChange(e, i)} 
+                        placeholder="Song Title" />
+                    </Col>
+                  </Form.Row>
+                  <br></br>
+                    <Form.Control 
+                      as="textarea"
+                      name="lyrics" 
+                      label="lyrics" 
+                      // defaultValue={song.lyrics} 
+                      value={song.lyrics} 
+                      onChange={(e) => this.handleChange(e, i)}
+                      placeholder="Lyrics"
+                      rows={6} />
+
+                  { songs.length - 1 === i && <Button 
+                    value="add"
+                    className="dynamic-input-btn"
+                    onClick={this.handleAddInput}
+                    variant="primary">+</Button>  }
+                  { songs.length !== 1 && <Button 
+                    value="remove"
+                    className="dynamic-input-btn"
+                    onClick={() => this.handleRemoveInput(i)}
+                    variant="primary">-</Button> }
+              </Col>
+            </Row>
+
+            </div>
+            )}
+          </Draggable>
+              )
+              })
             }
-          )
-        } 
+            {provided.placeholder}
+          </div>
+          )}
+          </Droppable>;
+          {/* !DROPPABLE DIV */}
+
+            <AddTagsBox />
+
+            <Button 
+              variant="primary" 
+              type="submit">
+              Save
+            </Button>
+          </Form>
+        </DragDropContext>
+
+      </Col>
+
+    </Row>
+
+    
 
 
-        <br></br>
-        <Button
-          variant="primary" 
-          type="submit">
-          Save
-        </Button>
-        
-          {/* <pre>
-            {JSON.stringify(inputList, null, 1)}
-            {JSON.stringify(videoInput, null, 1)}
-          </pre> */}
-      </Form>
-      </div>
+      {/* !new-and-edit-video-page DIV below */}
+    </div>    
+  </Container>    
     )
   }
 
-  export default withRouter(New);
+
+}
+
+const setStateToProps = (state) => {
+  return {
+    videos: state.videos,
+    auth: state.auth,
+    video: state.video,
+    updatedTags: state.tags
+  };
+};
+
+const setDispatchToProps = {
+  addVideo,
+  currentUser
+};
+
+export default connect(setStateToProps, setDispatchToProps)(New);
