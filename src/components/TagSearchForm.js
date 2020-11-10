@@ -71,7 +71,6 @@ class TagSearchForm extends Component {
   }
 
   handleClick = (tagNameToAdd) => {
-    console.log(tagNameToAdd, "===name=");
     if (tagNameToAdd !== "") {
       if(this.props.video.id){
         this.props.tags(tagNameToAdd);
