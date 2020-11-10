@@ -64,22 +64,39 @@ class TagSearchForm extends Component {
   };
 
   handleKeyDown = (event) => {
+    let newTag = event.target.value.trim()
     if(event.key === 'Enter'){
-      this.handleClick(event.target.value)
+      this.handleClick(newTag)
     }
   }
 
   handleClick = (tagNameToAdd) => {
     console.log(tagNameToAdd, "===name=");
     if (tagNameToAdd !== "") {
-      this.props.tags(tagNameToAdd);
-      this.props.video.tags = [...this.props.video.tags, {name: tagNameToAdd}]
-      this.props.getVideo(this.props.video);
-      this.closeDropdown()
-      this.typeahead.clear();
+      if(this.props.video.id){
+        this.props.tags(tagNameToAdd);
+        this.props.video.tags = [...this.props.video.tags, {name: tagNameToAdd}]
+        this.props.getVideo(this.props.video);
+      } else {
+        //adds this to array in store
+        this.props.tags(tagNameToAdd);
       }
+    }
+    this.closeDropdown()
+    this.typeahead.clear();
   }
 
+//NEW VIDEO
+  // this.props.tags(tagNameToAdd);
+
+  // this.closeDropdown()
+  // this.typeahead.clear();
+//EDIT VIDEO
+  // this.props.video.tags = [...this.props.video.tags, {name: tagNameToAdd}]
+  // this.props.getVideo(this.props.video);
+
+  // this.closeDropdown()
+  // this.typeahead.clear();
  
   render() {
 

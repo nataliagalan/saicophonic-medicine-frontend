@@ -43,7 +43,8 @@ class New extends Component {
     played: 0,
     seeking: false,
     duration: 0,
-    inputToUpdate: 0
+    inputToUpdate: 0,
+    editMode: false
   }
 
   componentDidMount() {
@@ -53,7 +54,7 @@ class New extends Component {
     } else {
       this.fetchData()
     }
-
+  
   }
 
   fetchData = async () => {
@@ -98,7 +99,7 @@ class New extends Component {
       url: this.state.url,
       band: this.state.band,
       songs: this.state.songs,
-      tags: this.props.video.tags
+      tags: this.props.updatedTags
     }
     this.handleSubmit(videoToAdd)
   }
@@ -393,7 +394,7 @@ class New extends Component {
           </Droppable>;
           {/* !DROPPABLE DIV */}
 
-            <AddTagsBox />
+            <AddTagsBox editMode={this.state.editMode} />
 
             <Button 
               variant="primary" 
