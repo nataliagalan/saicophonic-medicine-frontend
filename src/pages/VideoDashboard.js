@@ -136,7 +136,9 @@ const VideoDashboard = (props) => {
 
 
   const renderPagination = () => {
+
     let totalPages = videos[0].number_of_pages
+
     let paginationArray = []
 
     for(let i = 0; i < totalPages; i++){
@@ -158,8 +160,49 @@ const VideoDashboard = (props) => {
         />
       </Pagination>
     );
+  
   }
 
+  const renderTabsPagination = () => {
+    // let totalPages = 0
+    //   switch (filter) {
+    //     case "none":
+    //       totalPages = videos[0].number_of_pages
+    //     case "all":
+    //       let count = filteredByAll.length
+    //       totalPages = Math.ceil(count / 8)
+    //       // debugger
+    //     default:
+    //       totalPages = videos[0].number_of_pages
+    //   }
+  
+      let count = filteredByAll.length
+      let totalPages = Math.ceil(count / 8)
+      // let totalPages = videos[0].number_of_pages
+  
+      let paginationArray = []
+  
+      for(let i = 0; i < totalPages; i++){
+        paginationArray.push(<Pagination.Item 
+          key={i + 1}
+          onClick={() => setPage(i + 1)}
+        >{ i + 1 }</Pagination.Item>)
+      }
+      return (
+        <Pagination>
+          <Pagination.Prev 
+            onClick={() => setPage(old => Math.max(old - 1, 1))}
+            disabled={page === 1}
+          />
+          {paginationArray}
+          <Pagination.Next 
+            onClick={() => setPage(old => (!latestData ? old : old + 1))}
+            disabled={page === totalPages }
+          />
+        </Pagination>
+      );
+    
+    }
   
   return ( 
     <Container fluid>
@@ -170,7 +213,8 @@ const VideoDashboard = (props) => {
       </div>
       {showTabs === "true" ? displayFilterTabs() : null}
       <VideoContainer videos={findVideos()} />
-      {status === "success" ? renderPagination() : null}
+      {showTabs === "true" ? renderTabsPagination() : null} 
+      {status === "success" && showTabs === "false" ? renderPagination() : null}
 
     </div>
     </Container>
@@ -179,3 +223,22 @@ const VideoDashboard = (props) => {
  
 export default VideoDashboard;
 
+//I think this would require refactoring the searchform as functional component
+//and using react-query
+//if showtabs === true
+//displayfiltertabs
+//renderpagination where   
+  //send total count from backend
+  //use that to display tab count
+  // only send 8 per page via search
+  //incorporate page params
+  //do the fetchrequest with params
+  //increment page by clicking of prev
+  // let count = filteredByAll.length
+  // totalPages = Math.ceil(count / 8)
+
+//if showtabs === true
+//displayfiltertabs
+//renderpagination where   
+  // let count = filteredByAll.length
+  // totalPages = Math.ceil(count / 8)

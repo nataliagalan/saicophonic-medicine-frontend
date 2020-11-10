@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
+import { withRouter } from "react-router-dom";
 import { logoutSuccess } from '../actions/auth'
 import { toggleGrid } from '../actions/toggleGrid'
 
@@ -13,6 +14,7 @@ import SearchForm from './SearchForm';
 const MyNavbar = (props) => {
     //useSelector is similar to setStateToProps
     const auth = useSelector(state => state.auth);
+    const video = useSelector(state => state.video);
     // const showGrid = useSelector(state => state.toggleGrid);
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
@@ -28,7 +30,7 @@ const MyNavbar = (props) => {
       dispatch(toggleGrid())
     }
     
-    // console.log(showGrid,"==========MY NAVBAR PROPS==========");
+    // console.log(props.location,"==========MY NAVBAR PROPS==========");
 
     return (
       <>
@@ -42,9 +44,14 @@ const MyNavbar = (props) => {
         <Nav.Item> 
           <SearchForm /> 
         </Nav.Item>
-        <Nav.Item style={{cursor: 'pointer'}} onClick={handleToggleGrid}> 
-          <span role="img" id="toggle-grid-btn" aria-label="toggle grid">🏁</span> 
-        </Nav.Item>
+        {
+          video.id && props.location.pathname !== "/videos" ? 
+          null
+          :
+          (<Nav.Item style={{cursor: 'pointer'}} onClick={handleToggleGrid}> 
+            <span role="img" id="toggle-grid-btn" aria-label="toggle grid">🏁</span> 
+          </Nav.Item>)
+        }
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="nav-toggle" />
       </Container>
   
@@ -94,5 +101,5 @@ const MyNavbar = (props) => {
   
 }
 
-export default MyNavbar
+export default withRouter(MyNavbar);
 
