@@ -7,6 +7,7 @@ import { currentUser } from '../actions/auth'
 import { addVideo } from '../actions/videos'
 import { clearTags } from '../actions/tags'
 
+
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import Form from 'react-bootstrap/Form';
