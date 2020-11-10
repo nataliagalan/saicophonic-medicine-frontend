@@ -19,7 +19,6 @@ const Tags = (props) => {
     } else {
       dispatch(getTaggedVideos(filteredVideosByTag));
     }
-
   }
 
   return (

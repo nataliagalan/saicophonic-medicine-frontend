@@ -66,71 +66,6 @@ code {
 
 }
 
-/* hide togglegrid button at any screen less than 375 */
-
-@media screen and (max-width: 414px) {
-  #toggle-grid-btn { 
-    display: none;
- }
- 
- 
-}
-@media screen and (max-width: 766px) {
-  .header-text { 
-    font-size: 3em; 
- }
-  .header-subttext { 
-    font-size: 1rem; 
- }
- 
-}
-
-
-
-
-/* FIXES THE VIDEO IN PLACE */
-.video-wrapper {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 8rem;
-}
-
-@media screen and (max-width: 766px) {
-
-  .video-wrapper {
-    position: fixed !important;
-    /* top: 3rem; */
-    top: 1vw;
-    width: 100vw;
-    padding-right: 11px;
-    padding-left: 11px;
-    margin-left: -50vw;
-    margin-top: 100px;
-    left: 50%;
-    z-index: 2;
-    
-  }
-
-  .edit-and-new-form {
-    margin-top: 70vw;;
-    z-index: 1;
-  }
-
-  .duration-seconds {
-    display: none;
-  }
-
-  /* ! adjusts form width */
-
-  .new-and-edit-video-page {
-    margin-left: 2rem !important;
-    margin-right: 2rem !important;
-  }
-
-}
-
-/* FIXES THE VIDEO IN PLACE */
-
 .header-subtext {
   font-weight: 400;
   font-size: 1.5rem;
@@ -232,5 +167,71 @@ code {
   padding: .3rem;
   margin: .3rem;
 }
+
+
+
+/* hide togglegrid button at any screen less than 375 */
+
+@media screen and (max-width: 414px) {
+  #toggle-grid-btn { 
+    display: none;
+ }
+ 
+ 
+}
+@media screen and (max-width: 766px) {
+  .header-text { 
+    font-size: 3em; 
+ }
+  .header-subttext { 
+    font-size: 1rem; 
+ }
+ 
+}
+
+
+/* FIXES THE VIDEO IN PLACE */
+.video-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 8rem;
+}
+
+@media screen and (max-width: 766px) {
+
+  .video-wrapper {
+    position: fixed !important;
+    /* top: 3rem; */
+    top: 1vw;
+    width: 100vw;
+    padding-right: 11px;
+    padding-left: 11px;
+    margin-left: -50vw;
+    margin-top: 100px;
+    left: 50%;
+    z-index: 2;
+    
+  }
+
+  .edit-and-new-form {
+    margin-top: 70vw;;
+    z-index: 1;
+  }
+
+  .duration-seconds {
+    display: none;
+  }
+
+  /* ! adjusts form width */
+
+  .new-and-edit-video-page {
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
+  }
+
+}
+
+/* FIXES THE VIDEO IN PLACE */
+
 
 

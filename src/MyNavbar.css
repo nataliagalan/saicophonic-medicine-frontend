@@ -1,0 +1,316 @@
+$primaryColor: #3f3f4d;
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  background-color: #e7e7e7;
+}
+
+.container {
+  width: 100%;
+}
+.navbar {
+
+  &__container {
+    display: block;
+    background-color: $primaryColor;
+    padding: 0 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  &__flex {
+    position: relative;
+    width: 100%;
+    max-width: 1140px;
+    min-height: 75px;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__left, &__right {
+    flex: 1 1 50%;
+  }
+
+  &__hamburger {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    background: $primaryColor url('https://res.cloudinary.com/ajayrawat/image/upload/v1508734485/logo_zdwi2d.svg') no-repeat;
+    background-size: contain;
+    margin-right: 15px;
+    vertical-align: middle;
+  }
+
+  &__search {
+    display: inline-block;
+  }
+
+  &__inputwithicon {
+    position: relative;
+    width: 300px;
+  }
+
+  &__input {
+    background-color: darken($primaryColor, 5%);
+    border: 1px solid darken($primaryColor, 5%);
+    width: 100%;
+    height: 36px;
+    border-radius: 18px;
+    outline: none;
+    padding: 0 30px 0 15px;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #c0c7da;
+    letter-spacing: .5px;
+    word-spacing: 1px;
+
+    &:focus {
+      border-color: white;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    outline: none;
+
+    border: none;
+    background: #43cb83 url('https://res.cloudinary.com/ajayrawat/image/upload/v1508734484/search_icon_pr2sma.svg') no-repeat;
+    background-size: 17px;
+    background-position: center;
+    cursor: pointer;
+    transform: translate(0, 0);
+    transition: background-color .2s linear;
+    will-change: background-color;
+
+    &:hover, &:focus {
+      background-color: darken(#43cb83, 8%);
+    }
+
+    &:active {
+      background-color: darken(#43cb83, 10%);
+      transform: translateY(1px);
+    }
+  }
+
+  &__toggler {
+    display: none;
+  }
+
+  &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+
+    li {
+      position: relative;
+      display: inline-block;
+
+      &:not(:last-child) {
+        a {
+          padding: 0 15px;
+        }
+      }
+
+      &:last-child {
+        a {
+          padding: 0 0 0 15px;
+        }
+      }
+      a {
+        display: block;
+        color: #c0c7da;
+        text-decoration: none;
+        font-family: inherit;
+        font-size: 14px;
+        transition: color 200ms linear;
+        will-change: color;
+
+        &:hover, &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+
+  &__hamberger {
+    /*display: none;*/
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background: $primaryColor url('https://res.cloudinary.com/ajayrawat/image/upload/v1508734484/hamburger_icon_o7uviz.svg') no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+  }
+
+  &__toggler__label {
+    display: none;
+
+    font-family: inherit;
+    font-size: 16px;
+    color: white;
+    text-align: right;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  &__toggler__input {
+    appearance: none;
+  }
+
+  &__sublinks {
+    display: none;
+    position: absolute;
+    width: 175px;
+    height: auto;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background-color: $primaryColor;
+    box-shadow: 3px 5px rgba(0,0,0,0.2);
+
+    li {
+      width: 100%;
+      display: block;
+      white-space: nowrap;
+
+      &:first-child {
+        margin-top: 20px;
+      }
+
+      a {
+        display: block;
+        padding: 5px 15px 15px !important;
+      }
+    }
+  }
+
+  &__links li:hover &__sublinks {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .navbar {
+
+    &__flex {
+      display: block;
+      padding: 15px 0;
+    }
+
+    &__left {
+      margin-bottom: 15px;
+    }
+
+    &__search {
+      display: inline-block;
+      width: calc(100% - 120px);
+    }
+
+    &__inputwithicon {
+      position: relative;
+      width: 100%;
+    }
+
+    &__links {
+      float: none;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      max-width: 400px;
+      margin: 0 auto;
+
+      li {
+
+        &:first-child {
+          a {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .navbar {
+
+    &__hamburger {
+      display: block;
+      margin: 0 auto 15px;
+    }
+
+    &__search {
+      width: 100%;
+    }
+
+    &__toggler__label {
+      position: relative;
+      display: block;
+    }
+
+    &__toggler__input  {
+      display: block;
+      &:checked + .navbar__links {
+        display: flex;
+      }
+    }
+
+    &__links {
+      display: none;
+      flex-direction: column;
+
+      li {
+        a {
+          padding: 10px 10px 10px 0 !important;
+        }
+      }
+    }
+
+    &__sublinks {
+      display: block;
+      position: static;
+      box-shadow: none;
+      width: 100%;
+      padding-left: 15px;
+      background-color: darken($primaryColor, 5%);
+
+      li:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.ajay{
+  font-family: sans-serif;
+  font-size: 14px;
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  a{
+    text-decoration: none;
+    color: #333;
+
+    &:hover{
+      text-decoration: underline;
+      color: #000;
+    }
+  }
+}
