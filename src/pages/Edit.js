@@ -44,7 +44,8 @@ class Edit extends Component {
     played: 0,
     seeking: false,
     duration: 0,
-    inputToUpdate: 0
+    inputToUpdate: 0,
+    editMode: true
   }
 
   componentDidMount() {
@@ -58,7 +59,7 @@ class Edit extends Component {
     } else {
       this.fetchData()
     }
-
+    
   }
 
   fetchData = async () => {
@@ -410,7 +411,7 @@ class Edit extends Component {
           </Droppable>;
           {/* !DROPPABLE DIV */}
 
-            <AddTagsBox />
+            <AddTagsBox editMode={this.state.editMode} />
 
             <Button 
               variant="primary" 
