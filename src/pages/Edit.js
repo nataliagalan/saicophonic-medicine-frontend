@@ -452,15 +452,3 @@ const setDispatchToProps = {
 };
 
 export default connect(setStateToProps, setDispatchToProps)(Edit);
-// export default withRouter(connect(setStateToProps, setDispatchToProps)(Edit));
-
-
-
- 
-
-  
-  
-
-
-
-
