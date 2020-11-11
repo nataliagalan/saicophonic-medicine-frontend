@@ -286,9 +286,9 @@ class Edit extends Component {
             those seconds get passed as input to duration and it converts them
             to 00:00 format, then they get displayed
             */}
-            <div className="duration-seconds">
+            {/* <div className="duration-seconds">
             <Duration seconds={this.state.duration * this.state.played}/>
-            </div>
+            </div> */}
 
       {/* !VIDEO WRAPPER DIV */}
           </div>

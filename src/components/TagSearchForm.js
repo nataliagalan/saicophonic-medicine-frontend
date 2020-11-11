@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router';
 import { connect } from "react-redux";
+import { XIcon, SearchIcon } from '@primer/octicons-react'
+import Button from 'react-bootstrap/Button';
 
 import { AsyncTypeahead, Menu, MenuItem, Highlighter  } from 'react-bootstrap-typeahead';
 import { tags } from '../actions/tags'
@@ -66,6 +68,7 @@ class TagSearchForm extends Component {
   handleKeyDown = (event) => {
     let newTag = event.target.value.trim()
     if(event.key === 'Enter'){
+      event.preventDefault()
       this.handleClick(newTag)
     }
   }
@@ -114,7 +117,9 @@ class TagSearchForm extends Component {
         // onPaginate={this._handlePagination}
         onSearch={this._handleSearch}
         paginate
-        placeholder="Search tags or press enter"
+        placeholder="Filter tags or press enter to add"
+        promptText="Type to search tags"
+        emptyLabel={`Press enter to add new tag: ${this.state.query}`}
         options={this.state.options}
         onBlur={this.closeDropdown} 
         onKeyDown={this.handleKeyDown}
@@ -141,7 +146,13 @@ class TagSearchForm extends Component {
         
         open={this.state.open}
         useCache={false}
-      /> 
+      >
+        {({ selected }) => (
+          <div className="search-form-icons" id="tag-search-form-icon">
+            {!selected.length && <span aria-label="magnifier" id="tags-magnifier"><SearchIcon size={16}/></span>}
+          </div>
+        )}
+      </AsyncTypeahead> 
     </>
     )
   }
