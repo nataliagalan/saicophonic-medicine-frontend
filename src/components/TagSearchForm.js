@@ -108,8 +108,8 @@ class TagSearchForm extends Component {
       <AsyncTypeahead
         {...this.state}
         ref={typeahead => this.typeahead = typeahead}
-        className="TagSearchForm"
-        id="video-archive-typeahead"
+        className="tag-search-form"
+        id="tag-search-typeahead"
         labelKey="name"
         maxResults={10}
         minLength={2}
@@ -149,7 +149,7 @@ class TagSearchForm extends Component {
       >
         {({ selected }) => (
           <div className="search-form-icons" id="tag-search-form-icon">
-            {!selected.length && <span aria-label="magnifier" id="tags-magnifier"><SearchIcon size={16}/></span>}
+            {!selected.length && <span style={{color: "#EBDFF7"}} aria-label="magnifier" id="tags-magnifier"><SearchIcon size={16}/></span>}
           </div>
         )}
       </AsyncTypeahead> 

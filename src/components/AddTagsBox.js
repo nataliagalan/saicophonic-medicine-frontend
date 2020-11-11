@@ -7,6 +7,7 @@ import { deleteTag } from '../actions/tags'
 import Button from 'react-bootstrap/Button';
 import { XIcon } from '@primer/octicons-react'
 import TagSearchForm from './TagSearchForm';
+import Line from './Line';
 
 
 const AddTagsBox = (props) => {
@@ -60,8 +61,8 @@ const AddTagsBox = (props) => {
           :
           null
         }
-
       </ul>
+      
     </div>
     </>
   )
