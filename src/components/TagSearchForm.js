@@ -119,7 +119,7 @@ class TagSearchForm extends Component {
         paginate
         placeholder="Filter tags or press enter to add"
         promptText="Type to search tags"
-        emptyLabel={`Press enter to add new tag: ${this.state.query}`}
+        emptyLabel={`Press enter to add "${this.state.query}"`}
         options={this.state.options}
         onBlur={this.closeDropdown} 
         onKeyDown={this.handleKeyDown}
