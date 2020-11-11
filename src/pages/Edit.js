@@ -429,10 +429,10 @@ class Edit extends Component {
               Save
             </Button>
           </Form>
+          
         </DragDropContext>
 
       </Col>
-
     </Row>
 
     

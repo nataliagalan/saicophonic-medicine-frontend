@@ -395,6 +395,8 @@ input.form-control:-webkit-autofill:active  {
   -webkit-text-fill-color: #fff !important;
 }
 
+
+
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
   position: -webkit-sticky;
