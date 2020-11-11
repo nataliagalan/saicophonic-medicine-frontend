@@ -1,21 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { logoutSuccess } from '../actions/auth'
 import { toggleGrid } from '../actions/toggleGrid'
-
 import '../MyNavbar.css'
-
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import {Link} from 'react-router-dom';
 import logo from '../logo.png'
 import SearchForm from './SearchForm';
 import GridIcon from './GridIcon';
-import { OrganizationIcon, ThreeBarsIcon } from '@primer/octicons-react'
+import { ThreeBarsIcon, TelescopeIcon, XIcon } from '@primer/octicons-react'
 
 const MyNavbar = (props) => {
     //useSelector is similar to setStateToProps
@@ -24,6 +19,8 @@ const MyNavbar = (props) => {
     const showGrid = useSelector(state => state.toggleGrid);
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
+
+    const [ expanded, setExpanded ] = useState(true);
 
    
 
@@ -34,28 +31,42 @@ const MyNavbar = (props) => {
     const handleToggleGrid = () => {
       dispatch(toggleGrid())
     }
-    
+
+    const toggleMenuIcon = () => {
+      setExpanded(!expanded)
+    }
 
 
     return (
-    <Navbar bg="light" expand="md" fixed="top">
+    <Navbar 
+      onToggle={toggleMenuIcon} 
+      collapseOnSelect
+      bg="light" expand="md" 
+      fixed="top">
       <Navbar.Brand as={Link} to="/videos" href="/videos">
         <img src={logo} className="imgFluid" style={{maxWidth: '50px'}} alt="logo that looks like a yin yang symbol inside a pill"/> 
       </Navbar.Brand>
       <Nav.Item inline="true"> 
         <SearchForm /> 
       </Nav.Item>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+      <Navbar.Toggle
+        id="menu-toggle-btn" 
+        aria-controls="basic-navbar-nav">
+          { expanded ? <TelescopeIcon size={24} /> : <XIcon size={24} /> }
+      </Navbar.Toggle>
+
+
 
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
+        <Nav className="ml-auto" id="menu-div">
           {
             video.id && props.location.pathname !== "/videos" ? 
             null
             :
             (
             showGrid ? 
-            (<Nav.Link id="toggle-grid-btn" style={{cursor: 'pointer'}} onClick={handleToggleGrid}> 
+            (<Nav.Link id="toggle-grid-btn" style={{cursor: 'pointer'}} onClick={handleToggleGrid} > 
               <span style={{color: "black"}}><ThreeBarsIcon size={16} /></span> 
             </Nav.Link>)
             :
