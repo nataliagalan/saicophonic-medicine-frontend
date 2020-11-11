@@ -9,8 +9,7 @@ import { filteredByAll } from '../actions/filteredByAll';
 import { filteredByBand } from '../actions/filteredByBand';
 import { filteredBySong } from '../actions/filteredBySong';
 import { filteredByLyrics } from '../actions/filteredByLyrics';
-import { SearchIcon } from '@primer/octicons-react'
-import { XIcon } from '@primer/octicons-react'
+import { XIcon, SearchIcon } from '@primer/octicons-react'
 import Button from 'react-bootstrap/Button';
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
@@ -149,9 +148,6 @@ class SearchForm extends Component {
     }
   }
 
-  handleClear = () => {
-    this.typeahead.clear();
-  }
 
  
   render() {
@@ -233,7 +229,7 @@ class SearchForm extends Component {
               <div onClick={onClear}>
                 <XIcon size={20} />
               </div></Button>)}
-            {!selected.length && <SearchIcon size={16}/>}
+            {!selected.length && <span aria-label="magnifier" id="magnifier"><SearchIcon size={16}/></span>}
           </div>
         )}
       </AsyncTypeahead>

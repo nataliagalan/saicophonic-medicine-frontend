@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   /* font-family: ibm-plex-mono, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
@@ -201,8 +205,8 @@ a#toggle-grid-btn.nav-link {
   display: flex;
   bottom: 0;
   justify-content: center;
-  /* pointer-events: none; */
   /* Don't block clicks on the input */
+  /* pointer-events: none; */
   position: absolute;
   right: 0;
   top: 0;
@@ -212,6 +216,24 @@ a#toggle-grid-btn.nav-link {
 
 .rbt-aux{
   display: none;
+}
+
+#tag-search-form-icon{
+  align-items: center;
+  display: flex;
+  bottom: 0;
+  justify-content: center;
+  /* Don't block clicks on the input */
+  /* pointer-events: none; */
+  position: absolute;
+  left: 0;
+  /* margin-right: 10px; */
+  top: 0;
+  width: 34px;
+}
+
+input.rbt-input-main.form-control.rbt-input {
+  padding-left: 2rem;
 }
 
 
@@ -237,6 +259,11 @@ a#toggle-grid-btn.nav-link {
   .searchForm {
     width: 50vw;
   }
+
+  #magnifier {
+    display: none;
+  }
+
   #toggle-grid-btn { 
     display: none;
   }
