@@ -149,7 +149,7 @@ class TagSearchForm extends Component {
       >
         {({ selected }) => (
           <div className="search-form-icons" id="tag-search-form-icon">
-            {!selected.length && <span style={{color: "#EBDFF7"}} aria-label="magnifier" id="tags-magnifier"><SearchIcon size={16}/></span>}
+            {!selected.length && <span style={{color: "#EBDFF7"}} aria-label="magnifier" id="tags-magnifier"><SearchIcon size={16} verticalAlign='middle'/></span>}
           </div>
         )}
       </AsyncTypeahead> 

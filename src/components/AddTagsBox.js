@@ -38,12 +38,13 @@ const AddTagsBox = (props) => {
         {
           (video.id && props.editMode === true) ?
           video.tags.map((tag, idx) => <li className="tag" key={idx}>
-          <span>{tag.name}</span>
-          <Button onClick={() => removeTag(idx)}>
+          <span className="tag-text">{tag.name}</span>
+          <span onClick={() => removeTag(idx)} className="tag-delete-icon">
             <XIcon 
               key={idx}
-              size={16} />
-          </Button>
+              verticalAlign='middle'
+              size={10} />
+          </span>
           </li>)
           :
           null
