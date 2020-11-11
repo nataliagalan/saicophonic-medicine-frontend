@@ -196,6 +196,23 @@ a#toggle-grid-btn.nav-link {
   border-color: rgb(250, 192, 0);
 }
 
+.search-form-icons{
+  align-items: center;
+  display: flex;
+  bottom: 0;
+  justify-content: center;
+  /* pointer-events: none; */
+  /* Don't block clicks on the input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 34px;
+
+}
+
+.rbt-aux{
+  display: none;
+}
 
 
 
