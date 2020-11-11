@@ -52,7 +52,7 @@ code {
   outline: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
-   outline: none !important;
+  outline: none !important;
 }
 
 .nav-font-style {
@@ -93,6 +93,7 @@ code {
   font-size: 2rem;
   border: none;
 }
+
 .dynamic-input-btn:hover {
   color: rgb(250, 192, 0);
   background: none;
@@ -168,8 +169,32 @@ code {
   margin: .3rem;
 }
 
+#menu-toggle-btn:active,
+#menu-toggle-btn:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none !important;
 
+}
 
+.navbar-light .navbar-toggler {
+  border: none;
+}
+
+a#toggle-grid-btn.nav-link {
+  padding-top: 0.9rem;
+}
+
+.form-control {
+  border-radius: 0rem;
+  border: 2px solid #EBDFF7;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: rgb(250, 192, 0);
+}
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
@@ -181,11 +206,17 @@ code {
 
 @media only screen and (min-width: 768px) {
   /* tablets and desktop */
+  .searchForm {
+    width: 33vw;
+  }
 
 }
   
 @media only screen and (max-width: 767px) {
 /* phones */
+  .searchForm {
+    width: 50vw;
+  }
   #toggle-grid-btn { 
     display: none;
   }
@@ -220,11 +251,20 @@ code {
     display: none;
   }
 
-  /* ! adjusts form width */
-
+  /* adjusts form width */
   .new-and-edit-video-page {
     margin-left: 2rem !important;
     margin-right: 2rem !important;
+  }
+
+  .navbar-brand {
+    margin-right: 0rem;
+  }
+
+  #menu-div {
+    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 
@@ -234,3 +274,13 @@ code {
 
 }
 
+/* @media screen and (min-width: 1024px) {
+  .searchForm {
+    width: 20vw;
+  }
+}
+@media screen and (max-width: 320px) {
+  .searchForm {
+    width: 40vw;
+  }
+} */
