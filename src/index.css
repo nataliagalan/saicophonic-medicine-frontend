@@ -338,23 +338,6 @@ ul#tags {
 }
 
 
-.edit-and-new-form input.form-control, 
-.edit-and-new-form textarea.form-control {
-  border-radius: 0rem;
-  background-color: transparent;
-  color:#EBDFF7;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 0.1rem solid;
-  border-color: #EBDFF7;
-}
-.edit-and-new-form input.form-control::placeholder, 
-.edit-and-new-form textarea.form-control::placeholder {
-  color: #ebdff7e3;
-  letter-spacing: .09em;
-}
-
 
 .draggable-input-div{
   margin-left: 1rem;
@@ -380,6 +363,37 @@ ul#tags {
   color: #EBDFF7;
 }
 
+.edit-and-new-form input.form-control, 
+.edit-and-new-form textarea.form-control {
+  border-radius: 0rem;
+  background-color: transparent !important;
+  color:#EBDFF7;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.1rem solid;
+  border-color: #EBDFF7;
+}
+
+.edit-and-new-form input.form-control:active,
+.edit-and-new-form input.form-control:focus{
+  background-color: transparent !important;
+}
+
+.edit-and-new-form input.form-control::placeholder, 
+.edit-and-new-form textarea.form-control::placeholder {
+  color: #ebdff7e3;
+  letter-spacing: .09em;
+}
+
+/* MAKES ALL INPUT FIELDS TRANSPARENT ON AUTOFILL */
+input.form-control:-webkit-autofill,
+input.form-control:-webkit-autofill:hover, 
+input.form-control:-webkit-autofill:focus, 
+input.form-control:-webkit-autofill:active  {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: #fff !important;
+}
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
