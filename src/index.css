@@ -236,7 +236,7 @@ a#toggle-grid-btn.nav-link {
 }
 
 #tags-magnifier{
-  padding-bottom: 3.8px;
+  padding-bottom: 20px;
 }
 
 div.tags-input > div > div:nth-child(1) > input.rbt-input-main.form-control.rbt-input {
@@ -249,8 +249,10 @@ div.tags-input > div > div:nth-child(1) > input.rbt-input-main.form-control.rbt-
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom: 0.01rem solid;
+  /* border-bottom: 0.01rem solid; */
+  border-bottom: 0.01em solid;
   border-color: #EBDFF7;
+  margin-bottom: 1rem;
 }
 
 div.tags-input{
@@ -303,6 +305,7 @@ ul#tags {
 .save-video {
   margin-top: 3rem;
   margin-bottom: 4rem;
+  color: #EBDFF7;
 }
 
 .tag-search-menu {
@@ -368,13 +371,9 @@ ul#tags {
   padding-bottom: 1rem;
 }
 
-.draggable-input-div:focus,
-.draggable-input-div:active{
+
+.draggable-input-div:focus{
   outline: 0.1rem solid #f6cd53;
-  /* box-shadow: 0 0 3pt 2pt red; */
-  -moz-outline-radius: 0px;
-  outline-radius: 0px;
-  border-radius: 0;
 }
 
 .dynamic-input-btn{
