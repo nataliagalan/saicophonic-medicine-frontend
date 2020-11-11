@@ -306,8 +306,20 @@ ul#tags {
   background-position: center center; 
   opacity: 1;
   border-radius: 0px;
+  margin-top: -1px;
 }
 
+.rbt-input::placeholder {
+  color: #ebdff7b4;
+  letter-spacing: .02em;
+}
+
+
+
+.rbt-menu > .dropdown-item {
+  font-size: 0.9em; 
+  color: #000000b4;
+}
 
 
 
