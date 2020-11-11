@@ -331,8 +331,9 @@ class Edit extends Component {
           <Droppable key={this.state.id} droppableId="droppable-1">
           {(provided, snapshot) => (
             <div
+            className="droppable-input-div"
             ref={provided.innerRef}
-            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
+            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'transparent' }}
             {...provided.droppableProps}
             > 
               {
@@ -342,15 +343,16 @@ class Edit extends Component {
           <Draggable key={i} draggableId={`draggable-${i}`} index={i}>
             {(provided, snapshot) => (
             <div 
+              className="draggable-input-div"
               key={i}
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
             >
 
-            <Row key={i}>
+            <Row key={i} noGutters>
               <Col xs={1} >
-                <GrabberIcon size={26} />
+                <span style={{color: "#EBDFF7"}}><GrabberIcon size={26} /></span>
               </Col>
 
               <Col>
@@ -369,7 +371,7 @@ class Edit extends Component {
                         // placeholder="Time" 
                         />
                     </Col>
-                    <Col xs={7}>
+                    <Col xs={8}>
                       <Form.Control
                         name="title"
                         label="title"  
@@ -400,6 +402,7 @@ class Edit extends Component {
                     className="dynamic-input-btn"
                     onClick={() => this.handleRemoveInput(i)}
                     variant="primary">-</Button> }
+                  
               </Col>
             </Row>
 
@@ -412,8 +415,10 @@ class Edit extends Component {
             {provided.placeholder}
           </div>
           )}
-          </Droppable>;
+          </Droppable>
           {/* !DROPPABLE DIV */}
+
+          <div className="custom-spacer"></div>
           <Line color={"#EBDFF7"}/>
             <AddTagsBox editMode={this.state.editMode} />
           <Line color={"#EBDFF7"}/>

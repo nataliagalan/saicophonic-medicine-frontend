@@ -10,6 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 code {
   font-family: ibm-plex-mono, source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -193,6 +194,8 @@ a#toggle-grid-btn.nav-link {
 .form-control {
   border-radius: 0rem;
   border: 2px solid #EBDFF7;
+  font-size: 1.3em; 
+  letter-spacing: .04em;
 }
 
 .form-control:focus {
@@ -305,6 +308,10 @@ ul#tags {
   background-repeat:   no-repeat;
   background-position: center center; 
   opacity: 1;
+
+  /* border: 2px solid #EBDFF7;
+  background-color: rgb(15, 15, 15); */
+
   border-radius: 0px;
   margin-top: -1px;
 }
@@ -319,9 +326,38 @@ ul#tags {
 .rbt-menu > .dropdown-item {
   font-size: 0.9em; 
   color: #000000b4;
+  /* color: #EBDFF7; */
+  
 }
 
 
+.edit-and-new-form input.form-control, 
+.edit-and-new-form textarea.form-control {
+  border-radius: 0rem;
+  background-color: transparent;
+  color:#EBDFF7;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.1rem solid;
+  border-color: #EBDFF7;
+}
+.edit-and-new-form input.form-control::placeholder, 
+.edit-and-new-form textarea.form-control::placeholder {
+  color: #ebdff7e3;
+  letter-spacing: .09em;
+}
+
+
+.draggable-input-div{
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
+  padding-right: 1.6rem;
+  padding-left: 0.4rem;
+  padding-top: 0.9rem;
+  border: 0.1rem solid #EBDFF7;
+}
 
 
 /* FIXES THE VIDEO IN PLACE */
