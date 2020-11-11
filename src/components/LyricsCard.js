@@ -29,11 +29,15 @@ const LyricsCard = (props) => {
       method: "DELETE",
     });
     const data = await res.json();
-    if (data.status === 200) {
-      const updatedVideos = videos.filter((video) => video.id !== id);
-      dispatch(deleteVideo(updatedVideos));
-      props.history.push('/videos');
-    }
+    const updatedVideos = videos.filter((video) => video.id !== id);
+    dispatch(deleteVideo(updatedVideos));
+    props.history.push('/videos');
+    // if (data.status === 200) {
+    //   const updatedVideos = videos.filter((video) => video.id !== id);
+    //   dispatch(deleteVideo(updatedVideos));
+    //   props.history.push('/videos');
+    // }
+    
   };
 
   const copyUrlToClipboard = (id) => {

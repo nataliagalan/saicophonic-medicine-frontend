@@ -38,20 +38,30 @@ const MyNavbar = (props) => {
 
 
     return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="md" fixed="top">
       <Navbar.Brand as={Link} to="/videos" href="/videos">
         <img src={logo} className="imgFluid" style={{maxWidth: '50px'}} alt="logo that looks like a yin yang symbol inside a pill"/> 
       </Navbar.Brand>
-      <Nav.Item inline> 
+      <Nav.Item inline="true"> 
         <SearchForm /> 
       </Nav.Item>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Link style={{cursor: 'pointer'}} onClick={handleToggleGrid}>
-            <GridIcon color={"black"}/>
-          </Nav.Link>
+          {
+            video.id && props.location.pathname !== "/videos" ? 
+            null
+            :
+            (
+            showGrid ? 
+            (<Nav.Link id="toggle-grid-btn" style={{cursor: 'pointer'}} onClick={handleToggleGrid}> 
+              <span style={{color: "black"}}><ThreeBarsIcon size={16} /></span> 
+            </Nav.Link>)
+            :
+            (<Nav.Link id="toggle-grid-btn" style={{cursor: 'pointer'}} onClick={handleToggleGrid}><GridIcon color={"black"}/></Nav.Link>)
+            )
+          }
           <Nav.Link 
             as={Link} 
             to="/videos"
@@ -67,15 +77,17 @@ const MyNavbar = (props) => {
             id="menu-toggle" 
             className="nav-font-style">
             Random
-         </Nav.Link>
-         <Nav.Link 
-          as={Link} 
-          to="/videos/new"
-          href="/videos/new" 
-          id="menu-toggle" 
-          className="nav-font-style">
-            Add
           </Nav.Link>
+          {
+            auth.id && (<Nav.Link 
+              as={Link} 
+              to="/videos/new"
+              href="/videos/new" 
+              id="menu-toggle" 
+              className="nav-font-style">
+                Add
+            </Nav.Link>)
+          }
 
         </Nav>
 
