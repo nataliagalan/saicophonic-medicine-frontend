@@ -8,6 +8,7 @@ const videos = (state = initialValue, action) => {
     case "GET_TAGGED_VIDEOS":
     case "ADD_VIDEO":
     case "DELETE_VIDEO":
+      return action.videos
     case "UPDATE_VIDEO":
       return action.videos;
     default:
