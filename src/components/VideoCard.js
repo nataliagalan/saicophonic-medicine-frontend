@@ -8,6 +8,7 @@ import ReactPlayer from 'react-player/lazy'
 import LyricsCard from './LyricsCard';
 
 
+
 const VideoCard = (props) => {
 
   //useSelector is similar to setStateToProps
@@ -40,6 +41,7 @@ const VideoCard = (props) => {
                 <ReactPlayer
                 ref={ref}
                 light={true}
+                // playIcon={}
                 url={url} 
                 playing={playerState.playing}
                 controls={true}

@@ -10,9 +10,11 @@ import { filteredByBand } from '../actions/filteredByBand';
 import { filteredBySong } from '../actions/filteredBySong';
 import { filteredByLyrics } from '../actions/filteredByLyrics';
 import { SearchIcon } from '@primer/octicons-react'
+import { XIcon } from '@primer/octicons-react'
+import Button from 'react-bootstrap/Button';
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
-import { AsyncTypeahead, Menu, MenuItem, Highlighter  } from 'react-bootstrap-typeahead';
+import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typeahead';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import '../SearchForm.css';
@@ -147,6 +149,9 @@ class SearchForm extends Component {
     }
   }
 
+  handleClear = () => {
+    this.typeahead.clear();
+  }
 
  
   render() {
@@ -170,6 +175,7 @@ class SearchForm extends Component {
         }
         maxResults={6}
         minLength={2}
+        clearButton={true}
         onInputChange={this._handleInputChange}
         // onPaginate={this._handlePagination}
         onSearch={this._handleSearch}
@@ -181,7 +187,7 @@ class SearchForm extends Component {
         onBlur={this.closeDropdown} 
         onKeyDown={this.handleKeyDown}
         filterBy={() => true}
-        
+      
         renderMenu={(options, menuProps) => {
           return (
 
@@ -219,10 +225,20 @@ class SearchForm extends Component {
         
         open={this.state.open}
         useCache={false}
-      /> 
+      > 
+        {({ onClear, selected }) => (
+          <div className="search-form-icons">
+            {!!selected.length && 
+            (<Button aria-label="Clear" className="close rbt-close" >
+              <div onClick={onClear}>
+                <XIcon size={20} />
+              </div></Button>)}
+            {!selected.length && <SearchIcon size={16}/>}
+          </div>
+        )}
+      </AsyncTypeahead>
 
     </>
-
 
 
     )
