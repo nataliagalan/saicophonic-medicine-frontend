@@ -30,7 +30,16 @@ const VideoDashboard = (props) => {
   const dispatch = useDispatch();
 
  
-  
+  // makeAndHandleRequest = async (query) => {
+    //dispatch
+    //update the page number
+    //update the array
+
+    // this.props.filteredByAll(filteredVideos);
+    // this.props.filteredByBand(filteredVideos, query);
+    // this.props.filteredBySong(filteredVideos, query);
+    // this.props.filteredByLyrics(filteredVideos, query);
+
   const fetchVideos = async (key, page) => {
     const res = await fetch(`http://localhost:3001/api/v1/videos?page=${page}`);
 
@@ -118,8 +127,7 @@ const VideoDashboard = (props) => {
     switch (filter) {
       case "none":
         if(status === 'success'){
-        return resolvedData } else {
-          return videos
+        return videos
         }
       case "all":
         return filteredByAll
