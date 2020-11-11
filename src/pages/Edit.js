@@ -19,7 +19,7 @@ import Button from 'react-bootstrap/Button';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
 // import Duration from '../components/Duration';
-import { GrabberIcon } from '@primer/octicons-react'
+import { GrabberIcon, PlusIcon, DashIcon } from '@primer/octicons-react'
 import AddTagsBox from '../components/AddTagsBox';
 import Line from '../components/Line';
 
@@ -333,7 +333,7 @@ class Edit extends Component {
             <div
             className="droppable-input-div"
             ref={provided.innerRef}
-            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'transparent' }}
+            style={{ backgroundColor: snapshot.isDraggingOver ? '#241e2f2f' : 'transparent' }}
             {...provided.droppableProps}
             > 
               {
@@ -368,7 +368,7 @@ class Edit extends Component {
                         onFocus={(e) => this.handleFocus(e, i)} 
                         // defaultValue={this.state.played}
                         // onChange={(e) => this.handleChange(e, i)}
-                        // placeholder="Time" 
+                        placeholder="00:00" 
                         />
                     </Col>
                     <Col xs={8}>
@@ -396,12 +396,12 @@ class Edit extends Component {
                     value="add"
                     className="dynamic-input-btn"
                     onClick={this.handleAddInput}
-                    variant="primary">+</Button>  }
+                    variant="primary"><PlusIcon size={24} /></Button>  }
                   { songs.length !== 1 && <Button 
                     value="remove"
                     className="dynamic-input-btn"
                     onClick={() => this.handleRemoveInput(i)}
-                    variant="primary">-</Button> }
+                    variant="primary"><DashIcon size={24} /></Button> }
                   
               </Col>
             </Row>

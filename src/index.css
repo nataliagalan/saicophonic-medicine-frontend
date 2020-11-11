@@ -263,6 +263,9 @@ div.tags-input{
 #tags > li {
   display: inline-block;
   margin-bottom: 0.6rem;
+  font-size: 1.2em; 
+  letter-spacing: .09em;
+
 }
 
 ul#tags {
@@ -278,7 +281,7 @@ ul#tags {
   list-style: none;
   color: #fff;
   padding: 0.3rem;
-  margin-right: 0.5rem;
+  margin-right: 0.9rem;
   /* background-color: rgb(236, 224, 250); */
   /* border-color:  rgb(236, 224, 250); */
   border: 1px solid #EBDFF7;
@@ -318,13 +321,14 @@ ul#tags {
 
 .rbt-input::placeholder {
   color: #ebdff7b4;
-  letter-spacing: .02em;
+  letter-spacing: .01em;
+  
 }
 
 
 
 .rbt-menu > .dropdown-item {
-  font-size: 0.9em; 
+  font-size: 1.1em; 
   color: #000000b4;
   /* color: #EBDFF7; */
   
@@ -356,7 +360,25 @@ ul#tags {
   padding-right: 1.6rem;
   padding-left: 0.4rem;
   padding-top: 0.9rem;
-  border: 0.1rem solid #EBDFF7;
+  border: 0.1rem solid #2a272f;
+}
+
+.droppable-input-div{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.draggable-input-div:focus,
+.draggable-input-div:active{
+  outline: 0.1rem solid #f6cd53;
+  /* box-shadow: 0 0 3pt 2pt red; */
+  -moz-outline-radius: 0px;
+  outline-radius: 0px;
+  border-radius: 0;
+}
+
+.dynamic-input-btn{
+  color: #EBDFF7;
 }
 
 
