@@ -196,6 +196,9 @@ a#toggle-grid-btn.nav-link {
   border-color: rgb(250, 192, 0);
 }
 
+
+
+
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
   position: -webkit-sticky;

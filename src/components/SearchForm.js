@@ -9,7 +9,7 @@ import { filteredByAll } from '../actions/filteredByAll';
 import { filteredByBand } from '../actions/filteredByBand';
 import { filteredBySong } from '../actions/filteredBySong';
 import { filteredByLyrics } from '../actions/filteredByLyrics';
-
+import { SearchIcon } from '@primer/octicons-react'
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead, Menu, MenuItem, Highlighter  } from 'react-bootstrap-typeahead';
@@ -146,6 +146,8 @@ class SearchForm extends Component {
       this.props.history.push(`/videos/tagged/${tag}`)
     }
   }
+
+
  
   render() {
     // console.log(this.props, "============SEARCH FORM=========");
@@ -172,7 +174,9 @@ class SearchForm extends Component {
         // onPaginate={this._handlePagination}
         onSearch={this._handleSearch}
         paginate
-        placeholder="Search by artist, band, song or lyrics."
+        placeholder="Search by artist, band, song or lyrics"
+        promptText="Type to search"
+        searchText={`Searching for ${this.state.query}`}
         options={this.state.options}
         onBlur={this.closeDropdown} 
         onKeyDown={this.handleKeyDown}
