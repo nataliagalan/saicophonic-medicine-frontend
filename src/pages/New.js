@@ -7,7 +7,6 @@ import { currentUser } from '../actions/auth'
 import { addVideo } from '../actions/videos'
 import { clearTags } from '../actions/tags'
 
-
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import Form from 'react-bootstrap/Form';
@@ -19,9 +18,9 @@ import Container from 'react-bootstrap/Container';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
 import Duration from '../components/Duration';
-import { GrabberIcon } from '@primer/octicons-react'
+import { GrabberIcon, PlusIcon, DashIcon } from '@primer/octicons-react'
 import AddTagsBox from '../components/AddTagsBox';
-
+import Line from '../components/Line';
 
 
 class New extends Component {
@@ -269,9 +268,9 @@ class New extends Component {
             those seconds get passed as input to duration and it converts them
             to 00:00 format, then they get displayed
             */}
-            <div className="duration-seconds">
+            {/* <div className="duration-seconds">
             <Duration seconds={this.state.duration * this.state.played}/>
-            </div>
+            </div> */}
 
       {/* !VIDEO WRAPPER DIV */}
           </div>
@@ -313,8 +312,9 @@ class New extends Component {
           <Droppable key={this.state.id} droppableId="droppable-1">
           {(provided, snapshot) => (
             <div
+            className="droppable-input-div"
             ref={provided.innerRef}
-            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
+            style={{ backgroundColor: snapshot.isDraggingOver ? '#241e2f2f' : 'transparent' }}
             {...provided.droppableProps}
             > 
               {
@@ -324,15 +324,16 @@ class New extends Component {
           <Draggable key={i} draggableId={`draggable-${i}`} index={i}>
             {(provided, snapshot) => (
             <div 
+              className="draggable-input-div"
               key={i}
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
             >
 
-            <Row key={i}>
+            <Row key={i} noGutters>
               <Col xs={1} >
-                <GrabberIcon size={26} />
+                <span style={{color: "#EBDFF7"}}><GrabberIcon size={26} /></span>
               </Col>
 
               <Col>
@@ -348,10 +349,10 @@ class New extends Component {
                         onFocus={(e) => this.handleFocus(e, i)} 
                         // defaultValue={this.state.played}
                         // onChange={(e) => this.handleChange(e, i)}
-                        // placeholder="Time" 
+                        placeholder="00:00" 
                         />
                     </Col>
-                    <Col xs={7}>
+                    <Col xs={8}>
                       <Form.Control
                         name="title"
                         label="title"  
@@ -376,12 +377,12 @@ class New extends Component {
                     value="add"
                     className="dynamic-input-btn"
                     onClick={this.handleAddInput}
-                    variant="primary">+</Button>  }
+                    variant="primary"><PlusIcon size={24} /></Button>  }
                   { songs.length !== 1 && <Button 
                     value="remove"
                     className="dynamic-input-btn"
                     onClick={() => this.handleRemoveInput(i)}
-                    variant="primary">-</Button> }
+                    variant="primary"><DashIcon size={24} /></Button> }
               </Col>
             </Row>
 
@@ -394,12 +395,13 @@ class New extends Component {
             {provided.placeholder}
           </div>
           )}
-          </Droppable>;
+          </Droppable>
           {/* !DROPPABLE DIV */}
-
+          <Line color={"#EBDFF7"}/>
             <AddTagsBox editMode={this.state.editMode} />
-
+          <Line color={"#EBDFF7"}/>
             <Button 
+              className="save-video"
               variant="primary" 
               type="submit">
               Save
