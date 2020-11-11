@@ -20,6 +20,7 @@ const VideoCard = (props) => {
           <ResponsiveEmbed aspectRatio="16by9">
             <ReactPlayer
             ref={ref}
+            light={true}
             url={url} 
             playing={playerState.playing}
             controls={true}
@@ -38,6 +39,7 @@ const VideoCard = (props) => {
               <ResponsiveEmbed aspectRatio="16by9">
                 <ReactPlayer
                 ref={ref}
+                light={true}
                 url={url} 
                 playing={playerState.playing}
                 controls={true}
