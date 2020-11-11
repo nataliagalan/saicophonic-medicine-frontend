@@ -15,6 +15,7 @@ import Edit from '../pages/Edit';
 import SearchResults from '../pages/SearchResults';
 import Random from '../pages/Random';
 import TaggedResults from '../pages/TaggedResults';
+import MyFooter from './MyFooter';
 
 
 
@@ -34,6 +35,7 @@ const App = () => {
             <Route exact path="/videos/tagged/:tag" component={TaggedResults} /> 
             <Route exact path="/random" component={Random} />  
           </Switch>
+          <MyFooter />
         </div>
       </BrowserRouter>
     );
