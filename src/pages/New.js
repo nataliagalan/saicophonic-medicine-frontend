@@ -212,6 +212,7 @@ class New extends Component {
   // DRAGGABLE METHODS
 
   onDragEnd = (params) => {
+    if(!params.destination) return;
     const srcI = params.source.index;
     const desI = params.destination.index;
     // const list = this.state.songs;
