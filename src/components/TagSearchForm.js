@@ -127,9 +127,9 @@ class TagSearchForm extends Component {
         
         renderMenu={(options, menuProps) => {
           return (
-            <Menu {...menuProps} >
+            <Menu {...menuProps} className="tag-search-menu rbt-menu" id="tag-search-menu"> 
               {options.map((opt, ind) => 
-                <MenuItem option={opt} key={ind} position={ind} 
+                <MenuItem option={opt} key={ind} position={ind}
                 onClick={() => this.handleClick(opt.name)}
                 >
                   <div>
