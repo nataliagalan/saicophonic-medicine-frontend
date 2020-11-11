@@ -5,6 +5,8 @@ $theme-colors: (
         "danger": teal
 );
 
+// $primary: rgb(26, 26, 26);
+
 // $body-color: #fff;
 $body-bg: rgb(15, 15, 15);
 
@@ -31,6 +33,18 @@ $navbar-light-hover-color: rgb(253, 214, 85);
 
 $navbar-light-toggler-border-color: #fff;
 
+// background for any input field
+// $input-bg: rgb(253, 214, 85);
+
+// background color for selected option from dropdown menus, tied to $Primary
+// $component-active-bg: transparent;
+$component-active-bg: rgba(255, 255, 255, 0.274);
+
+$component-active-color: rgb(15, 15, 15);
+
+
+// $dropdown-link-hover-color:         darken($gray-900, 5%) !default;
+$dropdown-link-hover-bg: rgba(255, 255, 255, 0.274);
 
 
 

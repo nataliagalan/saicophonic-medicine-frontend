@@ -299,6 +299,18 @@ ul#tags {
   margin-bottom: 4rem;
 }
 
+.tag-search-menu {
+  background-image: linear-gradient(to right, #e5dfe8, #e5dfe8, #FFC821);
+  background-size:     cover;       
+  background-repeat:   no-repeat;
+  background-position: center center; 
+  opacity: 1;
+  border-radius: 0px;
+}
+
+
+
+
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
