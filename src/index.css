@@ -236,6 +236,20 @@ input.rbt-input-main.form-control.rbt-input {
   padding-left: 2rem;
 }
 
+div.tags-input > div > div:nth-child(1) > input.rbt-input-main.form-control.rbt-input{
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.01rem solid;
+  border-color: #EBDFF7;
+}
+
+div.tags-input{
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 
 
 /* FIXES THE VIDEO IN PLACE */

@@ -18,9 +18,10 @@ import Button from 'react-bootstrap/Button';
 
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
-import Duration from '../components/Duration';
+// import Duration from '../components/Duration';
 import { GrabberIcon } from '@primer/octicons-react'
 import AddTagsBox from '../components/AddTagsBox';
+import Line from '../components/Line';
 
 
 
@@ -413,9 +414,9 @@ class Edit extends Component {
           )}
           </Droppable>;
           {/* !DROPPABLE DIV */}
-
+          <Line color={"#EBDFF7"}/>
             <AddTagsBox editMode={this.state.editMode} />
-
+          <Line color={"#EBDFF7"}/>
             <Button 
               variant="primary" 
               type="submit">
