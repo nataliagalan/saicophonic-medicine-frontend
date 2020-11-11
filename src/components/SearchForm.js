@@ -31,6 +31,7 @@ class SearchForm extends Component {
 
   //removed page 1 from argument below for testing
   makeAndHandleRequest = async (query) => {
+    //page number 0
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
 
@@ -40,7 +41,11 @@ class SearchForm extends Component {
         isLoading: false,
       }); 
     } else {
-      //dispatch here    
+      //dispatch here  
+      
+      
+      //set data and page umber to 0
+      
       this.props.filteredByAll(filteredVideos);
       this.props.filteredByBand(filteredVideos, query);
       this.props.filteredBySong(filteredVideos, query);
