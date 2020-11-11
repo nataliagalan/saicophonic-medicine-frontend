@@ -232,12 +232,17 @@ a#toggle-grid-btn.nav-link {
   width: 34px;
 }
 
-input.rbt-input-main.form-control.rbt-input {
+#tags-magnifier{
+  padding-bottom: 3.8px;
+}
+
+div.tags-input > div > div:nth-child(1) > input.rbt-input-main.form-control.rbt-input {
   padding-left: 2rem;
 }
 
 div.tags-input > div > div:nth-child(1) > input.rbt-input-main.form-control.rbt-input{
   background-color: transparent;
+  color:#EBDFF7;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -248,8 +253,51 @@ div.tags-input > div > div:nth-child(1) > input.rbt-input-main.form-control.rbt-
 div.tags-input{
   margin-left: 2rem;
   margin-right: 2rem;
+  margin-bottom: 3rem;
+  margin-top: 2.5rem;
 }
 
+#tags > li {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
+ul#tags {
+  text-align: center; 
+}
+
+.tag-delete-icon {
+  border: none;
+  cursor: pointer;
+}
+
+.tag {
+  list-style: none;
+  color: #fff;
+  padding: 0.3rem;
+  margin-right: 0.5rem;
+  /* background-color: rgb(236, 224, 250); */
+  /* border-color:  rgb(236, 224, 250); */
+  border: 1px solid #EBDFF7;
+}
+
+.tag-text{
+  padding: .3rem;
+  /* color: rgb(24, 24, 24); */
+  color: #EBDFF7;
+}
+
+.ind-tag {
+  background-color: lavender;
+  color: #000;
+  padding: .3rem;
+  margin: .3rem;
+}
+
+.save-video {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
 
 
 /* FIXES THE VIDEO IN PLACE */

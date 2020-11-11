@@ -417,7 +417,8 @@ class Edit extends Component {
           <Line color={"#EBDFF7"}/>
             <AddTagsBox editMode={this.state.editMode} />
           <Line color={"#EBDFF7"}/>
-            <Button 
+            <Button
+              className="save-video"
               variant="primary" 
               type="submit">
               Save
