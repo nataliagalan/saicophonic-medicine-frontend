@@ -6,6 +6,7 @@ import { currentUser } from '../actions/auth'
 import {Link} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 class Login extends React.Component {
@@ -81,12 +82,13 @@ class Login extends React.Component {
   render() {
 
   return (
-    <div className="login-page-content-wrapper">
-    <Form onSubmit={this.handleSubmit}>
+    <div className="login-page-content-wrapper text-center">
+      <Container fluid>
+    <Form onSubmit={this.handleSubmit} className="login-page">
       { this.state.error && <h4 style={{ color: 'red'}}>{this.state.error}</h4> }
       {
         (!this.props.auth.id) ?
-        (<Form.Row>
+        (<><Form.Row>
           <Col>
             <Form.Control 
               name="username"
@@ -96,6 +98,9 @@ class Login extends React.Component {
               // placeholder="username" 
               />
           </Col>
+          </Form.Row>
+            
+          <Form.Row>
           <Col>
             <Form.Control
               name="password"
@@ -105,13 +110,19 @@ class Login extends React.Component {
               value={this.state.password}
               // placeholder="pw" 
               />
-          </Col>
+            </Col>
+          </Form.Row>
+
+          <Form.Row>
+            <Col>
+            <br></br>
           <Button 
             variant="primary" 
             type="submit">
             Login
           </Button>
-        </Form.Row>)
+          </Col>
+        </Form.Row></>)
         :
         (<>
         <Button 
@@ -121,19 +132,12 @@ class Login extends React.Component {
           variant="primary">
         Logout
         </Button>
-
-        <Button 
-          as={Link}
-          to='/videos/new'
-          variant="primary" 
-          type="submit">
-        Add Video
-        </Button>
       </>)
  
       }
 
     </Form>
+    </Container>
     </div>
     );
   }
