@@ -232,6 +232,17 @@ a#toggle-grid-btn.nav-link {
   display: none;
 }
 
+#root > div > nav > div.nav-item > div > div.search-form-icons > button{
+  text-shadow: none;
+  opacity: .8;
+}
+
+
+#root > div > nav > div.nav-item > div > div.search-form-icons > button:hover{
+  color: rgb(250, 192, 0);
+  background-color: transparent;
+  opacity: .6;
+}
 #tag-search-form-icon{
   align-items: center;
   display: flex;
@@ -498,6 +509,23 @@ img.social-logos:hover { /* svg on an img tag */
 }
 
 
+.btn.lyrics-card-icons{
+  border: none;
+}
+
+div.modal-body{
+  display: none;
+}
+#copy-success{
+  font-weight: 100;
+  text-align: center;
+}
+
+div.modal-content{
+  border: none;
+  border-radius: 0;
+  -moz-outline-radius: 0;
+}
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
