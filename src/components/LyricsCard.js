@@ -9,10 +9,12 @@ import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import Container from 'react-bootstrap/Container'
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tags from './Tags';
+import { TrashIcon, PencilIcon, ShareIcon, RocketIcon } from '@primer/octicons-react'
 
 
 const LyricsCard = (props) => {
@@ -124,22 +126,30 @@ const LyricsCard = (props) => {
           {
           (auth.id) ?
             (<><Button
-              style={{border: 'none'}} 
+              className="lyrics-card-icons"
               as={Link} 
               to={`/videos/edit/${id}`}>
-                <span role="img" aria-label="edit">✏️</span>
+                <span role="img" aria-label="edit">
+                  <PencilIcon size={24} />
+                </span>
               </Button>
             <Button 
-              style={{border: 'none'}}
+            className="lyrics-card-icons"
               // as={Link} 
               onClick={() => delVideo(id)}>
-                <span role="img" aria-label="delete">🗑</span>
+                <span role="img" aria-label="delete">
+                  <TrashIcon size={24} />
+                </span>
             </Button></>)
             : 
             null
           }
-          <Button onClick={() => copyUrlToClipboard (id)}>
-            Copy
+          <Button 
+          className="lyrics-card-icons"
+          onClick={() => copyUrlToClipboard (id)}>
+            <span role="img" aria-label="share">
+              <ShareIcon size={24} />
+            </span>
           </Button>
           <Modal
             show={show}
@@ -147,10 +157,12 @@ const LyricsCard = (props) => {
             dialogClassName="modal-90w"
             aria-labelledby="copy-success"
             >
-            <Modal.Header closeButton>
-              <Modal.Title id="copy-success">
-                Copied!
+            <Modal.Header >
+              <Container fluid>
+              <Modal.Title id="copy-success" >
+              <div className="justify-content-md-center text-center"><RocketIcon size={24} /><span>&nbsp;&nbsp;</span>Url copied to clipboard!</div>
               </Modal.Title>
+              </Container>
             </Modal.Header>
             <Modal.Body>
             </Modal.Body>

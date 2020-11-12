@@ -227,7 +227,7 @@ class SearchForm extends Component {
             {!!selected.length && 
             (<Button aria-label="Clear" className="close rbt-close" >
               <div onClick={onClear}>
-                <XIcon size={20} />
+              <span style={{color: "#EBDFF7"}} aria-label="clear-menu" id="clear-menu"><XIcon size={20} /></span>
               </div></Button>)}
             {!selected.length && <span style={{color: "#EBDFF7"}}aria-label="magnifier" id="magnifier"><SearchIcon size={16}/></span>}
           </div>
