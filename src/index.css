@@ -363,6 +363,7 @@ ul#tags {
   color: #EBDFF7;
 }
 
+.newsletter-form input.form-control, 
 .edit-and-new-form input.form-control, 
 .edit-and-new-form textarea.form-control {
   border-radius: 0rem;
@@ -375,11 +376,14 @@ ul#tags {
   border-color: #EBDFF7;
 }
 
+.newsletter-form input.form-control:active,
+.newsletter-form input.form-control:focus,
 .edit-and-new-form input.form-control:active,
 .edit-and-new-form input.form-control:focus{
   background-color: transparent !important;
 }
 
+.newsletter-form input.form-control::placeholder, 
 .edit-and-new-form input.form-control::placeholder, 
 .edit-and-new-form textarea.form-control::placeholder {
   color: #ebdff7e3;
@@ -396,6 +400,10 @@ input.form-control:-webkit-autofill:active  {
 }
 .social-logos{
   width: 1.3rem;
+  
+}
+.social-logos-div {
+  margin-top: 1.3rem;
 }
 
 #tinyletter-logo{
@@ -416,12 +424,37 @@ img.social-logos:hover { /* svg on an img tag */
   filter: hue-rotate(90deg) saturate(100%) invert(50%) sepia(90%);;
 }
 
-.newsletter{
-  border: 1px; 
-  solid: #ccc; 
-  padding: 3px; 
-  text-align: center;
+
+.newsletter-wrapper{
+ width: 28vw;
+ margin-bottom: 5rem;
+  margin-top: 5rem;
 }
+
+.my-footer{
+  margin-bottom: 3rem;
+  margin-top: 5rem;
+}
+.footer-site-title {
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin-top: 1.3rem;
+}
+.newsletter-prompt{
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #EBDFF7;
+  letter-spacing: .09em;
+  margin-bottom: 2.3rem;
+}
+
+.sign-up-newsletter {
+  color: #EBDFF7;
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: .09em;
+}
+
 
 
 /* fill="#fff" */
@@ -500,6 +533,13 @@ img.social-logos:hover { /* svg on an img tag */
     padding-left: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+  .newsletter-wrapper{
+    width: 88vw;
+   }
+
+   .sign-up-newsletter {
+    margin-top: 2rem;
   }
 }
 
