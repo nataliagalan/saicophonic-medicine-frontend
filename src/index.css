@@ -394,8 +394,37 @@ input.form-control:-webkit-autofill:active  {
   transition: background-color 5000s;
   -webkit-text-fill-color: #fff !important;
 }
+.social-logos{
+  width: 1.3rem;
+}
+
+#tinyletter-logo{
+  width: 1.8rem;
+  margin-right: 0px;
+}
+#tinyletter-logo:hover{
+  filter: hue-rotate(90deg) saturate(100%) invert(38%) sepia(90%);;
+
+}
+
+img.social-logos { /* svg on an img tag */
+  -webkit-filter: invert(1);  /* safari 6.0 - 9.0 */
+  filter: invert(1);
+  margin: 0.5rem; 
+}
+img.social-logos:hover { /* svg on an img tag */
+  filter: hue-rotate(90deg) saturate(100%) invert(50%) sepia(90%);;
+}
+
+.newsletter{
+  border: 1px; 
+  solid: #ccc; 
+  padding: 3px; 
+  text-align: center;
+}
 
 
+/* fill="#fff" */
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
