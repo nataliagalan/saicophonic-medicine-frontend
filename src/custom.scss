@@ -5,7 +5,7 @@ $theme-colors: (
         "danger": teal
 );
 
-$primary: rgb(253, 214, 85);
+$primary: rgb(255, 231, 153);
 
 
 // $body-color: #fff;
@@ -33,6 +33,12 @@ $navbar-light-active-color: #EBDFF7;
 $navbar-light-hover-color: rgb(253, 214, 85);
 
 $navbar-light-toggler-border-color: #fff;
+$nav-tabs-border-radius: 0;
+$nav-tabs-border-color: #EBDFF7;
+$nav-tabs-border-width: 3;
+
+$nav-tabs-link-active-color: #EBDFF7;
+// $nav-pills-link-active-color: #EBDFF7;
 
 // background for any input field
 // $input-bg: rgb(253, 214, 85);

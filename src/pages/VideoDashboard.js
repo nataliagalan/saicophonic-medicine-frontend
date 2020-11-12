@@ -94,6 +94,7 @@ const VideoDashboard = (props) => {
 
   const displayFilterTabs = () => {
     return (
+      <>
       <Nav fill variant="tabs" defaultActiveKey="all">
         <Nav.Item>
           <Nav.Link 
@@ -101,28 +102,30 @@ const VideoDashboard = (props) => {
             title="all"
             onClick={() => handleTabClick("all") }
           >
-              All({filteredByAll.length})
+              All ({filteredByAll.length})
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
             onClick={() => handleTabClick("bands") }
             title="bands"
-            eventKey="band">Artist/Bands({filteredByBand.bands.length})</Nav.Link>
+            eventKey="band">Artist/Bands ({filteredByBand.bands.length})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
             onClick={() => handleTabClick("songs")}
             title="songs"
-            eventKey="songs">Songs({filteredBySong.songs.length})</Nav.Link>
+            eventKey="songs">Songs ({filteredBySong.songs.length})</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link 
             onClick={() => handleTabClick("lyrics")}
             title="lyrics"
-            eventKey="lyrics">Lyrics({filteredByLyrics.lyrics.length})</Nav.Link>
+            eventKey="lyrics">Lyrics ({filteredByLyrics.lyrics.length})</Nav.Link>
         </Nav.Item>
-      </Nav> )
+      </Nav>
+      <div className="custom-spacer"></div>
+       </>)
   }
 
   const findVideos = () => {
