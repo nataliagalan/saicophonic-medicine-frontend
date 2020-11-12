@@ -71,14 +71,15 @@ code {
   outline: none !important;
 }
 
-.nav-font-style {
+
+.nav-font-style#menu-toggle {
   font-family: pragmatapro-fraktur, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 1.5rem;
   color: #EBDFF7;
-  padding-left: 1.5rem;
+  padding-right: 2rem;
 
 }
 
@@ -200,6 +201,7 @@ code {
 
 a#toggle-grid-btn.nav-link {
   padding-top: 0.9rem;
+  padding-right: 3rem;
 }
 
 .form-control {
@@ -526,6 +528,13 @@ div.modal-content{
   border-radius: 0;
   -moz-outline-radius: 0;
 }
+
+#root > div > div.container-fluid > div > div.nav.nav-tabs.nav-fill a{
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+}
+
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
