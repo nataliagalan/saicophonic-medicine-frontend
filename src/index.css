@@ -6,8 +6,9 @@ body {
   margin: 0;
   /* font-family: ibm-plex-mono, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
   font-family: "Futura-Pt", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  -webkit-font-smoothing: antialiased;
+  /* -webkit-font-smoothing: antialiased; */
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 
@@ -44,7 +45,7 @@ code {
 /* .nav-bg {
 
   background: linear-gradient(to bottom,  black 38%, transparent 100%);
-  -webkit-font-smoothing: subpixel-antialiased;
+
   transition: color .2s,background-color .2s;
   background: linear-gradient(#000000,rgba(255,255,255,0));
 } */
@@ -347,6 +348,10 @@ ul#tags {
   
 }
 
+.bold-menu{
+  font-weight: 500;
+}
+
 
 
 .draggable-input-div{
@@ -479,6 +484,14 @@ img.social-logos:hover { /* svg on an img tag */
   outline: 0.1rem solid #f6cd53;
   color: #f6cd53;
 
+}
+
+.toggle-grid-btn{
+  color: #EBDFF7;
+}
+
+.toggle-grid-btn:hover{
+  color: #f6cd53;
 }
 
 

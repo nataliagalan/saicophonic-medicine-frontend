@@ -187,7 +187,7 @@ class SearchForm extends Component {
         renderMenu={(options, menuProps) => {
           return (
 
-            <Menu {...menuProps} >
+            <Menu {...menuProps} className="tag-search-menu">
         
             {options.map((opt, ind) => 
               <MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
@@ -202,14 +202,14 @@ class SearchForm extends Component {
             <MenuItem option={options[0]} 
             onClick={() => this.handleAllResults(this.state.query)}
             >
-              <div>
+              <div className="bold-menu">
                 {`See all results`}
               </div>
             </MenuItem>
             <MenuItem option={options[0]} 
             onClick={() => this.fetchTaggedVideos(this.state.query)}
             >
-              <div>
+              <div className="bold-menu">
                 {`Videos tagged with ${this.state.query}`}
               </div>
             </MenuItem>

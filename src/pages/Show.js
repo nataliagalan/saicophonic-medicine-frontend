@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { deleteVideo } from "../actions/videos";
 import { getVideo } from "../actions/video";
 import { currentUser } from '../actions/auth';
+import { toggleGrid } from '../actions/toggleGrid'
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,7 +15,9 @@ import VideoCard from '../components/VideoCard';
 class Show extends Component {
 
   componentDidMount(){
-
+    if(this.props.showGrid){
+      this.props.toggleGrid()
+    }
     const id = parseInt(this.props.match.params.id);
 
     this.fetchVideo(id)
@@ -73,14 +76,16 @@ class Show extends Component {
 const setStateToProps = (state) => {
   return {
     video: state.video,
-    auth: state.auth
+    auth: state.auth,
+    showGrid: state.toggleGrid
   };
 };
 
 const setDispatchToProps = {
   deleteVideo,
   getVideo,
-  currentUser
+  currentUser,
+  toggleGrid
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(Show));

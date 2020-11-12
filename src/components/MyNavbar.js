@@ -67,11 +67,11 @@ const MyNavbar = (props) => {
             :
             (
             showGrid ? 
-            (<Nav.Link id="toggle-grid-btn" style={{cursor: 'pointer'}} onClick={handleToggleGrid} > 
-              <span style={{color: "black"}}><ThreeBarsIcon size={16} /></span> 
+            (<Nav.Link id="toggle-grid-btn" onClick={handleToggleGrid} > 
+              <span className="toggle-grid-btn"><ThreeBarsIcon size={16} /></span> 
             </Nav.Link>)
             :
-            (<Nav.Link id="toggle-grid-btn" style={{cursor: 'pointer'}} onClick={handleToggleGrid}><GridIcon color={"black"}/></Nav.Link>)
+            (<Nav.Link id="toggle-grid-btn" onClick={handleToggleGrid}><span className="toggle-grid-btn"><GridIcon /></span></Nav.Link>)
             )
           }
           <Nav.Link 

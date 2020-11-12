@@ -56,7 +56,7 @@ const VideoCard = (props) => {
             </Col>
 
           <br></br>
-          <Line color="#EBDFF7" />
+          <Line color="#EBDFF7" height={1} />
         </>
       )
     }
