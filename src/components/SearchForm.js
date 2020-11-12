@@ -11,6 +11,7 @@ import { filteredBySong } from '../actions/filteredBySong';
 import { filteredByLyrics } from '../actions/filteredByLyrics';
 import { XIcon, SearchIcon } from '@primer/octicons-react'
 import Button from 'react-bootstrap/Button';
+import Line from './Line';
 
 // import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typeahead';
@@ -187,7 +188,7 @@ class SearchForm extends Component {
         renderMenu={(options, menuProps) => {
           return (
 
-            <Menu {...menuProps} className="tag-search-menu">
+            <Menu {...menuProps} className="tag-search-menu rbt-menu">
         
             {options.map((opt, ind) => 
               <MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
@@ -198,7 +199,6 @@ class SearchForm extends Component {
                 </div>
               </MenuItem>
             )}
-
             <MenuItem option={options[0]} 
             onClick={() => this.handleAllResults(this.state.query)}
             >
@@ -229,7 +229,7 @@ class SearchForm extends Component {
               <div onClick={onClear}>
                 <XIcon size={20} />
               </div></Button>)}
-            {!selected.length && <span aria-label="magnifier" id="magnifier"><SearchIcon size={16}/></span>}
+            {!selected.length && <span style={{color: "#EBDFF7"}}aria-label="magnifier" id="magnifier"><SearchIcon size={16}/></span>}
           </div>
         )}
       </AsyncTypeahead>

@@ -330,7 +330,7 @@ ul#tags {
   background-color: rgb(15, 15, 15); */
 
   border-radius: 0px;
-  margin-top: -1px;
+  margin-top: -3px;
 }
 
 .rbt-input::placeholder {
@@ -378,6 +378,7 @@ ul#tags {
   color: #EBDFF7;
 }
 
+.searchForm input.form-control,
 .newsletter-form input.form-control, 
 .edit-and-new-form input.form-control, 
 .edit-and-new-form textarea.form-control {
@@ -391,6 +392,8 @@ ul#tags {
   border-color: #EBDFF7;
 }
 
+.searchForm input.form-control:active,
+.searchForm input.form-control:focus,
 .newsletter-form input.form-control:active,
 .newsletter-form input.form-control:focus,
 .edit-and-new-form input.form-control:active,
@@ -520,6 +523,7 @@ img.social-logos:hover { /* svg on an img tag */
 
   #magnifier {
     display: none;
+   
   }
 
   #toggle-grid-btn { 

@@ -62,7 +62,7 @@ const MyNavbar = (props) => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto" id="menu-div">
           {
-            video.id && props.location.pathname !== "/videos" ? 
+            props.location.pathname !== "/videos" ? 
             null
             :
             (
