@@ -164,8 +164,8 @@ code {
 
 .login-page-content-wrapper {
   padding-top: 13rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-left: 36rem;
+  margin-right: 36rem;
 }
 
 .accordion-time-title {
@@ -390,7 +390,7 @@ ul#tags {
 .dynamic-input-btn{
   color: #EBDFF7;
 }
-
+.login-page input.form-control,
 .searchForm input.form-control,
 .newsletter-form input.form-control, 
 .edit-and-new-form input.form-control, 
@@ -535,6 +535,10 @@ div.modal-content{
 
 }
 
+.btn-primary{
+  color: #EBDFF7;
+}
+
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
@@ -618,6 +622,11 @@ div.modal-content{
 
    .sign-up-newsletter {
     margin-top: 2rem;
+  }
+  .login-page-content-wrapper {
+    padding-top: 13rem;
+    margin-left: 8rem;
+    margin-right: 8rem;
   }
 
 
