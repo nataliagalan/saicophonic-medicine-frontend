@@ -455,9 +455,23 @@ img.social-logos:hover { /* svg on an img tag */
   letter-spacing: .09em;
 }
 
+.pagination{ 
+  float: right; 
+
+}
+.pagination-wrapper{
+  padding-top: 1.8rem;
+  padding-bottom: 0.6rem;
+}
 
 
-/* fill="#fff" */
+.page-link:focus{
+  outline: 0.1rem solid #f6cd53;
+  color: #f6cd53;
+
+}
+
+
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
@@ -541,6 +555,8 @@ img.social-logos:hover { /* svg on an img tag */
    .sign-up-newsletter {
     margin-top: 2rem;
   }
+
+
 }
 
 

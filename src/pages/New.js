@@ -17,7 +17,7 @@ import Container from 'react-bootstrap/Container';
 
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
-import Duration from '../components/Duration';
+// import Duration from '../components/Duration';
 import { GrabberIcon, PlusIcon, DashIcon } from '@primer/octicons-react'
 import AddTagsBox from '../components/AddTagsBox';
 import Line from '../components/Line';

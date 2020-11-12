@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Line = ({ color }) => (
+const Line = ({ color, height = 3 }) => (
   <hr
       style={{
           // color: color,
           backgroundColor: color,
-          height: 3,
+          height: height,
           border: 0
       }}
   />

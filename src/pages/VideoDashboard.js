@@ -11,6 +11,8 @@ import Container from 'react-bootstrap/Container';
 import Pagination from 'react-bootstrap/Pagination';
 import Nav from 'react-bootstrap/Nav';
 import VideoContainer from '../components/VideoContainer';
+import { ChevronRightIcon, ChevronLeftIcon } from '@primer/octicons-react'
+import Line from '../components/Line';
 
 
 const VideoDashboard = (props) => {
@@ -162,7 +164,8 @@ const VideoDashboard = (props) => {
     let paginationArray = []
 
     for(let i = 0; i < totalPages; i++){
-      paginationArray.push(<Pagination.Item 
+      paginationArray.push(<Pagination.Item
+        className="pagination-btn" 
         key={i + 1}
         onClick={() => setPage(i + 1)}
       >{ i + 1 }</Pagination.Item>)
@@ -171,17 +174,20 @@ const VideoDashboard = (props) => {
       return
     } else {
       return (
-        <Pagination>
+        <div className="pagination-wrapper">
+        <Pagination >
           <Pagination.Prev 
             onClick={() => setPage(old => Math.max(old - 1, 1))}
             disabled={page === 1}
-          />
+          ><ChevronLeftIcon size={24} /></Pagination.Prev>
           {paginationArray}
           <Pagination.Next 
             onClick={() => setPage(old => (!latestData ? old : old + 1))}
             disabled={page === totalPages }
-          />
+          ><ChevronRightIcon size={24} /></Pagination.Next>
+
         </Pagination>
+        </div>
       );
     }
   }
@@ -201,6 +207,7 @@ const VideoDashboard = (props) => {
       }
       {showTabs === "true" ? displayFilterTabs() : null}
       <VideoContainer videos={findVideos()} />
+      <Line color="#EBDFF7" height={0.5}/>
       {/* {showTabs === "true" ? renderTabsPagination() : null}  */}
       {/* {status === "success" ? renderPagination() : null} */}
       {status === "success" && renderPagination()}
