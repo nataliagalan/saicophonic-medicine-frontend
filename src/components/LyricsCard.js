@@ -14,7 +14,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tags from './Tags';
-import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, MuteIcon, UnmuteIcon, DashIcon } from '@primer/octicons-react'
+import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, MuteIcon, UnmuteIcon, DashIcon, ChevronUpIcon, ChevronDownIcon } from '@primer/octicons-react'
 
 
 const LyricsCard = (props) => {
@@ -115,15 +115,16 @@ const LyricsCard = (props) => {
       style={{cursor: 'pointer'}} 
       as={Card.Header} 
       eventKey="1">
-      +
+      <span style={{color: "#EBDFF7"}}><ChevronDownIcon size={16} /></span>
     </Accordion.Toggle>
     <Accordion.Collapse eventKey="1">
     <Card.Body className="plus-accordion">
                         
       <Row>
         {/* <Col> */}
-        
+        <div className="tags-wrapper" id="tags-wrapper">
           <Tags tags={tags}/>
+          </div>
         {/* </Col> */}
       </Row>
 

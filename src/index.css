@@ -151,7 +151,10 @@ code {
  
 
 .plus-accordion {
-  background: #fffced;
+  /* background: #fffced; */
+  background: rgb(15, 15, 15);
+  border-radius: 0;
+  border: 2px solid #EBDFF7;
   /* border-radius: 0; */
   
 }
@@ -201,6 +204,7 @@ letter-spacing: .05em;
   color: #EBDFF7;
   font-size: 1.2em; 
   letter-spacing: .05em;
+  font-weight: 300;
   /* font-family: futura-pt, sans-serif;
 font-weight: 400;
 font-style: normal; */
@@ -353,14 +357,32 @@ ul#tags {
   /* color: rgb(24, 24, 24); */
   color: #EBDFF7;
 }
-
-.ind-tag {
-  background-color: lavender;
-  color: #000;
+/* #root > div > div.container-fluid > div > div.row > div:nth-child(6) > div > div.plus-accordion-card.card > div.collapse.show > div > div:nth-child(1) > a */
+.ind-tag.btn.btn-primary{
+  background-color: transparent;
   padding: .3rem;
   margin: .3rem;
+  color: #EBDFF7;
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  border: 1px solid #EBDFF7 !important;
+  padding: 0.6rem !important;
+  padding-left: 0.8rem !important;
+  padding-right: 0.8rem !important;
+}
+.ind-tag.btn.btn-primary:hover{
+  
+  color: rgb(253, 220, 109);
+  border: 1px solid rgb(253, 220, 109) !important;
 }
 
+#tags-wrapper{
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-top: 1.1rem;
+  margin-bottom: 2.5rem;
+}
 .save-video {
   margin-top: 3rem;
   margin-bottom: 4rem;
