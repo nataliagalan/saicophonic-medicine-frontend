@@ -155,13 +155,13 @@ code {
   background: rgb(15, 15, 15);
   border-radius: 0;
   border: 2px solid #EBDFF7;
-  /* border-radius: 0; */
+ 
   
 }
 .plus-accordion-card {
   background: #fffced;
   margin-bottom: 1rem;
-  
+  border-radius: 0;
 }
 
 
