@@ -41,7 +41,8 @@ const MyNavbar = (props) => {
     <Navbar 
       onToggle={toggleMenuIcon} 
       collapseOnSelect
-      bg="light" expand="md" 
+      // bg="light" 
+      expand="md" className="nav-bg"
       fixed="top">
       <Navbar.Brand as={Link} to="/videos" href="/videos">
         <img src={logo} className="imgFluid" style={{maxWidth: '50px'}} alt="logo that looks like a yin yang symbol inside a pill"/> 
