@@ -85,7 +85,7 @@ class Login extends React.Component {
     <div className="login-page-content-wrapper text-center">
       <Container fluid>
     <Form onSubmit={this.handleSubmit} className="login-page">
-      { this.state.error && <h4 style={{ color: 'red'}}>{this.state.error}</h4> }
+      { this.state.error && <h5 style={{ color: '#fda292'}}>{this.state.error}</h5> }
       {
         (!this.props.auth.id) ?
         (<><Form.Row>
