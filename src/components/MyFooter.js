@@ -18,26 +18,27 @@ import { Nav } from 'react-bootstrap';
 export default class MyFooter extends Component {
   render() {
     return (
-      <div className="sticky-bottom">  
+      <div className="my-footer sticky-bottom text-center">  
 <Line color="white" />
-  <Container>
-    <Form className="mx-auto newsletter"
+  <Container className="newsletter-wrapper text-center">
+    <Form className="newsletter-form"
       action="https://tinyletter.com/SaicoTherapy" 
       method="post" 
       target="popupwindow" 
       onSubmit="window.open('https://tinyletter.com/SaicoTherapy', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
-      <Form.Row>
-      </Form.Row>
-        <Form.Label 
+      <Form.Row className="justify-content-md-center text-center">
+        <Form.Label className="newsletter-prompt text-center"
           for="tlemail">Your monthly dose of Saicophonic Medicine ↓
         </Form.Label>
-      <Form.Row>
-        <Col>
+      </Form.Row>
+
+      <Form.Row className="justify-content-md-center text-center">
+        <Col md={8}>
           <Form.Control type="text" name="email" id="tlemail" />
           <Form.Control type="hidden" value="1" name="embed"/>
         </Col>
-        <Col >
-          <Button type="submit">SIGN UP</Button>
+        <Col md={4}>
+          <Button type="submit" className="sign-up-newsletter">SIGN UP</Button>
         </Col>
       </Form.Row>
 
@@ -49,7 +50,7 @@ export default class MyFooter extends Component {
           <Container>
             <Col>
               <Row>
-              <div className="mx-auto"  >
+              <div className="mx-auto social-logos-div">
                 <a href="https://tinyletter.com/SaicoTherapy" target="_blank">
                   <img src={tinyletter} className="social-logos" id="tinyletter-logo" alt="tinyletter-logo" />
                 </a>
@@ -67,10 +68,9 @@ export default class MyFooter extends Component {
                 </a>
                 </div>
               </Row>
+
               <Row>
-                 
-                <Navbar.Brand  className="mx-auto parent">© 2020 Saicophonic Medicine</Navbar.Brand>
-                  
+                <Navbar.Brand className="mx-auto parent footer-site-title">© 2020 Saicophonic Medicine</Navbar.Brand>
               </Row>
             </Col>
           </Container>
