@@ -37,9 +37,19 @@ code {
 
 .nav-bg {
 
-  background: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.738) 19%, rgba(0, 0, 0, 0.541) 34%, rgba(0, 0, 0, 0.382) 47%, rgba(0, 0, 0, 0.278) 56.5%, rgba(0, 0, 0, 0.194) 65%, rgba(0, 0, 0, 0.126) 73%, rgba(0, 0, 0, 0.075) 80.2%, rgba(0, 0, 0, 0.042) 86.1%, rgba(0, 0, 0, 0.021) 91%, rgba(0, 0, 0, 0.008) 95.2%, rgba(0, 0, 0, 0.002) 98.2%, transparent 100%);
+  background: linear-gradient(to bottom, black 38%, rgba(0, 0, 0, 0.042) 86.1%, rgba(0, 0, 0, 0.021) 91%, rgba(0, 0, 0, 0.008) 95.2%, rgba(0, 0, 0, 0.002) 98.2%, transparent 100%);
 
+  /* padding-top: 2rem; */
 }
+/* .nav-bg {
+
+  background: linear-gradient(to bottom,  black 38%, transparent 100%);
+  -webkit-font-smoothing: subpixel-antialiased;
+  transition: color .2s,background-color .2s;
+  background: linear-gradient(#000000,rgba(255,255,255,0));
+} */
+
+
 
 
 
