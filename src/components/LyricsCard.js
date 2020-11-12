@@ -86,13 +86,13 @@ const LyricsCard = (props) => {
                   className="accordion-time-title">
                      {song.timestamp} </Button><span className="toggle-grid-btn"><DashIcon size={12} /></span>
 
-                <Button className="accordion-time-title">{song.title}</Button>
+                <Button className="accordion-time-title song-title">{song.title}</Button>
                 </Col>
                 </Row>
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i + 1}>
             <Card.Body 
-              className="overflow-auto"
+              className="overflow-auto accordion-lyrics"
               scrollable="true"
               style={{whiteSpace: "pre-line"}}>
               {song.lyrics} 
