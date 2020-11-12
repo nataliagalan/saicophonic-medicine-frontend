@@ -363,11 +363,17 @@ ul#tags {
   padding: .3rem;
   margin: .3rem;
   color: #EBDFF7;
+
+  font-size: 1.2rem;
   font-family: futura-pt, sans-serif;
   font-weight: 300;
-  font-style: italic;
+  /* font-style: italic; */
+  /* font-family: ibm-plex-mono, sans-serif;
+  font-weight: 200; */
+  font-style: normal;
+  letter-spacing: .03em;
   border: 1px solid #EBDFF7 !important;
-  padding: 0.6rem !important;
+  padding: 0.5rem !important;
   padding-left: 0.8rem !important;
   padding-right: 0.8rem !important;
 }
