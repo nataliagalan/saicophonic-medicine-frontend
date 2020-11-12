@@ -141,10 +141,14 @@ code {
   text-align: center;
 }
 .song-accordion {
-  background: #fdfbff;
+  /* background: #fdfbff; */
+  background: rgb(15, 15, 15);
   border-radius: 0;
+  border: 2px solid #EBDFF7;
   
 }
+
+ 
 
 .plus-accordion {
   background: #fffced;
@@ -170,6 +174,19 @@ code {
 
 .accordion-time-title {
   color: #000;
+  border:none;
+}
+.accordion-time-title:hover {
+  background-color: transparent;
+  text-decoration: underline;
+  color: #EBDFF7;
+  
+}
+.accordion-time-title:active,
+.accordion-time-title:focus {
+  background-color: transparent;
+  text-decoration: underline;
+  color: #EBDFF7;
 }
 
 /* this adds scrolling ability to lyrics accordion */

@@ -14,7 +14,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tags from './Tags';
-import { TrashIcon, PencilIcon, ShareIcon, RocketIcon } from '@primer/octicons-react'
+import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, MuteIcon, UnmuteIcon, DashIcon } from '@primer/octicons-react'
 
 
 const LyricsCard = (props) => {
@@ -69,7 +69,7 @@ const LyricsCard = (props) => {
           className="song-accordion"
           key={i}> 
             <Accordion.Toggle
-            
+              className="text-left"
               style={{cursor: 'pointer'}} 
               // onClick={ (e) => props.please(e.target.innerText.split(' - ')[0]) } 
               // onClick={ (e) => dispatch(togglePlayVideo(e.target.innerText.split(' - ')[0])) } 
@@ -77,9 +77,15 @@ const LyricsCard = (props) => {
               eventKey={i + 1}>
                 <Row>
                 <Col>
+                {props.playing ? 
+                (<span className="toggle-grid-btn"><MuteIcon size={16} /></span>) 
+                : 
+                (<span className="toggle-grid-btn"><UnmuteIcon size={16} /></span>)}
                 <Button 
                   onClick={ (e) => props.handlePlay(e.target.innerText) } 
-                  className="accordion-time-title"> {song.timestamp} </Button>
+                  className="accordion-time-title">
+                     {song.timestamp} </Button><span className="toggle-grid-btn"><DashIcon size={12} /></span>
+
                 <Button className="accordion-time-title">{song.title}</Button>
                 </Col>
                 </Row>

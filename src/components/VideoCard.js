@@ -29,7 +29,7 @@ const VideoCard = (props) => {
             height='100%'/>
           </ResponsiveEmbed>
           <br></br>
-          <LyricsCard {...props} handlePlay={handlePlay} />
+          <LyricsCard {...props} handlePlay={handlePlay} playing={playerState.playing}  />
           <br></br>
         </>
       )
@@ -52,7 +52,7 @@ const VideoCard = (props) => {
 
             
             <Col sm={5}>
-            <LyricsCard {...props} handlePlay={handlePlay} />
+            <LyricsCard {...props} handlePlay={handlePlay} playing={playerState.playing} />
             </Col>
 
           <br></br>
