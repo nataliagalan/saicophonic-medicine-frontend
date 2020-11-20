@@ -33,5 +33,5 @@ A portable music venue and archive, showcasing an expanding library of live musi
 - Built functional and class components, utilizing their life cycles, props and states via React’s structural hierarchy and Redux library for scalability.
 - Styled using React-Bootstrap (installed via CDN), Sass, and custom CSS3.
 
- ### Walkthrough
+ ## Walkthrough
 [See a video demo of the app's functionality.](https://vimeo.com/481551182/c203801a37 "Saicophonic Medicine Demo") 
