@@ -30,7 +30,7 @@ A portable music venue and archive, showcasing an expanding library of live musi
 - Delivered a fully responsive site with the ability to toggle smoothly between list and grid view.
 - Optimized pages for fast loading.
 - Simplified the process for adding timestamps to each video with an intuitive slider.
-- Built functional and class components, utilizing their life cycles, props and states via React’s structural hierarchy and Redux library for scalability.
+- Built functional and class components, utilizing their life cycles, props and states via React’s structural hierarchy, and store via Redux library for scalability.
 - Styled using React-Bootstrap (installed via CDN), Sass, and custom CSS3.
 
  ## Walkthrough
