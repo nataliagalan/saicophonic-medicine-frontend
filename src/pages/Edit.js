@@ -1,32 +1,22 @@
 import React, { Component } from 'react';
 import { connect  } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
-
-// import { loginSuccess } from '../actions/auth'
 import { currentUser } from '../actions/auth'
 import { updateVideo } from '../actions/videos'
 import { getVideo } from '../actions/video'
 import { clearTags } from '../actions/tags'
-
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
-// import Duration from '../components/Duration';
 import { GrabberIcon, PlusIcon, DashIcon } from '@primer/octicons-react'
 import AddTagsBox from '../components/AddTagsBox';
 import Line from '../components/Line';
 
-
-
 class Edit extends Component {
-
   state = {
     id: '',
     url: '',
@@ -54,14 +44,12 @@ class Edit extends Component {
     const path = this.props.location.pathname.split("/");
     const id = parseInt(path[path.length - 1]);
     this.setInitialState(id);
-
     const token = localStorage.getItem('myAppToken') 
     if(!token){
       this.props.history.push('/admin')
     } else {
       this.fetchData()
     }
-    
   }
 
   fetchData = async () => {
@@ -87,7 +75,6 @@ class Edit extends Component {
     const video = await res.json();
     this.setState({ id: id, songs: video.songs, tags: video.tags, url: video.url, band: video.band });
     this.props.getVideo(video)
-
   };
 
   handleChange = (e, i) => {
@@ -96,9 +83,7 @@ class Edit extends Component {
     list[i][name] = value
 
     this.setState((prevState) => 
-      ({songs: list 
-        // url: prevState.url
-      }))
+      ({ songs: list }))
   }
 
   handleVideoInputChange = (e) => {
@@ -122,7 +107,6 @@ class Edit extends Component {
   }
 
   handleSubmit = async (videoToUpdate) => {
- 
     const reqObj = {
       method: 'PATCH',
       headers: {
@@ -160,7 +144,6 @@ class Edit extends Component {
   }
 
   //SLIDER METHODS
-
   //format (and pad) takes seconds, returns 00:00 to display
   format = (seconds) => {
     const date = new Date(seconds * 1000)
@@ -183,9 +166,7 @@ class Edit extends Component {
 
   handleSeekChange = e => {
     this.setState({ played: parseFloat(e.target.value) })
-    // e.target.value = played
     let timeToDisplay = this.format( this.state.duration * e.target.value )
-
     const updatedSongArr = this.state.songs.map((song, i) => {
       if (i === this.state.inputToUpdate) {
         return {
@@ -196,9 +177,7 @@ class Edit extends Component {
         return song
       }
     })
-
     this.setState({songs: updatedSongArr})
-
   }
 
   handleSeekMouseUp = e => {
@@ -207,7 +186,6 @@ class Edit extends Component {
     //e.target.value is this.state.played
     let secondsForSeekTo = Math.round(duration * played)
     this.player.seekTo( secondsForSeekTo )
-    // this.player.seekTo(parseFloat(e.target.value))
   }
 
   handleDuration = (d) => {
@@ -217,17 +195,14 @@ class Edit extends Component {
   
   handleFocus = (e, i) => {
     this.setState({inputToUpdate: i})
-    // setInputToUpdate(i)
   }
-
   // END OF SLIDER METHODS
 
   ref = player => {
     this.player = player
   }
 
-  // DRAGGABLE METHODS
-
+  // DRAGGABLE METHOD
   onDragEnd = (params) => {
     if(!params.destination) return;
     const srcI = params.source.index;
@@ -242,20 +217,15 @@ class Edit extends Component {
     )
   }; 
   
-  // END OF DRAGGABLE METHODS
-
 
   render() {
     const { songs } = this.state
-    // console.log(songs[0].timestamp);
     return (
     <Container fluid>
       <div className="new-and-edit-video-page">
       <Row>
-          
         <Col md={6} sm={6}>
           <div className="video-wrapper" >
-
             <ResponsiveEmbed aspectRatio="16by9">
               <ReactPlayer
               className="react-player"
@@ -291,17 +261,14 @@ class Edit extends Component {
             <Duration seconds={this.state.duration * this.state.played}/>
             </div> */}
 
-      {/* !VIDEO WRAPPER DIV */}
+          {/* !VIDEO WRAPPER DIV */}
           </div>
         </Col>
 
-
         <Col md={6} sm={6}>
-
         <DragDropContext 
           onDragEnd={this.onDragEnd}>
           <Form
-          // onSubmit={this.handleSubmit}
           onSubmit={this.prepareSubmit}
           className="edit-and-new-form"
           >
@@ -309,7 +276,6 @@ class Edit extends Component {
               <Col>
                 <Form.Control 
                   name="url"
-                  // ref={input => { this.urlInput = input }} 
                   defaultValue={this.state.url} 
                   onChange={(e) => this.handleVideoInputChange(e)}
                   placeholder="Url" />
@@ -327,7 +293,7 @@ class Edit extends Component {
               </Form.Row>
               <br></br>
 
-              {/* DROPPABLE DIV */}
+          {/* DROPPABLE DIV */}
           <Droppable key={this.state.id} droppableId="droppable-1">
           {(provided, snapshot) => (
             <div
@@ -366,8 +332,6 @@ class Edit extends Component {
                         value={song.timestamp}
                         //handleFocus sets inputToUpdate with corresponding index
                         onFocus={(e) => this.handleFocus(e, i)} 
-                        // defaultValue={this.state.played}
-                        // onChange={(e) => this.handleChange(e, i)}
                         placeholder="00:00" 
                         />
                     </Col>
@@ -435,16 +399,11 @@ class Edit extends Component {
       </Col>
     </Row>
 
-    
-
-
-      {/* !new-and-edit-video-page DIV below */}
+    {/* !new-and-edit-video-page closing div */}
     </div>    
   </Container>    
     )
   }
-
-
 }
 
 const setStateToProps = (state) => {

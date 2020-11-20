@@ -38,7 +38,6 @@ const Tags = (props) => {
     : 
     null
   )
-
 };
 
 export default withRouter(Tags);

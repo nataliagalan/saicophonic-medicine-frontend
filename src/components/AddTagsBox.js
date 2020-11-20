@@ -1,14 +1,9 @@
-
 import React, { useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
-import '../Tags.css';
 import { getVideo } from '../actions/video'
 import { deleteTag } from '../actions/tags'
-import Button from 'react-bootstrap/Button';
 import { XIcon } from '@primer/octicons-react'
 import TagSearchForm from './TagSearchForm';
-import Line from './Line';
-
 
 const AddTagsBox = (props) => {
   const video = useSelector(state => state.video);

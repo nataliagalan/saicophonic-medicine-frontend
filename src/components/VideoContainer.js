@@ -9,7 +9,6 @@ const VideoContainer = (props) => {
   //useSelector is similar to setStateToProps
   const showGrid = useSelector(state => state.toggleGrid);
 
-
   const handleToggleGrid = () => {
     if(showGrid){
        return (<GridGenerator cols={4}>
@@ -29,99 +28,9 @@ const VideoContainer = (props) => {
     </Row>)
     }
   }
-
-  // VIDEO CONTAINER
-// =====GRID=====
-  // return (<GridGenerator cols={4}>
-  //   {
-  //     props.videos.map(video => {
-  //       return <VideoCard {...video} key={video.id} />
-  //     })
-  //   }
-  //   </GridGenerator>)
-
-// ====NO GRID====
-  // return (<Row>
-  //   {
-  //     props.videos.map(video => {
-  //       return <VideoCard {...video} key={video.id} />
-  //     })
-  //   }
-  //   </Row>)
-
-
-  // <GridGenerator cols={1}>
-  return handleToggleGrid();
-    // </GridGenerator>
-    
+  return handleToggleGrid();  
 }
 
-export default VideoContainer
-
-// VIDEO CONTAINER
-// =====GRID=====
-  // return (<GridGenerator cols={4}>
-  //   {
-  //     props.videos.map(video => {
-  //       return <VideoCard {...video} key={video.id} />
-  //     })
-  //   }
-  //   </GridGenerator>)
-
-// ====NO GRID====
-  // return (<Row>
-  //   {
-  //     props.videos.map(video => {
-  //       return <VideoCard {...video} key={video.id} />
-  //     })
-  //   }
-  //   </Row>)
-
-
-// VIDEO CARD
-// =====GRID=====
-  // return (
-  //       <>
-  //         <ResponsiveEmbed aspectRatio="16by9">
-  //           <ReactPlayer
-  //           ref={ref}
-  //           url={url} 
-  //           playing={playerState.playing}
-  //           controls={true}
-  //           width='100%'
-  //           height='100%'/>
-  //         </ResponsiveEmbed>
-  //         <br></br>
-  //         <LyricsCard {...props} handlePlay={handlePlay} />
-  //         <br></br>
-  //       </>
-  //     )
-
-
-// ====NO GRID====
-  // return (
-  //   <>
-  //       <Col sm={8} className="custom-spacer">
-  //         <ResponsiveEmbed aspectRatio="16by9">
-  //           <ReactPlayer
-  //           ref={ref}
-  //           url={url} 
-  //           playing={playerState.playing}
-  //           controls={true}
-  //           width='100%'
-  //           height='100%'/>
-  //         </ResponsiveEmbed>
-  //       </Col >
-
-        
-  //       <Col sm={4}>
-  //       <LyricsCard {...props} handlePlay={handlePlay} />
-  //       </Col>
-
-  //     <br></br>
-  //     <Line color="#EBDFF7" />
-  //   </>
-  // )
-
+export default VideoContainer;
 
  

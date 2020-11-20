@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-
 import { deleteVideo } from "../actions/videos";
 import { getVideo } from "../actions/video";
 import { currentUser } from '../actions/auth';
-
-
 import Container from 'react-bootstrap/Container';
 import VideoCard from '../components/VideoCard';
 
@@ -14,7 +11,6 @@ class Random extends Component {
 
   componentDidMount(){
     this.fetchVideo()
-
     const token = localStorage.getItem('myAppToken') 
     if(token){
       this.fetchUser()

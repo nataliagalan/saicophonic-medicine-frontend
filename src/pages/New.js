@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
 import { connect  } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
-
-// import { loginSuccess } from '../actions/auth'
 import { currentUser } from '../actions/auth'
 import { addVideo } from '../actions/videos'
 import { clearTags } from '../actions/tags'
-
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import ReactPlayer from 'react-player/lazy';
-// import Duration from '../components/Duration';
 import { GrabberIcon, PlusIcon, DashIcon } from '@primer/octicons-react'
 import AddTagsBox from '../components/AddTagsBox';
 import Line from '../components/Line';
 
 
 class New extends Component {
-
   state = {
     id: '',
     url: '',
@@ -55,7 +47,6 @@ class New extends Component {
     } else {
       this.fetchData()
     }
-  
   }
 
   fetchData = async () => {
@@ -80,7 +71,6 @@ class New extends Component {
     const { name, value } = e.target;
     const list = [...this.state.songs];
     list[i][name] = value
-
     this.setState((prevState) => 
       ({songs: list }))
   }
@@ -116,7 +106,6 @@ class New extends Component {
     };
     const res = await fetch(`http://localhost:3001/api/v1/videos`,reqObj);
     const newVideo = await res.json();
-
     if (newVideo.error) {
       console.log(newVideo.error)}
     else {
@@ -142,7 +131,6 @@ class New extends Component {
   }
 
   //SLIDER METHODS
-
   //format (and pad) takes seconds, returns 00:00 to display
   format = (seconds) => {
     const date = new Date(seconds * 1000)
@@ -154,7 +142,6 @@ class New extends Component {
     }
     return `${mm}:${ss}`
   }
-  
   pad = (string) => {
     return ('0' + string).slice(-2)
   }
@@ -165,9 +152,7 @@ class New extends Component {
 
   handleSeekChange = e => {
     this.setState({ played: parseFloat(e.target.value) })
-    // e.target.value = played
     let timeToDisplay = this.format( this.state.duration * e.target.value )
-
     const updatedSongArr = this.state.songs.map((song, i) => {
       if (i === this.state.inputToUpdate) {
         return {
@@ -178,18 +163,14 @@ class New extends Component {
         return song
       }
     })
-
     this.setState({songs: updatedSongArr})
-
   }
 
   handleSeekMouseUp = e => {
     this.setState({ seeking: false })
     const { duration, played } = this.state
-    //e.target.value is this.state.played
     let secondsForSeekTo = Math.round(duration * played)
     this.player.seekTo( secondsForSeekTo )
-    // this.player.seekTo(parseFloat(e.target.value))
   }
 
   handleDuration = (d) => {
@@ -199,9 +180,7 @@ class New extends Component {
   
   handleFocus = (e, i) => {
     this.setState({inputToUpdate: i})
-    // setInputToUpdate(i)
   }
-
   // END OF SLIDER METHODS
 
   ref = player => {
@@ -209,7 +188,6 @@ class New extends Component {
   }
 
   // DRAGGABLE METHODS
-
   onDragEnd = (params) => {
     if(!params.destination) return;
     const srcI = params.source.index;
@@ -223,20 +201,14 @@ class New extends Component {
     )
   }; 
   
-  // END OF DRAGGABLE METHODS
-
-
   render() {
     const { songs } = this.state
-    // console.log(songs[0].timestamp);
     return (
     <Container fluid>
       <div className="new-and-edit-video-page">
       <Row>
-          
         <Col md={6} sm={6}>
           <div className="video-wrapper" >
-
             <ResponsiveEmbed aspectRatio="16by9">
               <ReactPlayer
               className="react-player"
@@ -252,37 +224,23 @@ class New extends Component {
             <Form>
             <Form.Group controlId="formBasicRangeCustom">
             <Form.Control 
-            // <input
-            custom
-            type='range' min={0} max={0.999999} step='any'
-            value={this.state.played}
-            onMouseDown={this.handleSeekMouseDown}
-            onChange={this.handleSeekChange}
-            onMouseUp={this.handleSeekMouseUp}
-            // />
+              custom
+              type='range' min={0} max={0.999999} step='any'
+              value={this.state.played}
+              onMouseDown={this.handleSeekMouseDown}
+              onChange={this.handleSeekChange}
+              onMouseUp={this.handleSeekMouseUp}
             />
             </Form.Group>
             </Form>
-
-            {/* what gets displayed is the length of video times played (float)
-            those seconds get passed as input to duration and it converts them
-            to 00:00 format, then they get displayed
-            */}
-            {/* <div className="duration-seconds">
-            <Duration seconds={this.state.duration * this.state.played}/>
-            </div> */}
-
-      {/* !VIDEO WRAPPER DIV */}
+          {/* !VIDEO WRAPPER DIV */}
           </div>
         </Col>
 
-
         <Col md={6} sm={6}>
-
         <DragDropContext 
           onDragEnd={this.onDragEnd}>
           <Form
-          // onSubmit={this.handleSubmit}
           onSubmit={this.prepareSubmit}
           className="edit-and-new-form"
           >
@@ -290,7 +248,6 @@ class New extends Component {
               <Col>
                 <Form.Control 
                   name="url"
-                  // ref={input => { this.urlInput = input }} 
                   value={this.state.url} 
                   onChange={(e) => this.handleVideoInputChange(e)}
                   placeholder="Url" />
@@ -308,7 +265,7 @@ class New extends Component {
               </Form.Row>
               <br></br>
 
-              {/* DROPPABLE DIV */}
+          {/* DROPPABLE DIV */}
           <Droppable key={this.state.id} droppableId="droppable-1">
           {(provided, snapshot) => (
             <div
@@ -320,7 +277,6 @@ class New extends Component {
               {
                 songs.map((song, i) => {
                   return (
-                    
           <Draggable key={i} draggableId={`draggable-${i}`} index={i}>
             {(provided, snapshot) => (
             <div 
@@ -397,6 +353,7 @@ class New extends Component {
           )}
           </Droppable>
           {/* !DROPPABLE DIV */}
+
           <Line color={"#EBDFF7"}/>
             <AddTagsBox editMode={this.state.editMode} />
           <Line color={"#EBDFF7"}/>
@@ -408,21 +365,14 @@ class New extends Component {
             </Button>
           </Form>
         </DragDropContext>
-
       </Col>
-
     </Row>
 
-    
-
-
-      {/* !new-and-edit-video-page DIV below */}
+    {/* !new-and-edit-video-page closing div */}
     </div>    
   </Container>    
     )
   }
-
-
 }
 
 const setStateToProps = (state) => {

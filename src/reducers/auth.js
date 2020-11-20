@@ -1,5 +1,5 @@
-
 const initialValue = {}
+
 const auth = (state = initialValue, action) => {
   switch (action.type) {
     case "LOGIN_SUCCESS":
@@ -8,7 +8,6 @@ const auth = (state = initialValue, action) => {
       return {}
     case "CURRENT_USER":
       return action.user
-
     default:
       return state;
   }

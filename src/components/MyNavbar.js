@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { logoutSuccess } from '../actions/auth'
 import { toggleGrid } from '../actions/toggleGrid'
-import '../MyNavbar.css'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import {Link} from 'react-router-dom';
@@ -22,12 +20,6 @@ const MyNavbar = (props) => {
 
     const [ expanded, setExpanded ] = useState(true);
 
-   
-
-    const handleLogout = () => {
-      localStorage.removeItem('myAppToken')
-      dispatch(logoutSuccess())
-    }
     const handleToggleGrid = () => {
       dispatch(toggleGrid())
     }
@@ -36,12 +28,10 @@ const MyNavbar = (props) => {
       setExpanded(!expanded)
     }
 
-
     return (
     <Navbar 
       onToggle={toggleMenuIcon} 
       collapseOnSelect
-      // bg="light" 
       expand="md" className="nav-bg"
       fixed="top">
       <Navbar.Brand as={Link} to="/videos" href="/videos">
@@ -50,14 +40,11 @@ const MyNavbar = (props) => {
       <Nav.Item inline="true"> 
         <SearchForm /> 
       </Nav.Item>
-
       <Navbar.Toggle
         id="menu-toggle-btn" 
         aria-controls="basic-navbar-nav">
           { expanded ? <TelescopeIcon size={24} /> : <XIcon size={24} /> }
       </Navbar.Toggle>
-
-
 
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto" id="menu-div">
@@ -100,7 +87,6 @@ const MyNavbar = (props) => {
                 Add
             </Nav.Link>)
           }
-
         </Nav>
 
       </Navbar.Collapse>

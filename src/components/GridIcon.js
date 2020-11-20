@@ -4,8 +4,7 @@ import React from 'react';
 const GridIcon = ({ color }) => (
   <svg 
   style={{
-    color: color,
-    // backgroundColor: color
+    color: color
   }}
   width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-grid" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
   >

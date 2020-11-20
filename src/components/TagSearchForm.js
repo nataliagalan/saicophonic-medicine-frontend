@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router';
 import { connect } from "react-redux";
-import { XIcon, SearchIcon } from '@primer/octicons-react'
-import Button from 'react-bootstrap/Button';
-
+import { SearchIcon } from '@primer/octicons-react'
 import { AsyncTypeahead, Menu, MenuItem, Highlighter  } from 'react-bootstrap-typeahead';
 import { tags } from '../actions/tags'
 import { getVideo } from '../actions/video'
-
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-
-
 
 class TagSearchForm extends Component {
 
@@ -87,23 +82,9 @@ class TagSearchForm extends Component {
     this.closeDropdown()
     this.typeahead.clear();
   }
-
-//NEW VIDEO
-  // this.props.tags(tagNameToAdd);
-
-  // this.closeDropdown()
-  // this.typeahead.clear();
-//EDIT VIDEO
-  // this.props.video.tags = [...this.props.video.tags, {name: tagNameToAdd}]
-  // this.props.getVideo(this.props.video);
-
-  // this.closeDropdown()
-  // this.typeahead.clear();
  
   render() {
-
     return (
-
     <>
       <AsyncTypeahead
         {...this.state}
@@ -158,7 +139,6 @@ class TagSearchForm extends Component {
   }
 }
 
-
 const setStateToProps = (state) => {
   return {
     video: state.video
@@ -171,4 +151,3 @@ const setDispatchToProps = {
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(TagSearchForm));
-// export default withRouter(SearchForm);
