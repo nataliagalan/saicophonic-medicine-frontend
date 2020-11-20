@@ -3,7 +3,7 @@
 A portable music venue and archive, showcasing an expanding library of live music sessions and lyrics with custom timestamps (or digital dog-ears).
 
 - Developed a relational database system (PostgreSQL), and a Rails (RESTful) API backend with endpoints for videos, tagged videos, random video, tags, searched results, and auth.
-- Utilized JSON Web Tokens and local storage to store encrypted user information client-side and bcrypt server-side. Furthered secured credential management via Figaro gem.
+- Utilized JSON Web Tokens and local storage to store encrypted user information client-side and bcrypt server-side. Further secured credential management via Figaro gem.
 - Implemented a stable feature to seamlessly add or remove input fields dynamically.
 - Utilized Atlassian library to build drag and drop functionality accessible by keyboard as well.
 - Fine tuned search and discovery capabilities using Elasticsearch.
