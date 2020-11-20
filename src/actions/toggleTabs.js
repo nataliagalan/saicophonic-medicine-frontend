@@ -1,5 +1,3 @@
-
-
 export const toggleTabs = (boolean) => {
   return {
     type: "TOGGLE_TABS",

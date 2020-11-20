@@ -10,7 +10,6 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 class Login extends React.Component {
-
   state = {
     username: 'ursula2',
     password: '2', 
@@ -72,7 +71,6 @@ class Login extends React.Component {
     if(data.error){
       this.setState({error: data.error});
     } else {
-      // console.log(data, "------------");
       localStorage.setItem('myAppToken', data.token)
       this.props.loginSuccess(data)
       this.props.history.push('/videos')
@@ -80,8 +78,7 @@ class Login extends React.Component {
   }
 
   render() {
-
-  return (
+    return (
     <div className="login-page-content-wrapper text-center">
       <Container fluid>
     <Form onSubmit={this.handleSubmit} className="login-page">
@@ -95,7 +92,6 @@ class Login extends React.Component {
               label="username" 
               onChange={this.handleChange}
               value={this.state.username}
-              // placeholder="username" 
               />
           </Col>
           </Form.Row>
@@ -108,7 +104,6 @@ class Login extends React.Component {
               type="password" 
               onChange={this.handleChange} 
               value={this.state.password}
-              // placeholder="pw" 
               />
             </Col>
           </Form.Row>
@@ -130,21 +125,16 @@ class Login extends React.Component {
           to='/admin'
           onClick={ this.handleLogout }
           variant="primary">
-        Logout
+          Logout
         </Button>
       </>)
- 
       }
-
     </Form>
     </Container>
     </div>
     );
   }
 }
-
-
-
 
 
 //what gets returned here becomes available as props within this component

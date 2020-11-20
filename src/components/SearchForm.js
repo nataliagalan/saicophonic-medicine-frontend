@@ -11,14 +11,8 @@ import { filteredBySong } from '../actions/filteredBySong';
 import { filteredByLyrics } from '../actions/filteredByLyrics';
 import { XIcon, SearchIcon } from '@primer/octicons-react'
 import Button from 'react-bootstrap/Button';
-import Line from './Line';
-
-// import { AsyncTypeahead, Menu, MenuItem, Highlighter, TypeaheadMenu, useItem } from 'react-bootstrap-typeahead';
 import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typeahead';
-
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import '../SearchForm.css';
-
 
 class SearchForm extends Component {
 
@@ -28,8 +22,6 @@ class SearchForm extends Component {
     options: [],
     query: '',
   };
-
-
 
   //removed page 1 from argument below for testing
   makeAndHandleRequest = async (query) => {
@@ -43,10 +35,8 @@ class SearchForm extends Component {
         isLoading: false,
       }); 
     } else {
-      //dispatch here  
-      
-      
-      //set data and page umber to 0
+      // TODO dispatch here  
+      //set data and page number to 0
       
       this.props.filteredByAll(filteredVideos);
       this.props.filteredByBand(filteredVideos, query);
@@ -74,35 +64,27 @@ class SearchForm extends Component {
         isLoading: false
         });  
       }
-        
   }
 
   closeDropdown = () => {
     this.setState({ open: false });
-    
-
   }
-  
   
   handleAllResults = async (query) => {
     this.setState({ open: false });
-    
     const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
     const filteredVideos = await res.json();
-
     this.props.filteredByAll(filteredVideos);
     this.props.history.push(`/videos/search/${query}`)
     this.typeahead.clear();
-   
   }
 
-  _handleInputChange = query => {
+  handleInputChange = query => {
     if (query === ""){
+      //HIDE TABS
       this.setState({ open: false });
       this.props.setFilter("none");
       this.props.toggleTabs("false");
-      //HIDE TABS
-      
     } else {
       //SHOW TABS
       this.setState({ query: query, open: true });
@@ -111,10 +93,8 @@ class SearchForm extends Component {
     }
   }
 
-
-  _handleSearch = query => {
+  handleSearch = query => {
     this.setState({ isLoading: true  });
-
     this.makeAndHandleRequest(query)
   };
 
@@ -149,13 +129,9 @@ class SearchForm extends Component {
     }
   }
 
-
  
   render() {
-    // console.log(this.props, "============SEARCH FORM=========");
-
     return (
-
     <>
       <AsyncTypeahead
         {...this.state}
@@ -173,9 +149,9 @@ class SearchForm extends Component {
         maxResults={6}
         minLength={2}
         clearButton={true}
-        onInputChange={this._handleInputChange}
+        onInputChange={this.handleInputChange}
         // onPaginate={this._handlePagination}
-        onSearch={this._handleSearch}
+        onSearch={this.handleSearch}
         paginate
         placeholder="Search by artist, band, song or lyrics"
         promptText="Type to search"
@@ -187,9 +163,7 @@ class SearchForm extends Component {
       
         renderMenu={(options, menuProps) => {
           return (
-
             <Menu {...menuProps} className="tag-search-menu rbt-menu">
-        
             {options.map((opt, ind) => 
               <MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
                 <div>
@@ -213,12 +187,9 @@ class SearchForm extends Component {
                 {`Videos tagged with ${this.state.query}`}
               </div>
             </MenuItem>
-
           </Menu>
-
           );
         }}
-        
         open={this.state.open}
         useCache={false}
       > 
@@ -233,14 +204,10 @@ class SearchForm extends Component {
           </div>
         )}
       </AsyncTypeahead>
-
     </>
-
-
     )
   }
 }
-
 
 const setStateToProps = (state) => {
   return {
@@ -267,4 +234,3 @@ const setDispatchToProps = {
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(SearchForm));
-// export default withRouter(SearchForm);

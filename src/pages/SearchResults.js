@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import VideoDashboard from './VideoDashboard'
-import VideoContainer from '../components/VideoContainer';
 import Container from 'react-bootstrap/Container';
 
 
@@ -11,15 +10,14 @@ class SearchResults extends Component {
     let query = this.props.location.pathname.split('/')[3]
     return (
       <>
-    <Container fluid>
-      <div className="page-content-wrapper">
-        <div className="dashboard-header">
-        <h5 className="header-subtext">All results for "{query}"</h5>
-        </div>
-        <VideoDashboard hideHeader={true}/> 
-        
-    </div>
-    </Container>
+        <Container fluid>
+          <div className="page-content-wrapper">
+            <div className="dashboard-header">
+            <h5 className="header-subtext">All results for "{query}"</h5>
+            </div>
+            <VideoDashboard hideHeader={true}/> 
+          </div>
+        </Container>
       </>
     )
   }
@@ -34,7 +32,7 @@ const setStateToProps = (state) => {
     filteredByLyrics: state.filteredByLyrics,
     filter: state.setFilter,
     showTabs: state.toggleTabs.showTabs,
-    //note to self: naming the key setFilter here will not work because the props already have a key called setFilter pointing to the reducer
+    //naming the key setFilter here will not work because the props already have a key called setFilter pointing to the reducer
     //setFilter: state.setFilter,
     auth: state.auth
   };

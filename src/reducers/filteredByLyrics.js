@@ -1,11 +1,7 @@
-
-
-
 const initialValue = {
   lyrics: [], 
   query: ""
 }
-
 const videos = (state = initialValue, action) => {
   switch (action.type) {
     case "GET_FILTERED_LYRICS":

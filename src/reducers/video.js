@@ -1,6 +1,3 @@
-
-
-
 const initialValue = []
 const video = (state = initialValue, action) => {
   switch (action.type) {

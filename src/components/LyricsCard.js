@@ -14,7 +14,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tags from './Tags';
-import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, MuteIcon, UnmuteIcon, DashIcon, ChevronUpIcon, ChevronDownIcon } from '@primer/octicons-react'
+import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, MuteIcon, UnmuteIcon, DashIcon, ChevronDownIcon } from '@primer/octicons-react'
 
 
 const LyricsCard = (props) => {
@@ -31,15 +31,11 @@ const LyricsCard = (props) => {
       method: "DELETE",
     });
     const data = await res.json();
+    if (data.status === 200) {
     const updatedVideos = videos.filter((video) => video.id !== id);
     dispatch(deleteVideo(updatedVideos));
     props.history.push('/videos');
-    // if (data.status === 200) {
-    //   const updatedVideos = videos.filter((video) => video.id !== id);
-    //   dispatch(deleteVideo(updatedVideos));
-    //   props.history.push('/videos');
-    // }
-    
+    }
   };
 
   const copyUrlToClipboard = (id) => {
@@ -48,16 +44,10 @@ const LyricsCard = (props) => {
     setShow(true);
   }
 
+  const { id, songs, tags } = props
 
-  
-    const { id, songs, tags } = props
-    // const payload = "uuuuh lala"
-    // console.log(props, "lyricscarddddddddddddd");
-
-    return (
+  return (
   <Accordion >
-      {/* {on click event that setStates the selected song} */}
-
       {
         //first time around songs are undefined. if that's the case, don't do anything. else, iterate over songs
         !songs ?
@@ -71,8 +61,6 @@ const LyricsCard = (props) => {
             <Accordion.Toggle
               className="text-left"
               style={{cursor: 'pointer'}} 
-              // onClick={ (e) => props.please(e.target.innerText.split(' - ')[0]) } 
-              // onClick={ (e) => dispatch(togglePlayVideo(e.target.innerText.split(' - ')[0])) } 
               as={Card.Header} 
               eventKey={i + 1}>
                 <Row>
@@ -85,7 +73,6 @@ const LyricsCard = (props) => {
                   onClick={ (e) => props.handlePlay(e.target.innerText) } 
                   className="accordion-time-title">
                      {song.timestamp} </Button><span className="toggle-grid-btn"><DashIcon size={12} /></span>
-
                 <Button className="accordion-time-title song-title">{song.title}</Button>
                 </Col>
                 </Row>
@@ -98,17 +85,12 @@ const LyricsCard = (props) => {
               {song.lyrics} 
               </Card.Body>
             </Accordion.Collapse>
-    {/* <button onClick={(e) => this.props.handlePlayPause(e, songs)} > */}
-      {/* 24 */}
-      {/* {playing ? 'Pause' : 'Play'} */}
-    {/* </button> */}
           </Card>
           )
         })
       }
 
-      {/* Edit and Delete buttons */}
-
+  {/* Edit and Delete buttons */}
   <Card className="plus-accordion-card"> 
     <Accordion.Toggle
       className="plus-accordion"
@@ -121,39 +103,38 @@ const LyricsCard = (props) => {
     <Card.Body className="plus-accordion">
                         
       <Row>
-        {/* <Col> */}
         <div className="tags-wrapper" id="tags-wrapper">
           <Tags tags={tags}/>
-          </div>
-        {/* </Col> */}
+        </div>
       </Row>
 
       <Row>
         <Col>
           {
           (auth.id) ?
-            (<><Button
+            (<>
+            <Button
               className="lyrics-card-icons"
               as={Link} 
               to={`/videos/edit/${id}`}>
-                <span role="img" aria-label="edit">
-                  <PencilIcon size={24} />
-                </span>
-              </Button>
+              <span role="img" aria-label="edit">
+                <PencilIcon size={24} />
+              </span>
+            </Button>
             <Button 
             className="lyrics-card-icons"
-              // as={Link} 
               onClick={() => delVideo(id)}>
-                <span role="img" aria-label="delete">
-                  <TrashIcon size={24} />
-                </span>
-            </Button></>)
+              <span role="img" aria-label="delete">
+                <TrashIcon size={24} />
+              </span>
+            </Button>
+            </>)
             : 
             null
           }
           <Button 
-          className="lyrics-card-icons"
-          onClick={() => copyUrlToClipboard (id)}>
+            className="lyrics-card-icons"
+            onClick={() => copyUrlToClipboard (id)}>
             <span role="img" aria-label="share">
               <ShareIcon size={24} />
             </span>
@@ -162,12 +143,14 @@ const LyricsCard = (props) => {
             show={show}
             onHide={() => setShow(false)}
             dialogClassName="modal-90w"
-            aria-labelledby="copy-success"
-            >
+            aria-labelledby="copy-success">
             <Modal.Header >
               <Container fluid>
               <Modal.Title id="copy-success" >
-              <div className="justify-content-md-center text-center"><RocketIcon size={24} /><span>&nbsp;&nbsp;</span>Url copied to clipboard!</div>
+              <div className="justify-content-md-center text-center">
+                <RocketIcon size={24} />
+                <span>&nbsp;&nbsp;</span>Link copied to clipboard!
+              </div>
               </Modal.Title>
               </Container>
             </Modal.Header>
@@ -179,7 +162,7 @@ const LyricsCard = (props) => {
       </Row>
 
 
-        </Card.Body>
+      </Card.Body>
       </Accordion.Collapse>
     </Card>
   </Accordion>

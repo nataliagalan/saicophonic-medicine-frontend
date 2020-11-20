@@ -1,11 +1,5 @@
 import React from 'react'
-
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-//TODO delete this files
-// import logo from './logo.svg';
-// import './App.css';
-
 import MyNavbar from './MyNavbar';
 import VideoDashboard from '../pages/VideoDashboard';
 import Login from '../pages/Login';
@@ -16,7 +10,6 @@ import SearchResults from '../pages/SearchResults';
 import Random from '../pages/Random';
 import TaggedResults from '../pages/TaggedResults';
 import MyFooter from './MyFooter';
-
 
 
 const App = () => {

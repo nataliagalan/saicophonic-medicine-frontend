@@ -1,6 +1,3 @@
-
-
-
 const initialValue = []
 
 const tags = (state = initialValue, action) => {

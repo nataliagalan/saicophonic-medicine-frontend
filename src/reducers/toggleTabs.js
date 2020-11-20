@@ -1,5 +1,3 @@
-
-
 const initialValue = {showTabs: "false"}
 const toggleTabs = (state=initialValue, action) => {
   switch(action.type){

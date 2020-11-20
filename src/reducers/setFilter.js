@@ -1,5 +1,3 @@
-
-
 const initialValue = "none"
 
 const setFilter = (state = initialValue, action) => {

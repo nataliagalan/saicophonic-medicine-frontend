@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-
 import { deleteVideo } from "../actions/videos";
 import { getVideo } from "../actions/video";
 import { currentUser } from '../actions/auth';
 import { toggleGrid } from '../actions/toggleGrid'
-
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import VideoCard from '../components/VideoCard';
 
 class Show extends Component {
-
   componentDidMount(){
     if(this.props.showGrid){
       this.props.toggleGrid()
     }
     const id = parseInt(this.props.match.params.id);
-
     this.fetchVideo(id)
     const token = localStorage.getItem('myAppToken') 
     if(token){
