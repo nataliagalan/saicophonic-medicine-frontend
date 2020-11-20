@@ -34,4 +34,4 @@ A portable music venue and archive, showcasing an expanding library of live musi
 - Styled using React-Bootstrap (installed via CDN), Sass, and custom CSS3.
 
  ### Walkthrough ###
-[See a video demo of the app's functionality.](https://vimeo.com/481551182/c203801a37 "Named link title") 
+[See a video demo of the app's functionality.](https://vimeo.com/481551182/c203801a37 "Saicophonic Medicine Demo") 
