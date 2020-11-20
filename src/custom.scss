@@ -6,69 +6,37 @@ $theme-colors: (
 );
 
 $primary: rgb(255, 231, 153);
-
-
-// $body-color: #fff;
 $body-bg: rgb(15, 15, 15);
-
-
-// $font-family-sans-serif: ibm-plex-mono, sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-// $font-family-monospace:       ibm-plex-mono, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-// $font-family-base: ibm-plex-mono;
-
-// $font-family-sans-serif: "Futura-Pt", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-// $font-family-monospace:       "Futura-Pt", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-// $font-family-base: "Futura-Pt";
-
 $btn-border-radius: 0;
-
-
 $link-hover-color: darken(#EBDFF7, 15%);
-// $link-hover-color: darken($link-color, 15%) !default;
-
 $navbar-light-color: #EBDFF7;
-
 $navbar-light-active-color: #EBDFF7;
-
 $navbar-light-hover-color: rgb(253, 214, 85);
-
 $navbar-light-toggler-border-color: #fff;
 $nav-tabs-border-radius: 0;
 $nav-tabs-border-color: #EBDFF7;
 $nav-tabs-border-width: 3;
-
 $nav-tabs-link-active-color: #EBDFF7;
-// $nav-pills-link-active-color: #EBDFF7;
 
 // background for any input field
 // $input-bg: rgb(253, 214, 85);
 
-// background color for selected option from dropdown menus, tied to $Primary
+// background color for selected option from dropdown menus, tied to $primary
 // $component-active-bg: transparent;
 $component-active-bg: rgba(255, 255, 255, 0.274);
-
 $component-active-color: rgb(15, 15, 15);
-
-
-// $dropdown-link-hover-color:         darken($gray-900, 5%) !default;
 $dropdown-link-hover-bg: rgba(255, 255, 255, 0.274);
-
-
 $input-focus-bg: transparent;
-
 $pagination-bg: transparent;
 $pagination-border-color: transparent;
 $pagination-disabled-bg: transparent;
 $pagination-disabled-border-color: transparent;
-
 $pagination-active-color: rgb(253, 214, 85);
 $pagination-color: #EBDFF7;
-
 $pagination-hover-color: rgb(253, 214, 85);
 $pagination-hover-bg: transparent;
 $pagination-hover-border-color: transparent;
 $pagination-active-border-color: transparent;
-
 
 
 
