@@ -10,7 +10,7 @@ A portable music venue and archive, showcasing an expanding library of live musi
   - Add or remove custom number of input fields.
   - Add and delete video tags.
   - Add and delete videos.
-  - Edit timestamps, song titles and lyrics.
+  - Edit timestamps, song titles, lyrics, url and artist/band name.
 
 - Viewer: 
   - Explore the full library.
@@ -30,5 +30,8 @@ A portable music venue and archive, showcasing an expanding library of live musi
 - Delivered a fully responsive site with the ability to toggle smoothly between list and grid view.
 - Optimized pages for fast loading.
 - Simplified the process for adding timestamps to each video with an intuitive slider.
-- Styled using React-Bootstrap (installed via CDN), Sass, and custom CSS3.
 - Built functional and class components, utilizing their life cycles, props and states via React’s structural hierarchy and Redux library for scalability.
+- Styled using React-Bootstrap (installed via CDN), Sass, and custom CSS3.
+
+ ### Walkthrough ###
+[See a video demo of the app's functionality.](https://vimeo.com/481551182/c203801a37 "Named link title") 
