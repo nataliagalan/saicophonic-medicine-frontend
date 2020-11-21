@@ -1,6 +1,8 @@
 # Saicophonic Medicine
 A portable music venue and archive, showcasing an expanding library of live music sessions and lyrics with custom timestamps (or digital dog-ears).
 
+[View the Back End Repository](https://github.com/nataliagalan/saicophonic-medicine-backend "Saicophonic Medicine Back End") 
+
 ## Key User Stories
 - Admin: 
   - Build and categorize an archive of videos with corresponding songs, lyrics and timestamps.
