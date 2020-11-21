@@ -40,5 +40,5 @@ A portable music venue and archive, showcasing an expanding library of live musi
 
 ## Contact
 
-hi@nataliagalan.com 
+hi@nataliagalan.com   
 [Visit my LinkedIn](https://linkedin.com/in/natalia-galan "Natalia Galán LinkedIn") 
