@@ -141,7 +141,7 @@ const VideoDashboard = (props) => {
     let totalPages = 0
     if(videos[0]){
       totalPages = videos[0].number_of_pages
-    }else{
+    } else {
       totalPages = 0
     }
 
@@ -149,11 +149,13 @@ const VideoDashboard = (props) => {
 
     for(let i = 0; i < totalPages; i++){
       paginationArray.push(<Pagination.Item
+        id={page === i + 1 ? ("active-pagination-btn") : null}
         className="pagination-btn" 
         key={i + 1}
         onClick={() => setPage(i + 1)}
       >{ i + 1 }</Pagination.Item>)
     }
+
     if(isSearched){
       return
     } else {

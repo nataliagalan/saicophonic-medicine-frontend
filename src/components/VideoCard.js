@@ -27,7 +27,7 @@ const VideoCard = (props) => {
             height='100%'/>
           </ResponsiveEmbed>
           <br></br>
-          <LyricsCard {...props} handlePlay={handlePlay} hidePreview={hidePreview} playing={playerState.playing}  />
+          <LyricsCard {...props} handlePlay={handlePlay} handleTitlePlay={handleTitlePlay} hidePreview={hidePreview} playing={playerState.playing}  />
           <br></br>
         </>
       )
@@ -50,7 +50,7 @@ const VideoCard = (props) => {
           </Col >
             
           <Col sm={5}>
-          <LyricsCard {...props} handlePlay={handlePlay} hidePreview={hidePreview} playing={playerState.playing} />
+          <LyricsCard {...props} handlePlay={handlePlay} handleTitlePlay={handleTitlePlay} hidePreview={hidePreview} playing={playerState.playing} />
           </Col>
           <br></br>
           <Line color="#EBDFF7" height={1} />
@@ -71,13 +71,38 @@ const VideoCard = (props) => {
       setPreviewState(false);
     }
       
+    const handleTitlePlay = (e) => {
+      // e.stopPropagation()
+      let timeString = e.target.previousElementSibling.innerText
+      //turns the timeString 00:00 into seconds
+      const seconds = hmsToSeconds(timeString)
+      ref.current.seekTo(seconds, "seconds")
+      // setPlayerState(prevState => ({playing: !playerState.playing}));
+      setPlayerState(prevState => {
+          if(playerState.playing === true ){
+            return {playing: playerState.playing}
+          } else {
+            return {playing: !playerState.playing}
+          }
+        }
+      );
+    }
+
     const handlePlay = (e) => {
       // e.stopPropagation();
       let timeString = e.target.innerText
       //turns the timeString 00:00 into seconds
       const seconds = hmsToSeconds(timeString)
       ref.current.seekTo(seconds, "seconds")
-      setPlayerState(prevState => ({playing: !playerState.playing}));
+      // setPlayerState(prevState => ({playing: !playerState.playing}));
+      setPlayerState(prevState => {
+        if(playerState.playing === true ){
+          return {playing: playerState.playing}
+        } else {
+          return {playing: !playerState.playing}
+        }
+      }
+    );
     }
 
     const hmsToSeconds = (str) => {

@@ -13,7 +13,8 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tags from './Tags';
-import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, MuteIcon, UnmuteIcon, DashIcon, ChevronDownIcon } from '@primer/octicons-react'
+import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, EyeIcon, ChevronDownIcon, ChevronUpIcon, XIcon, PlusIcon, ClockIcon, TagIcon, StopwatchIcon } from '@primer/octicons-react'
+import Line from './Line';
 
 
 const LyricsCard = (props) => {
@@ -21,6 +22,7 @@ const LyricsCard = (props) => {
     //useSelector is similar to setStateToProps
     const videos = useSelector(state => state.videos);
     const auth = useSelector(state => state.auth);
+    const showGrid = useSelector(state => state.toggleGrid);
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
@@ -43,17 +45,32 @@ const LyricsCard = (props) => {
     setShow(true);
   }
 
+  const [ plusExpanded, setPlusExpanded ] = useState(true);
+  const [ chevronExpanded, setChevronExpanded ] = useState(true);
+
+
+
+  const handlePlusClick = (e) => {
+    props.hidePreview(e)
+    setPlusExpanded(!plusExpanded)
+  }
+
+  const handleChevronClick = (e) => {
+    setChevronExpanded(!chevronExpanded)
+  }
+
   const { id, songs, tags } = props
 
   return (
     <>
-  <Accordion>
-    <Card className="song-accordion">
+  <Accordion >
+    <Card className="parent-song-accordion" >
       <Card.Header>
-        <Accordion.Toggle 
-          onClick={ (e) => props.hidePreview(e) }
+        <Accordion.Toggle
+          onClick={(e) => handlePlusClick(e)}
           as={Button} variant="link" eventKey="0">
-          +
+          { plusExpanded ? <PlusIcon size={24} /> : <XIcon size={24} /> }
+          {/* <span style={{color: "#EBDFF7"}}><EyeIcon size={12} /></span> */}
         </Accordion.Toggle>
       </Card.Header>
       <Accordion.Collapse eventKey="0">
@@ -70,21 +87,27 @@ const LyricsCard = (props) => {
           className="song-accordion"
           key={i}> 
             <Accordion.Toggle
-              className="text-left"
+              className="text-left song-card-header"
               // style={{cursor: 'pointer'}} 
               as={Card.Header} 
               eventKey={i + 1}>
                 <Row>
                 <Col>
-                {props.playing ? 
-                (<span className="toggle-grid-btn"><MuteIcon size={16} /></span>) 
-                : 
-                (<span className="toggle-grid-btn"><UnmuteIcon size={16} /></span>)}
                 <Button 
                   onClick={ (e) => props.handlePlay(e) } 
                   className="accordion-time-title">
-                     {song.timestamp} </Button><span className="toggle-grid-btn"><DashIcon size={12} /></span>
-                <Button className="accordion-time-title song-title">{song.title}</Button>
+                     {song.timestamp} 
+                </Button>
+                <Button
+                  onClick={ (e) => props.handleTitlePlay(e) }  
+                  className={
+                    showGrid ? 
+                    ("accordion-time-title song-title grid-text-overflow") 
+                    : 
+                    ("accordion-time-title song-title")
+                  }>
+                  {song.title}
+                </Button>
                 </Col>
                 </Row>
             </Accordion.Toggle>
@@ -97,6 +120,7 @@ const LyricsCard = (props) => {
               </Card.Body>
             </Accordion.Collapse>
           </Card>
+          {/* <Line color="white"/> */}
           </Accordion>
           )
         })
@@ -112,9 +136,13 @@ const LyricsCard = (props) => {
     <Accordion.Toggle
       className="plus-accordion"
       style={{cursor: 'pointer'}} 
-      as={Card.Header} 
+      as={Card.Header}
+      // as={Button}
+      onClick={ (e) => handleChevronClick(e) }
+       
       eventKey="1">
-      <span style={{color: "#EBDFF7"}}><ChevronDownIcon size={16} /></span>
+        { chevronExpanded ? <ChevronDownIcon size={24} /> : <ChevronUpIcon size={24} /> }
+      {/* <span style={{color: "#EBDFF7"}}><ChevronDownIcon size={16} /></span> */}
     </Accordion.Toggle>
     <Accordion.Collapse eventKey="1">
     <Card.Body className="plus-accordion">
