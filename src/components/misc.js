@@ -1,11 +1,13 @@
+
 import React, {useState} from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { Link, withRouter } from "react-router-dom";
 
 import { deleteVideo } from "../actions/videos";
-
+import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
+import Collapse from 'react-bootstrap/Collapse'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Container from 'react-bootstrap/Container'
@@ -43,21 +45,35 @@ const LyricsCard = (props) => {
     setShow(true);
   }
 
+  // const handleShowLyrics = (e) => {
+  //   e.stopPropagation();
+  // }
+  const [open, setOpen] = useState(false);
+  const handleShowLyrics = useAccordionToggle(2, (e, eKey) =>{
+  // console.log('totally custom!')
+  e.stopPropagation();
+  setOpen(!open);
+  }
+
+);
+
   const { id, songs, tags } = props
 
   return (
     <>
-  <Accordion>
-    <Card className="song-accordion">
-      <Card.Header>
-        <Accordion.Toggle 
-          onClick={ (e) => props.hidePreview(e) }
-          as={Button} variant="link" eventKey="0">
-          +
-        </Accordion.Toggle>
-      </Card.Header>
-      <Accordion.Collapse eventKey="0">
-      <Card.Body>
+  <Accordion >
+    <Card className="song-accordion"
+          key="999">
+    <Accordion.Toggle
+      className="song-accordion"
+      style={{cursor: 'pointer'}} 
+      as={Card.Header} 
+      eventKey="999">
+      <span style={{color: "#EBDFF7"}}>+</span>
+    </Accordion.Toggle>
+    <Accordion.Collapse eventKey="999">
+    <Card.Body >
+    
       {
         //first time around songs are undefined. if that's the case, don't do anything. else, iterate over songs
         !songs ?
@@ -65,13 +81,12 @@ const LyricsCard = (props) => {
         :
         songs.map((song, i) => {
           return (
-          <Accordion >
           <Card 
           className="song-accordion"
           key={i}> 
             <Accordion.Toggle
               className="text-left"
-              // style={{cursor: 'pointer'}} 
+              style={{cursor: 'pointer'}} 
               as={Card.Header} 
               eventKey={i + 1}>
                 <Row>
@@ -84,30 +99,40 @@ const LyricsCard = (props) => {
                   onClick={ (e) => props.handlePlay(e) } 
                   className="accordion-time-title">
                      {song.timestamp} </Button><span className="toggle-grid-btn"><DashIcon size={12} /></span>
-                <Button className="accordion-time-title song-title">{song.title}</Button>
+                <Button 
+                  onClick={ (e) => handleShowLyrics(e, i + 1) } 
+                  aria-expanded={open}
+                  className="accordion-time-title song-title">{song.title}</Button>
                 </Col>
                 </Row>
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey={i + 1}>
+            <Accordion.Collapse in={open} eventKey={i + 1}>
+            {/* <Collapse in={open} eventKey={i + 1}> */}
             <Card.Body 
               className="overflow-auto accordion-lyrics"
               scrollable="true"
               style={{whiteSpace: "pre-line"}}>
+              {/* <div
+                className="overflow-auto accordion-lyrics"
+                scrollable="true"
+                style={{whiteSpace: "pre-line"}}
+              > */}
               {song.lyrics} 
+              {/* </div> */}
               </Card.Body>
+            {/* </Collapse> */}
             </Accordion.Collapse>
           </Card>
-          </Accordion>
           )
         })
       }
-        </Card.Body>
-      </Accordion.Collapse>
-    </Card>
-  </Accordion>
- 
-  {/* Edit and Delete buttons */}
+      </Card.Body>          
+    </Accordion.Collapse>
+  </Card>
+  </Accordion >
+
   <Accordion >
+  {/* Edit and Delete buttons */}
   <Card className="plus-accordion-card"> 
     <Accordion.Toggle
       className="plus-accordion"
@@ -182,6 +207,7 @@ const LyricsCard = (props) => {
       </Card.Body>
       </Accordion.Collapse>
     </Card>
+
   </Accordion>
   </>
   )
@@ -189,3 +215,49 @@ const LyricsCard = (props) => {
 
 
 export default withRouter(LyricsCard)
+
+
+
+
+
+
+
+
+<div class="container">
+
+    <div id="accordion">
+        <div class="card">
+
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0 d-inline">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Collapsible #1
+                    </button>
+                 </h5>
+                 <a href="#" data-target="[data-parent='#child1']" data-toggle="collapse" class="my-2 float-right">toggle all</a>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body" id="child1">
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapseOneA">Child A</a>
+                        </div>
+                        <div class="card-body collapse" data-parent="#child1" id="collapseOneA">
+                            Crunch wolf moon tempor, sunt aliqua put a bird.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapseOneB">Child B</a>
+                        </div>
+                        <div class="card-body collapse" data-parent="#child1" id="collapseOneB">
+                            Another flipp runch wolf moon tempor, sunt aliqua put a bird.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+    </div>
+</div>

@@ -10,7 +10,8 @@ import LyricsCard from './LyricsCard';
 const VideoCard = (props) => {
   //useSelector is similar to setStateToProps
   const showGrid = useSelector(state => state.toggleGrid);
-  
+  const [previewState, setPreviewState] = useState(true);
+
   const handleToggleGrid = () => {
     if(showGrid){
         return (
@@ -18,7 +19,7 @@ const VideoCard = (props) => {
           <ResponsiveEmbed aspectRatio="16by9">
             <ReactPlayer
             ref={ref}
-            light={true}
+            light={previewState}
             url={url} 
             playing={playerState.playing}
             controls={true}
@@ -26,7 +27,7 @@ const VideoCard = (props) => {
             height='100%'/>
           </ResponsiveEmbed>
           <br></br>
-          <LyricsCard {...props} handlePlay={handlePlay} playing={playerState.playing}  />
+          <LyricsCard {...props} handlePlay={handlePlay} hidePreview={hidePreview} playing={playerState.playing}  />
           <br></br>
         </>
       )
@@ -37,7 +38,8 @@ const VideoCard = (props) => {
             <ResponsiveEmbed aspectRatio="16by9">
               <ReactPlayer
               ref={ref}
-              light={true}
+              // light={true}
+              light={previewState}
               // playIcon={}
               url={url} 
               playing={playerState.playing}
@@ -48,7 +50,7 @@ const VideoCard = (props) => {
           </Col >
             
           <Col sm={5}>
-          <LyricsCard {...props} handlePlay={handlePlay} playing={playerState.playing} />
+          <LyricsCard {...props} handlePlay={handlePlay} hidePreview={hidePreview} playing={playerState.playing} />
           </Col>
           <br></br>
           <Line color="#EBDFF7" height={1} />
@@ -60,14 +62,22 @@ const VideoCard = (props) => {
     const ref = React.createRef()
 
     const [playerState, setPlayerState] = useState(() => ({playing: false}));
+ 
     //setPlayerState triggers a rerender
       // use the payload coming from dispatched actions
       // to set state
-    const handlePlay = (timeString) => {
+
+    const hidePreview = () => {
+      setPreviewState(false);
+    }
+      
+    const handlePlay = (e) => {
+      // e.stopPropagation();
+      let timeString = e.target.innerText
       //turns the timeString 00:00 into seconds
       const seconds = hmsToSeconds(timeString)
-      setPlayerState(prevState => ({playing: !playerState.playing}) );
       ref.current.seekTo(seconds, "seconds")
+      setPlayerState(prevState => ({playing: !playerState.playing}));
     }
 
     const hmsToSeconds = (str) => {
