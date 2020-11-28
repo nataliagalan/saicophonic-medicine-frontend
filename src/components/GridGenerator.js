@@ -16,7 +16,9 @@ return (
       {rows.map((cols, idx) => (
         <Row key={idx}>
           {cols.map((col, idx) => (
-            <Col sm={12} md={colWidth} key={idx}>
+            // change to sm and md to show grid on regular ipad
+            // <Col sm={12} md={colWidth} key={idx}>
+            <Col md={12} lg={colWidth} key={idx}>
               {col}
             </Col>
           ))}
