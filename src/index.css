@@ -113,10 +113,25 @@ code {
 .song-card-header {
   padding-top: 0;
   padding-bottom: 0;
+  background: rgb(15, 15, 15);
+  border: none;
+    /* font-family: pragmatapro-fraktur, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.1rem;
+  letter-spacing: .08em; */
 }
-.card-header {
-  padding-top: 0;
-  padding-bottom: 0;
+
+.song-card-header:active,
+.song-card-header:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none !important;
+}
+
+.song-title-col {
+  padding-left: 0px;
 }
 
 .page-content-wrapper {
@@ -127,6 +142,22 @@ code {
   text-align: center;
 }
 
+.card-header {
+  font-family: pragmatapro-fraktur, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.1rem;
+  letter-spacing: .08em;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  color: #EBDFF7;
+}
+
+.card-header:hover {
+  color: rgb(255, 219, 102);
+}
+
 .parent-song-accordion {
   /* background: #fdfbff; */
   background: rgb(15, 15, 15);
@@ -135,9 +166,9 @@ code {
   border-bottom: 0;
 }
 
-.song-accordion {
+.song-accordion.card {
   /* background: #fdfbff; */
-  background: transparent;
+  background: rgb(15, 15, 15);
   /* border-radius: 0; */
   /* border: 2px solid #EBDFF7; */
 }
@@ -150,6 +181,8 @@ code {
   /* background: #fffced; */
   background: rgb(15, 15, 15);
   padding-bottom: .50rem;
+  justify-content: center;
+
   /* border-radius: 0; */
   /* border: 2px solid #EBDFF7; */
 }
@@ -172,6 +205,7 @@ code {
 
 .accordion-time-title {
   color: #000;
+
   border:none;
   /* font-family: ibm-plex-mono, sans-serif;
 font-weight: 400;
@@ -181,6 +215,7 @@ font-style: normal; */
 .song-title {
 font-style: italic;
 letter-spacing: .05em;
+/* text-align: left; */
 }
 
 .grid-text-overflow {
@@ -211,6 +246,7 @@ letter-spacing: .05em;
   border-top: 0.01em solid;
   border-bottom: 0.01em solid;
   border-color: #EBDFF7;
+  padding-top: 0.5rem;
   /* font-family: futura-pt, sans-serif;
 font-weight: 400;
 font-style: normal; */
@@ -618,6 +654,7 @@ div.modal-content{
   .searchForm {
     width: 33vw;
   }
+
 }
   
 @media only screen and (max-width: 767px) {
@@ -702,10 +739,25 @@ div.modal-content{
     padding-right: 0;
   }
 
+  .accordion-time-title {
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
 
 }
 
 
 @media only screen and (max-width: 767px) and (orientation: portrait) {
 /* portrait phones */
+
+}
+
+@media only screen and (max-width: 768px) {
+/* regular ipad */
+  #toggle-grid-btn { 
+    display: none;
+  }
 }
