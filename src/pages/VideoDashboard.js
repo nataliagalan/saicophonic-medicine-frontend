@@ -5,11 +5,14 @@ import { getVideos } from '../actions/videos';
 import { currentUser } from '../actions/auth';
 import { setFilter } from '../actions/setFilter';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Pagination from 'react-bootstrap/Pagination';
 import Nav from 'react-bootstrap/Nav';
+import Col from 'react-bootstrap/Col';
 import VideoContainer from '../components/VideoContainer';
 import { ChevronRightIcon, ChevronLeftIcon } from '@primer/octicons-react';
 import Line from '../components/Line';
+import BkImage from '../components/BkImage';
 
 //TODO feature in progress: pagination for search results. Comments/pseudocode below.
 const VideoDashboard = (props) => {
@@ -167,22 +170,25 @@ const VideoDashboard = (props) => {
 	};
 
 	return (
-		<Container fluid>
-			<div className='page-content-wrapper'>
-				<div className='dashboard-header'>
-					<div className='dashboard-header-title'>
-						<h1 className='header-text'>Saicophonic Medicine</h1>
-					</div>
-					<h5 className='header-subtext'>An expanding library of live music sessions</h5>
-				</div>
-				{showTabs === 'true' ? displayFilterTabs() : null}
-				<VideoContainer videos={findVideos()} />
-				<Line color='#EBDFF7' height={0.5} />
-				{/* {showTabs === "true" ? renderTabsPagination() : null}  */}
-				{/* {status === "success" ? renderPagination() : null} */}
-				{status === 'success' && renderPagination()}
-			</div>
-		</Container>
+		<>
+			<BkImage />
+			<Container fluid className='main-wrapper'>
+				<Row >
+					<Col className='main-wrapper-col'>
+						{/* <Container fluid> */}
+						<div className='page-content-wrapper'>
+							{showTabs === 'true' ? displayFilterTabs() : null}
+							<VideoContainer videos={findVideos()} />
+							<Line color='#EBDFF7' height={0.5} />
+							{/* {showTabs === "true" ? renderTabsPagination() : null}  */}
+							{/* {status === "success" ? renderPagination() : null} */}
+							{status === 'success' && renderPagination()}
+						</div>
+						{/* </Container> */}
+					</Col>
+				</Row>
+			</Container>
+		</>
 	);
 };
 

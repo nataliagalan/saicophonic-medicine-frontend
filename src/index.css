@@ -1,5 +1,16 @@
+/* * { box-sizing: border-box; } */
+
 html {
 	scroll-behavior: smooth;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow-x: hidden;
 }
 
 body {
@@ -9,6 +20,7 @@ body {
 	/* -webkit-font-smoothing: antialiased; */
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: subpixel-antialiased;
+	/* width: 100%; */
 }
 
 code {
@@ -140,6 +152,33 @@ h3 {
 	margin-left: 2rem;
 	margin-right: 2rem;
 	text-align: center;
+}
+
+.main-wrapper {
+	background: rgb(15, 15, 15);
+	/* position: -webkit-sticky !important;
+	position: sticky !important; */
+  /* top: 900px !important; */
+  padding: 0px;
+	position: relative;
+	top: 780px;
+}
+
+.my-footer-wrapper {
+  background: rgb(15, 15, 15);
+  padding: 0px;
+	position: relative;
+	top: 780px;
+}
+
+.App {
+	padding: 0px;
+	position: relative;
+	top: 780px;
+}
+
+#root > div > div.main-wrapper.container-fluid > div > div {
+	padding: 0px;
 }
 
 .card-header {
@@ -495,6 +534,11 @@ ul#tags {
 	border-color: #ebdff7;
 }
 
+.close.rbt-close:hover {
+  color: #f6cd53;
+  background-color: transparent !important;
+}
+
 .login-page input.form-control,
 .searchForm input.form-control,
 .newsletter-form input.form-control,
@@ -661,6 +705,27 @@ div.modal-content {
 	color: #ebdff7;
 }
 
+.bk-img {
+	background: url('./assets/bk-img.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	/* 150vw ideal for phones, 66vw for ipad pro, 88 for ipad, 48 desktop */
+	min-height: 48vw;
+	min-width: 1024px;
+
+	/* Set up proportionate scaling */
+	width: 100%;
+	height: auto;
+
+	/* Set up positioning */
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
 	position: -webkit-sticky;
@@ -774,6 +839,10 @@ div.modal-content {
 		text-overflow: ellipsis;
 		padding-left: 0.8rem;
 	}
+
+	.bk-img {
+		min-height: 150vw !important;
+	}
 }
 
 @media only screen and (max-width: 767px) and (orientation: portrait) {
@@ -785,6 +854,7 @@ div.modal-content {
 	#toggle-grid-btn {
 		display: none;
 	}
+
 	input.rbt-input-main.form-control.rbt-input:placeholder-shown {
 		width: 131px;
 		white-space: nowrap;
@@ -799,6 +869,10 @@ div.modal-content {
 		text-overflow: ellipsis;
 		padding-left: 0.8rem;
 	}
+
+	.bk-img {
+		min-height: 88vw;
+	}
 }
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -809,5 +883,8 @@ div.modal-content {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		padding-left: 0.8rem;
+	}
+	.bk-img {
+		min-height: 66vw;
 	}
 }
