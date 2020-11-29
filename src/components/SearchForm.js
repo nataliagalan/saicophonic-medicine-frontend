@@ -173,13 +173,15 @@ class SearchForm extends Component {
 						return (
 							<Menu {...menuProps} className='tag-search-menu rbt-menu'>
 								{options.map((opt, ind) => (
-									<MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
+                  <MenuItem option={opt} key={ind} 
+                    position={ind} className='main-menu-item'
+                    onClick={() => this.fetchVideo(opt.id)}>
 										<div>
 											<Highlighter search={this.state.query}>{`${opt.band} ${opt.song1} ${opt.lyrics1} `}</Highlighter>
 										</div>
 									</MenuItem>
 								))}
-								<MenuItem option={options[0]} onClick={() => this.fetchTaggedVideos(this.state.query)}>
+								<MenuItem className='main-menu-item' option={options[0]} onClick={() => this.fetchTaggedVideos(this.state.query)}>
 									<div className='bold-menu'>{`Videos tagged with ${this.state.query}`}</div>
 								</MenuItem>
 							</Menu>
