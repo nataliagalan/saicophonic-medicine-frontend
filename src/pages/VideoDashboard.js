@@ -79,22 +79,22 @@ const VideoDashboard = (props) => {
 				<Nav fill variant='tabs' defaultActiveKey='all'>
 					<Nav.Item>
 						<Nav.Link eventKey='all' title='all' onClick={() => handleTabClick('all')}>
-							All ({filteredByAll.length})
+							ALL/TAGGED ({filteredByAll.length})
 						</Nav.Link>
 					</Nav.Item>
 					<Nav.Item>
 						<Nav.Link onClick={() => handleTabClick('bands')} title='bands' eventKey='band'>
-							Artist/Bands ({filteredByBand.bands.length})
+							ARTIST/BAND ({filteredByBand.bands.length})
 						</Nav.Link>
 					</Nav.Item>
 					<Nav.Item>
 						<Nav.Link onClick={() => handleTabClick('songs')} title='songs' eventKey='songs'>
-							Songs ({filteredBySong.songs.length})
+							SONG ({filteredBySong.songs.length})
 						</Nav.Link>
 					</Nav.Item>
 					<Nav.Item>
 						<Nav.Link onClick={() => handleTabClick('lyrics')} title='lyrics' eventKey='lyrics'>
-							Lyrics ({filteredByLyrics.lyrics.length})
+							LYRICS ({filteredByLyrics.lyrics.length})
 						</Nav.Link>
 					</Nav.Item>
 				</Nav>
@@ -169,21 +169,18 @@ const VideoDashboard = (props) => {
 	return (
 		<Container fluid>
 			<div className='page-content-wrapper'>
-				{props.hideHeader ? null : (
-					<div className='dashboard-header'>
-						<div className='dashboard-header-title'>
-							<h1 className='header-text'>Saicophonic Medicine</h1>
-						</div>
-						<h5 className='header-subtext'>An expanding library of live music sessions</h5>
+				<div className='dashboard-header'>
+					<div className='dashboard-header-title'>
+						<h1 className='header-text'>Saicophonic Medicine</h1>
 					</div>
-				)}
+					<h5 className='header-subtext'>An expanding library of live music sessions</h5>
+				</div>
 				{showTabs === 'true' ? displayFilterTabs() : null}
 				<VideoContainer videos={findVideos()} />
 				<Line color='#EBDFF7' height={0.5} />
 				{/* {showTabs === "true" ? renderTabsPagination() : null}  */}
 				{/* {status === "success" ? renderPagination() : null} */}
 				{status === 'success' && renderPagination()}
-				{/* {status === "success" && !props.hideHeader ? renderPagination() : null} */}
 			</div>
 		</Container>
 	);

@@ -5,6 +5,8 @@ import { toggleGrid } from '../actions/toggleGrid'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import {Link} from 'react-router-dom';
+import { setFilter } from '../actions/setFilter';
+import { toggleTabs } from '../actions/toggleTabs';
 import logo from '../logo.png'
 import SearchForm from './SearchForm';
 import GridIcon from './GridIcon';
@@ -15,6 +17,8 @@ const MyNavbar = (props) => {
     const auth = useSelector(state => state.auth);
     const video = useSelector(state => state.video);
     const showGrid = useSelector(state => state.toggleGrid);
+    const showTabs = useSelector((state) => state.toggleTabs.showTabs);
+    const filter = useSelector((state) => state.setFilter);
     //useDispatch is similar to setDispatchToProps
     const dispatch = useDispatch();
 
@@ -28,13 +32,22 @@ const MyNavbar = (props) => {
       setExpanded(!expanded)
     }
 
+    const clearSearch = () => {
+      console.log("clear search");
+      if(filter !== 'none'){
+        dispatch(setFilter('none'));
+        dispatch(toggleTabs('false'));
+      }
+			// props.toggleTabs('false');
+    }
+
     return (
     <Navbar 
       onToggle={toggleMenuIcon} 
       collapseOnSelect
       expand="md" className="nav-bg"
       fixed="top">
-      <Navbar.Brand as={Link} to="/videos" href="/videos">
+      <Navbar.Brand as={Link} to="/videos" href="/videos" onClick={clearSearch}>
         <img src={logo} className="imgFluid" style={{maxWidth: '50px'}} alt="logo that looks like a yin yang symbol inside a pill"/> 
       </Navbar.Brand>
       <Nav.Item inline="true"> 
@@ -49,7 +62,7 @@ const MyNavbar = (props) => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto" id="menu-div">
           {
-            props.location.pathname !== "/videos" ? 
+            props.location.pathname.includes("/videos/") ? 
             null
             :
             (
@@ -65,7 +78,8 @@ const MyNavbar = (props) => {
             as={Link} 
             to="/videos"
             href="/videos" 
-            id="menu-toggle" 
+            id="menu-toggle"
+            onClick={clearSearch} 
             className="nav-font-style">
             Videos
           </Nav.Link>
@@ -73,7 +87,8 @@ const MyNavbar = (props) => {
             as={Link} 
             to="/random"
             href="/random" 
-            id="menu-toggle" 
+            id="menu-toggle"
+            onClick={clearSearch} 
             className="nav-font-style">
             Random
           </Nav.Link>
@@ -83,6 +98,7 @@ const MyNavbar = (props) => {
               to="/videos/new"
               href="/videos/new" 
               id="menu-toggle" 
+              onClick={clearSearch}
               className="nav-font-style">
                 Add
             </Nav.Link>)

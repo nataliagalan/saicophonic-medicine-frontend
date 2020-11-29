@@ -1,211 +1,235 @@
-<Accordion>
-	<Card>
-		<Accordion.Toggle as={Card.Header} onSelect eventKey={i + 1}>
-			{band}
-		</Accordion.Toggle>
-		<Accordion.Collapse eventKey={i + 1}>
-			<Card.Body>Hello! I'm the body</Card.Body>
-		</Accordion.Collapse>
-	</Card>
-</Accordion>;
-
-const [accordionState, setAccordionState] = useState([true, false, false]);
-
-const toggleAccordion = (tab) => {
-	const newAccordionState = accordionState.map((x, index) => (tab === index ? !x : false));
-	setAccordionState(newAccordionState);
-};
-
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-
-import { deleteVideo } from '../actions/videos';
-
-import Accordion from 'react-bootstrap/Accordion';
-import Card from 'react-bootstrap/Card';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { getVideo } from '../actions/video';
+import { getTaggedVideos } from '../actions/videos';
+import { setFilter } from '../actions/setFilter';
+import { toggleTabs } from '../actions/toggleTabs';
+import { filteredByAll } from '../actions/filteredByAll';
+import { filteredByBand } from '../actions/filteredByBand';
+import { filteredBySong } from '../actions/filteredBySong';
+import { filteredByLyrics } from '../actions/filteredByLyrics';
+import { XIcon, SearchIcon } from '@primer/octicons-react';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Container from 'react-bootstrap/Container';
+import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Tags from './Tags';
-import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, EyeIcon, ChevronDownIcon, ChevronUpIcon, XIcon, PlusIcon, ClockIcon, TagIcon, StopwatchIcon } from '@primer/octicons-react';
-import Line from './Line';
+class SearchForm extends Component {
+	state = {
+		isLoading: false,
+		open: false,
+		options: [],
+		query: '',
+	};
 
-const LyricsCard = (props) => {
-	// useSelector is similar to setStateToProps
-	const videos = useSelector((state) => state.videos);
-	const auth = useSelector((state) => state.auth);
-	const showGrid = useSelector((state) => state.toggleGrid);
-	// useDispatch is similar to setDispatchToProps
-	const dispatch = useDispatch();
-	const [show, setShow] = useState(false);
+	//removed page 1 from argument below for testing
+	makeAndHandleRequest = async (query) => {
+		//page number 0
+		const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
+		const filteredVideos = await res.json();
 
-	const delVideo = async (id) => {
-		const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`, {
-			method: 'DELETE',
-		});
-		const data = await res.json();
-		if (data.status === 200) {
-			const updatedVideos = videos.filter((video) => video.id !== id);
-			dispatch(deleteVideo(updatedVideos));
-			props.history.push('/videos');
+		if (filteredVideos.error) {
+			console.log(`====${filteredVideos.error}====`);
+			this.setState({
+				isLoading: false,
+			});
+		} else {
+			// TODO dispatch here
+			//set data and page number to 0
+
+			this.props.filteredByAll(filteredVideos);
+			this.props.filteredByBand(filteredVideos, query);
+			this.props.filteredBySong(filteredVideos, query);
+			this.props.filteredByLyrics(filteredVideos, query);
+
+			const options = filteredVideos.map((video, idx) => ({
+				one: idx,
+				band: video.band,
+				id: video.id,
+				songs: video.songs,
+			}));
+
+			//useful for displaying highlighted options
+			filteredVideos.forEach((video, videoIndex) => {
+				video.songs.forEach((song, songIndex) => {
+					songIndex++;
+					options[videoIndex][`song${songIndex}`] = song.title;
+					options[videoIndex][`lyrics${songIndex}`] = song.lyrics;
+				});
+			});
+
+			this.setState({
+				options: options,
+				isLoading: false,
+			});
 		}
 	};
 
-	const copyUrlToClipboard = (id) => {
-		let base = window.location.origin.toString();
-		navigator.clipboard.writeText(`${base}/videos/${id}`);
-		setShow(true);
+	closeDropdown = () => {
+		this.setState({ open: false });
 	};
 
-	const [plusExpanded, setPlusExpanded] = useState(true);
-	const [chevronExpanded, setChevronExpanded] = useState(true);
-
-	const handlePlusClick = (e) => {
-		props.hidePreview(e);
-		setPlusExpanded(!plusExpanded);
+	handleAllResults = async (query) => {
+		this.setState({ open: false });
+		const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
+		const filteredVideos = await res.json();
+		this.props.filteredByAll(filteredVideos);
+		// this.props.history.push(`/videos/search/${query}`);
+		this.typeahead.clear();
 	};
 
-	const handleChevronClick = (e) => {
-		setChevronExpanded(!chevronExpanded);
+	handleInputChange = (query) => {
+		if (query === '') {
+			//HIDE TABS
+			this.setState({ open: false });
+			this.props.setFilter('none');
+			this.props.toggleTabs('false');
+		} else {
+			//SHOW TABS
+			this.setState({ query: query, open: true });
+			this.props.setFilter('all');
+			this.props.toggleTabs('true');
+		}
 	};
 
-	const { id, songs, tags, band } = props;
+	handleSearch = (query) => {
+		this.setState({ isLoading: true });
+		this.makeAndHandleRequest(query);
+	};
 
-	return (
-		<>
-			<Accordion>
-				<Card className='parent-song-accordion'>
-					{/* <Card.Header> */}
-					<Accordion.Toggle onClick={(e) => handlePlusClick(e)} as={Card.Header} eventKey='0'>
-						{band}
-						{plusExpanded ? <PlusIcon size={24} /> : <XIcon size={24} />}
-						{/* <span style={{color: "#EBDFF7"}}><EyeIcon size={12} /></span> */}
-					</Accordion.Toggle>
-					{/* </Card.Header> */}
-					<Accordion.Collapse eventKey='0'>
-						<Card.Body>
-							{
-								// first time around songs are undefined. if that's the case, don't do anything. else, iterate over songs
-								!songs
-									? null
-									: songs.map((song, i) => {
-											return (
-												<Accordion>
-													<Card className='song-accordion' key={i}>
-														<Accordion.Toggle
-															className='text-left song-card-header'
-															// style={{cursor: 'pointer'}}
-															as={Card.Header}
-															eventKey={i + 1}
-														>
-															<Row>
-																<Col>
-																	<Button onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left'>
-																		{song.timestamp}
-																	</Button>
-																	<Button
-																		onClick={(e) => props.handleTitlePlay(e)}
-																		className={
-																			showGrid ? 'text-left accordion-time-title song-title grid-text-overflow' : 'text-left accordion-time-title song-title'
-																		}
-																	>
-																		{song.title}
-																	</Button>
-																</Col>
-															</Row>
-														</Accordion.Toggle>
-														<Accordion.Collapse eventKey={i + 1}>
-															<Card.Body
-																className='overflow-auto accordion-lyrics'
-																scrollable='true'
-																style={{
-																	whiteSpace: 'pre-line',
-																}}
-															>
-																{song.lyrics}
-															</Card.Body>
-														</Accordion.Collapse>
-													</Card>
-													{/* <Line color="white"/> */}
-												</Accordion>
-											);
-									  })
-							}
-						</Card.Body>
-					</Accordion.Collapse>
-				</Card>
-			</Accordion>
+	handleKeyDown = (event) => {
+		if (event.key === 'Enter') {
+      this.setState({ open: false });
+			// this.handleAllResults(this.state.query, 'all');
+		}
+	};
 
-			{/* Edit and Delete buttons */}
-			<Accordion>
-				<Card className='plus-accordion-card'>
-					<Accordion.Toggle
-						className='plus-accordion'
-						style={{ cursor: 'pointer' }}
-						as={Card.Header}
-						// as={Button}
-						onClick={(e) => handleChevronClick(e)}
-						eventKey='1'
-					>
-						{chevronExpanded ? <ChevronDownIcon size={24} /> : <ChevronUpIcon size={24} />}
-						{/* <span style={{color: "#EBDFF7"}}><ChevronDownIcon size={16} /></span> */}{' '}
-					</Accordion.Toggle>
-					<Accordion.Collapse eventKey='1'>
-						<Card.Body className='plus-accordion'>
-							<Row>
-								<div className='tags-wrapper' id='tags-wrapper'>
-									<Tags tags={tags} />
-								</div>
-							</Row>
+	fetchVideo = async (id) => {
+    this.typeahead.clear();
+		this.setState({ open: false });
+		const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
+		const videoToShow = await res.json();
+		if (videoToShow.error) {
+			console.log('video not found');
+		} else {
+			this.props.getVideo(videoToShow);
+			this.props.history.push(`/videos/${id}`);
+		}
+	};
 
-							<Row>
-								<Col>
-									{' '}
-									{auth.id ? (
-										<>
-											<Button className='lyrics-card-icons' as={Link} to={`/videos/edit/${id}`}>
-												<span role='img' aria-label='edit'>
-													<PencilIcon size={24} />
-												</span>
-											</Button>
-											<Button className='lyrics-card-icons' onClick={() => delVideo(id)}>
-												<span role='img' aria-label='delete'>
-													<TrashIcon size={24} />
-												</span>
-											</Button>
-										</>
-									) : null}
-									<Button className='lyrics-card-icons' onClick={() => copyUrlToClipboard(id)}>
-										<span role='img' aria-label='share'>
-											<ShareIcon size={24} />
+	fetchTaggedVideos = async (tag) => {
+		this.typeahead.clear();
+		this.closeDropdown();
+		const res = await fetch(`http://localhost:3001/api/v1/videos/tagged/${tag}`);
+    const filteredVideosByTag = await res.json();
+    console.log(filteredVideosByTag);
+		if (filteredVideosByTag.error) {
+			console.log('error');
+		} else {
+			this.props.getTaggedVideos(filteredVideosByTag);
+			this.props.history.push(`/videos/tagged/${tag}`);
+		}
+    
+  };
+  
+
+	render() {
+		return (
+			<>
+				<AsyncTypeahead
+					{...this.state}
+					ref={(typeahead) => (this.typeahead = typeahead)}
+					className='searchForm'
+					id='video-archive-typeahead'
+					//labelkey determines the option keys that get searched
+					labelKey={(option) => {
+						let songString = option.songs.map((song) => song.title).join(' ');
+						let lyricsString = option.songs.map((song) => song.lyrics).join(' ');
+						return `${option.band} ${songString} ${lyricsString}`;
+					}}
+					maxResults={6}
+					minLength={2}
+          clearButton={true}
+					onInputChange={this.handleInputChange}
+					// onPaginate={this._handlePagination}
+					onSearch={this.handleSearch}
+					paginate
+					placeholder='Saicophonic Search'
+					promptText='Type to search'
+					searchText={`Searching for ${this.state.query}`}
+					options={this.state.options}
+					onBlur={this.closeDropdown}
+					onKeyDown={this.handleKeyDown}
+					filterBy={() => true}
+					renderMenu={(options, menuProps) => {
+						return (
+							<Menu {...menuProps} className='tag-search-menu rbt-menu'>
+								{options.map((opt, ind) => (
+									<MenuItem option={opt} key={ind} position={ind} onClick={() => this.fetchVideo(opt.id)}>
+										<div>
+											<Highlighter search={this.state.query}>
+                        {`${opt.band} ${opt.song1} ${opt.lyrics1} `}
+                      </Highlighter>
+										</div>
+									</MenuItem>
+								))}
+								<MenuItem option={options[0]} onClick={() => this.fetchTaggedVideos(this.state.query)}>
+									<div className='bold-menu'>{`Videos tagged with ${this.state.query}`}</div>
+								</MenuItem>
+							</Menu>
+						);
+					}}
+					open={this.state.open}
+					useCache={false}
+				>
+					{({ onClear, selected }) => (
+						<div className='search-form-icons'>
+							{!!selected.length && (
+								<Button aria-label='Clear' className='close rbt-close'>
+									<div onClick={onClear}>
+										<span style={{ color: '#EBDFF7' }} aria-label='clear-menu' id='clear-menu'>
+											<XIcon size={20} />
 										</span>
-									</Button>
-									<Modal show={show} onHide={() => setShow(false)} dialogClassName='modal-90w' aria-labelledby='copy-success'>
-										<Modal.Header>
-											<Container fluid>
-												<Modal.Title id='copy-success'>
-													<div className='justify-content-md-center text-center'>
-														<RocketIcon size={24} />
-														<span>&nbsp;&nbsp;</span>
-														Link copied to clipboard!
-													</div>
-												</Modal.Title>
-											</Container>
-										</Modal.Header>
-										<Modal.Body></Modal.Body>
-									</Modal>
-								</Col>
-							</Row>
-						</Card.Body>
-					</Accordion.Collapse>
-				</Card>
-			</Accordion>
-		</>
-	);
+									</div>
+								</Button>
+							)}
+							{!selected.length && (
+								<span style={{ color: '#EBDFF7' }} aria-label='magnifier' id='magnifier'>
+									<SearchIcon size={16} />
+								</span>
+							)}
+						</div>
+					)}
+				</AsyncTypeahead>
+			</>
+		);
+	}
+}
+
+<ClearButton onClick={onClear} />
+
+const setStateToProps = (state) => {
+	return {
+		video: state.video,
+		videos: state.videos,
+		filteredByAll: state.filteredByAll,
+		filteredByBand: state.filteredByBand,
+		filteredBySong: state.filteredBySong,
+		filteredByLyrics: state.filteredByLyrics,
+		filter: state.setFilter,
+		showTabs: state.toggleTabs.showTabs,
+	};
 };
 
-export default withRouter(LyricsCard);
+const setDispatchToProps = {
+	getVideo,
+	filteredByAll,
+	filteredByBand,
+	filteredBySong,
+	filteredByLyrics,
+	toggleTabs,
+	setFilter,
+	getTaggedVideos,
+};
+
+export default withRouter(connect(setStateToProps, setDispatchToProps)(SearchForm));
