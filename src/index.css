@@ -451,6 +451,13 @@ ul#tags {
 	letter-spacing: 0.01em;
 }
 
+.main-menu-item {
+	width: 256px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .rbt-menu > .dropdown-item {
 	font-size: 1.1em;
 	color: #000000b4;
@@ -484,7 +491,7 @@ ul#tags {
 }
 
 .searchForm {
-  border-bottom: 0.1rem solid;
+	border-bottom: 0.1rem solid;
 	border-color: #ebdff7;
 }
 
@@ -507,7 +514,7 @@ ul#tags {
 	border-radius: 0rem;
 	background-color: transparent !important;
 	color: #ebdff7;
-  border: none;
+	border: none;
 }
 
 .searchForm input.form-control:active,
@@ -665,7 +672,7 @@ div.modal-content {
 	/* tablets and desktop */
 	.searchForm {
 		width: 20vw;
-  }
+	}
 }
 
 @media only screen and (max-width: 767px) {
@@ -759,6 +766,14 @@ div.modal-content {
 		overflow: hidden;
 		text-overflow: clip;
 	}
+
+	.main-menu-item {
+		width: 138px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding-left: 0.8rem;
+	}
 }
 
 @media only screen and (max-width: 767px) and (orientation: portrait) {
@@ -769,24 +784,30 @@ div.modal-content {
 	/* regular ipad */
 	#toggle-grid-btn {
 		display: none;
-  }
-  input.rbt-input-main.form-control.rbt-input:placeholder-shown {
+	}
+	input.rbt-input-main.form-control.rbt-input:placeholder-shown {
 		width: 131px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: clip;
 	}
-}
 
-@media only screen and (max-width: 1024px) {
-	/* ipad pro */
-  /* input.rbt-input-main.form-control.rbt-input:placeholder-shown {
-		width: 131px;
+	.main-menu-item {
+		width: 138px;
 		white-space: nowrap;
 		overflow: hidden;
-		text-overflow: clip;
-  } */
-  /* .searchForm {
-		width: 15vw;
-	} */
+		text-overflow: ellipsis;
+		padding-left: 0.8rem;
+	}
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+	/* ipad pro */
+	.main-menu-item {
+		width: 188px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding-left: 0.8rem;
+	}
 }
