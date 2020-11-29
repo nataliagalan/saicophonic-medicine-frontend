@@ -5,7 +5,7 @@ const initialValue = {
 const videos = (state = initialValue, action) => {
   switch (action.type) {
     case "GET_FILTERED_BAND":
-      let query = action.payload.query
+      let query = action.payload.query.toLowerCase()
       let filteredVideos = action.payload.bands.filter( video => video.band.toLowerCase().includes(query) )
       return {...state, 
         bands: filteredVideos, 
