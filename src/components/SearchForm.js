@@ -100,7 +100,8 @@ class SearchForm extends Component {
 
 	handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
-			this.setState({ open: false });
+      this.setState({ open: false });
+      this.props.history.push(`/videos`);
 			// this.handleAllResults(this.state.query, 'all');
 		}
 	};
