@@ -14,7 +14,7 @@ const rows = chunk(React.Children.toArray(children), cols)
 return (
     <>
       {rows.map((cols, idx) => (
-        <Row key={idx}>
+        <Row key={idx} className="dashboard-row">
           {cols.map((col, idx) => (
             // change to sm and md to show grid on regular ipad
             // <Col sm={12} md={colWidth} key={idx}>

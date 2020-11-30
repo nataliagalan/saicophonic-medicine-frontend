@@ -11,8 +11,8 @@ import Button from 'react-bootstrap/Button';
 
 class Login extends React.Component {
   state = {
-    username: 'ursula2',
-    password: '2', 
+    username: '',
+    password: '', 
     error: null
   }
 
@@ -73,7 +73,7 @@ class Login extends React.Component {
     } else {
       localStorage.setItem('myAppToken', data.token)
       this.props.loginSuccess(data)
-      this.props.history.push('/videos')
+      this.props.history.push('/')
     }
   }
 

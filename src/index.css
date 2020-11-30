@@ -27,6 +27,10 @@ code {
 	font-family: ibm-plex-mono, source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.dashboard-row {
+  margin-top: 2rem;
+}
+
 #random-video {
 	z-index: 10001;
 }
@@ -77,6 +81,15 @@ code {
 	color: #ebdff7;
 	letter-spacing: 0.09em;
 	/* padding-top: 1.7rem; */
+}
+
+.tagged-header-subtext {
+  font-weight: 400;
+	font-size: 1.5rem;
+	color: #ebdff7;
+	letter-spacing: 0.09em;
+  padding-top: 1.7rem;
+  padding-bottom: 1.7rem;
 }
 
 .nav-bg {
@@ -157,11 +170,6 @@ h3 {
 	padding-bottom: 0;
 	background: rgb(15, 15, 15);
 	border: none;
-	/* font-family: pragmatapro-fraktur, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 1.1rem;
-  letter-spacing: .08em; */
 }
 
 .song-card-header:active,
@@ -219,8 +227,8 @@ h3 {
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 1.1rem;
 	letter-spacing: 0.08em;
-	display: flex;
-	justify-content: space-between;
+	/* display: flex; */
+	/* justify-content: space-between; */
 	cursor: pointer;
 	color: #ebdff7;
 }
@@ -233,7 +241,7 @@ h3 {
 	/* background: #fdfbff; */
 	background: rgb(15, 15, 15);
 	border-radius: 0;
-	border: 2px solid #ebdff7;
+	border: 0.17rem solid #ebdff7;
 	/* border-bottom: 0; */
 }
 
@@ -253,15 +261,14 @@ h3 {
 	background: rgb(15, 15, 15);
 	padding-bottom: 0.5rem;
 	justify-content: center;
-
-	/* border-radius: 0; */
-	/* border: 2px solid #EBDFF7; */
 }
 
+/* HERE */
 .plus-accordion-card {
 	background: #fffced;
 	margin-bottom: 1rem;
 	border-radius: 0;
+	border-top: 0;
 }
 
 .custom-spacer {
@@ -275,17 +282,24 @@ h3 {
 }
 
 .accordion-time-title {
-	color: #000;
-
-	border: none;
+	color: #ebdff7;
+  border: none;
+  margin-left: 1rem;
+  letter-spacing: 0.05em;
 	/* font-family: ibm-plex-mono, sans-serif;
 font-weight: 400;
 font-style: normal; */
 }
 
+.time-title-row {
+  margin-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
 .song-title {
 	font-style: italic;
-	letter-spacing: 0.05em;
+  letter-spacing: 0.05em;
+  color: #ebdff7;
 	/* text-align: left; */
 }
 
@@ -514,7 +528,8 @@ ul#tags {
 	background-position: center center;
 	opacity: 1;
 	border-radius: 0px;
-	margin-top: -1px;
+	border: none;
+	/* margin-top: -1px; */
 }
 
 .rbt-input::placeholder {
@@ -659,17 +674,22 @@ img.social-logos:hover {
 }
 
 .footer-site-title {
-	font-weight: 500;
-	font-size: 1.3rem;
+	font-weight: 400;
+	font-size: 1.06rem;
+	letter-spacing: 0.1em;
 	margin-top: 1.3rem;
+}
+
+.footer-text {
+	font-weight: 200;
 }
 
 .footer-contact,
 .footer-contact a {
-	font-weight: 400;
+	font-weight: 500;
 	letter-spacing: 0.17em;
 	text-transform: uppercase;
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	color: #ebdff7;
 }
 
@@ -757,66 +777,10 @@ div.modal-content {
 	font-weight: 200;
 }
 
-/* ANIMATIONS */
-
-@keyframes fadeInUp {
-	from {
-		transform: translate3d(0, 40px, 0);
-	}
-
-	to {
-		transform: translate3d(0, 0, 0);
-		opacity: 1;
-	}
+img.saicophonic-logo:hover {
+	/* svg on an img tag */
+	filter: hue-rotate(90deg) saturate(100%) invert(50%) sepia(90%);
 }
-
-@-webkit-keyframes fadeInUp {
-	from {
-		transform: translate3d(0, 40px, 0);
-	}
-
-	to {
-		transform: translate3d(0, 0, 0);
-		opacity: 1;
-	}
-}
-
-.animated {
-	animation-duration: 1s;
-	animation-fill-mode: both;
-	-webkit-animation-duration: 1s;
-	-webkit-animation-fill-mode: both;
-}
-
-.animatedFadeInUp {
-	opacity: 0;
-}
-
-.fadeInUp {
-	opacity: 0;
-	animation-name: fadeInUp;
-	-webkit-animation-name: fadeInUp;
-}
-
-.plus-toggle-btn {
-  display: none;
-}
-  
-.song-toggle:hover > .plus-toggle-btn {
-  display: block;
-}
-
-.tag-accordion {
-  display: none;
-}
-
-
-.tag-accordion:hover,
-.song-accordion:hover + .tag-accordion {
-  display: block;
-}
-
-/* END OF ANIMATIONS */
 
 /* FIXES THE VIDEO IN PLACE */
 .video-wrapper {
@@ -829,8 +793,161 @@ div.modal-content {
 	/* tablets and desktop */
 	.searchForm {
 		width: 20vw;
-	}
+  }
 }
+	/* ANIMATIONS */
+
+	@keyframes fadeInUp {
+		from {
+			transform: translate3d(0, 40px, 0);
+		}
+
+		to {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+		}
+	}
+
+	@-webkit-keyframes fadeInUp {
+		from {
+			transform: translate3d(0, 40px, 0);
+		}
+
+		to {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+		}
+	}
+
+	@-webkit-keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@-webkit-keyframes fade-in-right {
+		0% {
+			-webkit-transform: translateX(50px);
+			transform: translateX(50px);
+			opacity: 0;
+		}
+		100% {
+			-webkit-transform: translateX(0);
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+	@keyframes fade-in-right {
+		0% {
+			-webkit-transform: translateX(50px);
+			transform: translateX(50px);
+			opacity: 0;
+		}
+		100% {
+			-webkit-transform: translateX(0);
+			transform: translateX(0);
+			opacity: 1;
+		}
+  }
+
+  @-webkit-keyframes fade-in-left {
+    0% {
+      -webkit-transform: translateX(-50px);
+              transform: translateX(-50px);
+      opacity: 0;
+    }
+    38% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes fade-in-left {
+    0% {
+      -webkit-transform: translateX(-50px);
+              transform: translateX(-50px);
+      opacity: 0;
+    }
+    38% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 0.5;
+    }
+  }
+
+	.animated {
+		animation-duration: 1s;
+		animation-fill-mode: both;
+		-webkit-animation-duration: 1s;
+		-webkit-animation-fill-mode: both;
+	}
+
+	.animatedFadeInUp {
+		opacity: 0;
+	}
+
+	.fadeInUp {
+		opacity: 0;
+		animation-name: fadeInUp;
+		-webkit-animation-name: fadeInUp;
+	}
+
+	.plus-toggle-btn {
+    display: none;
+  }
+  .x-toggle-btn{
+    display: none;
+  }
+
+  .song-toggle {
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+
+    -webkit-animation: fade-in-left 0.6s cubic-bezier(0, 0.575, 0.565, 1.000) both;
+	        animation: fade-in-left 0.6s cubic-bezier(0, 0.575, 0.565, 1.000) both;
+  }
+  .song-toggle:hover > .x-toggle-btn,
+	.song-toggle:hover > .plus-toggle-btn {
+		display: block;
+		-webkit-animation: fade-in 0.6s cubic-bezier(0.39, 0.575, 0.565, 1.000) both;
+    animation: fade-in 0.6s cubic-bezier(0.39, 0.575, 0.565, 1.000) both;
+	}
+
+	.song-toggle:hover {
+		display: flex;
+		justify-content: space-between;
+	
+    -webkit-animation: fade-in-right 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+    animation: fade-in-right 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  
+	}
+
+	.tag-accordion {
+		display: none;
+	}
+
+	.tag-accordion:hover,
+	.song-accordion:hover + .tag-accordion {
+		display: block;
+		-webkit-animation: fade-in 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+		animation: fade-in 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+	}
+
+	/* END OF ANIMATIONS */
+
 
 @media only screen and (max-width: 767px) {
 	/* phones */
@@ -875,6 +992,7 @@ div.modal-content {
 	.new-and-edit-video-page {
 		margin-left: 2rem !important;
 		margin-right: 2rem !important;
+		padding-top: 2rem !important;
 	}
 
 	.navbar-brand {
@@ -942,9 +1060,10 @@ div.modal-content {
 		margin-bottom: 0px;
 	}
 
-	/* #root > nav {
-    background: black;
-  } */
+	.custom-spacer {
+    padding-top: 2.5rem;
+    padding-bottom: 1.1rem;
+  }
 }
 
 @media only screen and (max-width: 767px) and (orientation: portrait) {

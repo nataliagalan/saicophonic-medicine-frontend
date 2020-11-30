@@ -11,8 +11,7 @@ import { filteredBySong } from '../actions/filteredBySong';
 import { filteredByLyrics } from '../actions/filteredByLyrics';
 import { XIcon, SearchIcon } from '@primer/octicons-react';
 import Button from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
-import { AsyncTypeahead, Menu, MenuItem, Highlighter, ClearButton } from 'react-bootstrap-typeahead';
+import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 class SearchForm extends Component {
@@ -103,7 +102,7 @@ class SearchForm extends Component {
 			this.setState({ query: '' });
       this.setState({ open: false });
       this.typeahead.clear();
-			this.props.history.push(`/videos`);
+			this.props.history.push(`/`);
 			// this.handleAllResults(this.state.query, 'all');
 		}
 	};
@@ -132,7 +131,7 @@ class SearchForm extends Component {
 			console.log('error');
 		} else {
 			this.props.getTaggedVideos(filteredVideosByTag);
-			this.props.history.push(`/videos/tagged/${tag}`);
+			this.props.history.push(`/tagged/${tag}`);
 		}
 	};
 
@@ -165,7 +164,7 @@ class SearchForm extends Component {
 					onInputChange={this.handleInputChange}
 					// onPaginate={this._handlePagination}
 					onSearch={this.handleSearch}
-					paginate
+					// paginate
 					placeholder='Saicophonic Search'
 					promptText='Type to search'
 					searchText={`Searching for ${this.state.query}`}

@@ -11,9 +11,7 @@ import Nav from 'react-bootstrap/Nav';
 import Col from 'react-bootstrap/Col';
 import VideoContainer from '../components/VideoContainer';
 import { ChevronRightIcon, ChevronLeftIcon } from '@primer/octicons-react';
-import Line from '../components/Line';
 import BkImage from '../components/BkImage';
-import { toggleGrid } from '../actions/toggleGrid';
 
 //TODO feature in progress: pagination for search results. Comments/pseudocode below.
 const VideoDashboard = (props) => {
@@ -181,7 +179,7 @@ const VideoDashboard = (props) => {
 						<div className='page-content-wrapper'>
 							{showTabs === 'true' ? displayFilterTabs() : null}
 							<VideoContainer videos={findVideos()} />
-							<Line color='#EBDFF7' height={0.5} />
+							{/* <Line color='#EBDFF7' height={0.5} /> */}
 							{/* {showTabs === "true" ? renderTabsPagination() : null}  */}
 							{/* {status === "success" ? renderPagination() : null} */}
 							{status === 'success' && renderPagination()}

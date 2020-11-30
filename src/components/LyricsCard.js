@@ -14,8 +14,8 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tags from './Tags';
-import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, EyeIcon, ChevronDownIcon, ChevronUpIcon, XIcon, PlusIcon, ClockIcon, TagIcon, StopwatchIcon } from '@primer/octicons-react';
-import Line from './Line';
+import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, ChevronDownIcon, ChevronUpIcon, XIcon, PlusIcon } from '@primer/octicons-react';
+
 
 const LyricsCard = (props) => {
 	// useSelector is similar to setStateToProps
@@ -34,7 +34,7 @@ const LyricsCard = (props) => {
 		if (data.status === 200) {
 			const updatedVideos = videos.filter((video) => video.id !== id);
 			dispatch(deleteVideo(updatedVideos));
-			props.history.push('/videos');
+			props.history.push('/');
 		}
 	};
 
@@ -70,14 +70,13 @@ const LyricsCard = (props) => {
             {
             plusExpanded ? 
             <span className='plus-toggle-btn'>
-              <PlusIcon size={24} />
+              <PlusIcon size={16} />
             </span> 
             : 
             <span className='x-toggle-btn'>
-            <XIcon size={24} />
+            <XIcon size={16} />
             </span>
             }
-						{/* <span style={{color: "#EBDFF7"}}><EyeIcon size={12} /></span> */}
 					</Accordion.Toggle>
 					{/* </Card.Header> */}
 					<Accordion.Collapse eventKey='0'>
@@ -92,25 +91,23 @@ const LyricsCard = (props) => {
                         <Card className='song-accordion' key={i}>
                             <Accordion.Toggle
                               className='text-left song-card-header'
-                              // style={{cursor: 'pointer'}}
-                              // as={Card.Header}
                               eventKey={i + 1}
                             >
-                              <Row>
+                              <Row className='time-title-row'>
                                 <Col xs={4}>
-                                  <Button onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left'>
+                                  <span onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left'>
                                     {song.timestamp}
-                                  </Button>
+                                  </span>
                                 </Col>
                                 <Col xs={8} className='song-title-col'>
-                                  <Button
+                                  <span
                                     onClick={(e) => props.handleTitlePlay(e)}
                                     className={
                                       showGrid ? 'text-left accordion-time-title song-title grid-text-overflow' : 'text-left accordion-time-title song-title'
                                     }
                                   >
                                     {song.title}
-                                  </Button>
+                                  </span>
                                 </Col>
                               </Row>
                             </Accordion.Toggle>
@@ -136,7 +133,7 @@ const LyricsCard = (props) => {
 			</Accordion>
 
 			{/* Edit and Delete buttons */}
-			<Accordion className='tag-accordion'>
+			<Accordion className='tag-accordion '>
 				<Card className='plus-accordion-card'>
 					<Accordion.Toggle
 						className='plus-accordion'
@@ -147,7 +144,6 @@ const LyricsCard = (props) => {
 						eventKey='1'
 					>
 						{chevronExpanded ? <ChevronDownIcon size={24} /> : <ChevronUpIcon size={24} />}
-						{/* <span style={{color: "#EBDFF7"}}><ChevronDownIcon size={16} /></span> */}{' '}
 					</Accordion.Toggle>
 					<Accordion.Collapse eventKey='1'>
 						<Card.Body className='plus-accordion'>

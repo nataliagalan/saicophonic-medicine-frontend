@@ -30,7 +30,7 @@ const Tags = (props) => {
         className="ind-tag"
         as={Link} 
         onClick={() => fetchTaggedVideos(tag.name)}
-        to={`/videos/tagged/${tag.name}`}
+        to={`/tagged/${tag.name}`}
         >
         {tag.name}
       </Button>
