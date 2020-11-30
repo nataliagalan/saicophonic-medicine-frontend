@@ -28,7 +28,7 @@ code {
 }
 
 #random-video {
-  z-index: 10001;
+	z-index: 10001;
 }
 
 .bk-img {
@@ -50,14 +50,11 @@ code {
 	top: 0;
 	left: 0;
 	z-index: -1;
-
-
 }
 
 .dashboard-header {
 	/* below works on phones!!! */
-  max-width: 100vw;
-  
+	max-width: 100vw;
 }
 
 .header-text {
@@ -67,9 +64,9 @@ code {
 	font-weight: 600;
 	font-size: 4.5rem;
 	/* color: #ebdff7; */
-	background: -webkit-linear-gradient( rgb(250, 209, 76), #e5dfe8);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+	background: -webkit-linear-gradient(rgb(250, 209, 76), #e5dfe8);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 
 	/* max-width: 30vw; */
 }
@@ -237,7 +234,7 @@ h3 {
 	background: rgb(15, 15, 15);
 	border-radius: 0;
 	border: 2px solid #ebdff7;
-	border-bottom: 0;
+	/* border-bottom: 0; */
 }
 
 .song-accordion.card {
@@ -669,16 +666,16 @@ img.social-logos:hover {
 
 .footer-contact,
 .footer-contact a {
-  font-weight: 400;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  color: #ebdff7;
+	font-weight: 400;
+	letter-spacing: 0.17em;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	color: #ebdff7;
 }
 
 .footer-contact a:hover {
-  color: #fad871;
-  text-decoration: none;
+	color: #fad871;
+	text-decoration: none;
 }
 
 .newsletter-prompt {
@@ -762,30 +759,61 @@ div.modal-content {
 
 /* ANIMATIONS */
 
-.slide-top {
-	-webkit-animation: slide-top 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-	animation: slide-top 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+@keyframes fadeInUp {
+	from {
+		transform: translate3d(0, 40px, 0);
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
 }
 
-@-webkit-keyframes slide-top {
-	0% {
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
+@-webkit-keyframes fadeInUp {
+	from {
+		transform: translate3d(0, 40px, 0);
 	}
-	100% {
-		-webkit-transform: translateY(-100px);
-		transform: translateY(-100px);
+
+	to {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
 	}
 }
-@keyframes slide-top {
-	0% {
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
-	}
-	100% {
-		-webkit-transform: translateY(-100px);
-		transform: translateY(-100px);
-	}
+
+.animated {
+	animation-duration: 1s;
+	animation-fill-mode: both;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+}
+
+.animatedFadeInUp {
+	opacity: 0;
+}
+
+.fadeInUp {
+	opacity: 0;
+	animation-name: fadeInUp;
+	-webkit-animation-name: fadeInUp;
+}
+
+.plus-toggle-btn {
+  display: none;
+}
+  
+.song-toggle:hover > .plus-toggle-btn {
+  display: block;
+}
+
+.tag-accordion {
+  display: none;
+}
+
+
+.tag-accordion:hover,
+.song-accordion:hover + .tag-accordion {
+  display: block;
 }
 
 /* END OF ANIMATIONS */
@@ -818,9 +846,9 @@ div.modal-content {
 		font-size: 3em;
 	}
 
-  #video-dashboard > h5 {
-    padding-top: 4rem 
-  }
+	#video-dashboard > h5 {
+		padding-top: 4rem;
+	}
 	.video-wrapper {
 		position: fixed !important;
 		/* top: 3rem; */

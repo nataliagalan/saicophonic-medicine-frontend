@@ -9,7 +9,7 @@ const BkImage = () => {
 
 			<div className='bk-img imgFluid d-flex align-content-center flex-wrap'>
       {/* m-md-auto  works on most, except regular ipad in portrait */}
-				<div className='dashboard-header d-flex  align-self-center m-md-auto ' >
+				<div className='dashboard-header d-flex  align-self-center m-md-auto animated animatedFadeInUp fadeInUp' >
 					<h1 className='header-text '>Saicophonic Medicine</h1>
 				</div>
 
