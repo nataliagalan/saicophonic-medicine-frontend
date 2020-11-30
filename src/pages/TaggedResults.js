@@ -6,13 +6,13 @@ import Container from 'react-bootstrap/Container';
 
 class TaggedResults extends Component {
   render() {
-    let tag = this.props.location.pathname.split('/')[3]
+    let tag = this.props.location.pathname.split('/')[2]
     return (
       <>
         <Container fluid>
           <div className="page-content-wrapper">
             <div className="dashboard-header">
-            <h5 className="header-subtext">All videos tagged with "{tag}"</h5>
+            <h5 className="tagged-header-subtext">All videos tagged with "{tag}"</h5>
             </div>
 
             {this.props.videos ?

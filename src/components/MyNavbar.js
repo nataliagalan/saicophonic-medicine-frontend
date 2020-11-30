@@ -1,11 +1,10 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { toggleGrid } from '../actions/toggleGrid';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Tooltip from 'react-bootstrap/Tooltip';
-import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { Link } from 'react-router-dom';
 import { setFilter } from '../actions/setFilter';
@@ -23,8 +22,7 @@ const MyNavbar = (props) => {
 	const showTabs = useSelector((state) => state.toggleTabs.showTabs);
 	const filter = useSelector((state) => state.setFilter);
 	//useDispatch is similar to setDispatchToProps
-  const dispatch = useDispatch();
-  
+	const dispatch = useDispatch();
 
 	const [expanded, setExpanded] = useState(true);
 
@@ -41,22 +39,20 @@ const MyNavbar = (props) => {
 			dispatch(setFilter('none'));
 			dispatch(toggleTabs('false'));
 		}
-  };
+	};
 
 	const handleRandom = () => {
-    props.history.push(`/random`)
+		props.history.push(`/random`);
 		if (filter !== 'none') {
 			dispatch(setFilter('none'));
 			dispatch(toggleTabs('false'));
 		}
-  };
-  
-
+	};
 
 	return (
 		<Navbar onToggle={toggleMenuIcon} collapseOnSelect expand='md' className={!expanded ? 'expanded-nav-bg' : 'nav-bg'} fixed='top'>
-			<Navbar.Brand as={Link} to='/videos' href='/videos' onClick={clearSearch}>
-				<img src={logo} className='imgFluid' style={{ maxWidth: '50px' }} alt='logo that looks like a yin yang symbol inside a pill' />
+			<Navbar.Brand as={Link} to='/' href='/' onClick={clearSearch}>
+				<img src={logo} className='imgFluid saicophonic-logo' style={{ maxWidth: '50px' }} alt='logo that looks like a yin yang symbol inside a pill' />
 			</Navbar.Brand>
 			<Nav.Item inline='true'>
 				<SearchForm />
@@ -76,22 +72,22 @@ const MyNavbar = (props) => {
 							</Nav.Link>
 						</OverlayTrigger>
 					) : (
-            <OverlayTrigger key='left' placement='left' overlay={<Tooltip id={`tooltip-left`}>Switch to grid view</Tooltip>}>
-						<Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} href='#video-dashboard'>
-							<span className='toggle-grid-btn'>
-								<GridIcon />
-							</span>
-						</Nav.Link>
-            </OverlayTrigger>
+						<OverlayTrigger key='left' placement='left' overlay={<Tooltip id={`tooltip-left`}>Switch to grid view</Tooltip>}>
+							<Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} href='#video-dashboard'>
+								<span className='toggle-grid-btn'>
+									<GridIcon />
+								</span>
+							</Nav.Link>
+						</OverlayTrigger>
 					)}
-					<Nav.Link as={Link} to='/videos' href='/videos' id='menu-toggle' onClick={clearSearch} className='nav-font-style'>
+					<Nav.Link as={Link} to='/' href='/' id='menu-toggle' onClick={clearSearch} className='nav-font-style'>
 						Videos
 					</Nav.Link>
 					<Nav.Link href='#random' id='menu-toggle' onClick={handleRandom} className='nav-font-style'>
 						Random
 					</Nav.Link>
 					{auth.id && (
-						<Nav.Link as={Link} to='/videos/new' href='/videos/new' id='menu-toggle' onClick={clearSearch} className='nav-font-style'>
+						<Nav.Link as={Link} to='/new' href='/new' id='menu-toggle' onClick={clearSearch} className='nav-font-style'>
 							Add
 						</Nav.Link>
 					)}

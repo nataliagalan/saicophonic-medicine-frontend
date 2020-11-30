@@ -361,7 +361,7 @@ class New extends Component {
               className="save-video"
               variant="primary" 
               type="submit">
-              Save
+              SAVE
             </Button>
           </Form>
         </DragDropContext>

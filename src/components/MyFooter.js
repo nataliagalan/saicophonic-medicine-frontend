@@ -75,11 +75,11 @@ const MyFooter = (props) => {
 									</Row>
 
 									<Row>
-										<Navbar.Brand className='mx-auto parent footer-site-title'>© 2020 Saicophonic Medicine</Navbar.Brand>
+										<Navbar.Brand className='mx-auto parent footer-site-title'><span className='footer-text'>© </span>2020 Saicophonic Medicine</Navbar.Brand>
 									</Row>
 									<Row>
 										<Navbar.Brand className='mx-auto parent footer-contact'>
-											A project by
+                    <span className='footer-text'>A project by</span>
 											<a href='mailto:hi@nataliagalan.me'> Natalia Galán</a>
 										</Navbar.Brand>
 									</Row>
