@@ -15,6 +15,8 @@ import instagram from '../instagram.svg';
 import spotify from '../spotify.svg';
 
 const MyFooter = (props) => {
+
+  const showTabs = useSelector((state) => state.toggleTabs.showTabs);
 	const handleSubmit = () => {
 		window.open('https://tinyletter.com/SaicoTherapy', 'popupwindow', 'scrollbars=yes,width=800,height=600');
 		return true;
@@ -24,8 +26,8 @@ const MyFooter = (props) => {
 	return (
     <Container fluid 
     style={
-      props.location.pathname.includes('/videos/') ? 
-      { top: '0' } : { top: '780px' }
+      props.location.pathname.includes('/videos/') || showTabs === 'true' ? 
+      { top: '90px' } : { top: '780px' }
     } 
       className='my-footer-wrapper'>
 			<Row>

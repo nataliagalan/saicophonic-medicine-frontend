@@ -5,22 +5,23 @@ import Col from 'react-bootstrap/Col';
 
 const BkImage = () => {
 	return (
-		<Container fluid>
-			<Row>
-				<Col>
-					<div className='bk-img imgFluid'>
-						{/* <h1 align='center'>Some header example</h1> */}
-						<div className='dashboard-header'>
-							<div className='dashboard-header-title'>
-								<h1 className='header-text'>Saicophonic Medicine</h1>
-							</div>
-							<h5 className='header-subtext'>An expanding library of live music sessions</h5>
-						</div>
-					</div>
-				</Col>
-			</Row>
+		<Container fluid className='text-center '>
+
+			<div className='bk-img imgFluid d-flex align-content-center flex-wrap'>
+      {/* m-md-auto  works on most, except regular ipad in portrait */}
+				<div className='dashboard-header d-flex  align-self-center m-md-auto ' >
+					<h1 className='header-text '>Saicophonic Medicine</h1>
+					{/* <h5 className='header-subtext'>An expanding library of live music sessions</h5> */}
+				</div>
+
+			</div>
+      
 		</Container>
 	);
 };
 
 export default BkImage;
+
+
+
+

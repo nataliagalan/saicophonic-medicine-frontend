@@ -47,9 +47,9 @@ class Random extends Component {
     return (
       <>
         {
-          <div className="page-content-wrapper">
+          <div className="page-content-wrapper" id='random'>
             <br></br>
-          <Container fluid>
+          <Container fluid >
             {
             (video === []) ?
               null
