@@ -60,12 +60,23 @@ const LyricsCard = (props) => {
 
 	return (
 		<>
-			<Accordion>
+			<Accordion className='song-accordion'>
 				<Card className='parent-song-accordion'>
 					{/* <Card.Header> */}
-					<Accordion.Toggle onClick={(e) => handlePlusClick(e)} as={Card.Header} eventKey='0'>
+          <Accordion.Toggle 
+            className='song-toggle'
+            onClick={(e) => handlePlusClick(e)} as={Card.Header} eventKey='0'>
 						{band}
-						{plusExpanded ? <PlusIcon size={24} /> : <XIcon size={24} />}
+            {
+            plusExpanded ? 
+            <span className='plus-toggle-btn'>
+              <PlusIcon size={24} />
+            </span> 
+            : 
+            <span className='x-toggle-btn'>
+            <XIcon size={24} />
+            </span>
+            }
 						{/* <span style={{color: "#EBDFF7"}}><EyeIcon size={12} /></span> */}
 					</Accordion.Toggle>
 					{/* </Card.Header> */}
@@ -125,7 +136,7 @@ const LyricsCard = (props) => {
 			</Accordion>
 
 			{/* Edit and Delete buttons */}
-			<Accordion>
+			<Accordion className='tag-accordion'>
 				<Card className='plus-accordion-card'>
 					<Accordion.Toggle
 						className='plus-accordion'
