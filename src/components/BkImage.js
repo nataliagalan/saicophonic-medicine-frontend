@@ -11,7 +11,6 @@ const BkImage = () => {
       {/* m-md-auto  works on most, except regular ipad in portrait */}
 				<div className='dashboard-header d-flex  align-self-center m-md-auto ' >
 					<h1 className='header-text '>Saicophonic Medicine</h1>
-					{/* <h5 className='header-subtext'>An expanding library of live music sessions</h5> */}
 				</div>
 
 			</div>

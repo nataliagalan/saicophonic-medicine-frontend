@@ -13,7 +13,7 @@ import VideoContainer from '../components/VideoContainer';
 import { ChevronRightIcon, ChevronLeftIcon } from '@primer/octicons-react';
 import Line from '../components/Line';
 import BkImage from '../components/BkImage';
-import { toggleGrid } from '../actions/toggleGrid'
+import { toggleGrid } from '../actions/toggleGrid';
 
 //TODO feature in progress: pagination for search results. Comments/pseudocode below.
 const VideoDashboard = (props) => {
@@ -52,7 +52,7 @@ const VideoDashboard = (props) => {
 
 	useEffect(() => {
 		// code to run on component mount
-    // both resolvedData and latestDate are always undefined here
+		// both resolvedData and latestDate are always undefined here
 		const token = localStorage.getItem('myAppToken');
 		const fetchUser = async () => {
 			const token = localStorage.getItem('myAppToken');
@@ -173,16 +173,12 @@ const VideoDashboard = (props) => {
 	return (
 		<>
 			<BkImage />
-      <Container fluid 
-          style={
-            showTabs === 'true' ? 
-            { top: '90px' } : { top: '780px' }
-          } 
-        className='main-wrapper'id="video-dashboard" >
-				<Row >
-					<Col className='main-wrapper-col' >
+			<Container fluid style={showTabs === 'true' ? { top: '90px' } : { top: '780px' }} className='main-wrapper' id='video-dashboard'>
+				<h5 className='header-subtext text-center'>An expanding library of live music sessions</h5>
+				<Row>
+					<Col className='main-wrapper-col'>
 						{/* <Container fluid> */}
-						<div className='page-content-wrapper' >
+						<div className='page-content-wrapper'>
 							{showTabs === 'true' ? displayFilterTabs() : null}
 							<VideoContainer videos={findVideos()} />
 							<Line color='#EBDFF7' height={0.5} />
