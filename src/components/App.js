@@ -9,8 +9,6 @@ import Edit from '../pages/Edit';
 import Random from '../pages/Random';
 import TaggedResults from '../pages/TaggedResults';
 import MyFooter from './MyFooter';
-import Container from 'react-bootstrap/Container';
-
 const App = () => {
 	return (
 		<BrowserRouter>

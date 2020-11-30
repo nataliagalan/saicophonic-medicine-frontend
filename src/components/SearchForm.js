@@ -100,13 +100,16 @@ class SearchForm extends Component {
 
 	handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
+			this.setState({ query: '' });
       this.setState({ open: false });
-      this.props.history.push(`/videos`);
+      this.typeahead.clear();
+			this.props.history.push(`/videos`);
 			// this.handleAllResults(this.state.query, 'all');
 		}
 	};
 
 	fetchVideo = async (id) => {
+    this.setState({ query: '' });
 		this.typeahead.clear();
 		this.setState({ open: false });
 		const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
@@ -131,16 +134,16 @@ class SearchForm extends Component {
 			this.props.getTaggedVideos(filteredVideosByTag);
 			this.props.history.push(`/videos/tagged/${tag}`);
 		}
-  };
-  
-  handleClear = () => {
-    // dispatch(setFilter('none'));
-    // dispatch(toggleTabs('false'));
-    this.typeahead.clear();
-    this.props.setFilter('none');
-    this.props.toggleTabs('false');
-    this.setState({ query: '' });
-  }
+	};
+
+	handleClear = () => {
+		// dispatch(setFilter('none'));
+		// dispatch(toggleTabs('false'));
+		this.typeahead.clear();
+		this.props.setFilter('none');
+		this.props.toggleTabs('false');
+		this.setState({ query: '' });
+	};
 
 	render() {
 		return (
@@ -174,9 +177,7 @@ class SearchForm extends Component {
 						return (
 							<Menu {...menuProps} className='tag-search-menu rbt-menu'>
 								{options.map((opt, ind) => (
-                  <MenuItem option={opt} key={ind} 
-                    position={ind} className='main-menu-item'
-                    onClick={() => this.fetchVideo(opt.id)}>
+									<MenuItem option={opt} key={ind} position={ind} className='main-menu-item' onClick={() => this.fetchVideo(opt.id)}>
 										<div>
 											<Highlighter search={this.state.query}>{`${opt.band} ${opt.song1} ${opt.lyrics1} `}</Highlighter>
 										</div>
@@ -193,22 +194,20 @@ class SearchForm extends Component {
 				>
 					{({ onClear, selected }) => (
 						<div className='search-form-icons'>
-              {
-              this.state.query === '' ?
-								(<span style={{ color: '#EBDFF7' }} aria-label='magnifier' id='magnifier'>
+							{this.state.query === '' ? (
+								<span style={{ color: '#EBDFF7' }} aria-label='magnifier' id='magnifier'>
 									<SearchIcon size={16} />
-								</span>)
-							 : 
-								(<Button aria-label='Clear' className='close rbt-close'>
+								</span>
+							) : (
+								<Button aria-label='Clear' className='close rbt-close'>
 									{/* <div onClick={onClear}> */}
 									<div onClick={this.handleClear}>
 										<span style={{ color: '#EBDFF7' }} aria-label='clear-menu' id='clear-menu'>
 											<XIcon size={20} />
 										</span>
 									</div>
-								</Button>)
-                }
-						
+								</Button>
+							)}
 						</div>
 					)}
 				</AsyncTypeahead>
