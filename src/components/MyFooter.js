@@ -15,8 +15,7 @@ import instagram from '../instagram.svg';
 import spotify from '../spotify.svg';
 
 const MyFooter = (props) => {
-
-  const showTabs = useSelector((state) => state.toggleTabs.showTabs);
+	const showTabs = useSelector((state) => state.toggleTabs.showTabs);
 	const handleSubmit = () => {
 		window.open('https://tinyletter.com/SaicoTherapy', 'popupwindow', 'scrollbars=yes,width=800,height=600');
 		return true;
@@ -24,12 +23,7 @@ const MyFooter = (props) => {
 
 	// let currentPage = this.props.location.pathname
 	return (
-    <Container fluid 
-    style={
-      props.location.pathname.includes('/videos/') || showTabs === 'true' ? 
-      { top: '90px' } : { top: '780px' }
-    } 
-      className='my-footer-wrapper'>
+		<Container fluid style={props.location.pathname.includes('/videos/') || showTabs === 'true' ? { top: '90px' } : { top: '780px' }} className='my-footer-wrapper'>
 			<Row>
 				<Col>
 					<div className='my-footer text-center'>
@@ -71,7 +65,7 @@ const MyFooter = (props) => {
 											<a href='https://www.youtube.com/channel/UC2nfaz7gRu7EqkJZRT__3Rw/playlists?view_as=subscriber' target='_blank' rel='noopener noreferrer'>
 												<img src={youtube} className='social-logos' id='youtube-logo' alt='youtube-logo' />
 											</a>
-											<a href='https://www.instagram.com/saicophonic.medicine/' target='_blank' rel='noopener noreferrer'>
+											<a href='https://www.instagram.com/nnataliagalann/' target='_blank' rel='noopener noreferrer'>
 												<img src={instagram} className='social-logos' id='instagram-logo' alt='instagram-logo' />
 											</a>
 											<a href='https://open.spotify.com/user/pygtquli592t34f702bbvclbu?si=v0gdGE8BTtu10QWgt8C5PA' target='_blank' rel='noopener noreferrer'>
@@ -82,6 +76,12 @@ const MyFooter = (props) => {
 
 									<Row>
 										<Navbar.Brand className='mx-auto parent footer-site-title'>© 2020 Saicophonic Medicine</Navbar.Brand>
+									</Row>
+									<Row>
+										<Navbar.Brand className='mx-auto parent footer-contact'>
+											A project by
+											<a href='mailto:hi@nataliagalan.me'> Natalia Galán</a>
+										</Navbar.Brand>
 									</Row>
 								</Col>
 							</Container>
