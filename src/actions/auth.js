@@ -27,7 +27,7 @@ export const currentUser = (user) => {
 	};
 };
 
-export const thunkFetchUser = () => (dispatch, getState) => {
+export const thunkFetchUser = () => async (dispatch, getState) => {
 		const token = localStorage.getItem('myAppToken');
 		if (!token) {
 			history.push('/admin');
@@ -37,22 +37,21 @@ export const thunkFetchUser = () => (dispatch, getState) => {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
-			};
-			fetch(FETCH_USER_URL, reqObj)
-				.then((res) => res.json())
-				.then((user) => {
-					if (user.error) {
-            history.push('/admin');
-            console.log(user.error, "error from thunkfetchuser");
-					} else {
-						dispatch(currentUser(user));
-					}
-				});
+      };
+      const res = await fetch(FETCH_USER_URL, reqObj);
+      const user = await res.json();
+      if(user.error) {
+        history.push('/admin')
+        console.log(user.error, "error from thunkfetchuser");
+      } else {
+        //need to store the user (data) in store state
+        dispatch(currentUser(user));
+      }
 		}
 	};
 
 
-export const thunkLogin = (e, body) => (dispatch, getState) => {
+export const thunkLogin = (e, body) => async (dispatch, getState) => {
   e.preventDefault();
 		const reqObj = {
       method: 'POST',
@@ -63,19 +62,17 @@ export const thunkLogin = (e, body) => (dispatch, getState) => {
       body: JSON.stringify(body),
     };
 
-		fetch(ADMIN_URL, reqObj)
-			.then((res) => res.json())
-			.then((user) => {
-				if (user.error) {
-          console.log(user.error, "error from thunkLogin");
-					// this.setState({ error: user.error });
-				} else {
-          console.log(user, 'user from thunk');
-          localStorage.setItem('myAppToken', user.token);
-          dispatch(loginSuccess(user))
-          history.push('/');
-				}
-			});
+    const res = await fetch(ADMIN_URL, reqObj);
+    const user = await res.json();
+    if(user.error){
+      console.log(user.error, "error from thunkLogin");
+      // TODO this.setState({ error: user.error });
+    } else {
+      console.log(user, 'user from thunk');
+      localStorage.setItem('myAppToken', user.token)
+      dispatch(loginSuccess(user))
+      history.push('/')
+    }
 	};
 
 

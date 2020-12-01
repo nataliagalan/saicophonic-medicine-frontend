@@ -2,44 +2,19 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteVideo } from "../actions/videos";
-import { getVideo } from "../actions/video";
-import { currentUser } from '../actions/auth';
+import { thunkFetchVideo } from "../actions/video";
+import { thunkFetchUser } from '../actions/auth';
 import Container from 'react-bootstrap/Container';
 import VideoCard from '../components/VideoCard';
 
 class Random extends Component {
 
   componentDidMount(){
-    this.fetchVideo()
+    this.props.thunkFetchVideo()
     const token = localStorage.getItem('myAppToken') 
     if(token){
-      this.fetchUser()
+      this.props.thunkFetchUser()
     } 
-  }
-
-  fetchUser = async () => {
-    const token = localStorage.getItem('myAppToken') 
-    const reqObj = {
-      method: 'GET',
-      headers: {
-      'Authorization': `Bearer ${token}`
-      }
-    }
-    const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
-    const data = await res.json();
-    if(data.error) {
-      this.props.history.push('/admin')
-    } else {
-      //need to store the user (data) in store state
-      this.props.currentUser(data)
-    }
-  }
-
-  fetchVideo = async () => {
-    const res = await fetch(`http://localhost:3001/api/v1/random`);
-    const videoToShow = await res.json();
-    this.props.getVideo(videoToShow);
-    this.props.history.push(`/videos/${videoToShow.id}`)
   }
   
   render() {
@@ -72,9 +47,9 @@ const setStateToProps = (state) => {
 };
 
 const setDispatchToProps = {
-  deleteVideo,
-  getVideo,
-  currentUser
+  thunkFetchUser,
+  thunkFetchVideo,
+  deleteVideo
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(Random));

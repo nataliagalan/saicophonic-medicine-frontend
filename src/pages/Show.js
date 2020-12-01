@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteVideo } from '../actions/videos';
-import { getVideo } from '../actions/video';
-import { currentUser } from '../actions/auth';
+import { thunkFetchVideo } from '../actions/video';
+import { thunkFetchUser } from '../actions/auth';
 import { toggleGrid } from '../actions/toggleGrid';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
@@ -14,37 +14,13 @@ class Show extends Component {
 		if (this.props.showGrid) {
 			this.props.toggleGrid();
 		}
-		const id = parseInt(this.props.match.params.id);
-		this.fetchVideo(id);
+    const id = parseInt(this.props.match.params.id);
+    this.props.thunkFetchVideo(id)
 		const token = localStorage.getItem('myAppToken');
 		if (token) {
-			this.fetchUser();
+			this.props.thunkFetchUser()
 		}
 	}
-
-	fetchUser = async () => {
-		const token = localStorage.getItem('myAppToken');
-		const reqObj = {
-			method: 'GET',
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
-		const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
-		const data = await res.json();
-		if (data.error) {
-			this.props.history.push('/admin');
-		} else {
-			//need to store the user (data) in store state
-			this.props.currentUser(data);
-		}
-	};
-
-	fetchVideo = async (id) => {
-		const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
-		const videoToShow = await res.json();
-		this.props.getVideo(videoToShow);
-	};
 
 	render() {
 		const { video } = this.props;
@@ -52,7 +28,6 @@ class Show extends Component {
 			<>
 				{
 					<Container fluid>
-
 						<div className='new-and-edit-video-page'>
 							<br></br>
 							{video === [] ? null : (
@@ -78,8 +53,8 @@ const setStateToProps = (state) => {
 
 const setDispatchToProps = {
 	deleteVideo,
-	getVideo,
-	currentUser,
+	thunkFetchVideo,
+	thunkFetchUser,
 	toggleGrid,
 };
 
