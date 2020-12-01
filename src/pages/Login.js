@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loginSuccess } from '../actions/auth';
-import { logoutSuccess } from '../actions/auth';
-import { currentUser } from '../actions/auth';
+import { loginSuccess, logoutSuccess, currentUser, thunkFetchUser, thunkLogin } from '../actions/auth';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -17,35 +15,8 @@ class Login extends React.Component {
 	};
 
 	componentDidMount() {
-
-		const token = localStorage.getItem('myAppToken');
-		if (!token) {
-			this.props.history.push('/admin');
-		} else {
-			this.fetchData()
-      
-		
-		}  
+    this.props.thunkFetchUser()
   }
-  
-
-	fetchData = async () => {
-		const token = localStorage.getItem('myAppToken');
-		const reqObj = {
-			method: 'GET',
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
-		const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
-		const data = await res.json();
-		if (data.error) {
-			this.props.history.push('/admin');
-		} else {
-			//need to store the user (data) in store state
-			this.props.currentUser(data);
-		}
-	};
 
 	handleLogout = () => {
 		localStorage.removeItem('myAppToken');
@@ -58,34 +29,13 @@ class Login extends React.Component {
 		});
 	};
 
-	handleSubmit = async (e) => {
-		e.preventDefault();
-
-		const reqObj = {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-			},
-			body: JSON.stringify(this.state),
-		};
-		// /auth is a custom route on rails backend that triggers auth#create
-		const res = await fetch('http://localhost:3001/api/v1/auth', reqObj);
-		const data = await res.json();
-		if (data.error) {
-			this.setState({ error: data.error });
-		} else {
-			localStorage.setItem('myAppToken', data.token);
-			this.props.loginSuccess(data);
-			this.props.history.push('/');
-		}
-	};
 
 	render() {
 		return (
 			<div className='login-page-content-wrapper text-center'>
 				<Container fluid>
-					<Form onSubmit={this.handleSubmit} className='login-page'>
+					<Form onSubmit={(e) => this.props.thunkLogin(e, this.state)} className='login-page'>
+					{/* <Form onSubmit={this.handleSubmit} className='login-page'> */}
 						{this.state.error && <h5 style={{ color: '#fda292' }}>{this.state.error}</h5>}
 						{!this.props.auth.id ? (
 							<>
@@ -132,6 +82,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+  thunkFetchUser,
+  thunkLogin,
 	currentUser,
 	loginSuccess,
 	logoutSuccess,
