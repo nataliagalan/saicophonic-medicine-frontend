@@ -16,8 +16,8 @@ import { GrabberIcon, PlusIcon, DashIcon } from '@primer/octicons-react';
 import AddTagsBox from '../components/AddTagsBox';
 import Line from '../components/Line';
 
-const API_ENDPOINT = 'http://localhost:3001/api/v1';
-// const API_ENDPOINT = "https://saicophonic-railsbackend.herokuapp.com";
+// const API_ENDPOINT = 'http://localhost:3001/api/v1';
+const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
 const VIDEOS_URL = `${API_ENDPOINT}/videos`;
 class Edit extends Component {
 	state = {
