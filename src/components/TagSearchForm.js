@@ -7,6 +7,9 @@ import { tags } from '../actions/tags'
 import { getVideo } from '../actions/video'
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
+const API_ENDPOINT = 'http://localhost:3001/api/v1';
+// const API_ENDPOINT = "https://saicophonic-railsbackend.herokuapp.com";
+const TAGS_URL = `${API_ENDPOINT}/tags/search`;
 class TagSearchForm extends Component {
 
   state = {
@@ -16,9 +19,8 @@ class TagSearchForm extends Component {
     query: '',
   };
 
-  //removed page 1 from argument below for testing
   makeAndHandleRequest = async (query) => {
-    const res = await fetch(`http://localhost:3001/api/v1/tags/search/${query}`);
+    const res = await fetch(`${TAGS_URL}/${query}`);
     const filteredTags = await res.json();
 
     if(filteredTags.error) {
@@ -95,9 +97,7 @@ class TagSearchForm extends Component {
         maxResults={10}
         minLength={2}
         onInputChange={this._handleInputChange}
-        // onPaginate={this._handlePagination}
         onSearch={this._handleSearch}
-        paginate
         placeholder="Filter tags or press enter to add"
         promptText="Type to search tags"
         emptyLabel={`Press enter to add "${this.state.query}"`}

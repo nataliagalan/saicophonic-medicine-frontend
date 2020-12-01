@@ -84,43 +84,19 @@ const VideoCard = (props) => {
 	};
 
 	const handleTitlePlay = (e) => {
-		// e.stopPropagation()
-    // let timeString = e.target.previousElementSibling.innerText;
-    
 		let timeString = e.target.parentElement.previousElementSibling.firstElementChild.innerText
 		//turns the timeString 00:00 into seconds
 		const seconds = hmsToSeconds(timeString);
 		ref.current.seekTo(seconds, "seconds");
 		setPlayerState(true);
-		// setPlayerState(prevState => (true));
-		// setPlayerState(prevState => (!playerState));
-		// setPlayerState(prevState => ({playing: !playerState.playing}));
-		// setPlayerState((prevState) => {
-		// 	if (playerState.playing === true) {
-		// 		return { playing: playerState.playing };
-		// 	} else {
-		// 		return { playing: !playerState.playing };
-		// 	}
-		// });
 	};
 
 	const handlePlay = (e) => {
-		// e.stopPropagation();
 		let timeString = e.target.innerText;
 		//turns the timeString 00:00 into seconds
 		const seconds = hmsToSeconds(timeString);
     ref.current.seekTo(seconds, "seconds");
     setPlayerState(true);
-    // setPlayerState(prevState => (true));
-    // setPlayerState(prevState => (!playerState));
-		// setPlayerState(prevState => ({playing: !playerState.playing}));
-		// setPlayerState((prevState) => {
-		// 	if (playerState.playing === true) {
-		// 		return { playing: playerState.playing };
-		// 	} else {
-		// 		return { playing: !playerState.playing };
-		// 	}
-		// });
 	};
 
 	const hmsToSeconds = (str) => {

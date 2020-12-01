@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { usePaginatedQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVideos } from '../actions/videos';
-import { currentUser } from '../actions/auth';
+import { thunkFetchUser } from '../actions/auth';
 import { setFilter } from '../actions/setFilter';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -14,6 +14,10 @@ import { ChevronRightIcon, ChevronLeftIcon } from '@primer/octicons-react';
 import BkImage from '../components/BkImage';
 
 const VideoDashboard = (props) => {
+	const API_ENDPOINT = 'http://localhost:3001/api/v1';
+	// const API_ENDPOINT = "https://saicophonic-railsbackend.herokuapp.com";
+	const VIDEOS_URL = `${API_ENDPOINT}/videos`;
+
 	//useSelector is similar to setStateToProps
 	const videos = useSelector((state) => state.videos);
 	const filteredByAll = useSelector((state) => state.filteredByAll);
@@ -26,7 +30,7 @@ const VideoDashboard = (props) => {
 	const dispatch = useDispatch();
 
 	const fetchVideos = async (key, page) => {
-		const res = await fetch(`http://localhost:3001/api/v1/videos?page=${page}`);
+		const res = await fetch(`${VIDEOS_URL}?page=${page}`);
 		const videos = await res.json();
 		dispatch(getVideos(videos));
 		return videos;
@@ -40,26 +44,8 @@ const VideoDashboard = (props) => {
 		// code to run on component mount
 		// both resolvedData and latestDate are always undefined here
 		const token = localStorage.getItem('myAppToken');
-		const fetchUser = async () => {
-			const token = localStorage.getItem('myAppToken');
-			const reqObj = {
-				method: 'GET',
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			};
-			const res = await fetch('http://localhost:3001/api/v1/current_user', reqObj);
-			const data = await res.json();
-			if (data.error) {
-				props.history.push('/admin');
-			} else {
-				//need to store the user (data) in store state
-				dispatch(currentUser(data));
-			}
-		};
-
 		if (token) {
-			fetchUser();
+			dispatch(thunkFetchUser());
 		}
 	}, []);
 
