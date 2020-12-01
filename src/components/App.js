@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import history from '../history.js';
 import MyNavbar from './MyNavbar';
 import VideoDashboard from '../pages/VideoDashboard';
 import Login from '../pages/Login';
@@ -12,7 +14,7 @@ import MyFooter from './MyFooter';
 
 const App = () => {
 	return (
-		<BrowserRouter>
+		<Router history={history}>
 			<MyNavbar />
 			<Switch>
 				<Route exact path='/admin' component={Login} />
@@ -24,7 +26,7 @@ const App = () => {
 				<Route exact path='/random' component={Random} />
 			</Switch>
 			<MyFooter />
-		</BrowserRouter>
+		</Router>
 	);
 };
 

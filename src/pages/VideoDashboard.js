@@ -13,7 +13,6 @@ import VideoContainer from '../components/VideoContainer';
 import { ChevronRightIcon, ChevronLeftIcon } from '@primer/octicons-react';
 import BkImage from '../components/BkImage';
 
-//TODO feature in progress: pagination for search results. Comments/pseudocode below.
 const VideoDashboard = (props) => {
 	//useSelector is similar to setStateToProps
 	const videos = useSelector((state) => state.videos);
@@ -25,22 +24,11 @@ const VideoDashboard = (props) => {
 	const showTabs = useSelector((state) => state.toggleTabs.showTabs);
 
 	const dispatch = useDispatch();
-	// makeAndHandleRequest = async (query) => {
-	//dispatch
-	//update the page number
-	//update the array
 
-	// this.props.filteredByAll(filteredVideos);
-	// this.props.filteredByBand(filteredVideos, query);
-	// this.props.filteredBySong(filteredVideos, query);
-	// this.props.filteredByLyrics(filteredVideos, query);
 	const fetchVideos = async (key, page) => {
 		const res = await fetch(`http://localhost:3001/api/v1/videos?page=${page}`);
-		//if something is searched, make a new request
-		// const res = await fetch(`http://localhost:3001/api/v1/videos`);
 		const videos = await res.json();
 		dispatch(getVideos(videos));
-		// return res.json();
 		return videos;
 	};
 
