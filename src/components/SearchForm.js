@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { getVideo } from '../actions/video';
-import { getTaggedVideos } from '../actions/videos';
+import { thunkFetchVideo } from '../actions/video';
+import { thunkFetchTaggedVideos } from '../actions/videos';
 import { setFilter } from '../actions/setFilter';
 import { toggleTabs } from '../actions/toggleTabs';
 import { filteredByAll } from '../actions/filteredByAll';
@@ -14,6 +14,9 @@ import Button from 'react-bootstrap/Button';
 import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
+const API_ENDPOINT = 'http://localhost:3001/api/v1';
+// const API_ENDPOINT = "https://saicophonic-railsbackend.herokuapp.com";
+const SEARCH_URL = `${API_ENDPOINT}/videos/search`;
 class SearchForm extends Component {
 	state = {
 		isLoading: false,
@@ -25,7 +28,7 @@ class SearchForm extends Component {
 	//removed page 1 from argument below for testing
 	makeAndHandleRequest = async (query) => {
 		//page number 0
-		const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
+		const res = await fetch(`${SEARCH_URL}/${query}`);
 		const filteredVideos = await res.json();
 
 		if (filteredVideos.error) {
@@ -69,15 +72,6 @@ class SearchForm extends Component {
 		this.setState({ open: false });
 	};
 
-	handleAllResults = async (query) => {
-		this.setState({ open: false });
-		const res = await fetch(`http://localhost:3001/api/v1/videos/search/${query}`);
-		const filteredVideos = await res.json();
-		this.props.filteredByAll(filteredVideos);
-		// this.props.history.push(`/videos/search/${query}`);
-		this.typeahead.clear();
-	};
-
 	handleInputChange = (query) => {
 		if (query === '') {
 			//HIDE TABS
@@ -100,39 +94,23 @@ class SearchForm extends Component {
 	handleKeyDown = (event) => {
 		if (event.key === 'Enter') {
 			this.setState({ query: '' });
-      this.setState({ open: false });
-      this.typeahead.clear();
+			this.setState({ open: false });
+			this.typeahead.clear();
 			this.props.history.push(`/`);
-			// this.handleAllResults(this.state.query, 'all');
 		}
 	};
 
 	fetchVideo = async (id) => {
-    this.setState({ query: '' });
+		this.setState({ query: '' });
 		this.typeahead.clear();
 		this.setState({ open: false });
-		const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`);
-		const videoToShow = await res.json();
-		if (videoToShow.error) {
-			console.log('video not found');
-		} else {
-			this.props.getVideo(videoToShow);
-			this.props.history.push(`/videos/${id}`);
-		}
+		this.props.thunkFetchVideo(id);
 	};
 
-	fetchTaggedVideos = async (tag) => {
+	fetchTaggedVideos = (tag) => {
 		this.typeahead.clear();
-		this.closeDropdown();
-		const res = await fetch(`http://localhost:3001/api/v1/videos/tagged/${tag}`);
-		const filteredVideosByTag = await res.json();
-		console.log(filteredVideosByTag);
-		if (filteredVideosByTag.error) {
-			console.log('error');
-		} else {
-			this.props.getTaggedVideos(filteredVideosByTag);
-			this.props.history.push(`/tagged/${tag}`);
-		}
+    this.closeDropdown();
+    this.props.thunkFetchTaggedVideos(tag)
 	};
 
 	handleClear = () => {
@@ -229,14 +207,14 @@ const setStateToProps = (state) => {
 };
 
 const setDispatchToProps = {
-	getVideo,
+	thunkFetchVideo,
 	filteredByAll,
 	filteredByBand,
 	filteredBySong,
 	filteredByLyrics,
 	toggleTabs,
 	setFilter,
-	getTaggedVideos,
+	thunkFetchTaggedVideos,
 };
 
 export default withRouter(connect(setStateToProps, setDispatchToProps)(SearchForm));

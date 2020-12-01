@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { deleteVideo } from '../actions/videos';
+import { thunkDeleteVideo } from '../actions/videos';
 
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
@@ -19,24 +19,11 @@ import { TrashIcon, PencilIcon, ShareIcon, RocketIcon, ChevronDownIcon, ChevronU
 
 const LyricsCard = (props) => {
 	// useSelector is similar to setStateToProps
-	const videos = useSelector((state) => state.videos);
 	const auth = useSelector((state) => state.auth);
 	const showGrid = useSelector((state) => state.toggleGrid);
 	// useDispatch is similar to setDispatchToProps
 	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
-
-	const delVideo = async (id) => {
-		const res = await fetch(`http://localhost:3001/api/v1/videos/${id}`, {
-			method: 'DELETE',
-		});
-		const data = await res.json();
-		if (data.status === 200) {
-			const updatedVideos = videos.filter((video) => video.id !== id);
-			dispatch(deleteVideo(updatedVideos));
-			props.history.push('/');
-		}
-	};
 
 	const copyUrlToClipboard = (id) => {
 		let base = window.location.origin.toString();
@@ -163,7 +150,7 @@ const LyricsCard = (props) => {
 													<PencilIcon size={24} />
 												</span>
 											</Button>
-											<Button className='lyrics-card-icons' onClick={() => delVideo(id)}>
+											<Button className='lyrics-card-icons' onClick={() => dispatch(thunkDeleteVideo(id))}>
 												<span role='img' aria-label='delete'>
 													<TrashIcon size={24} />
 												</span>
