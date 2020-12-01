@@ -7,8 +7,8 @@ import { tags } from '../actions/tags'
 import { getVideo } from '../actions/video'
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-const API_ENDPOINT = 'http://localhost:3001/api/v1';
-// const API_ENDPOINT = "https://saicophonic-railsbackend.herokuapp.com";
+// const API_ENDPOINT = 'http://localhost:3001/api/v1';
+const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
 const TAGS_URL = `${API_ENDPOINT}/tags/search`;
 class TagSearchForm extends Component {
 

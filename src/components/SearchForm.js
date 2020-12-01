@@ -14,8 +14,8 @@ import Button from 'react-bootstrap/Button';
 import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-const API_ENDPOINT = 'http://localhost:3001/api/v1';
-// const API_ENDPOINT = "https://saicophonic-railsbackend.herokuapp.com";
+// const API_ENDPOINT = 'http://localhost:3001/api/v1';
+const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
 const SEARCH_URL = `${API_ENDPOINT}/videos/search`;
 class SearchForm extends Component {
 	state = {

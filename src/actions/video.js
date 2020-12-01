@@ -1,7 +1,8 @@
 import history from '../history'
 
-const API_ENDPOINT = 'http://localhost:3001/api/v1';
-// const API_ENDPOINT = "https://saicophonic-railsbackend.herokuapp.com";
+// const API_ENDPOINT = 'http://localhost:3001/api/v1';
+const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
+
 const RANDOM_URL = `${API_ENDPOINT}/random`;
 const VIDEOS_URL = `${API_ENDPOINT}/videos`;
 
