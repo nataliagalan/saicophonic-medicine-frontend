@@ -35,7 +35,8 @@ export const thunkFetchUser = () => async (dispatch, getState) => {
 			const reqObj = {
 				method: 'GET',
 				headers: {
-					Authorization: `Bearer ${token}`,
+					// Authorization: `Bearer ${token}`,
+					Authorization: token,
 				},
       };
       const res = await fetch(FETCH_USER_URL, reqObj);
