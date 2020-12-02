@@ -41,11 +41,11 @@ class New extends Component {
 
 	componentDidMount() {
 		const token = localStorage.getItem('myAppToken');
-		if (!token) {
-			this.props.history.push('/admin');
-		} else {
-			this.props.thunkFetchUser();
-		}
+		// if (!token) {
+		// 	this.props.history.push('/admin');
+		// } else {
+		// 	this.props.thunkFetchUser();
+		// }
 	}
 
 	handleChange = (e, i) => {
