@@ -44,10 +44,11 @@ const VideoDashboard = (props) => {
 	useEffect(() => {
 		// code to run on component mount
 		// both resolvedData and latestDate are always undefined here
-		const token = localStorage.getItem('myAppToken');
-		if (token) {
-			dispatch(thunkFetchUser());
-		}
+    const token = localStorage.getItem('myAppToken');
+    // debugger
+		// if (token) {
+		// 	dispatch(thunkFetchUser());
+		// }
 	}, []);
 
 	const displayFilterTabs = () => {

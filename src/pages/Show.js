@@ -17,9 +17,9 @@ class Show extends Component {
     const id = parseInt(this.props.match.params.id);
     this.props.thunkFetchVideo(id)
 		const token = localStorage.getItem('myAppToken');
-		if (token) {
-			this.props.thunkFetchUser()
-		}
+		// if (token) {
+		// 	this.props.thunkFetchUser()
+		// }
 	}
 
 	render() {

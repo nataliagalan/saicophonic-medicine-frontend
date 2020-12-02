@@ -15,7 +15,7 @@ class Login extends React.Component {
 	};
 
 	componentDidMount() {
-    this.props.thunkFetchUser()
+    // this.props.thunkFetchUser()
   }
 
 	handleLogout = () => {

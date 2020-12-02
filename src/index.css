@@ -1053,7 +1053,7 @@ img.saicophonic-logo:hover {
 
 	.page-content-wrapper {
 		/* top: 0px !important; */
-		/* padding-top: 0; */
+		padding-top: 1rem;
 	}
 
 	#root > div.my-footer-wrapper.container-fluid > div > div > div > div > form > div:nth-child(1) > label {
