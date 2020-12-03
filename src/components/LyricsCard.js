@@ -157,7 +157,8 @@ const LyricsCard = (props) => {
 											</Button>
 										</>
 									) : null}
-									<Button className='lyrics-card-icons' onClick={() => copyUrlToClipboard(id)}>
+
+									{/* <Button className='lyrics-card-icons' onClick={() => copyUrlToClipboard(id)}>
 										<span role='img' aria-label='share'>
 											<ShareIcon size={24} />
 										</span>
@@ -175,7 +176,8 @@ const LyricsCard = (props) => {
 											</Container>
 										</Modal.Header>
 										<Modal.Body></Modal.Body>
-									</Modal>
+									</Modal> */}
+
 								</Col>
 							</Row>
 						</Card.Body>
