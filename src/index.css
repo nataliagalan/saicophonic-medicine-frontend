@@ -1,4 +1,8 @@
 /* * { box-sizing: border-box; } */
+.ascii-art {
+  font-family: monospace;
+  white-space: pre;
+}
 
 html {
 	scroll-behavior: smooth;
