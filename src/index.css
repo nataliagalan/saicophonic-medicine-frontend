@@ -937,10 +937,17 @@ img.saicophonic-logo:hover {
 
 	.tag-accordion {
 		display: none;
-	}
-
+  }
+  
+	/* .tag-accordion {
+		margin-bottom: 1rem;
+	} */
+  .song-accordion{
+    margin-bottom: 1rem;
+  }
 	.tag-accordion:hover,
 	.song-accordion:hover + .tag-accordion {
+    margin-bottom: 0rem;
 		display: block;
 		-webkit-animation: fade-in 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 		animation: fade-in 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
