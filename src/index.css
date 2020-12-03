@@ -943,11 +943,12 @@ img.saicophonic-logo:hover {
 		margin-bottom: 1rem;
 	} */
   .song-accordion{
-    padding-bottom: 1rem;
+    margin-top: 1rem;
   }
+
 	.tag-accordion:hover,
 	.song-accordion:hover + .tag-accordion {
-    padding-bottom: 0rem;
+    /* padding-bottom: 0rem; */
 		display: block;
 		-webkit-animation: fade-in 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 		animation: fade-in 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
