@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from "redux";
+import HttpsRedirect from 'react-https-redirect';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from "react-redux";
-import rootReducer from "./reducers/index";
+import { Provider } from 'react-redux';
+import rootReducer from './reducers/index';
 import App from './components/App';
 // Importing Sass with Bootstrap CSS
 import './custom.scss';
@@ -13,15 +14,15 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducer, composeEnhancers(
-  applyMiddleware(thunk)
-  ));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+	<Provider store={store}>
+		<HttpsRedirect>
+			<App />
+		</HttpsRedirect>
+	</Provider>,
+	document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

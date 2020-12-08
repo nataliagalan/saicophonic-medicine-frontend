@@ -9161,6 +9161,13 @@ react-fast-compare@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
+react-https-redirect@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-https-redirect/-/react-https-redirect-1.1.0.tgz#6f3c35cc5849d863d398714fcb9f4d125f9e254d"
+  integrity sha512-HWN/Ftgi31W2OAFVNo5BO1n8C9D2W0L+sque20dKuwh51hQuMwK4bMAtdrYAmapfGGh+53zQ1NsrSacVS1Q/mw==
+  dependencies:
+    prop-types "^15.5.8"
+
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.3.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
