@@ -1,5 +1,4 @@
 import React from 'react';
-// import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from '../history.js';
 import MyNavbar from './MyNavbar';
