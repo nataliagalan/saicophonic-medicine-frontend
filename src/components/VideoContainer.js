@@ -28,6 +28,7 @@ const VideoContainer = (props) => {
     </Row>)
     }
   }
+  
   return handleToggleGrid();  
 }
 
