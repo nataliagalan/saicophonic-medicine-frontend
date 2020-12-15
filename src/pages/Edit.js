@@ -17,7 +17,7 @@ import AddTagsBox from '../components/AddTagsBox';
 import Line from '../components/Line';
 
 // const API_ENDPOINT = 'http://localhost:3001/api/v1';
-const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
+const API_ENDPOINT = 'https://saicophonic-api.herokuapp.com/api/v1';
 const VIDEOS_URL = `${API_ENDPOINT}/videos`;
 class Edit extends Component {
 	state = {
@@ -47,14 +47,8 @@ class Edit extends Component {
 		const path = this.props.location.pathname.split('/');
 		const id = parseInt(path[path.length - 1]);
 		this.setInitialState(id);
-		const token = localStorage.getItem('myAppToken');
-		// if (!token) {
-		// 	this.props.history.push('/admin');
-		// } else {
-			this.props.thunkFetchUser();
-		// }
+		this.props.thunkFetchUser();
 	}
- 
 
 	setInitialState = async (id) => {
 		const res = await fetch(`${VIDEOS_URL}/${id}`);

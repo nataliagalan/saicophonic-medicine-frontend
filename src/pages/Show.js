@@ -14,12 +14,9 @@ class Show extends Component {
 		if (this.props.showGrid) {
 			this.props.toggleGrid();
 		}
-    const id = parseInt(this.props.match.params.id);
-    this.props.thunkFetchVideo(id)
-		const token = localStorage.getItem('myAppToken');
-		// if (token) {
-			this.props.thunkFetchUser()
-		// }
+		const id = parseInt(this.props.match.params.id);
+		this.props.thunkFetchVideo(id);
+		this.props.thunkFetchUser();
 	}
 
 	render() {

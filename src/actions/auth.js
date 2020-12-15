@@ -42,7 +42,6 @@ export const thunkFetchUser = () => async (dispatch, getState) => {
         Accept: 'application/json'
       },
     };
-    // let res = await Axios.get('http://localhost:3001/api/v1/current_user', reqObj);
     let res = await Axios.get(FETCH_USER_URL, reqObj);
     console.log(res, 'res from axios request');      
 		if (res.error) {

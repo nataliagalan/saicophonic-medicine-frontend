@@ -14,8 +14,8 @@ import { ChevronRightIcon, ChevronLeftIcon } from '@primer/octicons-react';
 import BkImage from '../components/BkImage';
 
 const VideoDashboard = (props) => {
-  // const API_ENDPOINT = 'http://localhost:3001/api/v1';
-  const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
+	// const API_ENDPOINT = 'http://localhost:3001/api/v1';
+	const API_ENDPOINT = 'https://saicophonic-api.herokuapp.com/api/v1';
 
 	const VIDEOS_URL = `${API_ENDPOINT}/videos`;
 
@@ -44,11 +44,7 @@ const VideoDashboard = (props) => {
 	useEffect(() => {
 		// code to run on component mount
 		// both resolvedData and latestDate are always undefined here
-    const token = localStorage.getItem('myAppToken');
-    // debugger
-		// if (token) {
-			dispatch(thunkFetchUser());
-		// }
+		dispatch(thunkFetchUser());
 	}, []);
 
 	const displayFilterTabs = () => {
