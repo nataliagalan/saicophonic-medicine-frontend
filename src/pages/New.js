@@ -40,12 +40,7 @@ class New extends Component {
 	};
 
 	componentDidMount() {
-		const token = localStorage.getItem('myAppToken');
-		// if (!token) {
-		// 	this.props.history.push('/admin');
-		// } else {
-			this.props.thunkFetchUser();
-		// }
+		this.props.thunkFetchUser();
 	}
 
 	handleChange = (e, i) => {
@@ -71,11 +66,11 @@ class New extends Component {
 			band: this.state.band,
 			songs: this.state.songs,
 			tags: this.props.updatedTags,
-    };
-    let id = `${this.props.auth.id}`
-    // this.handleSubmit(videoToAdd);
-    this.props.thunkAddVideo(videoToAdd, id)
-    this.props.clearTags();
+		};
+		let id = `${this.props.auth.id}`;
+		// this.handleSubmit(videoToAdd);
+		this.props.thunkAddVideo(videoToAdd, id);
+		this.props.clearTags();
 	};
 
 	handleAddInput = () => {
