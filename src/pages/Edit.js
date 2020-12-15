@@ -51,7 +51,7 @@ class Edit extends Component {
 		// if (!token) {
 		// 	this.props.history.push('/admin');
 		// } else {
-		// 	this.props.thunkFetchUser();
+			this.props.thunkFetchUser();
 		// }
 	}
  

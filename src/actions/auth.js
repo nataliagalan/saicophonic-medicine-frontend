@@ -1,11 +1,12 @@
 import history from '../history';
 import Axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:3001/api/v1';
-// const API_ENDPOINT = 'https://saicophonic-api.herokuapp.com/api/v1';
+// const API_ENDPOINT = 'http://localhost:3001/api/v1';
+const API_ENDPOINT = 'https://saicophonic-api.herokuapp.com/api/v1';
 
 // /auth is a custom route on rails backend that triggers auth#create
 const ADMIN_URL = `${API_ENDPOINT}/auth`;
+// /current_user is a custom route on rails backend that triggers auth#show
 const FETCH_USER_URL = `${API_ENDPOINT}/current_user`;
 
 export const loginSuccess = (user) => {
@@ -41,8 +42,8 @@ export const thunkFetchUser = () => async (dispatch, getState) => {
         Accept: 'application/json'
       },
     };
-    let res = await Axios.get('http://localhost:3001/api/v1/current_user', reqObj);
-    // let res = await Axios.get('https://saicophonic-api.herokuapp.com/api/v1/current_user', reqObj);
+    // let res = await Axios.get('http://localhost:3001/api/v1/current_user', reqObj);
+    let res = await Axios.get(FETCH_USER_URL, reqObj);
     console.log(res, 'res from axios request');      
 		if (res.error) {
       history.push('/admin');

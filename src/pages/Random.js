@@ -13,7 +13,7 @@ class Random extends Component {
     this.props.thunkFetchVideo()
     const token = localStorage.getItem('myAppToken') 
     // if(token){
-    //   this.props.thunkFetchUser()
+      this.props.thunkFetchUser()
     // } 
   }
   
