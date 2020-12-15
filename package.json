@@ -1,6 +1,9 @@
 {
   "name": "saicophonic-medicine-frontend",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.x"
+  },
   "private": true,
   "dependencies": {
     "@primer/octicons-react": "^11.0.0",
