@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios';
 import { connect } from 'react-redux';
 import { loginSuccess, logoutSuccess, currentUser, thunkFetchUser, thunkLogin } from '../actions/auth';
 import { Link } from 'react-router-dom';
