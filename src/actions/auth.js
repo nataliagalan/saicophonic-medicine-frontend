@@ -31,9 +31,9 @@ export const currentUser = (user) => {
 
 export const thunkFetchUser = () => async (dispatch, getState) => {
   const token = localStorage.getItem('myAppToken');
-	if (!token) {
-		history.push('/admin');
-	} else {
+	// if (!token) {
+	// 	history.push('/admin');
+	// } else {
     const reqObj = {
       method: 'GET',
       headers: {
@@ -52,7 +52,7 @@ export const thunkFetchUser = () => async (dispatch, getState) => {
       let user = res.data;
 			dispatch(currentUser(user));
     }
-	}
+	// }
 };
 
 export const thunkLogin = (e, body) => async (dispatch, getState) => {
