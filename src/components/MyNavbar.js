@@ -64,10 +64,12 @@ const MyNavbar = (props) => {
 			<Navbar.Collapse id='basic-navbar-nav'>
 				<Nav className='ml-auto' id='menu-div'>
 
-          {/* {props.location.pathname.includes('/videos/') ? null : 
+          {props.location.pathname.includes('/videos/') ? null : 
           showGrid ? (
 						<OverlayTrigger key='left' placement='left' overlay={<Tooltip id={`tooltip-left`}>Switch to list view</Tooltip>}>
-							<Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} href='#video-dashboard'>
+              <Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} 
+              // href='#video-dashboard'
+              >
 								<span className='toggle-grid-btn'>
 									<ListUnorderedIcon size={16} />
 								</span>
@@ -75,13 +77,15 @@ const MyNavbar = (props) => {
 						</OverlayTrigger>
 					) : (
 						<OverlayTrigger key='left' placement='left' overlay={<Tooltip id={`tooltip-left`}>Switch to grid view</Tooltip>}>
-							<Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} href='#video-dashboard'>
+              <Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} 
+              // href='#video-dashboard'
+              >
 								<span className='toggle-grid-btn'>
 									<GridIcon />
 								</span>
 							</Nav.Link>
 						</OverlayTrigger>
-					)} */}
+					)}
 
 					<Nav.Link as={Link} to='/' href='/' id='menu-toggle' onClick={clearSearch} className='nav-font-style'>
 						Videos
