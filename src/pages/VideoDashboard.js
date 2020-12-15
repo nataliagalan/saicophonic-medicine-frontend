@@ -47,7 +47,7 @@ const VideoDashboard = (props) => {
     const token = localStorage.getItem('myAppToken');
     // debugger
 		// if (token) {
-		// 	dispatch(thunkFetchUser());
+			dispatch(thunkFetchUser());
 		// }
 	}, []);
 
