@@ -40,7 +40,12 @@ class New extends Component {
 	};
 
 	componentDidMount() {
-		this.props.thunkFetchUser();
+    const token = localStorage.getItem('myAppToken');
+		if (!token) {
+			this.props.history.push('/admin');
+		} else {
+			this.props.thunkFetchUser();
+		}
 	}
 
 	handleChange = (e, i) => {
