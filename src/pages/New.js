@@ -80,31 +80,32 @@ class New extends Component {
       songs: this.state.songs,
       tags: this.props.updatedTags
     }
-    this.handleSubmit(videoToAdd)
-  }
-
-  handleSubmit = async (videoToAdd) => {
-    const reqObj = {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json',
-      id: `${this.props.auth.id}`
-      // id: `2`
-      },
-      body: JSON.stringify(videoToAdd)
-    };
-    // const res = await fetch(`http://localhost:3001/api/v1/videos`,reqObj);
-    const res = await fetch(`https://saicophonic-api.herokuapp.com/api/v1/videos`,reqObj);
-    const newVideo = await res.json();
-    if (newVideo.error) {
-      console.log(newVideo.error)}
-    else {
-      const allVideos = [...this.props.videos, newVideo];
-      this.props.addVideo(allVideos);
-      this.props.history.push(`/videos/${newVideo.id}`);
-    }
+    // this.handleSubmit(videoToAdd)
+    let id = this.props.auth.id
+    this.props.thunkAddVideo(videoToAdd, id);
     this.props.clearTags();
   }
+
+  // handleSubmit = async (videoToAdd) => {
+  //   const reqObj = {
+  //     method: 'POST',
+  //     headers: {
+  //     'Content-Type': 'application/json',
+  //     id: `${this.props.auth.id}`
+  //     },
+  //     body: JSON.stringify(videoToAdd)
+  //   };
+  //   const res = await fetch(`https://saicophonic-api.herokuapp.com/api/v1/videos`,reqObj);
+  //   const newVideo = await res.json();
+  //   if (newVideo.error) {
+  //     console.log(newVideo.error)}
+  //   else {
+  //     const allVideos = [...this.props.videos, newVideo];
+  //     this.props.addVideo(allVideos);
+  //     this.props.history.push(`/videos/${newVideo.id}`);
+  //   }
+  //   this.props.clearTags();
+  // }
 
 	// prepareSubmit = (e) => {
 	// 	e.preventDefault();

@@ -2,7 +2,7 @@ import history from '../history';
 import Axios from 'axios';
 
 // const API_ENDPOINT = 'http://localhost:3001/api/v1';
-const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
+const API_ENDPOINT = 'https://saicophonic-api.herokuapp.com/api/v1';
 const VIDEOS_URL = `${API_ENDPOINT}/videos`;
 const TAGGED_URL = `${API_ENDPOINT}/videos/tagged`;
 
@@ -45,26 +45,23 @@ export const thunkAddVideo = (videoToAdd, id) => async (dispatch, getState) => {
 	const reqObj = {
 		method: 'POST',
 		headers: {
-      'Content-Type': 'application/json'
-			// id: 9,
+			'Content-Type': 'application/json',
+			id: `${id}`,
 		},
 		body: JSON.stringify(videoToAdd),
 	};
-  // let res = await Axios.get(FETCH_USER_URL, reqObj);
-  let newVideo = await Axios.post(VIDEOS_URL, reqObj);
-	// const res = await fetch(VIDEOS_URL, reqObj);
-	// const newVideo = await res.json();
+	const res = await fetch(`https://saicophonic-api.herokuapp.com/api/v1/videos`, reqObj);
+	const newVideo = await res.json();
 	if (newVideo.error) {
-		console.log(newVideo.error, 'new video error from thunkaddVideo');
-		// TODO this.setState({ error: user.error });
+		console.log(newVideo.error);
 	} else {
-		console.log(newVideo, 'new video from from thunkaddVideo');
-		// const { videos } = getState();
-		// const allVideos = [...videos, newVideo];
-		// dispatch(addVideo(allVideos));
-		// history.push(`/videos/${newVideo.id}`);
+		const { videos } = getState();
+		const allVideos = [...videos, newVideo];
+		dispatch(addVideo(allVideos));
+		history.push(`/videos/${newVideo.id}`);
 	}
 };
+
 
 export const thunkUpdateVideo = (videoToUpdate, id) => async (dispatch, getState) => {
 	const reqObj = {
@@ -106,7 +103,7 @@ export const thunkFetchTaggedVideos = (tag) => async (dispatch, getState) => {
 	if (filteredVideosByTag.error) {
 		console.log(filteredVideosByTag.error, 'error in thunkFetchTaggedVideos ');
 	} else {
-    dispatch(getTaggedVideos(filteredVideosByTag));
-    history.push(`/tagged/${tag}`);
+		dispatch(getTaggedVideos(filteredVideosByTag));
+		history.push(`/tagged/${tag}`);
 	}
 };
