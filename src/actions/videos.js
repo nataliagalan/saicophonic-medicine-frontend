@@ -1,4 +1,5 @@
 import history from '../history';
+import Axios from 'axios';
 
 // const API_ENDPOINT = 'http://localhost:3001/api/v1';
 const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
@@ -44,23 +45,24 @@ export const thunkAddVideo = (videoToAdd, id) => async (dispatch, getState) => {
 	const reqObj = {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json',
-			id: id,
+      'Content-Type': 'application/json'
+			// id: 9,
 		},
 		body: JSON.stringify(videoToAdd),
 	};
-
-	const res = await fetch(VIDEOS_URL, reqObj);
-	const newVideo = await res.json();
+  // let res = await Axios.get(FETCH_USER_URL, reqObj);
+  let newVideo = await Axios.post(VIDEOS_URL, reqObj);
+	// const res = await fetch(VIDEOS_URL, reqObj);
+	// const newVideo = await res.json();
 	if (newVideo.error) {
 		console.log(newVideo.error, 'new video error from thunkaddVideo');
 		// TODO this.setState({ error: user.error });
 	} else {
 		console.log(newVideo, 'new video from from thunkaddVideo');
-		const { videos } = getState();
-		const allVideos = [...videos, newVideo];
-		dispatch(addVideo(allVideos));
-		history.push(`/videos/${newVideo.id}`);
+		// const { videos } = getState();
+		// const allVideos = [...videos, newVideo];
+		// dispatch(addVideo(allVideos));
+		// history.push(`/videos/${newVideo.id}`);
 	}
 };
 

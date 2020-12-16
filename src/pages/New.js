@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { thunkFetchUser } from '../actions/auth';
-import { thunkAddVideo } from '../actions/videos';
+import { thunkAddVideo, addVideo } from '../actions/videos';
 import { clearTags } from '../actions/tags';
+
+import Axios from 'axios';
+
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -40,7 +43,7 @@ class New extends Component {
 	};
 
 	componentDidMount() {
-    const token = localStorage.getItem('myAppToken');
+		const token = localStorage.getItem('myAppToken');
 		if (!token) {
 			this.props.history.push('/admin');
 		} else {
@@ -61,22 +64,65 @@ class New extends Component {
 
 	handleBandInputChange = (e) => {
 		this.setState({ band: e.target.value });
-	};
+  };
+  
 
-	prepareSubmit = (e) => {
-		e.preventDefault();
-		let videoToAdd = {
-			id: this.state.id,
-			url: this.state.url,
-			band: this.state.band,
-			songs: this.state.songs,
-			tags: this.props.updatedTags,
-		};
-		let id = `${this.props.auth.id}`;
-		// this.handleSubmit(videoToAdd);
-		this.props.thunkAddVideo(videoToAdd, id);
-		this.props.clearTags();
-	};
+
+
+
+
+  prepareSubmit = (e) => {
+    e.preventDefault();
+    let videoToAdd = {
+      id: this.state.id,
+      url: this.state.url,
+      band: this.state.band,
+      songs: this.state.songs,
+      tags: this.props.updatedTags
+    }
+    this.handleSubmit(videoToAdd)
+  }
+
+  handleSubmit = async (videoToAdd) => {
+    const reqObj = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      // id: `${this.props.auth.id}`
+      id: `2`
+      },
+      body: JSON.stringify(videoToAdd)
+    };
+    // const res = await fetch(`http://localhost:3001/api/v1/videos`,reqObj);
+    const res = await fetch(`https://saicophonic-api.herokuapp.com/api/v1/videos`,reqObj);
+    const newVideo = await res.json();
+    if (newVideo.error) {
+      console.log(newVideo.error)}
+    else {
+      const allVideos = [...this.props.videos, newVideo];
+      this.props.addVideo(allVideos);
+      this.props.history.push(`/videos/${newVideo.id}`);
+    }
+    this.props.clearTags();
+  }
+
+	// prepareSubmit = (e) => {
+	// 	e.preventDefault();
+	// 	let videoToAdd = {
+	// 		id: this.state.id,
+	// 		// id: 2,
+	// 		url: this.state.url,
+	// 		band: this.state.band,
+	// 		songs: this.state.songs,
+	// 		tags: this.props.updatedTags,
+	// 	};
+	// 	// let id = `${this.props.auth.id}`;
+	// 	this.handleSubmit(videoToAdd);
+	// 	// this.props.thunkAddVideo(videoToAdd, 2);
+	// 	this.props.clearTags();
+	// };
+
+
 
 	handleAddInput = () => {
 		this.setState((prevState) => ({ songs: [...prevState.songs, { title: '', lyrics: '', timestamp: '' }] }));
@@ -201,6 +247,7 @@ class New extends Component {
 
 						<Col md={6} sm={6}>
 							<DragDropContext onDragEnd={this.onDragEnd}>
+								{/* <Form onSubmit={this.prepareSubmit} className='edit-and-new-form'> */}
 								<Form onSubmit={this.prepareSubmit} className='edit-and-new-form'>
 									<Form.Row>
 										<Col>
@@ -216,7 +263,8 @@ class New extends Component {
 									<br></br>
 
 									{/* DROPPABLE DIV */}
-									<Droppable key={this.state.id} droppableId='droppable-1'>
+									{/* <Droppable key={this.state.id} droppableId='droppable-1'> */}
+									<Droppable key={1} droppableId='droppable-1'>
 										{(provided, snapshot) => (
 											<div
 												className='droppable-input-div'
@@ -326,7 +374,8 @@ const setStateToProps = (state) => {
 };
 
 const setDispatchToProps = {
-	thunkAddVideo,
+  thunkAddVideo,
+  addVideo,
 	thunkFetchUser,
 	clearTags,
 };
