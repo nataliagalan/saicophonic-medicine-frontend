@@ -43,7 +43,7 @@ export const thunkFetchUser = () => async (dispatch, getState) => {
       },
     };
     let res = await Axios.get(FETCH_USER_URL, reqObj);
-    console.log(res, 'res from axios request');      
+    // console.log(res, 'res from axios request');      
 		if (res.error) {
       history.push('/admin');
 			console.log(res.error, 'error from thunkfetchuser');
