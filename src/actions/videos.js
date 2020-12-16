@@ -62,7 +62,6 @@ export const thunkAddVideo = (videoToAdd, id) => async (dispatch, getState) => {
 	}
 };
 
-
 export const thunkUpdateVideo = (videoToUpdate, id) => async (dispatch, getState) => {
 	const reqObj = {
 		method: 'PATCH',
@@ -72,7 +71,6 @@ export const thunkUpdateVideo = (videoToUpdate, id) => async (dispatch, getState
 		},
 		body: JSON.stringify(videoToUpdate),
 	};
-
 	const res = await fetch(`${VIDEOS_URL}/${id}`, reqObj);
 	const updatedVideo = await res.json();
 	if (res.status === 200) {
