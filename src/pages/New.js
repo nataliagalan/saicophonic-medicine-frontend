@@ -88,8 +88,8 @@ class New extends Component {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
-      // id: `${this.props.auth.id}`
-      id: `2`
+      id: `${this.props.auth.id}`
+      // id: `2`
       },
       body: JSON.stringify(videoToAdd)
     };
