@@ -1,4 +1,4 @@
-const toggleGrid = (state=false, action) => {
+const toggleGrid = (state=true, action) => {
   switch(action.type){
       case 'TOGGLE_GRID':
           return !state
