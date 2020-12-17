@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { usePaginatedQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVideos } from '../actions/videos';
+import { toggleGrid } from '../actions/toggleGrid';
 import { thunkFetchUser } from '../actions/auth';
 import { setFilter } from '../actions/setFilter';
 import Container from 'react-bootstrap/Container';
@@ -44,7 +45,8 @@ const VideoDashboard = (props) => {
 	useEffect(() => {
 		// code to run on component mount
 		// both resolvedData and latestDate are always undefined here
-		dispatch(thunkFetchUser());
+    dispatch(thunkFetchUser());
+    dispatch(toggleGrid());
 	}, []);
 
 	const displayFilterTabs = () => {
