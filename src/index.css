@@ -984,7 +984,7 @@ img.saicophonic-logo:hover {
 		font-size: 3em;
 	}
 
-	#video-dashboard > h5 {
+	#videos > h5 {
 		padding-top: 4rem;
   }
   
@@ -1074,7 +1074,7 @@ img.saicophonic-logo:hover {
 		padding-top: 0;
   }
   
-   #video-dashboard .page-content-wrapper {
+   #videos .page-content-wrapper {
 		/* top: 0px !important; */
     padding-top: 1rem;
     margin-left: 0;
