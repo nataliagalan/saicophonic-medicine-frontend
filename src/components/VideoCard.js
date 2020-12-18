@@ -15,7 +15,7 @@ const VideoCard = (props) => {
 		if (showGrid) {
 			return (
 				<>
-					<ResponsiveEmbed aspectRatio='16by9'>
+					<ResponsiveEmbed aspectRatio='16by9' className='responsive-embed-video'>
 						<ReactPlayer
 							ref={ref}
 							light={previewState}
@@ -27,14 +27,14 @@ const VideoCard = (props) => {
 							height='100%'
 						/>
 					</ResponsiveEmbed>
-					<br></br>
+					{/* <br></br> */}
 					<LyricsCard
 						{...props}
 						handlePlay={handlePlay}
 						handleTitlePlay={handleTitlePlay}
             hidePreview={hidePreview}
 					/>
-					<br></br>
+					{/* <br></br> */}
 				</>
 			);
 		} else {

@@ -67,7 +67,7 @@ const LyricsCard = (props) => {
 					</Accordion.Toggle>
 					{/* </Card.Header> */}
 					<Accordion.Collapse eventKey='0'>
-						<Card.Body>
+						<Card.Body className='lyrics-card-body'>
               <Accordion>
 							{
 								// first time around songs are undefined. if that's the case, don't do anything. else, iterate over songs
