@@ -68,7 +68,7 @@ const MyNavbar = (props) => {
           showGrid ? (
 						<OverlayTrigger key='left' placement='left' overlay={<Tooltip id={`tooltip-left`}>Switch to list view</Tooltip>}>
               <Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} 
-              href='#video-dashboard'
+              href='#videos'
               >
 								<span className='toggle-grid-btn'>
 									<ListUnorderedIcon size={16} />
@@ -78,7 +78,7 @@ const MyNavbar = (props) => {
 					) : (
 						<OverlayTrigger key='left' placement='left' overlay={<Tooltip id={`tooltip-left`}>Switch to grid view</Tooltip>}>
               <Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} 
-              href='#video-dashboard'
+              href='#videos'
               >
 								<span className='toggle-grid-btn'>
 									<GridIcon />

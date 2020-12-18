@@ -145,7 +145,7 @@ const VideoDashboard = (props) => {
 	return (
 		<>
 			<BkImage />
-			<Container fluid style={showTabs === 'true' ? { top: '90px' } : { top: '780px' }} className='main-wrapper' id='video-dashboard'>
+			<Container fluid style={showTabs === 'true' ? { top: '90px' } : { top: '780px' }} className='main-wrapper' id='videos'>
 				<h5 className='header-subtext text-center animated animatedFadeInUp fadeInUp'>An expanding library of live music sessions</h5>
 				<Row>
 					<Col className='main-wrapper-col'>
