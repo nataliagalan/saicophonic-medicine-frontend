@@ -196,6 +196,10 @@ h3 {
 	text-align: center;
 }
 
+.list-view-col {
+  margin-top: 2rem;
+}
+
 .main-wrapper {
 	background: rgb(15, 15, 15);
 	/* position: -webkit-sticky !important;
@@ -962,7 +966,12 @@ img.saicophonic-logo:hover {
 
 
 @media only screen and (max-width: 767px) {
-	/* phones */
+  /* phones */
+  
+  .list-view-col {
+    margin-top: 0rem;
+  }
+
 	.searchForm {
 		width: 50vw;
 	}
