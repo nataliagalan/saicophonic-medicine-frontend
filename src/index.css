@@ -1012,8 +1012,8 @@ img.saicophonic-logo:hover {
 
 	/* adjusts form width */
 	.new-and-edit-video-page {
-		margin-left: 2rem !important;
-		margin-right: 2rem !important;
+		margin-left: 0rem !important;
+		margin-right: 0rem !important;
 		padding-top: 2rem !important;
 	}
 
