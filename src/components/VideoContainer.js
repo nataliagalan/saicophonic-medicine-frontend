@@ -21,7 +21,7 @@ const VideoContainer = (props) => {
     </GridGenerator>
     )
     } else {
-       return (<Row>
+       return (<Row className='list-view-col'>
     {
       props.videos.map(video => {
         return <VideoCard {...video} key={video.id} />
