@@ -554,10 +554,14 @@ ul#tags {
 	margin-right: 0.8rem; 
 }
 
-/* fixes hint overlap issue */
+.filter-tabs {
+  margin-top: 3rem;
+}
+
+/* fixes hint overlap issue in dropdown search menu */
 .rbt-input-hint {
   font-weight: 500;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
 }
 
 .rbt-menu > .dropdown-item {
@@ -1066,13 +1070,13 @@ img.saicophonic-logo:hover {
 		text-overflow: ellipsis;
 	}
 
-	.main-menu-item {
-		/* width: 138px;
+	/*.main-menu-item {
+		 width: 138px;
 		white-space: nowrap;
 		overflow: hidden;
-		text-overflow: ellipsis;*/
-		/* padding-left: 0.8rem;  */
-	}
+		text-overflow: ellipsis;
+		padding-left: 0.8rem;  
+	}*/
 
 	.bk-img {
 		min-height: 210vw !important;
@@ -1132,13 +1136,13 @@ img.saicophonic-logo:hover {
 		text-overflow: clip;
 	}
 
-	.main-menu-item {
-		/* width: 138px;
+	/* .main-menu-item {
+		width: 138px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		padding-left: 0.8rem; */
-	}
+		padding-left: 0.8rem; 
+	}*/
 
 	.bk-img {
 		min-height: 99vw;
@@ -1147,13 +1151,13 @@ img.saicophonic-logo:hover {
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
 	/* ipad pro */
-	.main-menu-item {
-		/* width: 188px;
+	/*.main-menu-item {
+		 width: 188px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		padding-left: 0.8rem; */
-	}
+		padding-left: 0.8rem; 
+	}*/
 
 	.bk-img {
 		min-height: 77vw;

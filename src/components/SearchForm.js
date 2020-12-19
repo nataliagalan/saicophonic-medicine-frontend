@@ -134,7 +134,7 @@ class SearchForm extends Component {
 					labelKey={(option) => {
 						let songString = option.songs.map((song) => song.title).join(' ');
 						let lyricsString = option.songs.map((song) => song.lyrics).join(' ');
-						return `${option.band} ${songString} ${lyricsString}`;
+						return `${option.band} - ${songString}`;
 					}}
 					maxResults={6}
 					minLength={2}
@@ -161,7 +161,7 @@ class SearchForm extends Component {
 									</MenuItem>
 								))}
 								<MenuItem className='main-menu-item' option={options[0]} onClick={() => this.fetchTaggedVideos(this.state.query)}>
-									<div className='bold-menu'>{`Videos tagged with ${this.state.query}`}</div>
+									<div className='bold-menu'>{`Tagged with "${this.state.query}"`}</div>
 								</MenuItem>
 							</Menu>
 						);
