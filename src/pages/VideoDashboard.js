@@ -52,7 +52,7 @@ const VideoDashboard = (props) => {
 	const displayFilterTabs = () => {
 		return (
 			<>
-				<Nav fill variant='tabs' defaultActiveKey='all'>
+				<Nav fill variant='tabs' defaultActiveKey='all' className='filter-tabs'>
 					<Nav.Item>
 						<Nav.Link eventKey='all' title='all' onClick={() => handleTabClick('all')}>
 							ALL/TAGGED ({filteredByAll.length})
@@ -74,7 +74,7 @@ const VideoDashboard = (props) => {
 						</Nav.Link>
 					</Nav.Item>
 				</Nav>
-				<div className='custom-spacer'></div>
+				{/* <div className='custom-filter-tabs-spacer'></div> */}
 			</>
 		);
 	};
