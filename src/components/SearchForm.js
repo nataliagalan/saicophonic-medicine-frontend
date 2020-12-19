@@ -156,7 +156,7 @@ class SearchForm extends Component {
 								{options.map((opt, ind) => (
 									<MenuItem option={opt} key={ind} position={ind} className='main-menu-item' onClick={() => this.fetchVideo(opt.id)}>
 										<div>
-											<Highlighter search={this.state.query}>{`${opt.band} ${opt.song1} ${opt.lyrics1} `}</Highlighter>
+											<Highlighter search={this.state.query}>{`${opt.band} - ${opt.song1}`}</Highlighter>
 										</div>
 									</MenuItem>
 								))}
