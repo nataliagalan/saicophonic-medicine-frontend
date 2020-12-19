@@ -10,7 +10,7 @@ class TaggedResults extends Component {
     return (
       <>
         <Container fluid>
-          <div className="page-content-wrapper">
+          <div className="page-content-wrapper tagged-results-page-content-wrapper">
             <div className="dashboard-header">
             <h5 className="tagged-header-subtext">All videos tagged with "{tag}"</h5>
             </div>
