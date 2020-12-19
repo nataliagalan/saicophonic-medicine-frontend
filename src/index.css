@@ -546,10 +546,16 @@ ul#tags {
 }
 
 .main-menu-item {
-	width: 256px;
+	/* width: 256px;
 	white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis;
+  text-overflow: ellipsis; */
+	padding-left: 0.8rem; 
+	margin-right: 0.8rem; 
+}
+
+.rbt-input-hint {
+  display: none;
 }
 
 .rbt-menu > .dropdown-item {
@@ -1059,11 +1065,11 @@ img.saicophonic-logo:hover {
 	}
 
 	.main-menu-item {
-		width: 138px;
+		/* width: 138px;
 		white-space: nowrap;
 		overflow: hidden;
-		text-overflow: ellipsis;
-		padding-left: 0.8rem;
+		text-overflow: ellipsis;*/
+		/* padding-left: 0.8rem;  */
 	}
 
 	.bk-img {
@@ -1125,11 +1131,11 @@ img.saicophonic-logo:hover {
 	}
 
 	.main-menu-item {
-		width: 138px;
+		/* width: 138px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		padding-left: 0.8rem;
+		padding-left: 0.8rem; */
 	}
 
 	.bk-img {
@@ -1140,11 +1146,11 @@ img.saicophonic-logo:hover {
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
 	/* ipad pro */
 	.main-menu-item {
-		width: 188px;
+		/* width: 188px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		padding-left: 0.8rem;
+		padding-left: 0.8rem; */
 	}
 
 	.bk-img {
