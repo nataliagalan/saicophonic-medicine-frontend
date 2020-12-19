@@ -554,8 +554,10 @@ ul#tags {
 	margin-right: 0.8rem; 
 }
 
+/* fixes hint overlap issue */
 .rbt-input-hint {
-  display: none;
+  font-weight: 500;
+  letter-spacing: 0.03em;
 }
 
 .rbt-menu > .dropdown-item {
