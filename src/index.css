@@ -196,6 +196,10 @@ h3 {
 	text-align: center;
 }
 
+.tagged-results-page-content-wrapper {
+  padding-top: 6rem;
+}
+
 .list-view-col {
   margin-top: 2rem;
 }
@@ -982,6 +986,11 @@ img.saicophonic-logo:hover {
   
   .list-view-col {
     margin-top: 0rem;
+  }
+
+  .tagged-results-page-content-wrapper {
+    margin-left: 0rem;
+    margin-right: 0rem;
   }
 
 	.searchForm {
