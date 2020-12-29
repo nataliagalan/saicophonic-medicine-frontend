@@ -82,7 +82,7 @@ const LyricsCard = (props) => {
                             >
                               <Row className='time-title-row'>
                                 <Col xs={4}>
-                                  <span onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left'>
+                                  <span onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left grid-text-overflow'>
                                     {song.timestamp}
                                   </span>
                                 </Col>
