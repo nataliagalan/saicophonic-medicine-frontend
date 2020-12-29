@@ -294,7 +294,8 @@ h3 {
 }
 
 .accordion-time-title {
-	color: #ebdff7;
+  /* color: #ebdff7; */
+  color: rgba(245, 211, 98);
   border: none;
   margin-left: 1rem;
   letter-spacing: 0.05em;
@@ -1076,7 +1077,7 @@ img.saicophonic-logo:hover {
 		width: 150px;
 		white-space: nowrap;
 		overflow: hidden;
-		text-overflow: ellipsis;
+    text-overflow: ellipsis;
 	}
 
 	/*.main-menu-item {
