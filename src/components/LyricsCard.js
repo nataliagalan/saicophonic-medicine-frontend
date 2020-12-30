@@ -26,8 +26,10 @@ const LyricsCard = (props) => {
 	const [show, setShow] = useState(false);
 
 	const copyUrlToClipboard = (id) => {
-		let base = window.location.origin.toString();
-		navigator.clipboard.writeText(`${base}/videos/${id}`);
+    let base = window.location.origin.toString();
+    console.log(base, "base");
+    navigator.clipboard.writeText(`${base}/videos/${id}`);
+    console.log(`${base}/videos/${id}`, "base interpolation");
 		setShow(true);
 	};
 
@@ -158,7 +160,7 @@ const LyricsCard = (props) => {
 										</>
 									) : null}
 
-									{/* <Button className='lyrics-card-icons' onClick={() => copyUrlToClipboard(id)}>
+									<Button className='lyrics-card-icons' onClick={() => copyUrlToClipboard(id)}>
 										<span role='img' aria-label='share'>
 											<ShareIcon size={24} />
 										</span>
@@ -176,7 +178,7 @@ const LyricsCard = (props) => {
 											</Container>
 										</Modal.Header>
 										<Modal.Body></Modal.Body>
-									</Modal> */}
+									</Modal>
 
 								</Col>
 							</Row>
