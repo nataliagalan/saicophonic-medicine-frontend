@@ -223,6 +223,10 @@ h3 {
 	border-top: 0.5rem solid rgb(15, 15, 15);
 }
 
+#tlemail::placeholder {
+  color: #ebdff776;
+}
+
 .App {
 	padding: 0px;
 	position: relative;
