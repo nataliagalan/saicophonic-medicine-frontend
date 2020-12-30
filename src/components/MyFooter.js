@@ -38,7 +38,7 @@ const MyFooter = (props) => {
 
 								<Form.Row className='justify-content-md-center text-center'>
 									<Col md={8}>
-										<Form.Control type='text' name='email' id='tlemail' />
+										<Form.Control type='text' name='email' id='tlemail' placeholder='your@email.com'/>
 										<Form.Control type='hidden' value='1' name='embed' />
 									</Col>
 									<Col md={4}>
