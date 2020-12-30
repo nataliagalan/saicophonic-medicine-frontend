@@ -27,9 +27,7 @@ const LyricsCard = (props) => {
 
 	const copyUrlToClipboard = (id) => {
     let base = window.location.origin.toString();
-    console.log(base, "base");
     navigator.clipboard.writeText(`${base}/videos/${id}`);
-    console.log(`${base}/videos/${id}`, "base interpolation");
 		setShow(true);
 	};
 
