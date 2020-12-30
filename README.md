@@ -15,7 +15,7 @@ dynamic forms (added the ability to seamlessly add or remove input fields dynami
 for videos, tagged videos, random video, tags, and searched results.
 - Utilized JSON Web Tokens and localStorage to store encrypted admin information on client-side.
 Integrated bcrypt and further secured credential management by storing config in env variable on server-side.
-- Styled using React-Bootstrap (installed via CDN), Sass, and custom CSS3.
+- Styled using React-Bootstrap, Sass, and custom CSS3.
 
 ## Key User Stories
 - Admin: 
@@ -36,7 +36,7 @@ Integrated bcrypt and further secured credential management by storing config in
   - Click on a button to share a specific video.
   
 ## Walkthrough
-[See a video demo of the app's functionality.](https://vimeo.com/481551182/c203801a37 "Saicophonic Medicine Demo") 
+See a [video demo](https://vimeo.com/481551182/c203801a37 "Saicophonic Medicine Demo") of the app's functionality. 
 Explore current version at [saicophonic.com](https://www.saicophonic.com "Saicophonic Medicine Live Site").
 
 ## Contact
