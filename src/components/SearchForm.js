@@ -15,7 +15,7 @@ import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typ
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 // const API_ENDPOINT = 'http://localhost:3001/api/v1';
-const API_ENDPOINT = 'https://saicophonic-api.herokuapp.com/api/v1';
+const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
 const SEARCH_URL = `${API_ENDPOINT}/videos/search`;
 class SearchForm extends Component {
 	state = {
@@ -109,8 +109,8 @@ class SearchForm extends Component {
 
 	fetchTaggedVideos = (tag) => {
 		this.typeahead.clear();
-		this.closeDropdown();
-		this.props.thunkFetchTaggedVideos(tag);
+    this.closeDropdown();
+    this.props.thunkFetchTaggedVideos(tag)
 	};
 
 	handleClear = () => {

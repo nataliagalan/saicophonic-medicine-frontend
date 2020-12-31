@@ -4,11 +4,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 type GridGeneratorProps = {
-	cols: 1 | 2 | 3 | 4 | 6 | 12;
+  cols: 1 | 2 | 3 | 4 | 6 | 12;
 };
 const GridGenerator: React.FC<GridGeneratorProps> = ({ cols, children }) => {
 	const colWidth = 12 / cols;
-	const rows = chunk(React.Children.toArray(children), cols);
+  const rows = chunk(React.Children.toArray(children), cols);
 	return (
 		<>
 			{rows.map((cols: any, idx: number) => (

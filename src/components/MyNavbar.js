@@ -63,9 +63,13 @@ const MyNavbar = (props) => {
 
 			<Navbar.Collapse id='basic-navbar-nav'>
 				<Nav className='ml-auto' id='menu-div'>
-					{props.location.pathname.includes('/videos/') ? null : showGrid ? (
+
+          {props.location.pathname.includes('/videos/') ? null : 
+          showGrid ? (
 						<OverlayTrigger key='left' placement='left' overlay={<Tooltip id={`tooltip-left`}>Switch to list view</Tooltip>}>
-							<Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} href='#videos'>
+              <Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} 
+              href='#videos'
+              >
 								<span className='toggle-grid-btn'>
 									<ListUnorderedIcon size={16} />
 								</span>
@@ -73,7 +77,9 @@ const MyNavbar = (props) => {
 						</OverlayTrigger>
 					) : (
 						<OverlayTrigger key='left' placement='left' overlay={<Tooltip id={`tooltip-left`}>Switch to grid view</Tooltip>}>
-							<Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} href='#videos'>
+              <Nav.Link id='toggle-grid-btn' onClick={handleToggleGrid} 
+              href='#videos'
+              >
 								<span className='toggle-grid-btn'>
 									<GridIcon />
 								</span>

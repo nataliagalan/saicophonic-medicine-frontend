@@ -1,8 +1,29 @@
 # [Saicophonic Medicine](https://www.saicophonic.com "Saicophonic Medicine")
+<<<<<<< HEAD
 A portable music venue and archive, showcasing an expanding library of live music sessions and lyrics with custom timestamps (or digital dog-ears).
 
 [View the Back End Repository](https://github.com/nataliagalan/saicophonic-medicine-backend "Saicophonic Medicine Back End") 
 
+=======
+WebApp that helps build, share and manage a collection of live music videos and lyrics with custom timestamps (or digital dog-ears).
+
+[View the Back End Repository](https://github.com/nataliagalan/saicophonic-medicine-backend "Saicophonic Medicine Back End") 
+
+## Features
+- Built the ability to easily click on timestamps for a fast video playback experience.
+- Simplified the process for adding timestamps to each video with an intuitive slider.
+- Tuned search and discovery capabilities with Elasticsearch (used by Shopify, Github, LinkedIn...) and autocomplete.
+- Decreased load time by 88.5% with lazy loading implementation.
+- Delivered a fully responsive site with the ability to toggle smoothly between list and grid view.
+- Optimized UX for adding lyrics through a drag and drop feature with keyboard accessibility and
+dynamic forms (added the ability to seamlessly add or remove input fields dynamically). Utilized React Hooks and Redux store for scalability.
+- Created a relational database system (PostgreSQL), and a Rails (RESTful) API backend with endpoints
+for videos, tagged videos, random video, tags, and searched results.
+- Utilized JSON Web Tokens and localStorage to store encrypted admin information on client-side.
+Integrated bcrypt and further secured credential management by storing config in env variable on server-side.
+- Styled using React-Bootstrap, Sass, and custom CSS3.
+
+>>>>>>> 5481d0e1a0b376afb0ca778cb79c11ef579dd263
 ## Key User Stories
 - Admin: 
   - Build and categorize an archive of videos with corresponding songs, lyrics and timestamps.
@@ -20,6 +41,7 @@ A portable music venue and archive, showcasing an expanding library of live musi
   - Explore videos by tag.
   - Get a random video.
   - Click on a button to share a specific video.
+<<<<<<< HEAD
 
 ## Features
 - Developed a relational database system (PostgreSQL), and a Rails (RESTful) API backend with endpoints for videos, tagged videos, random video, tags, searched results, and auth.
@@ -37,6 +59,12 @@ A portable music venue and archive, showcasing an expanding library of live musi
 
  ## Walkthrough
 [See a video demo of the app's functionality.](https://vimeo.com/481551182/c203801a37 "Saicophonic Medicine Demo") 
+=======
+  
+## Walkthrough
+See a [video demo](https://vimeo.com/481551182/c203801a37 "Saicophonic Medicine Demo") of the app's functionality. 
+Explore current version at [saicophonic.com](https://www.saicophonic.com "Saicophonic Medicine Live Site").
+>>>>>>> 5481d0e1a0b376afb0ca778cb79c11ef579dd263
 
 ## Contact
 

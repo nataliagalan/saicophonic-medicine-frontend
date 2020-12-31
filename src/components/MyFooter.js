@@ -38,7 +38,7 @@ const MyFooter = (props) => {
 
 								<Form.Row className='justify-content-md-center text-center'>
 									<Col md={8}>
-										<Form.Control type='text' name='email' id='tlemail' placeholder='your@email.com' />
+										<Form.Control type='text' name='email' id='tlemail' placeholder='your@email.com'/>
 										<Form.Control type='hidden' value='1' name='embed' />
 									</Col>
 									<Col md={4}>
@@ -75,13 +75,11 @@ const MyFooter = (props) => {
 									</Row>
 
 									<Row>
-										<Navbar.Brand className='mx-auto parent footer-site-title'>
-											<span className='footer-text'>© </span>2020 Saicophonic Medicine
-										</Navbar.Brand>
+										<Navbar.Brand className='mx-auto parent footer-site-title'><span className='footer-text'>© </span>2020 Saicophonic Medicine</Navbar.Brand>
 									</Row>
 									<Row>
 										<Navbar.Brand className='mx-auto parent footer-contact'>
-											<span className='footer-text'>A project by</span>
+                    <span className='footer-text'>A project by</span>
 											<a href='mailto:hi@nataliagalan.me'> Natalia Galán</a>
 										</Navbar.Brand>
 									</Row>
