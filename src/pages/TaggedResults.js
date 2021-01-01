@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import VideoContainer from '../components/VideoContainer';
 import Container from 'react-bootstrap/Container';
 
 class TaggedResults extends Component {
+  componentDidMount() {
+    ReactDOM.findDOMNode(this).scrollIntoView();
+  }
+
 	render() {
 		let tag = this.props.location.pathname.split('/')[2];
 		return (
