@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { thunkFetchUser } from '../actions/auth';
 import { thunkAddVideo, addVideo } from '../actions/videos';
@@ -43,6 +44,7 @@ class New extends Component {
 	};
 
 	componentDidMount() {
+    ReactDOM.findDOMNode(this).scrollIntoView();
 		const token = localStorage.getItem('myAppToken');
 		if (!token) {
 			this.props.history.push('/admin');

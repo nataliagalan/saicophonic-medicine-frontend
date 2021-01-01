@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { thunkFetchUser } from '../actions/auth';
 import { thunkUpdateVideo } from '../actions/videos';
@@ -44,6 +45,7 @@ class Edit extends Component {
 	};
 
 	componentDidMount() {
+    ReactDOM.findDOMNode(this).scrollIntoView();
 		const path = this.props.location.pathname.split('/');
 		const id = parseInt(path[path.length - 1]);
 		this.setInitialState(id);

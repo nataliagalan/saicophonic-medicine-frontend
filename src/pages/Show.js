@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteVideo } from '../actions/videos';
@@ -11,6 +12,7 @@ import VideoCard from '../components/VideoCard';
 
 class Show extends Component {
 	componentDidMount() {
+    ReactDOM.findDOMNode(this).scrollIntoView();
 		if (this.props.showGrid) {
 			this.props.toggleGrid();
 		}
