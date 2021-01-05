@@ -29,12 +29,11 @@ const LyricsCard = (props) => {
 		setShow(true);
 	};
 
-	const [songAccordionPlusExpanded, setSongAccordionPlusExpanded] = useState(true);
+	const [songAccordionPlusExpanded, setSongAccordionPlusExpanded] = useState(false);
 	const [plusExpanded, setPlusExpanded] = useState(true);
 	const [chevronExpanded, setChevronExpanded] = useState(true);
 
 	const handleSongAccordionPlusClick = (e, i) => {
-    
 		setSongAccordionPlusExpanded(!songAccordionPlusExpanded);
 	};
 
@@ -80,11 +79,20 @@ const LyricsCard = (props) => {
 														<Accordion.Toggle onClick={(e) => handleSongAccordionPlusClick(e, i)} className='text-left song-card-header' eventKey={i + 1}>
 															<Row className='time-title-row'>
 																<Col xs={4}>
+																	{songAccordionPlusExpanded ? (
+																		<span className='song-accordion-plus-toggle-btn'>
+																			<PlusIcon size={16} />
+																		</span>
+																	) : (
+																		<span className='song-accordion-plus-toggle-btn'>
+																			<XIcon size={16} />
+																		</span>
+																	)}
 																	<span onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left grid-text-overflow'>
 																		{song.timestamp}
 																	</span>
 																</Col>
-																<Col xs={6} className='song-title-col'>
+																<Col xs={8} className='song-title-col'>
 																	<span
 																		onClick={(e) => props.handleTitlePlay(e)}
 																		className={
@@ -94,17 +102,7 @@ const LyricsCard = (props) => {
 																		{song.title}
 																	</span>
 																</Col>
-																<Col xs={2}>
-																	{songAccordionPlusExpanded ? (
-																		<span className='song-accordion-plus-toggle-btn'>
-																			<XIcon size={16} />
-																		</span>
-																	) : (
-																		<span className='song-accordion-plus-toggle-btn'>
-																			<PlusIcon size={16} />
-																		</span>
-																	)}
-																</Col>
+																
 															</Row>
 														</Accordion.Toggle>
 														<Accordion.Collapse eventKey={i + 1}>
