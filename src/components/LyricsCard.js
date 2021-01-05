@@ -24,13 +24,19 @@ const LyricsCard = (props) => {
 	const [show, setShow] = useState(false);
 
 	const copyUrlToClipboard = (id) => {
-    let base = window.location.origin.toString();
-    navigator.clipboard.writeText(`${base}/videos/${id}`);
+		let base = window.location.origin.toString();
+		navigator.clipboard.writeText(`${base}/videos/${id}`);
 		setShow(true);
 	};
 
+	const [songAccordionPlusExpanded, setSongAccordionPlusExpanded] = useState(true);
 	const [plusExpanded, setPlusExpanded] = useState(true);
 	const [chevronExpanded, setChevronExpanded] = useState(true);
+
+	const handleSongAccordionPlusClick = (e, i) => {
+    
+		setSongAccordionPlusExpanded(!songAccordionPlusExpanded);
+	};
 
 	const handlePlusClick = (e) => {
 		props.hidePreview(e);
@@ -48,70 +54,75 @@ const LyricsCard = (props) => {
 			<Accordion className='song-accordion'>
 				<Card className='parent-song-accordion'>
 					{/* <Card.Header> */}
-          <Accordion.Toggle 
-            className='song-toggle'
-            onClick={(e) => handlePlusClick(e)} as={Card.Header} eventKey='0'>
+					<Accordion.Toggle className='song-toggle' onClick={(e) => handlePlusClick(e)} as={Card.Header} eventKey='0'>
 						{band}
-            {
-            plusExpanded ? 
-            <span className='plus-toggle-btn'>
-              <PlusIcon size={16} />
-            </span> 
-            : 
-            <span className='x-toggle-btn'>
-            <XIcon size={16} />
-            </span>
-            }
+						{plusExpanded ? (
+							<span className='plus-toggle-btn'>
+								<PlusIcon size={16} />
+							</span>
+						) : (
+							<span className='x-toggle-btn'>
+								<XIcon size={16} />
+							</span>
+						)}
 					</Accordion.Toggle>
 					{/* </Card.Header> */}
 					<Accordion.Collapse eventKey='0'>
 						<Card.Body className='lyrics-card-body'>
-              <Accordion>
-							{
-								// first time around songs are undefined. if that's the case, don't do anything. else, iterate over songs
-								!songs
-									? null
-									: songs.map((song, i) => {
-                      return (
-                        <Card className='song-accordion' key={i}>
-                            <Accordion.Toggle
-                              className='text-left song-card-header'
-                              eventKey={i + 1}
-                            >
-                              <Row className='time-title-row'>
-                                <Col xs={4}>
-                                  <span onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left grid-text-overflow'>
-                                    {song.timestamp}
-                                  </span>
-                                </Col>
-                                <Col xs={8} className='song-title-col'>
-                                  <span
-                                    onClick={(e) => props.handleTitlePlay(e)}
-                                    className={
-                                      showGrid ? 'text-left accordion-time-title song-title grid-text-overflow' : 'text-left accordion-time-title song-title'
-                                    }
-                                  >
-                                    {song.title}
-                                  </span>
-                                </Col>
-                              </Row>
-                            </Accordion.Toggle>
-                            <Accordion.Collapse eventKey={i + 1}>
-                              <Card.Body
-                                className='overflow-auto accordion-lyrics'
-                                scrollable='true'
-                                style={{
-                                  whiteSpace: 'pre-line',
-                                }}
-                              >
-                                {song.lyrics}
-                              </Card.Body>
-                            </Accordion.Collapse>
-                          </Card>
-                      );
-                  })
-              }
-              </Accordion>
+							<Accordion>
+								{
+									// first time around songs are undefined. if that's the case, don't do anything. else, iterate over songs
+									!songs
+										? null
+										: songs.map((song, i) => {
+												return (
+													<Card className='song-accordion' key={i}>
+														<Accordion.Toggle onClick={(e) => handleSongAccordionPlusClick(e, i)} className='text-left song-card-header' eventKey={i + 1}>
+															<Row className='time-title-row'>
+																<Col xs={4}>
+																	<span onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left grid-text-overflow'>
+																		{song.timestamp}
+																	</span>
+																</Col>
+																<Col xs={6} className='song-title-col'>
+																	<span
+																		onClick={(e) => props.handleTitlePlay(e)}
+																		className={
+																			showGrid ? 'text-left accordion-time-title song-title grid-text-overflow' : 'text-left accordion-time-title song-title'
+																		}
+																	>
+																		{song.title}
+																	</span>
+																</Col>
+																<Col xs={2}>
+																	{songAccordionPlusExpanded ? (
+																		<span className='song-accordion-plus-toggle-btn'>
+																			<XIcon size={16} />
+																		</span>
+																	) : (
+																		<span className='song-accordion-plus-toggle-btn'>
+																			<PlusIcon size={16} />
+																		</span>
+																	)}
+																</Col>
+															</Row>
+														</Accordion.Toggle>
+														<Accordion.Collapse eventKey={i + 1}>
+															<Card.Body
+																className='overflow-auto accordion-lyrics'
+																scrollable='true'
+																style={{
+																	whiteSpace: 'pre-line',
+																}}
+															>
+																{song.lyrics}
+															</Card.Body>
+														</Accordion.Collapse>
+													</Card>
+												);
+										  })
+								}
+							</Accordion>
 						</Card.Body>
 					</Accordion.Collapse>
 				</Card>

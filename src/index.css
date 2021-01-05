@@ -937,9 +937,14 @@ img.saicophonic-logo:hover {
 		-webkit-animation-name: fadeInUp;
 	}
 
+	.song-accordion-plus-toggle-btn {
+    color: rgba(245, 211, 98);
+  }
+
 	.plus-toggle-btn {
     display: none;
   }
+
   .x-toggle-btn{
     display: none;
   }
