@@ -79,7 +79,8 @@ const LyricsCard = (props) => {
 														<Accordion.Toggle onClick={(e) => handleSongAccordionPlusClick(e, i)} className='text-left song-card-header' eventKey={i + 1}>
 															<Row className='time-title-row'>
 																<Col xs={4}>
-																	{songAccordionPlusExpanded ? (
+                                  {/* TODO ADD PLUS AND X ICONS HERE */}
+																	{/* {songAccordionPlusExpanded ? (
 																		<span className='song-accordion-plus-toggle-btn'>
 																			<PlusIcon size={16} />
 																		</span>
@@ -87,7 +88,7 @@ const LyricsCard = (props) => {
 																		<span className='song-accordion-plus-toggle-btn'>
 																			<XIcon size={16} />
 																		</span>
-																	)}
+																	)} */}
 																	<span onClick={(e) => props.handlePlay(e)} className='accordion-time-title text-left grid-text-overflow'>
 																		{song.timestamp}
 																	</span>
