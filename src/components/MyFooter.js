@@ -75,7 +75,7 @@ const MyFooter = (props) => {
 									</Row>
 
 									<Row>
-										<Navbar.Brand className='mx-auto parent footer-site-title'><span className='footer-text'>© </span>2020 Saicophonic Medicine</Navbar.Brand>
+										<Navbar.Brand className='mx-auto parent footer-site-title'><span className='footer-text'>© </span>2021 Saicophonic Medicine</Navbar.Brand>
 									</Row>
 									<Row>
 										<Navbar.Brand className='mx-auto parent footer-contact'>
