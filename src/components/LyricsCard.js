@@ -46,7 +46,7 @@ const LyricsCard = (props) => {
 		setChevronExpanded(!chevronExpanded);
 	};
 
-	const { id, songs, tags, band } = props;
+	const { id, songs, tags, band, bandcamp } = props;
 
 	return (
 		<>
@@ -76,10 +76,14 @@ const LyricsCard = (props) => {
 										: songs.map((song, i) => {
 												return (
 													<Card className='song-accordion' key={i}>
-														<Accordion.Toggle onClick={(e) => handleSongAccordionPlusClick(e, i)} className='text-left song-card-header' eventKey={i + 1}>
+														<Accordion.Toggle
+															onClick={(e) => handleSongAccordionPlusClick(e, i)}
+															className='text-left song-card-header'
+															eventKey={i + 1}
+														>
 															<Row className='time-title-row'>
 																<Col xs={4}>
-                                  {/* TODO ADD PLUS AND X ICONS HERE */}
+																	{/* TODO ADD PLUS AND X ICONS HERE */}
 																	{/* {songAccordionPlusExpanded ? (
 																		<span className='song-accordion-plus-toggle-btn'>
 																			<PlusIcon size={16} />
@@ -97,13 +101,14 @@ const LyricsCard = (props) => {
 																	<span
 																		onClick={(e) => props.handleTitlePlay(e)}
 																		className={
-																			showGrid ? 'text-left accordion-time-title song-title grid-text-overflow' : 'text-left accordion-time-title song-title'
+																			showGrid
+																				? 'text-left accordion-time-title song-title grid-text-overflow'
+																				: 'text-left accordion-time-title song-title'
 																		}
 																	>
 																		{song.title}
 																	</span>
 																</Col>
-																
 															</Row>
 														</Accordion.Toggle>
 														<Accordion.Collapse eventKey={i + 1}>
@@ -125,6 +130,25 @@ const LyricsCard = (props) => {
 						</Card.Body>
 					</Accordion.Collapse>
 				</Card>
+				<Button className='support-artist' href={bandcamp} target='_blank'>
+					Support Artist
+					<svg
+						xmlns='http://www.w3.org/2000/svg'
+						class='icon icon-tabler icon-tabler-arrow-up-right'
+						width='20'
+						height='20'
+						viewBox='0 0 24 24'
+						stroke-width='2'
+						stroke='currentColor'
+						fill='none'
+						stroke-linecap='round'
+						stroke-linejoin='round'
+					>
+						<path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+						<line x1='17' y1='7' x2='7' y2='17'></line>
+						<polyline points='8 7 17 7 17 16'></polyline>
+					</svg>
+				</Button>
 			</Accordion>
 
 			{/* Edit and Delete buttons */}
