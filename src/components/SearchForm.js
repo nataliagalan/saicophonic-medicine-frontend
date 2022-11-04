@@ -133,7 +133,6 @@ class SearchForm extends Component {
 					//labelkey determines the option keys that get searched
 					labelKey={(option) => {
 						let songString = option.songs.map((song) => song.title).join(' ');
-						let lyricsString = option.songs.map((song) => song.lyrics).join(' ');
 						return `${option.band} - ${songString}`;
 					}}
 					maxResults={6}

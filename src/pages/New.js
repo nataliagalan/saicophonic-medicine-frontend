@@ -5,8 +5,6 @@ import { thunkFetchUser } from '../actions/auth';
 import { thunkAddVideo, addVideo } from '../actions/videos';
 import { clearTags } from '../actions/tags';
 
-import Axios from 'axios';
-
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';

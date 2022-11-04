@@ -17,9 +17,7 @@ import { ThreeBarsIcon, ListUnorderedIcon, XIcon } from '@primer/octicons-react'
 const MyNavbar = (props) => {
 	//useSelector is similar to setStateToProps
 	const auth = useSelector((state) => state.auth);
-	const video = useSelector((state) => state.video);
 	const showGrid = useSelector((state) => state.toggleGrid);
-	const showTabs = useSelector((state) => state.toggleTabs.showTabs);
 	const filter = useSelector((state) => state.setFilter);
 	//useDispatch is similar to setDispatchToProps
 	const dispatch = useDispatch();
