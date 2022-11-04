@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,8 +10,8 @@ import Line from '../components/Line';
 import itunes from '../itunes.svg';
 import tinyletter from '../tinyletter.svg';
 import youtube from '../youtube.svg';
-import instagram from '../instagram.svg';
 import spotify from '../spotify.svg';
+import bandcamp from '../bandcamp.svg';
 
 const MyFooter = (props) => {
 	const showTabs = useSelector((state) => state.toggleTabs.showTabs);
@@ -23,13 +22,23 @@ const MyFooter = (props) => {
 
 	// let currentPage = this.props.location.pathname
 	return (
-		<Container fluid style={props.location.pathname.includes('/videos/') || showTabs === 'true' ? { top: '90px' } : { top: '780px' }} className='my-footer-wrapper'>
+		<Container
+			fluid
+			style={props.location.pathname.includes('/videos/') || showTabs === 'true' ? { top: '90px' } : { top: '780px' }}
+			className='my-footer-wrapper'
+		>
 			<Row>
 				<Col>
 					<div className='my-footer text-center'>
 						<Line color='white' />
 						<Container className='newsletter-wrapper text-center'>
-							<Form className='newsletter-form' action='https://tinyletter.com/SaicoTherapy' method='post' target='popupwindow' onSubmit={handleSubmit}>
+							<Form
+								className='newsletter-form'
+								action='https://tinyletter.com/SaicoTherapy'
+								method='post'
+								target='popupwindow'
+								onSubmit={handleSubmit}
+							>
 								<Form.Row className='justify-content-md-center text-center'>
 									<Form.Label className='newsletter-prompt text-center' htmlFor='tlemail'>
 										Your monthly dose of Saicophonic Medicine ↓
@@ -38,7 +47,7 @@ const MyFooter = (props) => {
 
 								<Form.Row className='justify-content-md-center text-center'>
 									<Col md={8}>
-										<Form.Control type='text' name='email' id='tlemail' placeholder='your@email.com'/>
+										<Form.Control type='text' name='email' id='tlemail' placeholder='your@email.com' />
 										<Form.Control type='hidden' value='1' name='embed' />
 									</Col>
 									<Col md={4}>
@@ -56,30 +65,44 @@ const MyFooter = (props) => {
 								<Col>
 									<Row>
 										<div className='mx-auto social-logos-div'>
+											<a href='https://bandcamp.com/ngalan' target='_blank' rel='noopener noreferrer'>
+												<img src={bandcamp} className='social-logos' id='bandcamp-logo' alt='bandcamp-logo' />
+											</a>
 											<a href='https://tinyletter.com/SaicoTherapy' target='_blank' rel='noopener noreferrer'>
 												<img src={tinyletter} className='social-logos' id='tinyletter-logo' alt='tinyletter-logo' />
 											</a>
-											<a href='https://music.apple.com/us/playlist/the-night-is-on-my-mind/pl.u-aZb0N69T1GB9l2q' target='_blank' rel='noopener noreferrer'>
+											<a
+												href='https://music.apple.com/us/playlist/the-night-is-on-my-mind/pl.u-aZb0N69T1GB9l2q'
+												target='_blank'
+												rel='noopener noreferrer'
+											>
 												<img src={itunes} className='social-logos' id='apple-music-logo' alt='apple-music-logo' />
 											</a>
-											<a href='https://www.youtube.com/channel/UC2nfaz7gRu7EqkJZRT__3Rw/playlists?view_as=subscriber' target='_blank' rel='noopener noreferrer'>
-												<img src={youtube} className='social-logos' id='youtube-logo' alt='youtube-logo' />
-											</a>
-											<a href='https://www.instagram.com/nnataliagalann/' target='_blank' rel='noopener noreferrer'>
-												<img src={instagram} className='social-logos' id='instagram-logo' alt='instagram-logo' />
-											</a>
-											<a href='https://open.spotify.com/user/pygtquli592t34f702bbvclbu?si=v0gdGE8BTtu10QWgt8C5PA' target='_blank' rel='noopener noreferrer'>
+											<a
+												href='https://open.spotify.com/user/pygtquli592t34f702bbvclbu?si=v0gdGE8BTtu10QWgt8C5PA'
+												target='_blank'
+												rel='noopener noreferrer'
+											>
 												<img src={spotify} className='social-logos' id='spotify-logo' alt='spotify-logo' />
+											</a>
+											<a
+												href='https://www.youtube.com/channel/UC2nfaz7gRu7EqkJZRT__3Rw/playlists?view_as=subscriber'
+												target='_blank'
+												rel='noopener noreferrer'
+											>
+												<img src={youtube} className='social-logos' id='youtube-logo' alt='youtube-logo' />
 											</a>
 										</div>
 									</Row>
 
 									<Row>
-										<Navbar.Brand className='mx-auto parent footer-site-title'><span className='footer-text'>© </span>2021 Saicophonic Medicine</Navbar.Brand>
+										<Navbar.Brand className='mx-auto parent footer-site-title'>
+											<span className='footer-text'>© </span>2022 Saicophonic Medicine
+										</Navbar.Brand>
 									</Row>
 									<Row>
 										<Navbar.Brand className='mx-auto parent footer-contact'>
-                    <span className='footer-text'>A project by</span>
+											<span className='footer-text'>A project by</span>
 											<a href='mailto:hi@nataliagalan.me'> Natalia Galán</a>
 										</Navbar.Brand>
 									</Row>
