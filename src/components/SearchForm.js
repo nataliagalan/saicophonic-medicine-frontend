@@ -14,7 +14,7 @@ import Button from 'react-bootstrap/Button';
 import { AsyncTypeahead, Menu, MenuItem, Highlighter } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-// const API_ENDPOINT = 'http://localhost:3001/api/v1';
+// const API_ENDPOINT = 'http://localhost:3000/api/v1';
 const API_ENDPOINT = "https://saicophonic-api.herokuapp.com/api/v1";
 const SEARCH_URL = `${API_ENDPOINT}/videos/search`;
 class SearchForm extends Component {
@@ -45,7 +45,7 @@ class SearchForm extends Component {
 			this.props.filteredBySong(filteredVideos, query);
 			this.props.filteredByLyrics(filteredVideos, query);
 
-			const options = filteredVideos.map((video, idx) => ({
+			const options = filteredVideos.query.map((video, idx) => ({
 				one: idx,
 				band: video.band,
 				id: video.id,
@@ -53,7 +53,7 @@ class SearchForm extends Component {
 			}));
 
 			//useful for displaying highlighted options
-			filteredVideos.forEach((video, videoIndex) => {
+			filteredVideos.query.forEach((video, videoIndex) => {
 				video.songs.forEach((song, songIndex) => {
 					songIndex++;
 					options[videoIndex][`song${songIndex}`] = song.title;
@@ -109,8 +109,8 @@ class SearchForm extends Component {
 
 	fetchTaggedVideos = (tag) => {
 		this.typeahead.clear();
-    this.closeDropdown();
-    this.props.thunkFetchTaggedVideos(tag)
+		this.closeDropdown();
+		this.props.thunkFetchTaggedVideos(tag);
 	};
 
 	handleClear = () => {
