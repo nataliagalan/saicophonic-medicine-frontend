@@ -100,7 +100,7 @@ export const thunkFetchTaggedVideos = (tag) => async (dispatch, getState) => {
 	if (filteredVideosByTag.error) {
 		console.log(filteredVideosByTag.error, 'error in thunkFetchTaggedVideos ');
 	} else {
-		dispatch(getTaggedVideos(filteredVideosByTag));
+		dispatch(getTaggedVideos(filteredVideosByTag.query));
 		history.push(`/tagged/${tag}`);
 	}
 };
