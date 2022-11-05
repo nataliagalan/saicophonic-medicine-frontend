@@ -7,12 +7,14 @@ const videos = (state = initialValue, action) => {
 		case 'GET_FILTERED_LYRICS':
 			let query = action.payload.query.toLowerCase();
 			//split the query into an array
-			let filteredVideos = action.payload.lyrics.query.filter(function (video) {
-				return video.songs.some(function (song) {
-					return song.lyrics.toLowerCase().includes(query);
+			if (action.payload.lyrics) {
+				let filteredVideos = action.payload.lyrics.query.filter(function (video) {
+					return video.songs.some(function (song) {
+						return song.lyrics.toLowerCase().includes(query);
+					});
 				});
-			});
-			return { ...state, lyrics: filteredVideos, query: action.payload.query };
+				return { ...state, lyrics: filteredVideos, query: action.payload.query };
+			}
 		default:
 			return state;
 	}
